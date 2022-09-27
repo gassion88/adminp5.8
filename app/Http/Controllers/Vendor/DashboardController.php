@@ -17,6 +17,57 @@ class DashboardController extends Controller
 {
     public function dashboard(Request $request)
     {
+        if ($request['number'] !=''){
+
+            $or = [
+                'id' => 100000 + Order::all()->count() + 1,
+                'user_id' => 8,
+                'order_amount' => '999.00',
+                'payment_status' => 'unpaid',
+                'order_status' => 'handover',
+                'payment_method' => 'cash_on_delivery',
+                'transaction_reference' => null,
+                'coupon_discount_amount' => '0.00',
+                'coupon_code' => null,
+                'delivery_address_id' => null,
+                'delivery_address'=> '{"contact_person_name":"\u041e\u0444\u0444\u043b\u0430\u0439\u043d \u0417\u0430\u043a\u0430\u0437","contact_person_number":"+79290000000","address_type":"home","address":"\u041e\u0444\u0444\u043b\u0430\u0439\u043d \u0417\u0430\u043a\u0430\u0437","floor":null,"road":null,"house":null,"longitude":"43.9553117","latitude":"42.2128383","number":'.$request['number'].'}',
+                'restaurant_id'=> Helpers::get_restaurant_id(),
+                'restaurant_discount_amount' => 0.00,
+                'zone_id'=> 1,
+                'pending' => now(),
+                'created_at' => now(),
+                'updated_at' => now()
+            ];
+
+            $o_id = DB::table('orders')->insertGetId($or);
+
+            $or_d = [
+                'order_id' => $o_id,
+                'food_id' => 1,
+                'food_details' => '{"id":1,"name":"\u0421\u0430\u043b\u0430\u0442 \"\u0413\u0440\u0435\u0447\u0435\u0441\u043a\u0438\u0439\"","description":"\u0421\u0430\u043b\u0430\u0442 \"\u0413\u0440\u0435\u0447\u0435\u0441\u043a\u0438\u0439\"\n200 \u0433.\n\u041b\u0438\u0441\u0442 \u0441\u0430\u043b\u0430\u0442\u0430, \u0441\u044b\u0440 \u0424\u0435\u0442\u0430, \u0442\u043e\u043c\u0430\u0442\u044b \u0447\u0435\u0440\u0440\u0438, \u043e\u0433\u0443\u0440\u0435\u0446, \u0441\u043b\u0430\u0434\u043a\u0438\u0439 \u043f\u0435\u0440\u0435\u0446, \u043c\u0430\u0441\u043b\u0438\u043d\u044b, \u043e\u043b\u0438\u0432\u043a\u0438, \u043a\u0440\u0430\u0441\u043d\u044b\u0439 \u043b\u0443\u043a, \u0441\u043f\u0435\u0446\u0438\u0438 \u0441 \u0442\u0440\u0430\u0432\u0430\u043c\u0438, \u043e\u043b\u0438\u0432\u043a\u043e\u0432\u043e\u0435 \u043c\u0430\u0441\u043b\u043e, \u0441\u043e\u043a \u043b\u0438\u043c\u043e\u043d\u0430","image":"2022-06-20-62b05881ebda5.png","category_id":7,"category_ids":[{"id":"7","position":0},{"id":"0","position":1}],"variations":[],"add_ons":[],"attributes":[],"choice_options":[],"price":310,"tax":0,"tax_type":"percent","discount":5,"discount_type":"percent","available_time_starts":"10:00:00","available_time_ends":"23:00:00","veg":0,"status":1,"restaurant_id":1,"created_at":"2022-09-08T12:25:46.000000Z","updated_at":"2022-09-08T12:25:46.000000Z","order_count":0,"avg_rating":0,"rating_count":0,"restaurant_name":"Vincenzo","restaurant_discount":0,"restaurant_opening_time":"10:00","restaurant_closing_time":"23:00","schedule_order":false}',
+                'quantity' => 1,
+                'price' => 990.00,
+                'tax_amount' => 0.00,
+                'discount_on_food' => 0.00,
+                'discount_type' => 'discount_on_product',
+                'variant' => null,
+                'variation' => '[]',
+                'add_ons' => '[]',
+                'created_at' => now(),
+                'updated_at' => now()
+            ];
+            DB::table('order_details')->insert($or_d);
+
+            /*
+            $or = Order::where('id', 100001)->get();
+            return '-'.Helpers::get_restaurant_id().'-';
+            $or = Order::first();
+            return Helpers::get_restaurant_id();
+            $order = new Order;
+
+            $order->save();*/
+
+        }
         $params = [
             'statistics_type' => $request['statistics_type'] ?? 'overall'
         ];

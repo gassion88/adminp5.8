@@ -143,6 +143,8 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                     <!-- End Header -->
 
                     <!-- Body -->
+                    @php($add = json_decode($order->delivery_address, true))
+                    @if ( !isset($add['number']) )
                     <div class="card-body p-0">
                         <?php
                         $total_addon_price = 0;
@@ -352,11 +354,13 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                         </div>
                         <!-- End Row -->
                     </div>
+                    @endif
                     <!-- End Body -->
                 </div>
                 <!-- End Card -->
             </div>
 
+            @if ( !isset($add['number']) )
             <div class="col-lg-4 order-print-area-right">
                 <!-- Card -->
                 @if ($order['order_status'] != 'delivered')
@@ -469,8 +473,8 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                         @endif
                     </div>
                 </div>
-                @endif
-                <div class="card">
+                @endif                
+                <div class="card">                  
                     <div class="card-body">
                         <h5 class="card-title mb-3">
                             <span class="card-header-icon">
@@ -569,8 +573,9 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                             @endif
                         </div>
                     </div>
-                @endif
+                @endif           
             </div>
+            @endif
         </div>
         <!-- End Row -->
     </div>
