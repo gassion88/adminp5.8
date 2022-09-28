@@ -228,6 +228,11 @@
                     confirmButtonText: 'Вызвать курьера',
                     inputPlaceholder: "Номер мобильного телефона",
                     input: 'text',
+                    inputValidator: (value) => {
+                    if (!value) {
+                    return 'Вы не указали номер мобильного телефона клиента!'
+                    }
+                },
                     preConfirm: (number) => {
                         location.href = route + number;
                     },
