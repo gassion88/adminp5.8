@@ -360,7 +360,7 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                 <!-- End Card -->
             </div>
 
-            @if ( !isset($add['number']) )
+            
             <div class="col-lg-4 order-print-area-right">
                 <!-- Card -->
                 @if ($order['order_status'] != 'delivered')
@@ -402,6 +402,46 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                                     href="javascript:">{{ __('messages.maek_delivered') }}</a>
                             @endif
                         </div>
+                        @if ($order->order_status != 'refunded')
+                                        <div>
+                                            <div class="dropdown">
+                                                @if (isset($order->restaurant))
+                                                    <button class="form-control h--45px dropdown-toggle d-flex justify-content-between align-items-center" type="button"
+                                                        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                                        aria-expanded="false">
+                                                        {{ __('messages.status') }}
+                                                    </button>
+                                                @endif
+                                                @php($order_delivery_verification = (bool) \App\Models\BusinessSetting::where(['key' => 'order_delivery_verification'])->first()->value)
+                                                <div class="dropdown-menu text-capitalize" aria-labelledby="dropdownMenuButton">
+                                                    <a class="dropdown-item {{ $order['order_status'] == 'pending' ? 'active' : '' }}"
+                                                        onclick="route_alert('{{ route('vendor.order.statuss', ['id' => $order['id'], 'order_status' => 'pending']) }}','Change status to pending ?')"
+                                                        href="javascript:">{{ __('messages.pending') }}</a>
+                                                    <a class="dropdown-item {{ $order['order_status'] == 'confirmed' ? 'active' : '' }}"
+                                                        onclick="route_alert('{{ route('vendor.order.statuss', ['id' => $order['id'], 'order_status' => 'confirmed']) }}','Change status to confirmed ?')"
+                                                        href="javascript:">{{ __('messages.confirmed') }}</a>
+
+                                                    <a class="dropdown-item {{ $order['order_status'] == 'processing' ? 'active' : '' }}"
+                                                        onclick="route_alert('{{ route('vendor.order.statuss', ['id' => $order['id'], 'order_status' => 'processing']) }}', 'Change status to processing ?','Are you sure?', '{{ $max_processing_time }}')"
+                                                        href="javascript:">
+                                                        {{ __('messages.processing') }}</a>
+
+                                                    <a class="dropdown-item {{ $order['order_status'] == 'handover' ? 'active' : '' }}"
+                                                        onclick="route_alert('{{ route('vendor.order.statuss', ['id' => $order['id'], 'order_status' => 'handover']) }}','Change status to handover ?')"
+                                                        href="javascript:">{{ __('messages.handover') }}</a>
+                                                    <a class="dropdown-item {{ $order['order_status'] == 'picked_up' ? 'active' : '' }}"
+                                                        onclick="route_alert('{{ route('vendor.order.statuss', ['id' => $order['id'], 'order_status' => 'picked_up']) }}','Change status to out for delivery ?')"
+                                                        href="javascript:">{{ __('messages.out_for_delivery') }}</a>
+                                                    <a class="dropdown-item {{ $order['order_status'] == 'delivered' ? 'active' : '' }}"
+                                                        onclick="route_alert('{{ route('vendor.order.statuss', ['id' => $order['id'], 'order_status' => 'delivered']) }}','Change status to delivered (payment status will be paid if not)?')"
+                                                        href="javascript:">{{ __('messages.delivered') }}</a>
+                                                    <a class="dropdown-item {{ $order['order_status'] == 'canceled' ? 'active' : '' }}"
+                                                        onclick="route_alert('{{ route('vendor.order.statuss', ['id' => $order['id'], 'order_status' => 'canceled']) }}','Change status to canceled ?')"
+                                                        href="javascript:">{{ __('messages.canceled') }}</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
                         <!-- End Unfold -->
                         @if ($order['order_type'] != 'take_away')
                             @if ($order->delivery_man)
@@ -473,7 +513,8 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                         @endif
                     </div>
                 </div>
-                @endif                
+                @endif
+                @if ( !isset($add['number']) )                
                 <div class="card">                  
                     <div class="card-body">
                         <h5 class="card-title mb-3">
@@ -573,9 +614,10 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                             @endif
                         </div>
                     </div>
-                @endif           
+                @endif
+            @endif           
             </div>
-            @endif
+           
         </div>
         <!-- End Row -->
     </div>
