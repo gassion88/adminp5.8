@@ -86,7 +86,7 @@
                 </div>
             </div>
         </div>
-        <!-- End Page Header -->
+        <!-- End Page Header 
         <div class="card mb-3">
             <div class="card-header">
                 <h5 class="card-title">
@@ -240,7 +240,7 @@
                     </div>
                 </form>
             </div>
-        </div>
+        </div>-->
         <div class="card">
             <div class="card-header">
                 <h5 class="card-title">
