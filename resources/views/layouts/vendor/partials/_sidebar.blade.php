@@ -70,13 +70,13 @@
                     </li>
                     <!-- End POS -->
                     @endif
-
+                    <!-- Campaign
                     <li class="nav-item">
                         <small
                             class="nav-subtitle">Promotions</small>
                         <small class="tio-more-horizontal nav-subtitle-replacer"></small>
                     </li>
-                    <!-- Campaign -->
+                     
                     @if(\App\CentralLogics\Helpers::employee_module_permission_check('campaign'))
                     <li class="navbar-vertical-aside-has-menu {{Request::is('vendor-panel/campaign*')?'active':''}}">
                         <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle" href="javascript:" title="{{translate('Campaign')}}">
@@ -98,7 +98,7 @@
                             </li>
                         </ul>
                     </li>
-                    @endif
+                    @endif-->
                     <!-- End Campaign -->
 
                     @if(\App\CentralLogics\Helpers::employee_module_permission_check('order'))
@@ -409,8 +409,9 @@
                         </a>
                     </li>
                     @endif
+                    <!-- Business Settings 
                     @if(\App\CentralLogics\Helpers::employee_module_permission_check('bank_info'))
-                    <!-- Business Settings -->
+                    
                     <li class="navbar-vertical-aside-has-menu {{Request::is('vendor-panel/profile*')?'active':''}}">
                         <a class="js-navbar-vertical-aside-menu-link nav-link"
                             href="{{route('vendor.profile.bankView')}}"
@@ -422,10 +423,10 @@
                         </a>
                     </li>
                     @endif
-
-
+                        -->
+                    <!-- RestaurantWallet 
                     @if(\App\CentralLogics\Helpers::employee_module_permission_check('wallet'))
-                    <!-- RestaurantWallet -->
+                    
                     <li class="navbar-vertical-aside-has-menu {{Request::is('vendor-panel/wallet*')?'active':''}}">
                         <a class="js-navbar-vertical-aside-menu-link nav-link" href="{{route('vendor.wallet.index')}}" title="{{__('messages.my')}} {{__('messages.wallet')}}"
                         >
@@ -435,6 +436,7 @@
                         </a>
                     </li>
                     @endif
+                    -->
                     <!-- End RestaurantWallet -->
                     @if(\App\CentralLogics\Helpers::employee_module_permission_check('reviews'))
                     <li class="navbar-vertical-aside-has-menu {{Request::is('vendor-panel/reviews')?'active':''}}">
