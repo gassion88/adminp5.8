@@ -62,12 +62,13 @@
                     <span class="d-block mb-1 pb-1">
                         <strong>{{__('messages.address')}} :</strong> {{$shop->address}}
                     </span>
+                    <!--
                     <span class="d-block mb-1 pb-1">
                         <strong>{{__('messages.admin_commission')}} :</strong> {{(isset($shop->comission)?$shop->comission:\App\Models\BusinessSetting::where('key','admin_commission')->first()->value)}}%
                     </span>
                     <span class="d-block mb-1 pb-1">
                         <strong>{{__('messages.vat/tax')}} :</strong> {{$shop->tax}}%
-                    </span>
+                    </span> -->
                 </div>
             </div>
         </div>
