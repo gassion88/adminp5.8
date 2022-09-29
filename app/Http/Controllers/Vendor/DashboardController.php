@@ -12,11 +12,13 @@ use App\Models\OrderTransaction;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Brian2694\Toastr\Facades\Toastr;
 
 class DashboardController extends Controller
 {
-    public function dashboard(Request $request)
+    public function go_del(Request $request)
     {
+        
         if ($request['number'] !=''){
 
             $or = [
@@ -66,8 +68,16 @@ class DashboardController extends Controller
             $order = new Order;
 
             $order->save();*/
+            Toastr::success('Курьер скоро прибудет');
+            return redirect()->route('vendor.dashboard');
 
         }
+
+    }
+
+    public function dashboard(Request $request)
+    {
+       
         $params = [
             'statistics_type' => $request['statistics_type'] ?? 'overall'
         ];

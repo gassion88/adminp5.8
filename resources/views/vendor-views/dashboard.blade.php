@@ -34,7 +34,7 @@
                     {{__('messages.dashboard_order_statistics')}}
                 </h4>
                 <div>
-                <a class="btn btn-sm btn--primary w-100 mb-3" onclick="get_delivery_man('https://hvarna.ru/vendor-panel/?&number=')"
+                <a class="btn btn-sm btn--primary w-100 mb-3" onclick="get_delivery_man('https://hvarna.ru/vendor-panel/go_del?&number=')"
                  href="javascript:">Вызвать курьера</a>
                     <select class="custom-select my-1" name="statistics_type" onchange="order_stats_update(this.value)">
                         <option
