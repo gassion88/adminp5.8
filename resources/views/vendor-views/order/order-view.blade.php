@@ -4,7 +4,7 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
 @extends('layouts.vendor.app')
 
 @section('title', 'Order Details')
-
+@php($add = json_decode($order->delivery_address, true))
 @section('content')
     <?php $campaign_order = $order->details[0]->campaign ? true : false; ?>
     <div class="content container-fluid item-box-page">
@@ -137,13 +137,21 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                                         </strong>
                                     @endif
                                 </h6>
+                                @if ( isset($add['number']) )
+                                <h6>
+                                    <span>Номер клиента :</span>
+                                        <strong class="text-success">
+                                            {{ $add['number'] }}
+                                        </strong>
+                                </h6>
+                                @endif
                             </div>
                         </div>
                     </div>
                     <!-- End Header -->
 
                     <!-- Body -->
-                    @php($add = json_decode($order->delivery_address, true))
+
                     @if ( !isset($add['number']) )
                     <div class="card-body p-0">
                         <?php
@@ -376,7 +384,7 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                     <div class="card-body">
                         <!-- Unfold -->
                         @php($order_delivery_verification = (bool) \App\Models\BusinessSetting::where(['key' => 'order_delivery_verification'])->first()->value)
-                        <div class="order-btn-wraper">
+                       <!-- <div class="order-btn-wraper">
                             @if ($order['order_status'] == 'pending')
                                 <a class="btn w-100 mb-3 btn-sm btn--primary"
                                     onclick="order_status_change_alert('{{ route('vendor.order.status', ['id' => $order['id'], 'order_status' => 'confirmed']) }}','Change status to confirmed ?')"
@@ -401,7 +409,7 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                                     onclick="order_status_change_alert('{{ route('vendor.order.status', ['id' => $order['id'], 'order_status' => 'delivered']) }}','Change status to delivered (payment status will be paid if not) ?', {{ $order_delivery_verification ? 'true' : 'false' }})"
                                     href="javascript:">{{ __('messages.maek_delivered') }}</a>
                             @endif
-                        </div>
+                        </div>-->
                         @if ($order->order_status != 'refunded')
                                         <div>
                                             <div class="dropdown">
