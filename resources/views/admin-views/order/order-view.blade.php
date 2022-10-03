@@ -1058,8 +1058,43 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-5 my-2">
+                        <h3 class="modal-title" id="myModalLabel">Доступные доставщики</h3>
                             <ul class="list-group overflow-auto max-height-400">
                                 @foreach ($deliveryMen as $dm)
+                                    <li class="list-group-item">
+                                        <span class="dm_list" role='button' data-id="{{ $dm['id'] }}">
+                                            <img class="avatar avatar-sm avatar-circle mr-1"
+                                                onerror="this.src='{{ asset('public/assets/admin/img/160x160/img1.jpg') }}'"
+                                                src="{{ asset('storage/app/public/delivery-man') }}/{{ $dm['image'] }}"
+                                                alt="{{ $dm['name'] }}">
+                                            {{ $dm['name'] }}
+                                        </span>
+                                           
+                                        <a class="btn btn-primary btn-xs float-right"
+                                            onclick="addDeliveryMan({{ $dm['id'] }})">{{ __('messages.assign') }}</a>
+                                            
+                                           <?php
+                                                $dat = "";
+                                                for ($i = 0; $i <= count($deliver)-1; $i++){
+                                                    if( $deliver[$i]['delivery_man_id'] = $dm['id']){
+                                                        $dat = $deliver[$i]["accepted"]." ".$deliver[$i]["delivered"];
+                                                        break;
+                                                    }
+                                                }
+                                                
+                                            ?>
+                                             @if ( $dat!= "" )
+                                               последний заказ {{$dat}}
+                                             @else
+                                               пока заказов нет
+                                             @endif
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        <div class="col-md-7 modal_body_map">
+                        <h3 class="modal-title" id="myModalLabel">Все доставщики</h3>
+                        @foreach ($deliveryAllMen as $dm)
                                     <li class="list-group-item">
                                         <span class="dm_list" role='button' data-id="{{ $dm['id'] }}">
                                             <img class="avatar avatar-sm avatar-circle mr-1"
@@ -1073,12 +1108,7 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                                             onclick="addDeliveryMan({{ $dm['id'] }})">{{ __('messages.assign') }}</a>
                                     </li>
                                 @endforeach
-                            </ul>
-                        </div>
-                        <div class="col-md-7 modal_body_map">
-                            <div class="location-map" id="dmassign-map">
-                                <div id="map_canvas"></div>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>

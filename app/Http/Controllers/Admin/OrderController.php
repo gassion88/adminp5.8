@@ -263,6 +263,11 @@ class OrderController extends Controller
             } else {
                 if($order->restaurant !== null){
                     $deliveryMen = DeliveryMan::where('zone_id', $order->restaurant->zone_id)->available()->active()->get();
+                    $deliveryAllMen = DeliveryMan::where('zone_id', $order->restaurant->zone_id)->active()->get();
+                    $deliver = array();
+                    for ($i = 0; $i <= count($deliveryAllMen)-1; $i++) {
+                        array_push($deliver, Order::where('delivery_man_id', $deliveryAllMen[$i]['id'])->latest()->first());
+                    }
                 } else{
                     $deliveryMen = DeliveryMan::where('zone_id', '=', NULL )->active()->get();
                 }
@@ -298,8 +303,9 @@ class OrderController extends Controller
             }
 
             $deliveryMen = Helpers::deliverymen_list_formatting($deliveryMen);
+            $deliveryAllMen = Helpers::deliverymen_list_formatting($deliveryAllMen);
 
-            return view('admin-views.order.order-view', compact('order', 'deliveryMen', 'categories', 'products', 'category', 'keyword', 'editing'));
+            return view('admin-views.order.order-view', compact('order', 'deliveryMen', 'categories', 'products', 'category', 'keyword', 'editing', 'deliveryAllMen', 'deliver'));
         } else {
             Toastr::info(trans('messages.no_more_orders'));
             return back();
