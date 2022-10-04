@@ -1074,19 +1074,23 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                                             onclick="addDeliveryMan({{ $dm['id'] }})">{{ __('messages.assign') }}</a>
                                             
                                            <?php
+                                           //dd($deliveryAllMen);
                                                 $dat = "";
                                                 for ($i = 0; $i <= count($deliver)-1; $i++){
-                                                    if( $deliver[$i]['delivery_man_id'] = $dm['id']){
-                                                        $dat = $deliver[$i]["accepted"]." ".$deliver[$i]["delivered"];
-                                                        break;
+                                                    if(isset($deliver[$i]['id'])){
+                                                        if( $deliver[$i]['delivery_man_id'] == $dm['id']){
+                                                            $dat = $deliver[$i]["accepted"];
+                                                            break;                                                           
+                                                        }
                                                     }
+                                                    
                                                 }
                                                 
                                             ?>
                                              @if ( $dat!= "" )
-                                               последний заказ {{$dat}}
+                                             <br>последний заказ {{$dat}}
                                              @else
-                                               пока заказов нет
+                                             <br>пока заказов нет
                                              @endif
                                     </li>
                                 @endforeach
@@ -1103,9 +1107,28 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                                                 alt="{{ $dm['name'] }}">
                                             {{ $dm['name'] }}
                                         </span>
-
-                                        <a class="btn btn-primary btn-xs float-right"
-                                            onclick="addDeliveryMan({{ $dm['id'] }})">{{ __('messages.assign') }}</a>
+                                        <?php
+                                        
+                                                $dat = "";
+                                                for ($i = 0; $i <= count($deliver)-1; $i++){
+                                                    if( isset($deliver[$i]['id']) ){
+                                                        if( $deliver[$i]['delivery_man_id'] == $dm['id']){
+                                                            $dat = $deliver[$i]["accepted"];
+                                                            $dc = $deliver[$i]['day_count'];
+                                                            break;                                                           
+                                                        }
+                                                    }
+                                                    
+                                                }
+                                                
+                                            ?>
+                                             @if ( $dat!= "" )
+                                             <br>последний заказ {{$dat}}
+                                             <br>Заказов за сегодня {{$dc}}
+                                             @else
+                                             <br>пока заказов нет                                            
+                                             @endif
+                                        
                                     </li>
                                 @endforeach
                             
