@@ -384,7 +384,8 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                     <div class="card-body">
                         <!-- Unfold -->
                         @php($order_delivery_verification = (bool) \App\Models\BusinessSetting::where(['key' => 'order_delivery_verification'])->first()->value)
-                       <!-- <div class="order-btn-wraper">
+                         @if ($order['order_type'] == 'take_away')
+                        <div class="order-btn-wraper">
                             @if ($order['order_status'] == 'pending')
                                 <a class="btn w-100 mb-3 btn-sm btn--primary"
                                     onclick="order_status_change_alert('{{ route('vendor.order.status', ['id' => $order['id'], 'order_status' => 'confirmed']) }}','Change status to confirmed ?')"
@@ -409,8 +410,11 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                                     onclick="order_status_change_alert('{{ route('vendor.order.status', ['id' => $order['id'], 'order_status' => 'delivered']) }}','Change status to delivered (payment status will be paid if not) ?', {{ $order_delivery_verification ? 'true' : 'false' }})"
                                     href="javascript:">{{ __('messages.maek_delivered') }}</a>
                             @endif
-                        </div>-->
+                         
+                        </div>
+                        @endif
                         @if ($order->order_status != 'refunded')
+                        @if ($order['order_type'] != 'take_away')                       
                                         <div>
                                             <div class="dropdown">
                                                 @if (isset($order->restaurant))
@@ -448,7 +452,8 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                                                         href="javascript:">{{ __('messages.canceled') }}</a>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> 
+                                        @endif                                          
                                     @endif
                         <!-- End Unfold -->
                         @if ($order['order_type'] != 'take_away')
