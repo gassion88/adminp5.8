@@ -1088,7 +1088,7 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                                                 
                                             ?>
                                              @if ( $dat!= "" )
-                                             <br>последний заказ {{$dat}}
+                                             <br>последний заказ {{\Carbon\Carbon::parse($dat)->format('H:i d.m.Y') }}
                                              @else
                                              <br>пока заказов нет
                                              @endif
@@ -1097,7 +1097,7 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                             </ul>
                         </div>
                         <div class="col-md-7 modal_body_map">
-                        <h3 class="modal-title" id="myModalLabel">Все доставщики</h3>
+                        <h3 class="modal-title" id="myModalLabel">На доставке</h3>
                         @foreach ($deliveryAllMen as $dm)
                                     <li class="list-group-item">
                                         <span class="dm_list" role='button' data-id="{{ $dm['id'] }}">
@@ -1123,7 +1123,7 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                                                 
                                             ?>
                                              @if ( $dat!= "" )
-                                             <br>последний заказ {{$dat}}
+                                             <br>Принял заказ в {{\Carbon\Carbon::parse($dat)->format('H:i d.m.Y') }}
                                              <br>Заказов за сегодня {{$dc}}
                                              @else
                                              <br>пока заказов нет                                            
