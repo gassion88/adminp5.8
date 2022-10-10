@@ -958,6 +958,7 @@ class Helpers
             $status = ($order->order_status == 'delivered' && $order->delivery_man) ? 'delivery_boy_delivered' : $order->order_status;
             $value = self::order_status_update_message($status);
             if ($value) {
+                
                 if( $order->order_type == 'take_away' && $order->order_status == 'handover' ){
                     $data = [
                         'title' => trans('messages.order_push_title'),
@@ -975,7 +976,6 @@ class Helpers
                     ]);
 
                 }else if($order->order_type == 'take_away' && $order->order_status == 'delivered'){
-                    
                 }else{
                     $data = [
                         'title' => trans('messages.order_push_title'),
@@ -984,7 +984,7 @@ class Helpers
                         'image' => '',
                         'type' => 'order_status',
                     ];
-                    //self::send_push_notif_to_device($order->customer->cm_firebase_token, $data);
+                    self::send_push_notif_to_device($order->customer->cm_firebase_token, $data);
                     DB::table('user_notifications')->insert([
                         'data' => json_encode($data),
                         'user_id' => $order->user_id,
