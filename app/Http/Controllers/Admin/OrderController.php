@@ -262,8 +262,8 @@ class OrderController extends Controller
                 $deliveryMen = DeliveryMan::where('restaurant_id', $order->restaurant_id)->available()->active()->get();
             } else {
                 if($order->restaurant !== null){
-                    $deliveryMen = DeliveryMan::where('zone_id', $order->restaurant->zone_id)->available()->active()->orderBy('updated_at','asc')->get();
-                    $deliveryAllMen = DeliveryMan::where('zone_id', $order->restaurant->zone_id)->active()->get();
+                    $deliveryMen = DeliveryMan::where('zone_id', $order->restaurant->zone_id)->where('status', 1)->available()->active()->orderBy('updated_at','asc')->get();
+                    $deliveryAllMen = DeliveryMan::where('zone_id', $order->restaurant->zone_id)->where('status', 1)->active()->get();
                     $deliver = array();
                    //return count(Order::where('delivery_man_id', 1)->whereDate('delivered', \Carbon\Carbon::today())->get());
                     for ($i = 0; $i <= count($deliveryAllMen)-1; $i++) {
