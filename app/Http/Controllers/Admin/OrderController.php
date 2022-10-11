@@ -308,7 +308,7 @@ class OrderController extends Controller
             }
 
             $deliveryMen = Helpers::deliverymen_list_formatting($deliveryMen);
-            $deliveryAllMen = Helpers::deliverymen_list_formatting($deliveryAllMen);
+            //$deliveryAllMen = Helpers::deliverymen_list_formatting($deliveryAllMen);
 
             return view('admin-views.order.order-view', compact('order', 'deliveryMen', 'categories', 'products', 'category', 'keyword', 'editing', 'deliveryAllMen', 'deliver'));
         } else {
@@ -441,6 +441,11 @@ class OrderController extends Controller
             return response()->json(['message' => trans('messages.deliveryman') . ' ' . trans('messages.not_found')], 404);
         }
         $order = Order::Notpos()->find($order_id);
+        if ($order->delivery_man) {
+            $dm = $order->delivery_man;
+            $dm->current_orders = 0;
+            $dm->save();
+        }
 
         $deliveryman = DeliveryMan::where('id', $delivery_man_id)->available()->active()->first();
         if ($order->delivery_man_id == $delivery_man_id) {

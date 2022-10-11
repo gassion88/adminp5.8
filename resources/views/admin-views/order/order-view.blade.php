@@ -1097,31 +1097,39 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                             </ul>
                         </div>
                         <div class="col-md-7 modal_body_map">
-                        <h3 class="modal-title" id="myModalLabel">На доставке</h3>
+                        <h3 class="modal-title" id="myModalLabel">Активные сегодня</h3>
                         @foreach ($deliveryAllMen as $dm)
+
+                                    <?php
+                                        
+                                        $dat = "";
+                                        for ($i = 0; $i <= count($deliver)-1; $i++){
+                                            if( isset($deliver[$i]['id']) ){
+                                                if( $deliver[$i]['delivery_man_id'] == $dm['id']){
+                                                    $dat = $deliver[$i]["accepted"];
+                                                    $dc = $deliver[$i]['day_count'];
+                                                    $activ_order = $deliver[$i]["id"];
+                                                    break;                                                           
+                                                }
+                                            }
+                                            
+                                        }
+                                        
+                                    ?>
                                     <li class="list-group-item">
                                         <span class="dm_list" role='button' data-id="{{ $dm['id'] }}">
                                             <img class="avatar avatar-sm avatar-circle mr-1"
                                                 onerror="this.src='{{ asset('public/assets/admin/img/160x160/img1.jpg') }}'"
                                                 src="{{ asset('storage/app/public/delivery-man') }}/{{ $dm['image'] }}"
                                                 alt="{{ $dm['name'] }}">
-                                            {{ $dm['name'] }}
+                                            {{ $dm['f_name'].' '. $dm['l_name']}}
                                         </span>
-                                        <?php
-                                        
-                                                $dat = "";
-                                                for ($i = 0; $i <= count($deliver)-1; $i++){
-                                                    if( isset($deliver[$i]['id']) ){
-                                                        if( $deliver[$i]['delivery_man_id'] == $dm['id']){
-                                                            $dat = $deliver[$i]["accepted"];
-                                                            $dc = $deliver[$i]['day_count'];
-                                                            break;                                                           
-                                                        }
-                                                    }
-                                                    
-                                                }
-                                                
-                                            ?>
+                                            @if ( $dm["current_orders"] != 0 )
+                                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<strong style="color: #ec9a3c !important;">На доставке</strong> <a href="{{route('admin.order.details',['id'=>$activ_order])}}">{{$activ_order}}</a>
+                                            @endif  
+                                            
+                                            
+                                            
                                              @if ( $dat!= "" )
                                              <br>Принял заказ в {{\Carbon\Carbon::parse($dat)->format('H:i d.m.Y') }}
                                              <br>Заказов за сегодня {{$dc}}
