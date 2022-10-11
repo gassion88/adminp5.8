@@ -676,6 +676,9 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                                                 <span class="ml-auto text--primary position-relative p-2 cursor-pointer" data-toggle="modal" data-target="#myModal">
                                                     {{ __('messages.change') }}
                                                 </span>
+                                                <a  onclick="dell_delivery_man({{$order->id}})" href="javascript:">Удалить</a>
+                                                 
+                                                
                                             @endif
                                         </div>
                                         <div class="w-100 text-right initial-39-4">
@@ -1496,6 +1499,24 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
         src="https://maps.googleapis.com/maps/api/js?key={{ \App\Models\BusinessSetting::where('key', 'map_api_key')->first()->value }}&v=3.45.8">
     </script>
     <script>
+         
+         function dell_delivery_man(id){
+            Swal.fire({
+                    //text: message,
+                    title: 'Вы действительно хотите удалить курьера для этого заказа?',
+                    type: 'warning',
+                    showCancelButton: true,
+                    cancelButtonColor: 'default',
+                    confirmButtonColor: '#FC6A57',
+                    cancelButtonText: 'Отмена',
+                    confirmButtonText: 'Удалить',
+                    preConfirm: (id) => {
+                        location.href = '{{ url('/') }}/admin/order/dell-delivery-man/{{ $order['id'] }}';
+                    },
+                    allowOutsideClick: () => !Swal.isLoading()
+                })
+        }
+
         function addDeliveryMan(id) {
             $.ajax({
                 type: "GET",
