@@ -53,7 +53,7 @@
                             <a class="js-hs-unfold-invoker btn btn-icon btn-soft-secondary rounded-circle"
                                href="{{route('admin.order.list',['status'=>'pending'])}}">
                                 <i class="tio-shopping-cart-outlined"></i>
-                                <span class="btn-status btn-sm-status btn-status-danger"></span>
+                                <span id="danger-not" class="btn-status btn-sm-status"></span>
                             </a>
                         </div>
                         <!-- End Notification -->

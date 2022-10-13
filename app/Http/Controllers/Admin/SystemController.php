@@ -19,9 +19,23 @@ class SystemController extends Controller
     public function restaurant_data()
     {
         $new_order = DB::table('orders')->where(['checked' => 0])->count();
+        $n_order = DB::table('orders')->where(['order_status' => 'pending'])->count();
+        //$mess = DB::table('conversations')->where(['receiver_type' => 'admin'])->value('unread_message_count');
+
         return response()->json([
             'success' => 1,
-            'data' => ['new_order' => $new_order]
+            'data' => ['new_order' => $new_order],
+            'pend' => ['pending' => $n_order]
+        ]);
+        
+    }
+
+    public function pending_or()
+    {
+        $new_order = DB::table('orders')->where(['order_status' == 'pending'])->count();
+        return response()->json([
+            'success' => 1,
+            'pend' => ['pending' => $new_order]
         ]);
     }
 

@@ -341,22 +341,35 @@
         $.get({
             url: '{{route('vendor.get-restaurant-data')}}',
             dataType: 'json',
-            success: function (response) {
-                let data = response.data;
-                if (data.new_pending_order > 0) {
-                    order_type = 'pending';
-                    playAudio();
-                    $('#popup-modal').appendTo("body").modal('show');
-                }
-                else if(data.new_confirmed_order > 0)
-                {
-                    order_type = 'confirmed';
-                    playAudio();
-                    $('#popup-modal').appendTo("body").modal('show');
-                }
-            },
+            success: function (response)  {
+                            let data = response.data;
+                            let pend = response.pend;
+                            //console.log(response);
+                           
+                            if (data.new_order > 0) {
+                                playAudio();
+                                $('#popup-modal').appendTo("body").modal('show');
+                                
+                            }
+
+                            if (pend.pending > 0 && !$("#danger-not").hasClass("btn-status-danger")) {
+                                $('#danger-not').addClass('btn-status-danger');                               
+                            }
+                            if(pend.pending == 0 && $("#danger-not").hasClass("btn-status-danger") ){
+                                $('#danger-not').removeClass('btn-status-danger');
+                            }
+                            /*
+                            if (mess.messages > 0 && !$("#danger-mess").hasClass("btn-status-danger")) {
+                                
+                                $('#danger-mess').addClass('btn-status-danger');                               
+                            }
+                            if(mess.messages == 0 && $("#danger-mess").hasClass("btn-status-danger") ){
+                                $('#danger-mess').removeClass('btn-status-danger');
+                            }
+                            */
+                        },
         });
-    }, 10000);
+    }, 3000);
     @endif
     function check_order() {
         location.href = '{{url('/')}}/vendor-panel/order/list/'+order_type;

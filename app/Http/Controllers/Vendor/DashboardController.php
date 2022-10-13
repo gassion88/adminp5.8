@@ -131,10 +131,14 @@ class DashboardController extends Controller
         }
         $new_pending_order = $new_pending_order->count();
         $new_confirmed_order = DB::table('orders')->where(['checked' => 0])->where('restaurant_id', Helpers::get_restaurant_id())->whereIn('order_status',['confirmed', 'accepted'])->whereNotNull('confirmed')->count();
+        
+        $n_order = DB::table('orders')->where(['order_status' => 'pending'])->where('restaurant_id', Helpers::get_restaurant_id())->count();
+        //$mess = DB::table('conversations')->where(['receiver_type' => 'vendor'])->where(['receiver_id' => Helpers::get_restaurant_id()])->where('unread_message_count','>','0')->count();
 
         return response()->json([
             'success' => 1,
-            'data' => ['new_pending_order' => $new_pending_order, 'new_confirmed_order' => $new_confirmed_order]
+            'data' => ['new_pending_order' => $new_pending_order, 'new_confirmed_order' => $new_confirmed_order],
+            'pend' => ['pending' => $n_order]
         ]);
     }
 
