@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title','Attribute Bulk Import')
+@section('title',translate('Attribute Bulk Import'))
 
 @push('css_or_js')
 
@@ -10,15 +10,15 @@
     <div class="content container-fluid">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{trans('messages.dashboard')}}</a>
+                <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{translate('messages.dashboard')}}</a>
                 </li>
                 <li class="breadcrumb-item" aria-current="page"><a
-                        href="{{route('admin.attribute.add-new')}}">{{trans('messages.foods')}}</a>
+                        href="{{route('admin.attribute.add-new')}}">{{translate('messages.foods')}}</a>
                 </li>
-                <li class="breadcrumb-item">{{trans('messages.bulk_import')}} </li>
+                <li class="breadcrumb-item">{{translate('messages.bulk_import')}} </li>
             </ol>
         </nav>
-        <h1 class="text-capitalize">{{__('messages.attributes')}} {{__('messages.bulk_import')}}</h1>
+        <h1 class="text-capitalize">{{translate('messages.attributes')}} {{translate('messages.bulk_import')}}</h1>
         <!-- Content Row -->
         <div class="row">
             <div class="col-12">
@@ -26,10 +26,10 @@
                     <h2 class="mb-3 text-primary">{{ translate('Instructions') }}</h2>
                     <p> {{ translate('1. Download the format file and fill it with proper data.') }}</p>
 
-                    <p>2. You can download the example file to understand how the data must be filled.</p>
+                    <p>{{ translate('2. You can download the example file to understand how the data must be filled.') }}</p>
 
-                    <p>3. Once you have downloaded and filled the format file, upload it in the form below and
-                        submit.</p>
+                    <p>{{ translate('3. Once you have downloaded and filled the format file, upload it in the form below and
+                        submit.') }}</p>
 
                 </div>
             </div>

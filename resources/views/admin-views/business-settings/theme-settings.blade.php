@@ -26,7 +26,7 @@ $theme_value = \App\Models\BusinessSetting::where('key', 'theme')->first()->valu
                     enctype="multipart/form-data" class="pt-md-5">
                     @csrf
                     <div class="form-group" id="user_app_theme">
-                        
+
                         <div class="row">
                             <div class='col-md-3 col-sm-6 col-12 text-center'>
                                 <input type="radio" name="theme" require id="img1" class="d-none imgbgchk" value="1"
@@ -48,7 +48,7 @@ $theme_value = \App\Models\BusinessSetting::where('key', 'theme')->first()->valu
                     </div>
                     <div class="form-group pt-2">
                         <div class="btn--container justify-content-end">
-                            <button type="submit" class="btn btn--primary">{{__('messages.apply')}}</button>
+                            <button type="submit" class="btn btn--primary">{{translate('messages.apply')}}</button>
                         </div>
                     </div>
                 </form>

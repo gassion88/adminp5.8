@@ -90,7 +90,7 @@ class OrderController extends Controller
         ->orderBy('schedule_at', 'desc')
         ->paginate(config('default_pagination'));
 
-        $status = trans('messages.'.$status);
+        $status = translate('messages.'.$status);
         return view('vendor-views.order.list', compact('orders', 'status'));
     }
 
@@ -136,19 +136,19 @@ class OrderController extends Controller
 
         if($order->delivered != null)
         {
-            Toastr::warning(trans('messages.cannot_change_status_after_delivered'));
+            Toastr::warning(translate('messages.cannot_change_status_after_delivered'));
             return back();
         }
 
         if($request['order_status']=='canceled' && !config('canceled_by_restaurant'))
         {
-            Toastr::warning(trans('messages.you_can_not_cancel_a_order'));
+            Toastr::warning(translate('messages.you_can_not_cancel_a_order'));
             return back();
         }
 
         if($request['order_status']=='canceled' && $order->confirmed)
         {
-            Toastr::warning(trans('messages.you_can_not_cancel_after_confirm'));
+            Toastr::warning(translate('messages.you_can_not_cancel_after_confirm'));
             return back();
         }
 
@@ -156,7 +156,7 @@ class OrderController extends Controller
 
         if($request['order_status']=='delivered' && $order->order_type != 'take_away' && !Helpers::get_restaurant_data()->self_delivery_system)
         {
-            Toastr::warning(trans('messages.you_can_not_delivered_delivery_order'));
+            Toastr::warning(translate('messages.you_can_not_delivered_delivery_order'));
             return back();
         }
 
@@ -164,7 +164,7 @@ class OrderController extends Controller
         {
             if(!Helpers::get_restaurant_data()->self_delivery_system && config('order_confirmation_model') == 'deliveryman' && $order->order_type != 'take_away')
             {
-                Toastr::warning(trans('messages.order_confirmation_warning'));
+                Toastr::warning(translate('messages.order_confirmation_warning'));
                 return back();
             }
         }
@@ -177,13 +177,13 @@ class OrderController extends Controller
                 {
                     if($request->otp != $order->otp)
                     {
-                        Toastr::warning(trans('messages.order_varification_code_not_matched'));
+                        Toastr::warning(translate('messages.order_varification_code_not_matched'));
                         return back();
                     }
                 }
                 else
                 {
-                    Toastr::warning(trans('messages.order_varification_code_is_required'));
+                    Toastr::warning(translate('messages.order_varification_code_is_required'));
                     return back();
                 }
             }
@@ -201,7 +201,7 @@ class OrderController extends Controller
 
                 if(!$ol)
                 {
-                    Toastr::warning(trans('messages.faield_to_create_order_transaction'));
+                    Toastr::warning(translate('messages.faield_to_create_order_transaction'));
                     return back();
                 }
             }
@@ -243,113 +243,10 @@ class OrderController extends Controller
         $order->save();
         if(!Helpers::send_order_notification($order))
         {
-            Toastr::warning(trans('messages.push_notification_faild'));
+            Toastr::warning(translate('messages.push_notification_faild'));
         }
 
-        Toastr::success(trans('messages.order').' '.trans('messages.status_updated'));
-        return back();
-    }
-
-    public function statuss(Request $request)
-    {
-        $order = Order::Notpos()->find($request->id);
-        if (in_array($order->order_status, ['delivered', 'refunded', 'failed'])) {
-            Toastr::warning(trans('messages.you_can_not_change_the_status_of_a_completed_order'));
-            return back();
-        }
-
-        if ($order['delivery_man_id'] == null && $request->order_status == 'out_for_delivery') {
-            Toastr::warning(trans('messages.please_assign_deliveryman_first'));
-            return back();
-        }
-
-        if ($request->order_status == 'delivered' && $order['transaction_reference'] == null && !in_array($order['payment_method'],['cash_on_delivery','wallet'])) {
-            Toastr::warning(trans('messages.add_your_paymen_ref_first'));
-            return back();
-        }
-
-        if ($request->order_status == 'delivered') {
-
-            if ($order->transaction  == null) {
-                if ($order->payment_method == "cash_on_delivery") {
-                    if ($order->order_type == 'take_away') {
-                        $ol = OrderLogic::create_transaction($order, 'restaurant', null);
-                    } else if ($order->delivery_man_id) {
-                        $ol =  OrderLogic::create_transaction($order, 'deliveryman', null);
-                    } else if ($order->user_id) {
-                        $ol =  OrderLogic::create_transaction($order, false, null);
-                    }
-                } else {
-                    $ol = OrderLogic::create_transaction($order, 'admin', null);
-                }
-                if (!$ol) {
-                    Toastr::warning(trans('messages.faield_to_create_order_transaction'));
-                    return back();
-                }
-            } else if ($order->delivery_man_id) {
-                $order->transaction->update(['delivery_man_id' => $order->delivery_man_id]);
-            }
-
-            $order->payment_status = 'paid';
-            if ($order->delivery_man) {
-                $dm = $order->delivery_man;
-                $dm->increment('order_count');
-                $dm->current_orders = $dm->current_orders > 1 ? $dm->current_orders - 1 : 0;
-                $dm->save();
-            }
-            $order->details->each(function ($item, $key) {
-                if ($item->food) {
-                    $item->food->increment('order_count');
-                }
-            });
-            $order->customer->increment('order_count');
-            $order->restaurant->increment('order_count');
-        } else if ($request->order_status == 'refunded') {
-            if ($order->payment_method == "cash_on_delivery" || $order->payment_status == "unpaid") {
-                Toastr::warning(trans('messages.you_can_not_refund_a_cod_order'));
-                return back();
-            }
-            if (isset($order->delivered)) {
-                $rt = OrderLogic::refund_order($order);
-
-                if (!$rt) {
-                    Toastr::warning(trans('messages.faield_to_create_order_transaction'));
-                    return back();
-                }
-            }
-
-            if ($order->payment_status == "paid" && BusinessSetting::where('key', 'wallet_add_refund')->first()->value == 1) {
-                CustomerLogic::create_wallet_transaction($order->user_id, $order->order_amount, 'order_refund', $order->id);
-            }
-
-            if ($order->delivery_man) {
-                $dm = $order->delivery_man;
-                $dm->current_orders = $dm->current_orders > 1 ? $dm->current_orders - 1 : 0;
-                $dm->save();
-            }
-        } else if ($request->order_status == 'canceled') {
-            if (in_array($order->order_status, ['delivered', 'canceled', 'refund_requested', 'refunded', 'failed'])) {
-                Toastr::warning(trans('messages.you_can_not_cancel_a_completed_order'));
-                return back();
-            }
-            if ($order->delivery_man) {
-                $dm = $order->delivery_man;
-                $dm->current_orders = $dm->current_orders > 1 ? $dm->current_orders - 1 : 0;
-                $dm->save();
-            }
-        }
-        $order->order_status = $request->order_status;
-        if($request->order_status == 'processing') {
-            $order->processing_time = isset($request->processing_time) ? $request->processing_time : explode('-', $order['restaurant']['delivery_time'])[0];
-        }
-        $order[$request->order_status] = now();
-        $order->save();
-
-        if (!Helpers::send_order_notification($order)) {
-            Toastr::warning(trans('messages.push_notification_faild'));
-        }
-
-        Toastr::success(trans('messages.order') . trans('messages.status_updated'));
+        Toastr::success(translate('messages.order').' '.translate('messages.status_updated'));
         return back();
     }
 

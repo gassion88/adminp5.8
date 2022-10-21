@@ -1,6 +1,6 @@
 @extends('layouts.vendor.app')
 
-@section('title','Campaign List')
+@section('title',translate('messages.Campaign List'))
 
 @push('css_or_js')
 
@@ -18,7 +18,7 @@
                             <img src="{{asset('/public/assets/admin/img/resturant-panel/page-title/campaign.png')}}" alt="public">
                         </div>
                         <span>
-                            {{__('messages.campaign')}}
+                            {{translate('messages.campaign')}}
                         </span>
                         <span class="badge badge-soft-dark ml-2">{{$campaigns->total()}}</span>
                     </h2>
@@ -35,7 +35,7 @@
                             <form action="javascript:" id="search-form">
                                 @csrf
                                 <div class="input-group input--group">
-                                    <input id="datatableSearch_" type="search" name="search" class="form-control" placeholder="Ex : Search by Title name" aria-label="{{__('messages.search')}}">
+                                    <input id="datatableSearch_" type="search" name="search" class="form-control" placeholder="{{ translate('Ex : Search by Title name') }}" aria-label="{{translate('messages.search')}}">
                                     <button type="submit" class="btn btn--secondary">
                                         <i class="tio-search"></i>
                                     </button>
@@ -54,12 +54,12 @@
                                }'>
                             <thead class="thead-light">
                             <tr>
-                                <th style="width:20%">SL</th>
-                                <th style="width:20%">{{__('messages.title')}}</th>
-                                <th style="width:20%">{{__('messages.image')}}</th>
-                                                                <th >{{__('messages.date')}} {{__('messages.duration')}}</th>
-                                <th >{{__('messages.time')}} {{__('messages.duration')}}</th>
-                                <th style="width:20%">{{__('messages.status')}}</th>
+                                <th class="w-20p">{{ translate('messages.sl') }}</th>
+                                <th class="w-20p">{{translate('messages.title')}}</th>
+                                <th class="w-20p">{{translate('messages.image')}}</th>
+                                <th >{{translate('messages.date')}} {{translate('messages.duration')}}</th>
+                                <th >{{translate('messages.time')}} {{translate('messages.duration')}}</th>
+                                <th class="w-20p">{{translate('messages.status')}}</th>
                             </tr>
                             <!-- <tr>
                                 <th>
@@ -77,7 +77,7 @@
                                               "minimumResultsForSearch": "Infinity",
                                               "customClass": "custom-select custom-select-sm text-capitalize"
                                             }'>
-                                        <option value="">{{__('messages.any')}}</option>
+                                        <option value="">{{translate('messages.any')}}</option>
                                         <option value="Joined">Joined</option>
                                     </select>
                                 </th>
@@ -94,9 +94,8 @@
                                         </span>
                                     </td>
                                     <td>
-                                        <div style="overflow-x: hidden;overflow-y: hidden;">
-                                            <img src="{{asset('storage/app/public/campaign')}}/{{$campaign['image']}}" style="width: 100%;aspect-ratio:2.53; max-width:124px;object-fit:cover"
-                                                 onerror="this.src='{{asset('public/assets/admin/img/160x160/img2.jpg')}}'">
+                                        <div class="overflow-hidden">
+                                            <img class="initial-75" src="{{asset('storage/app/public/campaign')}}/{{$campaign['image']}}" onerror="this.src='{{asset('public/assets/admin/img/160x160/img2.jpg')}}'">
                                         </div>
                                     </td>
                                     <td>
@@ -115,13 +114,13 @@
                                     ?>
                                         @if(in_array($restaurant_id,$restaurant_ids))
                                         <!-- <button type="button" onclick="location.href='{{route('vendor.campaign.remove-restaurant',[$campaign['id'],$restaurant_id])}}'" title="You are already joined. Click to out from the campaign." class="join--btn btn-outline-danger">Out</button> -->
-                                        <button type="button" onclick="form_alert('campaign-{{$campaign['id']}}','{{__('messages.alert_restaurant_out_from_campaign')}}')" title="You are already joined. Click to out from the campaign." class="join--btn btn--danger text-white">{{  translate('Leave Campaign') }}</button>
+                                        <button type="button" onclick="form_alert('campaign-{{$campaign['id']}}','{{translate('messages.alert_restaurant_out_from_campaign')}}')" title="You are already joined. Click to out from the campaign." class="join--btn btn--danger text-white">{{  translate('Leave Campaign') }}</button>
                                         <form action="{{route('vendor.campaign.remove-restaurant',[$campaign['id'],$restaurant_id])}}"
                                                 method="GET" id="campaign-{{$campaign['id']}}">
                                             @csrf
                                         </form>
                                         @else
-                                        <button type="button" class="join--btn btn--primary text-white" onclick="form_alert('campaign-{{$campaign['id']}}','{{__('messages.alert_restaurant_join_campaign')}}')" title="Click to join the campaign">{{  translate('Join Campaign') }}</button>
+                                        <button type="button" class="join--btn btn--primary text-white" onclick="form_alert('campaign-{{$campaign['id']}}','{{translate('messages.alert_restaurant_join_campaign')}}')" title="Click to join the campaign">{{  translate('Join Campaign') }}</button>
                                         <form action="{{route('vendor.campaign.addrestaurant',[$campaign['id'],$restaurant_id])}}"
                                                 method="GET" id="campaign-{{$campaign['id']}}">
                                             @csrf

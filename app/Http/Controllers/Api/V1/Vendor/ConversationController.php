@@ -138,8 +138,8 @@ class ConversationController extends Controller
                 $conversation->save();
 
                 $data = [
-                    'title' =>trans('messages.message'),
-                    'description' =>trans('messages.message_description'),
+                    'title' =>translate('messages.message'),
+                    'description' =>translate('messages.message_description'),
                     'order_id' => '',
                     'image' => '',
                     'type'=> 'message',
@@ -200,11 +200,11 @@ class ConversationController extends Controller
         if(!$sender){
             $sender = new UserInfo();
             $sender->vendor_id = $vendor->id;
-            $sender->f_name = $vendor->f_name;
-            $sender->l_name = $vendor->l_name;
+            $sender->f_name = $vendor->restaurants[0]->name;
+            $sender->l_name = '';
             $sender->phone = $vendor->phone;
             $sender->email = $vendor->email;
-            $sender->image = $vendor->image;
+            $sender->image = $vendor->restaurants[0]->logo;
             $sender->save();
         }
 
@@ -243,11 +243,11 @@ class ConversationController extends Controller
         if(!$sender){
             $sender = new UserInfo();
             $sender->vendor_id = $vendor->id;
-            $sender->f_name = $vendor->f_name;
-            $sender->l_name = $vendor->l_name;
+            $sender->f_name = $vendor->restaurants[0]->name;
+            $sender->l_name = '';
             $sender->phone = $vendor->phone;
             $sender->email = $vendor->email;
-            $sender->image = $vendor->image;
+            $sender->image = $vendor->restaurants[0]->logo;
             $sender->save();
         }
 

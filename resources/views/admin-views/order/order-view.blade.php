@@ -16,17 +16,17 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                     <img src="{{asset('/public/assets/admin/img/orders.png')}}" alt="public">
                 </div>
                 <span>
-                    {{__('messages.order')}} {{__('messages.details')}}
+                    {{translate('messages.order')}} {{translate('messages.details')}}
                 </span>
                 <div class="d-flex ml-auto">
                     <a class="btn btn-icon btn-sm badge-soft-primary rounded-circle justify-content-center mr-1"
                         href="{{ route('admin.order.details', [$order['id'] - 1]) }}" data-toggle="tooltip"
-                        data-placement="top" title="Previous order">
+                        data-placement="top" title="{{ translate('Previous order') }}">
                         <i class="tio-chevron-left m-0"></i>
                     </a>
                     <a class="btn btn-icon btn-sm badge-soft-primary rounded-circle justify-content-center"
                         href="{{ route('admin.order.details', [$order['id'] + 1]) }}" data-toggle="tooltip"
-                        data-placement="top" title="Next order">
+                        data-placement="top" title="{{ translate('Next order') }}">
                         <i class="tio-chevron-right m-0"></i>
                     </a>
                 </div>
@@ -56,12 +56,12 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                     <div class="card-header border-0 align-items-start flex-wrap">
                         <div class="order-invoice-left">
                             <h1 class="page-header-title mt-2">
-                                <span class="font--max-sm">{{ __('messages.order') }} {{translate('id')}} {{translate('#')}}{{ $order['id'] }}</span>
+                                <span class="font--max-sm">{{ translate('messages.order') }} {{translate('id')}} {{translate('#')}}{{ $order['id'] }}</span>
                                 <!-- Static -->
                                 {{-- <span class="badge badge-soft-primary px-2 ml-2">{{translate('pos')}}</span> --}}
                                 @if ($order->edited)
                                 <span class="badge badge-soft-danger text-capitalize my-2 ml-2">
-                                    {{ __('messages.edited') }}
+                                    {{ translate('messages.edited') }}
                                 </span>
                                 @endif
                                 <!-- Static -->
@@ -69,12 +69,12 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                                 @if (!$editing && in_array($order->order_status, ['pending', 'confirmed', 'processing', 'accepted']))
                                     @if ($order->restaurant)
                                         <button class="btn bn--primary btn-outline-primary m-1 print--btn" type="button" onclick="edit_order()">
-                                            <i class="tio-edit"></i> <span>{{ __('messages.edit') }} {{ __('messages.order') }}</span>
+                                            <i class="tio-edit"></i> <span>{{ translate('messages.edit') }} {{ translate('messages.order') }}</span>
                                         </button>
                                     @endif
                                 @endif
                                 <a class="btn btn--primary m-1 print--btn" href={{ route('admin.order.generate-invoice', [$order['id']]) }}>
-                                    <i class="tio-print mr-1"></i> <span>{{ __('messages.print') }} {{ __('messages.invoice') }}</span>
+                                    <i class="tio-print mr-1"></i> <span>{{ translate('messages.print') }} {{ translate('messages.invoice') }}</span>
                                 </a>
                             </div>
                             </h1>
@@ -85,34 +85,42 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                             </span>
                             @if ($order->schedule_at && $order->scheduled)
                                 <span>
-                                    <span>{{ __('messages.scheduled_at') }} :</span>
+                                    <span>{{ translate('messages.scheduled_at') }} :</span>
                                     <strong class="text-warning">{{ date('d M Y ' . config('timeformat'), strtotime($order['schedule_at'])) }}</strong>
                                 </span>
                             @endif
+                            @if (isset($order->restaurant))
                             <h6 class="mt-2 pt-1 mb-2">
                                 <i class="tio-shop"></i>
-                                {{ __('messages.restaurant') }} : <label
-                                    class="badge badge-soft-info font-regular m-0">{{ Str::limit($order->restaurant ? $order->restaurant->name : __('messages.Restaurant deleted!'), 25, '...') }}</label>
+                                {{ translate('messages.restaurant') }} : <label
+                                    class="badge badge-soft-info font-regular m-0">{{ Str::limit($order->restaurant->name, 25, '...') }}</label>
                             </h6>
+                            @else
+                            <h6 class="mt-2 pt-1 mb-2">
+                                <i class="tio-shop"></i>
+                                {{ translate('messages.restaurant') }} : <label
+                                    class="badge badge-soft-danger font-regular m-0">{{ Str::limit(translate('messages.Restaurant deleted!'), 25, '...') }}</label>
+                            </h6>
+                            @endif
                             <h6 class="m-0">
                             @if ($campaign_order)
                                     <span class="badge badge-soft-primary ml-sm-3">
-                                        {{ __('messages.campaign_order') }}
+                                        {{ translate('messages.campaign_order') }}
                                     </span>
                                 @endif
                             </h6>
                             <div class="hs-unfold mt-2">
                                 <button class="btn order--details-btn-sm btn--primary btn-outline-primary btn--sm" data-toggle="modal" data-target="#locationModal"><i
-                                        class="tio-poi-outlined"></i> <span class="ml-1">{{ __('messages.show_locations_on_map') }}</span> </button>
+                                        class="tio-poi-outlined"></i> <span class="ml-1">{{ translate('messages.show_locations_on_map') }}</span> </button>
                                 @if ($order->payment_method != 'cash_on_delivery' && $order->payment_status == 'paid' && $order->order_status != 'refunded' && isset($order->restaurant))
                                     <button class="btn order--details-btn-sm btn--warning btn-outline-warning btn--sm mt-2"
-                                        onclick="route_alert('{{ route('admin.order.status', ['id' => $order['id'], 'order_status' => 'refunded']) }}','{{ __('messages.you_want_to_refund_this_order', ['amount' => $refund_amount . ' ' . \App\CentralLogics\Helpers::currency_code()]) }}', '{{ __('messages.are_you_sure_want_to_refund') }}')"><i
-                                            class="tio-money"></i> <span class="ml-1">{{ __('messages.refund_this_order') }}</span> </button>
+                                        onclick="route_alert('{{ route('admin.order.status', ['id' => $order['id'], 'order_status' => 'refunded']) }}','{{ translate('messages.you_want_to_refund_this_order', ['amount' => $refund_amount . ' ' . \App\CentralLogics\Helpers::currency_code()]) }}', '{{ translate('messages.are_you_sure_want_to_refund') }}')"><i
+                                            class="tio-money"></i> <span class="ml-1">{{ translate('messages.refund_this_order') }}</span> </button>
                                 @endif
                             </div>
                             <div class="order--note mt-3">
                                 @if($order['order_note'] != null)
-                                    <strong class="text--title">{{ __('messages.note') }} :</strong>
+                                    <strong class="text--title">{{ translate('messages.note') }} :</strong>
                                     <span>{{ $order['order_note'] }}</span>
                                 @endif
                             </div>
@@ -122,41 +130,41 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                                 @if (!$editing && in_array($order->order_status, ['pending', 'confirmed', 'processing', 'accepted']))
                                     @if ($order->restaurant)
                                         <button class="btn bn--primary btn-outline-primary m-2 print--btn" type="button" onclick="edit_order()">
-                                            <i class="tio-edit"></i> <span>{{ __('messages.edit') }} {{ __('messages.order') }}</span>
+                                            <i class="tio-edit"></i> <span>{{ translate('messages.edit') }} {{ translate('messages.order') }}</span>
                                         </button>
                                     @endif
                                 @endif
                                 <a class="btn btn--primary m-2 print--btn" href={{ route('admin.order.generate-invoice', [$order['id']]) }}>
-                                    <i class="tio-print mr-1"></i> <span>{{ __('messages.print') }} {{ __('messages.invoice') }}</span>
+                                    <i class="tio-print mr-1"></i> <span>{{ translate('messages.print') }} {{ translate('messages.invoice') }}</span>
                                 </a>
                             </div>
                             <div class="text-right mt-3 order-invoice-right-contents text-capitalize">
                                 <h6>
-                                    <span>{{ __('messages.status') }} :</span>
+                                    <span>{{ translate('messages.status') }} :</span>
                                     @if ($order['order_status'] == 'pending')
                                         <span class="badge badge-soft-success ml-2 ml-sm-3 text-capitalize font-medium">
-                                            {{ __('messages.pending') }}
+                                            {{ translate('messages.pending') }}
                                         </span>
                                     @elseif($order['order_status'] == 'confirmed')
                                         <span class="badge badge-soft-success ml-2 ml-sm-3 text-capitalize font-medium">
-                                            {{ __('messages.confirmed') }}
+                                            {{ translate('messages.confirmed') }}
                                         </span>
                                     @elseif($order['order_status'] == 'processing')
                                         <span class="badge badge-soft-warning ml-2 ml-sm-3 text-capitalize font-medium">
-                                            {{ __('messages.processing') }}
+                                            {{ translate('messages.processing') }}
                                         </span>
                                     @elseif($order['order_status'] == 'picked_up')
                                         <span class="badge badge-soft-warning ml-2 ml-sm-3 text-capitalize font-medium">
-                                            {{ __('messages.out_for_delivery') }}
+                                            {{ translate('messages.out_for_delivery') }}
                                         </span>
                                     @elseif($order['order_status'] == 'delivered')
                                         <span class="badge badge-soft-success ml-2 ml-sm-3 text-capitalize font-medium">
-                                            {{ __('messages.delivered') }}
+                                            {{ translate('messages.delivered') }}
                                         </span>
                                     @elseif($order['order_status'] == 'failed')
                                         <span class="badge badge-soft-danger ml-2 ml-sm-3 text-capitalize font-medium">
-                                            {{ __('messages.payment') }}
-                                            {{ __('messages.failed') }}
+                                            {{ translate('messages.payment') }}
+                                            {{ translate('messages.failed') }}
                                         </span>
                                     @else
                                         <span class="badge badge-soft-danger ml-2 ml-sm-3 text-capitalize font-medium">
@@ -165,41 +173,41 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                                     @endif
                                 </h6>
                                 <h6>
-                                    <span>{{ __('messages.payment') }} {{ __('messages.method') }} :</span>
+                                    <span>{{ translate('messages.payment') }} {{ translate('messages.method') }} :</span>
                                     <strong>{{ str_replace('_', ' ', $order['payment_method']) }}</strong>
                                 </h6>
                                 <h6>
                                     @if ($order['transaction_reference'] == null)
-                                        <span>{{ __('messages.reference') }} {{ __('messages.code') }} :</span>
+                                        <span>{{ translate('messages.reference') }} {{ translate('messages.code') }} :</span>
                                         @if (isset($order->restaurant))
                                             <button class="btn btn-outline-primary btn--primary btn-sm add--referal" data-toggle="modal"
                                                 data-target=".bd-example-modal-sm">
-                                                {{ __('messages.add') }}
+                                                {{ translate('messages.add') }}
                                             </button>
                                         @endif
                                     @else
-                                        <span>{{ __('messages.reference') }} {{ __('messages.code') }} :</span>
+                                        <span>{{ translate('messages.reference') }} {{ translate('messages.code') }} :</span>
                                         <strong>{{ $order['transaction_reference'] }}</strong>
                                     @endif
                                 </h6>
                                 <h6>
-                                    <span>{{ __('messages.order') }} {{ __('messages.type') }} :</span>
+                                    <span>{{ translate('messages.order') }} {{ translate('messages.type') }} :</span>
                                     <strong>{{ str_replace('_', ' ', $order['order_type']) }}</strong>
                                 </h6>
                                 @if ($order->coupon)
                                     <h6>
-                                        <span>{{ __('messages.coupon') }}</span>
+                                        <span>{{ translate('messages.coupon') }}</span>
                                         <label class="text-info">{{ $order->coupon_code }}
-                                            ({{ __('messages.' . $order->coupon->coupon_type) }})</label>
+                                            ({{ translate('messages.' . $order->coupon->coupon_type) }})</label>
                                     </h6>
                                 @endif
 
                                 <h6>
-                                    <span>{{__('messages.payment')}} {{__('messages.status')}} :</span>
+                                    <span>{{translate('messages.payment')}} {{translate('messages.status')}} :</span>
                                     @if ($order['payment_status'] == 'paid')
-                                        <strong class="text-success">{{ __('messages.paid') }}</strong>
+                                        <strong class="text-success">{{ translate('messages.paid') }}</strong>
                                     @else
-                                        <strong class="text-danger">{{ __('messages.unpaid') }}</strong>
+                                        <strong class="text-danger">{{ translate('messages.unpaid') }}</strong>
                                     @endif
                                 </h6>
                             </div>
@@ -217,7 +225,7 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                                             <div class="input--group input-group input-group-merge input-group-flush">
                                                 <input id="datatableSearch" type="search"
                                                     value="{{ $keyword ? $keyword : '' }}" name="search"
-                                                    class="form-control" placeholder="Ex : Search Products" aria-label="Search here">
+                                                    class="form-control" placeholder="{{ translate('messages.Ex : Search Food Name') }}" aria-label="Search here">
                                                 <button type="submit" class="btn btn--secondary"><i class="tio-search"></i></button>
                                             </div>
                                             <!-- End Search -->
@@ -225,9 +233,9 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                                         <div>
                                             <div class="input-group header-item">
                                                 <select name="category" id="category" class="form-control js-select2-custom mx-1"
-                                                    title="{{ __('messages.select') }} {{ __('messages.category') }}"
+                                                    title="{{ translate('messages.select') }} {{ translate('messages.category') }}"
                                                     onchange="set_category_filter(this.value)">
-                                                    <option value="">{{ __('messages.all') }} {{ __('messages.categories') }}
+                                                    <option value="">{{ translate('messages.all') }} {{ translate('messages.categories') }}
                                                     </option>
                                                     @foreach ($categories as $item)
                                                         <option value="{{ $item->id }}"
@@ -315,7 +323,7 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                                                 @if ($editing)
                                                     <div class="avatar avatar-xl mr-3 cursor-pointer"
                                                         onclick="quick_view_cart_item({{ $key }})"
-                                                        title="{{ __('messages.click_to_edit_this_item') }}">
+                                                        title="{{ translate('messages.click_to_edit_this_item') }}">
                                                         <span class="avatar-status avatar-lg-status avatar-status-dark"><i
                                                                 class="tio-edit"></i></span>
                                                         <img class="img-fluid rounded"
@@ -399,7 +407,7 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                                                 @if ($editing)
                                                     <div class="avatar avatar-xl mr-3  cursor-pointer"
                                                         onclick="quick_view_cart_item({{ $key }})"
-                                                        title="{{ __('messages.click_to_edit_this_item') }}">
+                                                        title="{{ translate('messages.click_to_edit_this_item') }}">
                                                         <span class="avatar-status avatar-lg-status avatar-status-dark"><i
                                                                 class="tio-edit"></i></span>
                                                         <img class="img-fluid"
@@ -444,7 +452,7 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                                             <div>
                                                 @foreach (json_decode($detail['add_ons'], true) as $key2 => $addon)
                                                     @if ($key2 == 0)
-                                                        <strong><u>{{ __('messages.addons') }} : </u></strong>
+                                                        <strong><u>{{ translate('messages.addons') }} : </u></strong>
                                                     @endif
                                                     <div class="font-size-sm text-body">
                                                         <span class="font-weight-bold">
@@ -523,32 +531,32 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                         <div class="row justify-content-end mb-3 px-4">
                             <div class="col-md-9 col-lg-8 initial-39-3">
                                 <dl class="row text-sm-right">
-                                    <dt class="col-6 text-capitalize">{{ __('messages.items') }}
-                                        {{ __('messages.price') }}:</dt>
+                                    <dt class="col-6 text-capitalize">{{ translate('messages.items') }}
+                                        {{ translate('messages.price') }}:</dt>
                                     <dd class="col-6 text-right">
                                         {{ \App\CentralLogics\Helpers::format_currency($product_price) }}</dd>
-                                    <dt class="col-6">{{ __('messages.addon') }}
-                                        {{ __('messages.cost') }}:
+                                    <dt class="col-6">{{ translate('messages.addon') }}
+                                        {{ translate('messages.cost') }}:
                                     </dt>
                                     <dd class="col-6 text-right">
                                         {{ \App\CentralLogics\Helpers::format_currency($total_addon_price) }}
                                         <hr>
                                     </dd>
 
-                                    <dt class="col-6">{{ __('messages.subtotal') }}:</dt>
+                                    <dt class="col-6">{{ translate('messages.subtotal') }}:</dt>
                                     <dd class="col-6 text-right">
                                         {{ \App\CentralLogics\Helpers::format_currency($product_price + $total_addon_price) }}
                                     </dd>
-                                    <dt class="col-6">{{ __('messages.discount') }}:</dt>
+                                    <dt class="col-6">{{ translate('messages.discount') }}:</dt>
                                     <dd class="col-6 text-right">
                                         - {{ \App\CentralLogics\Helpers::format_currency($restaurant_discount_amount) }}
                                     </dd>
-                                    <dt class="col-6">{{ __('messages.coupon') }}
-                                        {{ __('messages.discount') }}:</dt>
+                                    <dt class="col-6">{{ translate('messages.coupon') }}
+                                        {{ translate('messages.discount') }}:</dt>
                                     <dd class="col-6 text-right">
                                         - {{ \App\CentralLogics\Helpers::format_currency($coupon_discount_amount) }}
                                     </dd>
-                                    <dt class="col-6">{{ __('messages.vat/tax') }}:</dt>
+                                    <dt class="col-6">{{ translate('messages.vat/tax') }}:</dt>
                                     <dd class="col-6 text-right">
                                         + {{ \App\CentralLogics\Helpers::format_currency($total_tax_amount) }}</dd>
                                     <dt class="col-6">{{ translate('DM Tips') }}</dt>
@@ -557,7 +565,7 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                                     <dt class="col-6">{{ translate('Delivery Fee') }}</dt>
                                     <dd class="col-6 text-right">
                                         + {{ \App\CentralLogics\Helpers::format_currency($del_c) }}</dd>
-                                    <dt class="col-6">{{ __('messages.total') }}:</dt>
+                                    <dt class="col-6">{{ translate('messages.total') }}:</dt>
                                     <dd class="col-6 text-right">
                                         {{ \App\CentralLogics\Helpers::format_currency($product_price + $del_c + $total_tax_amount + $total_addon_price + $deliverman_tips - $coupon_discount_amount - $restaurant_discount_amount) }}
                                     </dd>
@@ -568,9 +576,9 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                             <div class="col-12 mt-3">
                                 <div class="btn--container justify-content-end">
                                     <button class="btn btn-sm btn--danger" type="button"
-                                        onclick="cancle_editing_order()">{{ __('messages.cancel') }}</button>
+                                        onclick="cancle_editing_order()">{{ translate('messages.cancel') }}</button>
                                     <button class="btn btn-sm btn--primary" type="button"
-                                        onclick="update_order()">{{ __('messages.submit') }}</button>
+                                        onclick="update_order()">{{ translate('messages.submit') }}</button>
                                 </div>
                             </div>
                             @endif
@@ -584,7 +592,7 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
 
             <div class="col-lg-4 order-print-area-right">
                 <div class="row g-1">
-
+                        @if (isset($order->restaurant))
                         <div class="col-12">
                             <!-- Card -->
                             <div class="card">
@@ -608,35 +616,35 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                                                     <button class="form-control h--45px dropdown-toggle d-flex justify-content-between align-items-center" type="button"
                                                         id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                                                         aria-expanded="false">
-                                                        {{ __('messages.status') }}
+                                                        {{ translate('messages.status') }}
                                                     </button>
                                                 @endif
                                                 @php($order_delivery_verification = (bool) \App\Models\BusinessSetting::where(['key' => 'order_delivery_verification'])->first()->value)
                                                 <div class="dropdown-menu text-capitalize" aria-labelledby="dropdownMenuButton">
                                                     <a class="dropdown-item {{ $order['order_status'] == 'pending' ? 'active' : '' }}"
-                                                        onclick="route_alert('{{ route('admin.order.status', ['id' => $order['id'], 'order_status' => 'pending']) }}','Change status to pending ?')"
-                                                        href="javascript:">{{ __('messages.pending') }}</a>
+                                                        onclick="route_alert('{{ route('admin.order.status', ['id' => $order['id'], 'order_status' => 'pending']) }}','{{ translate('Change status to pending ?') }}')"
+                                                        href="javascript:">{{ translate('messages.pending') }}</a>
                                                     <a class="dropdown-item {{ $order['order_status'] == 'confirmed' ? 'active' : '' }}"
-                                                        onclick="route_alert('{{ route('admin.order.status', ['id' => $order['id'], 'order_status' => 'confirmed']) }}','Change status to confirmed ?')"
-                                                        href="javascript:">{{ __('messages.confirmed') }}</a>
+                                                        onclick="route_alert('{{ route('admin.order.status', ['id' => $order['id'], 'order_status' => 'confirmed']) }}','{{ translate('Change status to confirmed ?') }}')"
+                                                        href="javascript:">{{ translate('messages.confirmed') }}</a>
 
                                                     <a class="dropdown-item {{ $order['order_status'] == 'processing' ? 'active' : '' }}"
-                                                        onclick="route_alert('{{ route('admin.order.status', ['id' => $order['id'], 'order_status' => 'processing']) }}', 'Change status to processing ?','Are you sure?', '{{ $max_processing_time }}')"
+                                                        onclick="route_alert('{{ route('admin.order.status', ['id' => $order['id'], 'order_status' => 'processing']) }}', '{{ translate('Change status to processing ?') }}','{{ translate('Are you sure?') }}', '{{ $max_processing_time }}')"
                                                         href="javascript:">
-                                                        {{ __('messages.processing') }}</a>
+                                                        {{ translate('messages.processing') }}</a>
 
                                                     <a class="dropdown-item {{ $order['order_status'] == 'handover' ? 'active' : '' }}"
-                                                        onclick="route_alert('{{ route('admin.order.status', ['id' => $order['id'], 'order_status' => 'handover']) }}','Change status to handover ?')"
-                                                        href="javascript:">{{ __('messages.handover') }}</a>
+                                                        onclick="route_alert('{{ route('admin.order.status', ['id' => $order['id'], 'order_status' => 'handover']) }}','{{ translate('Change status to handover ?') }}')"
+                                                        href="javascript:">{{ translate('messages.handover') }}</a>
                                                     <a class="dropdown-item {{ $order['order_status'] == 'picked_up' ? 'active' : '' }}"
-                                                        onclick="route_alert('{{ route('admin.order.status', ['id' => $order['id'], 'order_status' => 'picked_up']) }}','Change status to out for delivery ?')"
-                                                        href="javascript:">{{ __('messages.out_for_delivery') }}</a>
+                                                        onclick="route_alert('{{ route('admin.order.status', ['id' => $order['id'], 'order_status' => 'picked_up']) }}','{{ translate('Change status to out for delivery ?') }}')"
+                                                        href="javascript:">{{ translate('messages.out_for_delivery') }}</a>
                                                     <a class="dropdown-item {{ $order['order_status'] == 'delivered' ? 'active' : '' }}"
-                                                        onclick="route_alert('{{ route('admin.order.status', ['id' => $order['id'], 'order_status' => 'delivered']) }}','Change status to delivered (payment status will be paid if not)?')"
-                                                        href="javascript:">{{ __('messages.delivered') }}</a>
+                                                        onclick="route_alert('{{ route('admin.order.status', ['id' => $order['id'], 'order_status' => 'delivered']) }}','{{ translate('Change status to delivered (payment status will be paid if not)?') }}')"
+                                                        href="javascript:">{{ translate('messages.delivered') }}</a>
                                                     <a class="dropdown-item {{ $order['order_status'] == 'canceled' ? 'active' : '' }}"
-                                                        onclick="route_alert('{{ route('admin.order.status', ['id' => $order['id'], 'order_status' => 'canceled']) }}','Change status to canceled ?')"
-                                                        href="javascript:">{{ __('messages.canceled') }}</a>
+                                                        onclick="route_alert('{{ route('admin.order.status', ['id' => $order['id'], 'order_status' => 'canceled']) }}','{{ translate('Change status to canceled ?') }}')"
+                                                        href="javascript:">{{ translate('messages.canceled') }}</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -648,7 +656,7 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                                         <div class="w-100 text-center mt-4">
                                             <button type="button" class="btn w-100 btn--primary font-regular" data-toggle="modal"
                                                 data-target="#myModal" data-lat='21.03' data-lng='105.85'>
-                                                <i class="tio-bike"></i> {{ __('messages.assign_delivery_mam_manually') }}
+                                                <i class="tio-bike"></i> {{ translate('messages.assign_delivery_mam_manually') }}
                                             </button>
                                         </div>
                                     @endif
@@ -659,6 +667,7 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                             </div>
                             <!-- End Card -->
                         </div>
+                        @endif
                         @if ($order->delivery_man && $order->delivery_man->type == 'zone_wise')
                             <div class="col-12">
                                 <div class="card">
@@ -674,11 +683,8 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                                             </h5>
                                             @if ($order->delivery_man && !isset($order->delivered) && !$order->restaurant->self_delivery_system)
                                                 <span class="ml-auto text--primary position-relative p-2 cursor-pointer" data-toggle="modal" data-target="#myModal">
-                                                    {{ __('messages.change') }}
+                                                    {{ translate('messages.change') }}
                                                 </span>
-                                                <a  onclick="dell_delivery_man({{$order->id}})" href="javascript:">Удалить</a>
-                                                 
-                                                
                                             @endif
                                         </div>
                                         <div class="w-100 text-right initial-39-4">
@@ -698,7 +704,7 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                                                     <strong class="text--title font-semibold">
                                                         {{ $order->delivery_man->orders_count }}
                                                     </strong>
-                                                    {{ __('messages.orders_delivered') }}
+                                                    {{ translate('messages.orders_delivered') }}
                                                 </span>
                                                 <span class="text--title font-semibold d-block">
                                                     <i class="tio-call-talking-quiet"></i> {{ $order->delivery_man['phone'] }}
@@ -711,7 +717,7 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                                         <hr>
                                         @php($address = $order->dm_last_location)
                                         <div class="d-flex justify-content-between align-items-center">
-                                            <h5>{{ __('messages.last') }} {{ __('messages.location') }}</h5>
+                                            <h5>{{ translate('messages.last') }} {{ translate('messages.location') }}</h5>
                                         </div>
                                         @if (isset($address))
                                             <span class="d-block">
@@ -722,7 +728,7 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                                             </span>
                                         @else
                                             <span class="d-block text-lowercase qcont">
-                                                {{ __('messages.location') . ' ' . __('messages.not_found') }}
+                                                {{ translate('messages.location') . ' ' . translate('messages.not_found') }}
                                             </span>
                                         @endif
                                     </div>
@@ -738,7 +744,7 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                                     <span class="card-header-icon">
                                         <i class="tio-user"></i>
                                     </span>
-                                    <span>{{ __('messages.customer') }} {{ __('messages.info') }}</span>
+                                    <span>{{ translate('messages.customer') }} {{ translate('messages.info') }}</span>
                                 </h5>
                                 <!-- End Header -->
                                     @if ($order->customer)
@@ -758,7 +764,7 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                                                 </span>
                                                 <span>
                                                     <strong class="text--title font-semibold">{{ $order->customer->orders_count }}</strong>
-                                                    {{ __('messages.orders') }}
+                                                    {{ translate('messages.orders') }}
                                                 </span>
                                                 <span class="text--title font-semibold d-block">
                                                     <i class="tio-call-talking-quiet"></i> {{ $order->customer['phone'] }}
@@ -781,7 +787,7 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                                                 <span class="card-header-icon">
                                                     <i class="tio-user"></i>
                                                 </span>
-                                                <span>{{ translate('delivery') }} {{ __('messages.info') }}</span>
+                                                <span>{{ translate('delivery') }} {{ translate('messages.info') }}</span>
                                             </h5>
                                             @if (isset($address) && isset($order->restaurant))
                                                 <a class="link" data-toggle="modal" data-target="#shipping-address-modal" href="javascript:"><i class="tio-edit"></i></a>
@@ -840,7 +846,7 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                                         <span class="card-header-icon">
                                             <i class="tio-shop"></i>
                                         </span>
-                                        <span>{{ __('messages.restaurant') }} {{ __('messages.info') }}</span>
+                                        <span>{{ translate('messages.restaurant') }} {{ translate('messages.info') }}</span>
                                     </h5>
                                     <!-- End Header -->
                                     <a class="media align-items-center deco-none resturant--information-single"
@@ -863,7 +869,7 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                                                 <strong class="text--title font-semibold">
                                                     {{ $order->restaurant->orders_count }}
                                                 </strong>
-                                                {{ __('messages.orders_served') }}
+                                                {{ translate('messages.orders_served') }}
                                             </span>
                                             <span class="text--title font-semibold d-block">
                                                 <i class="tio-call-talking-quiet"></i> {{ $order->restaurant['phone'] }}
@@ -891,8 +897,8 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
         <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title h4" id="mySmallModalLabel">{{ __('messages.reference') }}
-                        {{ __('messages.code') }} {{ __('messages.add') }}</h5>
+                    <h5 class="modal-title h4" id="mySmallModalLabel">{{ translate('messages.reference') }}
+                        {{ translate('messages.code') }} {{ translate('messages.add') }}</h5>
                     <button type="button" class="btn btn-xs btn-icon btn-ghost-secondary" data-dismiss="modal"
                         aria-label="Close">
                         <i class="tio-clear tio-lg"></i>
@@ -905,10 +911,10 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                         <!-- Input Group -->
                         <div class="form-group">
                             <input type="text" name="transaction_reference" class="form-control"
-                                placeholder="EX : Code123" required>
+                                placeholder="{{ translate('messages.Ex :') }} Code123" required>
                         </div>
                         <!-- End Input Group -->
-                        <button class="btn btn-primary">{{ __('messages.submit') }}</button>
+                        <button class="btn btn-primary">{{ translate('messages.submit') }}</button>
                     </div>
                 </form>
 
@@ -956,7 +962,7 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                         <div class="modal-body">
                             <div class="row mb-3">
                                 <label for="requiredLabel" class="col-md-2 col-form-label input-label text-md-right">
-                                    {{ __('messages.type') }}
+                                    {{ translate('messages.type') }}
                                 </label>
                                 <div class="col-md-10 js-form-message">
                                     <input type="text" class="form-control" name="address_type"
@@ -965,7 +971,7 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                             </div>
                             <div class="row mb-3">
                                 <label for="requiredLabel" class="col-md-2 col-form-label input-label text-md-right">
-                                    {{ __('messages.contact') }}
+                                    {{ translate('messages.contact') }}
                                 </label>
                                 <div class="col-md-10 js-form-message">
                                     <input type="text" class="form-control" name="contact_person_number"
@@ -974,7 +980,7 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                             </div>
                             <div class="row mb-3">
                                 <label for="requiredLabel" class="col-md-2 col-form-label input-label text-md-right">
-                                    {{ __('messages.name') }}
+                                    {{ translate('messages.name') }}
                                 </label>
                                 <div class="col-md-10 js-form-message">
                                     <input type="text" class="form-control" name="contact_person_name"
@@ -1023,23 +1029,29 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                                     {{ translate('latitude') }}
                                 </label>
                                 <div class="col-md-4 js-form-message">
-                                    <input type="text" class="form-control" name="latitude"
+                                    <input type="text" class="form-control" name="latitude" id="latitude"
                                         value="{{ $address['latitude'] }}">
                                 </div>
                                 <label for="requiredLabel" class="col-md-2 col-form-label input-label text-md-right">
-                                    {{ __('messages.longitude') }}
+                                    {{ translate('messages.longitude') }}
                                 </label>
                                 <div class="col-md-4 js-form-message">
-                                    <input type="text" class="form-control" name="longitude"
+                                    <input type="text" class="form-control" name="longitude" id="longitude"
                                         value="{{ $address['longitude'] }}">
                                 </div>
+                            </div>
+                            <div class="mb-3">
+                                <input id="pac-input" class="controls rounded initial-8"
+                                title="{{ translate('messages.search_your_location_here') }}" type="text"
+                                placeholder="{{ translate('messages.search_here') }}" />
+                            <div class="mb-2 h-200px" id="map"></div>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-white"
-                                data-dismiss="modal">{{ __('messages.close') }}</button>
-                            <button type="submit" class="btn btn-primary">{{ __('messages.save') }}
-                                {{ __('messages.changes') }}</button>
+                                data-dismiss="modal">{{ translate('messages.close') }}</button>
+                            <button type="submit" class="btn btn-primary">{{ translate('messages.save') }}
+                                {{ translate('messages.changes') }}</button>
                         </div>
                     </form>
                 @endif
@@ -1053,15 +1065,14 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">{{ __('messages.assign') }}
-                        {{ __('messages.deliveryman') }}</h4>
+                    <h4 class="modal-title" id="myModalLabel">{{ translate('messages.assign') }}
+                        {{ translate('messages.deliveryman') }}</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-5 my-2">
-                        <h3 class="modal-title" id="myModalLabel">Доступные доставщики</h3>
                             <ul class="list-group overflow-auto max-height-400">
                                 @foreach ($deliveryMen as $dm)
                                     <li class="list-group-item">
@@ -1072,77 +1083,17 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                                                 alt="{{ $dm['name'] }}">
                                             {{ $dm['name'] }}
                                         </span>
-                                           
+
                                         <a class="btn btn-primary btn-xs float-right"
-                                            onclick="addDeliveryMan({{ $dm['id'] }})">{{ __('messages.assign') }}</a>
-                                            
-                                           <?php
-                                           //dd($deliveryAllMen);
-                                                $dat = "";
-                                                for ($i = 0; $i <= count($deliver)-1; $i++){
-                                                    if(isset($deliver[$i]['id'])){
-                                                        if( $deliver[$i]['delivery_man_id'] == $dm['id']){
-                                                            $dat = $deliver[$i]["accepted"];
-                                                            break;                                                           
-                                                        }
-                                                    }
-                                                    
-                                                }
-                                                
-                                            ?>
-                                             @if ( $dat!= "" )
-                                             <br>последний заказ {{\Carbon\Carbon::parse($dat)->format('H:i d.m.Y') }}
-                                             @else
-                                             <br>пока заказов нет
-                                             @endif
+                                            onclick="addDeliveryMan({{ $dm['id'] }})">{{ translate('messages.assign') }}</a>
                                     </li>
                                 @endforeach
                             </ul>
                         </div>
                         <div class="col-md-7 modal_body_map">
-                        <h3 class="modal-title" id="myModalLabel">Активные сегодня</h3>
-                        @foreach ($deliveryAllMen as $dm)
-
-                                    <?php
-                                        
-                                        $dat = "";
-                                        for ($i = 0; $i <= count($deliver)-1; $i++){
-                                            if( isset($deliver[$i]['id']) ){
-                                                if( $deliver[$i]['delivery_man_id'] == $dm['id']){
-                                                    $dat = $deliver[$i]["accepted"];
-                                                    $dc = $deliver[$i]['day_count'];
-                                                    $activ_order = $deliver[$i]["id"];
-                                                    break;                                                           
-                                                }
-                                            }
-                                            
-                                        }
-                                        
-                                    ?>
-                                    <li class="list-group-item">
-                                        <span class="dm_list" role='button' data-id="{{ $dm['id'] }}">
-                                            <img class="avatar avatar-sm avatar-circle mr-1"
-                                                onerror="this.src='{{ asset('public/assets/admin/img/160x160/img1.jpg') }}'"
-                                                src="{{ asset('storage/app/public/delivery-man') }}/{{ $dm['image'] }}"
-                                                alt="{{ $dm['name'] }}">
-                                            {{ $dm['f_name'].' '. $dm['l_name']}}
-                                        </span>
-                                            @if ( $dm["current_orders"] != 0 )
-                                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<strong style="color: #ec9a3c !important;">На доставке</strong> <a href="{{route('admin.order.details',['id'=>$activ_order])}}">{{$activ_order}}</a>
-                                            @endif  
-                                            
-                                            
-                                            
-                                             @if ( $dat!= "" )
-                                             <br>Принял заказ в {{\Carbon\Carbon::parse($dat)->format('H:i d.m.Y') }}
-                                             <br>Заказов за сегодня {{$dc}}
-                                             @else
-                                             <br>пока заказов нет                                            
-                                             @endif
-                                        
-                                    </li>
-                                @endforeach
-                            
+                            <div class="location-map" id="dmassign-map">
+                                <div id="map_canvas"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1156,8 +1107,8 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="locationModalLabel">{{ __('messages.location') }}
-                        {{ __('messages.data') }}</h4>
+                    <h4 class="modal-title" id="locationModalLabel">{{ translate('messages.location') }}
+                        {{ translate('messages.data') }}</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
                 </div>
@@ -1375,11 +1326,11 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                         Swal.fire({
                             icon: 'info',
                             title: 'Cart',
-                            text: "{{ __('messages.product_already_added_in_cart') }}"
+                            text: "{{ translate('messages.product_already_added_in_cart') }}"
                         });
                         return false;
                     } else if (data.data == 0) {
-                        toastr.success('{{ __('messages.product_has_been_added_in_cart') }}', {
+                        toastr.success('{{ translate('messages.product_has_been_added_in_cart') }}', {
                             CloseButton: true,
                             ProgressBar: true
                         });
@@ -1388,7 +1339,7 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                     }
                     $('.call-when-done').click();
 
-                    toastr.success('{{ __('messages.order_updated_successfully') }}', {
+                    toastr.success('{{ translate('messages.order_updated_successfully') }}', {
                         CloseButton: true,
                         ProgressBar: true
                     });
@@ -1402,14 +1353,14 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
 
         function removeFromCart(key) {
             Swal.fire({
-                title: '{{ __('messages.are_you_sure') }}',
-                text: '{{ __('messages.you_want_to_remove_this_order_item') }}',
+                title: '{{ translate('messages.are_you_sure') }}',
+                text: '{{ translate('messages.you_want_to_remove_this_order_item') }}',
                 type: 'warning',
                 showCancelButton: true,
                 cancelButtonColor: 'default',
                 confirmButtonColor: '#FC6A57',
-                cancelButtonText: '{{ __('messages.no') }}',
-                confirmButtonText: '{{ __('messages.yes') }}',
+                cancelButtonText: '{{ translate('messages.no') }}',
+                confirmButtonText: '{{ translate('messages.yes') }}',
                 reverseButtons: true
             }).then((result) => {
                 if (result.value) {
@@ -1426,7 +1377,7 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                                 });
                             }
                         } else {
-                            toastr.success('{{ __('messages.item_has_been_removed_from_cart') }}', {
+                            toastr.success('{{ translate('messages.item_has_been_removed_from_cart') }}', {
                                 CloseButton: true,
                                 ProgressBar: true
                             });
@@ -1441,14 +1392,14 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
         @if ($order->restaurant)
             function edit_order() {
                 Swal.fire({
-                    title: '{{ __('messages.are_you_sure') }}',
-                    text: '{{ __('messages.you_want_to_edit_this_order') }}',
+                    title: '{{ translate('messages.are_you_sure') }}',
+                    text: '{{ translate('messages.you_want_to_edit_this_order') }}',
                     type: 'warning',
                     showCancelButton: true,
                     cancelButtonColor: 'default',
                     confirmButtonColor: '#FC6A57',
-                    cancelButtonText: '{{ __('messages.no') }}',
-                    confirmButtonText: '{{ __('messages.yes') }}',
+                    cancelButtonText: '{{ translate('messages.no') }}',
+                    confirmButtonText: '{{ translate('messages.yes') }}',
                     reverseButtons: true
                 }).then((result) => {
                     if (result.value) {
@@ -1460,14 +1411,14 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
 
         function cancle_editing_order() {
             Swal.fire({
-                title: '{{ __('messages.are_you_sure') }}',
-                text: '{{ __('messages.you_want_to_cancel_editing') }}',
+                title: '{{ translate('messages.are_you_sure') }}',
+                text: '{{ translate('messages.you_want_to_cancel_editing') }}',
                 type: 'warning',
                 showCancelButton: true,
                 cancelButtonColor: 'default',
                 confirmButtonColor: '#FC6A57',
-                cancelButtonText: '{{ __('messages.no') }}',
-                confirmButtonText: '{{ __('messages.yes') }}',
+                cancelButtonText: '{{ translate('messages.no') }}',
+                confirmButtonText: '{{ translate('messages.yes') }}',
                 reverseButtons: true
             }).then((result) => {
                 if (result.value) {
@@ -1478,14 +1429,14 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
 
         function update_order() {
             Swal.fire({
-                title: '{{ __('messages.are_you_sure') }}',
-                text: '{{ __('messages.you_want_to_submit_all_changes_for_this_order') }}',
+                title: '{{ translate('messages.are_you_sure') }}',
+                text: '{{ translate('messages.you_want_to_submit_all_changes_for_this_order') }}',
                 type: 'warning',
                 showCancelButton: true,
                 cancelButtonColor: 'default',
                 confirmButtonColor: '#FC6A57',
-                cancelButtonText: '{{ __('messages.no') }}',
-                confirmButtonText: '{{ __('messages.yes') }}',
+                cancelButtonText: '{{ translate('messages.no') }}',
+                confirmButtonText: '{{ translate('messages.yes') }}',
                 reverseButtons: true
             }).then((result) => {
                 if (result.value) {
@@ -1496,27 +1447,9 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
     </script>
 
     <script
-        src="https://maps.googleapis.com/maps/api/js?key={{ \App\Models\BusinessSetting::where('key', 'map_api_key')->first()->value }}&v=3.45.8">
+        src="https://maps.googleapis.com/maps/api/js?key={{ \App\Models\BusinessSetting::where('key', 'map_api_key')->first()->value }}&libraries=places&callback=initMap&v=3.45.8">
     </script>
     <script>
-         
-         function dell_delivery_man(id){
-            Swal.fire({
-                    //text: message,
-                    title: 'Вы действительно хотите удалить курьера для этого заказа?',
-                    type: 'warning',
-                    showCancelButton: true,
-                    cancelButtonColor: 'default',
-                    confirmButtonColor: '#FC6A57',
-                    cancelButtonText: 'Отмена',
-                    confirmButtonText: 'Удалить',
-                    preConfirm: (id) => {
-                        location.href = '{{ url('/') }}/admin/order/dell-delivery-man/{{ $order['id'] }}';
-                    },
-                    allowOutsideClick: () => !Swal.isLoading()
-                })
-        }
-
         function addDeliveryMan(id) {
             $.ajax({
                 type: "GET",
@@ -1540,7 +1473,7 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
         }
 
         function last_location_view() {
-            toastr.warning('Only available when order is out for delivery!', {
+            toastr.warning('{{ translate('Only available when order is out for delivery!') }}', {
                 CloseButton: true,
                 ProgressBar: true
             });
@@ -1598,7 +1531,7 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                 google.maps.event.addListener(Restaurantmarker, 'click', (function(Restaurantmarker) {
                     return function() {
                         infowindow.setContent(
-                            "<div style='float:left'><img style='max-height:40px;wide:auto;' src='{{ asset('storage/app/public/restaurant/' . $order->restaurant->logo) }}'></div><div class='text-break' style='float:right; padding: 10px;'><b>{{ Str::limit($order->restaurant->name, 15, '...') }}</b><br/> {{ $order->restaurant->address }}</div>"
+                            "<div class='float--left'><img class='js--design-1' src='{{ asset('storage/app/public/restaurant/' . $order->restaurant->logo) }}'></div><div class='text-break float--right p--10px'><b>{{ Str::limit($order->restaurant->name, 15, '...') }}</b><br/> {{ $order->restaurant->address }}</div>"
                         );
                         infowindow.open(map, Restaurantmarker);
                     }
@@ -1607,7 +1540,7 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
             map.fitBounds(dmbounds);
             for (var i = 0; i < deliveryMan.length; i++) {
                 if (deliveryMan[i].lat) {
-                    // var contentString = "<div style='float:left'><img style='max-height:40px;wide:auto;' src='{{ asset('storage/app/public/delivery-man') }}/"+deliveryMan[i].image+"'></div><div style='float:right; padding: 10px;'><b>"+deliveryMan[i].name+"</b><br/> "+deliveryMan[i].location+"</div>";
+                    // var contentString = "<div class='float--left'><img class='js--design-1' src='{{ asset('storage/app/public/delivery-man') }}/"+deliveryMan[i].image+"'></div><div class=' float--right p--10px'><b>"+deliveryMan[i].name+"</b><br/> "+deliveryMan[i].location+"</div>";
                     var point = new google.maps.LatLng(deliveryMan[i].lat, deliveryMan[i].lng);
                     dmbounds.extend(point);
                     map.fitBounds(dmbounds);
@@ -1621,9 +1554,9 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                     google.maps.event.addListener(marker, 'click', (function(marker, i) {
                         return function() {
                             infowindow.setContent(
-                                "<div style='float:left'><img style='max-height:40px;wide:auto;' src='{{ asset('storage/app/public/delivery-man') }}/" +
+                                "<div class='float--left'><img class='js--design-1' src='{{ asset('storage/app/public/delivery-man') }}/" +
                                 deliveryMan[i].image +
-                                "'></div><div style='float:right; padding: 10px;'><b>" + deliveryMan[i]
+                                "'></div><div class='float--right p--10px'><b>" + deliveryMan[i]
                                 .name + "</b><br/> " + deliveryMan[i].location + "</div>");
                             infowindow.open(map, marker);
                         }
@@ -1632,6 +1565,148 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
 
             };
         }
+
+        function initMap() {
+            let map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 13,
+                center: {
+                    lat: {{ isset($order->restaurant) ? $order->restaurant->latitude : '23.757989' }},
+                    lng: {{ isset($order->restaurant) ? $order->restaurant->longitude : '90.360587' }}
+                }
+            });
+
+            let zonePolygon = null;
+
+            //get current location block
+            let infoWindow = new google.maps.InfoWindow();
+            // Try HTML5 geolocation.
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        myLatlng = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude,
+                        };
+                        infoWindow.setPosition(myLatlng);
+                        infoWindow.setContent("Location found.");
+                        infoWindow.open(map);
+                        map.setCenter(myLatlng);
+                    },
+                    () => {
+                        handleLocationError(true, infoWindow, map.getCenter());
+                    }
+                );
+            } else {
+                // Browser doesn't support Geolocation
+                handleLocationError(false, infoWindow, map.getCenter());
+            }
+            //-----end block------
+            const input = document.getElementById("pac-input");
+            const searchBox = new google.maps.places.SearchBox(input);
+            map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
+            let markers = [];
+            const bounds = new google.maps.LatLngBounds();
+            searchBox.addListener("places_changed", () => {
+                const places = searchBox.getPlaces();
+
+                if (places.length == 0) {
+                    return;
+                }
+                // Clear out the old markers.
+                markers.forEach((marker) => {
+                    marker.setMap(null);
+                });
+                markers = [];
+                // For each place, get the icon, name and location.
+                places.forEach((place) => {
+                    if (!place.geometry || !place.geometry.location) {
+                        console.log("Returned place contains no geometry");
+                        return;
+                    }
+                    console.log(place.geometry.location);
+                    if(!google.maps.geometry.poly.containsLocation(
+                        place.geometry.location,
+                        zonePolygon
+                    )){
+                        toastr.error('{{ translate('messages.out_of_coverage') }}', {
+                            CloseButton: true,
+                            ProgressBar: true
+                        });
+                        return false;
+                    }
+
+                    document.getElementById('latitude').value = place.geometry.location.lat();
+                    document.getElementById('longitude').value = place.geometry.location.lng();
+
+                    const icon = {
+                        url: place.icon,
+                        size: new google.maps.Size(71, 71),
+                        origin: new google.maps.Point(0, 0),
+                        anchor: new google.maps.Point(17, 34),
+                        scaledSize: new google.maps.Size(25, 25),
+                    };
+                    // Create a marker for each place.
+                    markers.push(
+                        new google.maps.Marker({
+                            map,
+                            icon,
+                            title: place.name,
+                            position: place.geometry.location,
+                        })
+                    );
+
+                    if (place.geometry.viewport) {
+                        // Only geocodes have viewport.
+                        bounds.union(place.geometry.viewport);
+                    } else {
+                        bounds.extend(place.geometry.location);
+                    }
+                });
+                map.fitBounds(bounds);
+            });
+            @if ($order->restaurant)
+                $.get({
+                    url: '{{ url('/') }}/admin/zone/get-coordinates/{{ $order->restaurant->zone_id }}',
+                    dataType: 'json',
+                    success: function(data) {
+                        zonePolygon = new google.maps.Polygon({
+                            paths: data.coordinates,
+                            strokeColor: "#FF0000",
+                            strokeOpacity: 0.8,
+                            strokeWeight: 2,
+                            fillColor: 'white',
+                            fillOpacity: 0,
+                        });
+                        zonePolygon.setMap(map);
+                        zonePolygon.getPaths().forEach(function(path) {
+                            path.forEach(function(latlng) {
+                                bounds.extend(latlng);
+                                map.fitBounds(bounds);
+                            });
+                        });
+                        map.setCenter(data.center);
+                        google.maps.event.addListener(zonePolygon, 'click', function(mapsMouseEvent) {
+                            infoWindow.close();
+                            // Create a new InfoWindow.
+                            infoWindow = new google.maps.InfoWindow({
+                                position: mapsMouseEvent.latLng,
+                                content: JSON.stringify(mapsMouseEvent.latLng.toJSON(), null,
+                                    2),
+                            });
+                            var coordinates = JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2);
+                            var coordinates = JSON.parse(coordinates);
+
+                            document.getElementById('latitude').value = coordinates['lat'];
+                            document.getElementById('longitude').value = coordinates['lng'];
+                            infoWindow.open(map);
+                        });
+                    },
+                });
+            @endif
+
+        }
+        initMap();
+
         $(document).ready(function() {
 
             // Re-init map before show modal
@@ -1646,6 +1721,10 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                 initializeGMap();
                 google.maps.event.trigger(map, "resize");
                 map.setCenter(myLatlng);
+            });
+
+            $('#shipping-address-modal').on('shown.bs.modal', function() {
+                initMap();
             });
 
 
@@ -1666,7 +1745,7 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                     google.maps.event.addListener(marker, 'click', (function(marker) {
                         return function() {
                             infowindow.setContent(
-                                "<div style='float:left'><img style='max-height:40px;wide:auto;' src='{{ asset('storage/app/public/profile/' . $order->customer->image) }}'></div><div style='float:right; padding: 10px;'><b>{{ $order->customer->f_name }} {{ $order->customer->l_name }}</b><br/>{{ $address['address'] }}</div>"
+                                "<div class='float--left'><img class='js--design-1' src='{{ asset('storage/app/public/profile/' . $order->customer->image) }}'></div><div class='float--right p--10px'><b>{{ $order->customer->f_name }} {{ $order->customer->l_name }}</b><br/>{{ $address['address'] }}</div>"
                             );
                             infowindow.open(map, marker);
                         }
@@ -1685,7 +1764,7 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                     google.maps.event.addListener(dmmarker, 'click', (function(dmmarker) {
                         return function() {
                             infowindow.setContent(
-                                "<div style='float:left'><img style='max-height:40px;wide:auto;' src='{{ asset('storage/app/public/delivery-man/' . $order->delivery_man->image) }}'></div><div style='float:right; padding: 10px;'><b>{{ $order->delivery_man->f_name }}  {{ $order->delivery_man->l_name }}</b><br/> {{ $order->dm_last_location['location'] }}</div>"
+                                "<div class='float--left'><img class='js--design-1' src='{{ asset('storage/app/public/delivery-man/' . $order->delivery_man->image) }}'></div><div class='float--right p--10px'><b>{{ $order->delivery_man->f_name }}  {{ $order->delivery_man->l_name }}</b><br/> {{ $order->dm_last_location['location'] }}</div>"
                             );
                             infowindow.open(map, dmmarker);
                         }
@@ -1705,7 +1784,7 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                     google.maps.event.addListener(Retaurantmarker, 'click', (function(Retaurantmarker) {
                         return function() {
                             infowindow.setContent(
-                                "<div style='float:left'><img style='max-height:40px;wide:auto;' src='{{ asset('storage/app/public/restaurant/' . $order->restaurant->logo) }}'></div><div style='float:right; padding: 10px;'><b>{{ Str::limit($order->restaurant->name, 15, '...') }}</b><br/> {{ $order->restaurant->address }}</div>"
+                                "<div class='float--left'><img class='js--design-1' src='{{ asset('storage/app/public/restaurant/' . $order->restaurant->logo) }}'></div><div class='float--right p--10px'><b>{{ Str::limit($order->restaurant->name, 15, '...') }}</b><br/> {{ $order->restaurant->address }}</div>"
                             );
                             infowindow.open(map, Retaurantmarker);
                         }

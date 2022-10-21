@@ -7,7 +7,7 @@
                 @elseif($at->deliveryman)
                 <a href="{{route('admin.delivery-man.preview',[$at->deliveryman->id])}}">{{ $at->deliveryman->f_name }} {{ $at->deliveryman->l_name }}</a>
                 @else
-                    {{__('messages.not_found')}}
+                    {{translate('messages.not_found')}}
                 @endif
             </td>
             <td><label class="text-uppercase">{{$at['from_type']}}</label></td>

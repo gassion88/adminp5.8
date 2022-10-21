@@ -1,17 +1,16 @@
 <div>
     <div class="table-responsive">
         <table id="datatable"
-            class="table table-borderless table-thead-bordered table-nowrap table-align-middle card-table dataTable table-data-min-height"
-            style="width: 100%">
+            class="table table-borderless table-thead-bordered table-nowrap table-align-middle card-table dataTable table-data-min-height">
             <thead class="thead-light">
                 <tr>
-                    <th>SL</th>
-                    <th>{{__('messages.order')}} {{__('messages.id')}}</th>
-                    <th>{{__('messages.total_order_amount')}}</th>
-                    <th>{{__('messages.restaurant')}} {{__('messages.earned')}}</th>
-                    <th>{{__('messages.admin')}}  {{__('messages.earned')}}</th>
-                    <th>{{__('messages.delivery')}}  {{__('messages.fee')}}</th>
-                    <th>{{__('messages.vat/tax')}}</th>
+                    <th>{{ translate('messages.sl') }}</th>
+                    <th>{{translate('messages.order')}} {{translate('messages.id')}}</th>
+                    <th>{{translate('messages.total_order_amount')}}</th>
+                    <th>{{translate('messages.restaurant')}} {{translate('messages.earned')}}</th>
+                    <th>{{translate('messages.admin')}}  {{translate('messages.earned')}}</th>
+                    <th>{{translate('messages.delivery')}}  {{translate('messages.fee')}}</th>
+                    <th>{{translate('messages.vat/tax')}}</th>
                 </tr>
             </thead>
             <tbody>

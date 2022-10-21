@@ -33,7 +33,7 @@ Route::group(['prefix' => 'payment-mobile'], function () {
 
 // SSLCOMMERZ Start
 
-Route::post('pay-ssl', 'SslCommerzPaymentController@index');
+Route::post('pay-ssl', 'SslCommerzPaymentController@index')->name('pay-ssl');
 Route::post('/success', 'SslCommerzPaymentController@success');
 Route::post('/fail', 'SslCommerzPaymentController@fail');
 Route::post('/cancel', 'SslCommerzPaymentController@cancel');
@@ -48,7 +48,7 @@ Route::get('paypal-status', 'PaypalPaymentController@getPaymentStatus')->name('p
 
 
 Route::get('pay-stripe', 'StripePaymentController@payment_process_3d')->name('pay-stripe');
-Route::get('pay-stripe/success', 'StripePaymentController@success')->name('pay-stripe.success');
+Route::get('pay-stripe/success/{order_id}/{transaction_ref}', 'StripePaymentController@success')->name('pay-stripe.success');
 Route::get('pay-stripe/fail', 'StripePaymentController@fail')->name('pay-stripe.fail');
 
 // Get Route For Show Payment Form
@@ -80,7 +80,7 @@ Route::get('/paystack',function (){
 // The route that the button calls to initialize payment
 Route::post('/flutterwave-pay','FlutterwaveController@initialize')->name('flutterwave_pay');
 // The callback url after a payment
-Route::get('/rave/callback', 'FlutterwaveController@callback')->name('flutterwave_callback');
+Route::get('/rave/callback/{order_id}', 'FlutterwaveController@callback')->name('flutterwave_callback');
 
 
 // The callback url after a payment
@@ -109,7 +109,7 @@ Route::any('paytm-response', 'PaytmController@callback')->name('paytm-response')
 
 // The callback url after a payment LIQPAY
 Route::get('liqpay-payment', 'LiqPayController@payment')->name('liqpay-payment');
-Route::any('liqpay-callback', 'LiqPayController@callback')->name('liqpay-callback');
+Route::any('liqpay-callback/{order_id}', 'LiqPayController@callback')->name('liqpay-callback');
 
 Route::get('wallet-payment','WalletPaymentController@make_payment')->name('wallet.payment');
 

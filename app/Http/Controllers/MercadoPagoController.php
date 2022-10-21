@@ -30,7 +30,6 @@ class MercadoPagoController extends Controller
     }
     public function make_payment(Request $request)
     {
-
         SDK::setAccessToken($this->data['access_token']);
         $payment = new Payment();
         $payment->transaction_amount = (float)$request['transactionAmount'];
@@ -39,7 +38,7 @@ class MercadoPagoController extends Controller
         $payment->installments = (int)$request['installments'];
         $payment->payment_method_id = $request['paymentMethodId'];
         $payment->issuer_id = (int)$request['issuer'];
-    
+
         $payer = new Payer();
         $payer->email = $request['payer']['email'];
         $payer->identification = array(
@@ -47,7 +46,7 @@ class MercadoPagoController extends Controller
             "number" => $request['payer']['identification']['number']
         );
         $payment->payer = $payer;
-        
+
         $payment->save();
 
         $response = array(
@@ -74,7 +73,7 @@ class MercadoPagoController extends Controller
                 $value = Helpers::order_status_update_message('confirmed');
                 if ($value) {
                     $data = [
-                        'title' =>trans('messages.order_placed_successfully'),
+                        'title' =>translate('messages.order_placed_successfully'),
                         'description' => $value,
                         'order_id' => $order['id'],
                         'image' => '',
@@ -89,8 +88,8 @@ class MercadoPagoController extends Controller
                     ]);
                 }
                 $data = [
-                    'title' =>trans('messages.order_placed_successfully'),
-                    'description' => trans('messages.new_order_push_description'),
+                    'title' =>translate('messages.order_placed_successfully'),
+                    'description' => translate('messages.new_order_push_description'),
                     'order_id' => $order->id,
                     'image' => '',
                     'type'=>'order_status',
@@ -116,17 +115,17 @@ class MercadoPagoController extends Controller
         // "https://api.mercadopago.com/users/test_user" \
         // -d '{"site_id":"MLA"}'
 
-        $curl = curl_init();  
+        $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, "https://api.mercadopago.com/users/test_user");
-        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);   
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);   
-        curl_setopt($curl, CURLOPT_POST, true);   
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl, CURLOPT_POST, true);
         curl_setopt($curl, CURLOPT_HTTPHEADER, array(
             'Content-Type: application/json',
             'Authorization: Bearer '.$this->data['access_token']
         ));
-        curl_setopt($curl, CURLOPT_POSTFIELDS, '{"site_id":"MLA"}');   
-        $response = curl_exec($curl);   
+        curl_setopt($curl, CURLOPT_POSTFIELDS, '{"site_id":"MLA"}');
+        $response = curl_exec($curl);
         dd($response);
 
     }

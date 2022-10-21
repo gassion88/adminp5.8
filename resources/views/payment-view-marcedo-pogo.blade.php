@@ -31,8 +31,8 @@
                         <span class="price" id="summary-price"></span>
                         <p class="item-name">Book x <span id="summary-quantity"></span></p>
                     </div> -->
-                    <p class="alert alert-danger" role="alert" id="error_alert" style="display:none;"></p>
-                    <div class="total">{{__('messages.amount_to_be_paid')}}<span class="price">{{\App\CentralLogics\Helpers::format_currency($order->order_amount)}}</span></div>
+                    <p class="alert alert-danger initial-hidden" role="alert" id="error_alert"></p>
+                    <div class="total">{{translate('messages.amount_to_be_paid')}}<span class="price">{{\App\CentralLogics\Helpers::format_currency($order->order_amount)}}</span></div>
                 </div>
                 <div class="payment-details">
                     <form id="form-checkout">
@@ -93,7 +93,7 @@
 <script>
     const publicKey = document.getElementById("mercado-pago-public-key").value;
     const mercadopago = new MercadoPago(publicKey);
-    
+
     loadCardForm();
     function loadCardForm() {
         const productCost = '{{$order->order_amount}}';
@@ -106,15 +106,15 @@
                 id: "form-checkout",
                 cardholderName: {
                     id: "form-checkout__cardholderName",
-                    placeholder: "{{__('messages.card_holder_name')}}",
+                    placeholder: "{{translate('messages.card_holder_name')}}",
                 },
                 cardholderEmail: {
                     id: "form-checkout__cardholderEmail",
-                    placeholder: "{{__('messages.card_holder_email')}}",
+                    placeholder: "{{translate('messages.card_holder_email')}}",
                 },
                 cardNumber: {
                     id: "form-checkout__cardNumber",
-                    placeholder: "{{__('messages.card_number')}}",
+                    placeholder: "{{translate('messages.card_number')}}",
                 },
                 cardExpirationMonth: {
                     id: "form-checkout__cardExpirationMonth",
@@ -126,22 +126,22 @@
                 },
                 securityCode: {
                     id: "form-checkout__securityCode",
-                    placeholder: "{{__('messages.security_code')}}",
+                    placeholder: "{{translate('messages.security_code')}}",
                 },
                 installments: {
                     id: "form-checkout__installments",
-                    placeholder: "{{__('messages.installments')}}",
+                    placeholder: "{{translate('messages.installments')}}",
                 },
                 identificationType: {
                     id: "form-checkout__identificationType",
                 },
                 identificationNumber: {
                     id: "form-checkout__identificationNumber",
-                    placeholder: "{{__('messages.identification_number')}}",
+                    placeholder: "{{translate('messages.identification_number')}}",
                 },
                 issuer: {
                     id: "form-checkout__issuer",
-                    placeholder: "{{__('messages.issuer')}}",
+                    placeholder: "{{translate('messages.issuer')}}",
                 },
             },
             callbacks: {
@@ -165,11 +165,11 @@
                         identificationType,
                     } = cardForm.getCardFormData();
 
-                    fetch("{{route('mercadopago.make_payment')}}", {
+                    fetch("{{route('mercadopago.make_payment',request()->getQueryString())}}", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
-                            "X-CSRF-TOKEN": "{{csrf_token()}}"  
+                            "X-CSRF-TOKEN": "{{csrf_token()}}"
                         },
                         body: JSON.stringify({
                             token,

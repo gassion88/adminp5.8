@@ -33,7 +33,7 @@ class NotificationController extends Controller
         ], [
             'notification_title.required' => 'Title is required!',
         ]);
-        
+
         if ($validator->fails()) {
             return response()->json(['errors' => Helpers::error_processor($validator)]);
         }
@@ -74,7 +74,7 @@ class NotificationController extends Controller
         try {
             Helpers::send_push_notif_to_topic($notification, $topic, 'general');
         } catch (\Exception $e) {
-            Toastr::warning(trans('messages.push_notification_faild'));
+            Toastr::warning(translate('messages.push_notification_faild'));
         }
 
         return response()->json([], 200);
@@ -89,7 +89,7 @@ class NotificationController extends Controller
     public function update(Request $request, $id)
     {
         if (env('APP_MODE') == 'demo') {
-            Toastr::info(trans('messages.update_option_is_disable_for_demo'));
+            Toastr::info(translate('messages.update_option_is_disable_for_demo'));
             return back();
         }
         $request->validate([
@@ -131,13 +131,13 @@ class NotificationController extends Controller
         {
             $notification->image = url('/').'/storage/app/public/notification/'.$image_name;
         }
-        
+
         try {
             Helpers::send_push_notif_to_topic($notification, $topic, 'general');
         } catch (\Exception $e) {
-            Toastr::warning(trans('messages.push_notification_faild'));
+            Toastr::warning(translate('messages.push_notification_faild'));
         }
-        Toastr::success(trans('messages.notification').' '.trans('messages.updated_successfully'));
+        Toastr::success(translate('messages.notification').' '.translate('messages.updated_successfully'));
         return back();
     }
 
@@ -146,7 +146,7 @@ class NotificationController extends Controller
         $notification = Notification::findOrFail($request->id);
         $notification->status = $request->status;
         $notification->save();
-        Toastr::success(trans('messages.notification_status_updated'));
+        Toastr::success(translate('messages.notification_status_updated'));
         return back();
     }
 
@@ -157,7 +157,7 @@ class NotificationController extends Controller
             Storage::disk('public')->delete('notification/' . $notification['image']);
         }
         $notification->delete();
-        Toastr::success(trans('messages.notification_deleted_successfully'));
+        Toastr::success(translate('messages.notification_deleted_successfully'));
         return back();
     }
 

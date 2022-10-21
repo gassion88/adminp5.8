@@ -26,7 +26,7 @@
             <div class="btn--container justify-content-center">
                 <a class="btn btn-sm btn--primary btn-outline-primary action-btn" href="{{route('admin.banner.edit',[$banner['id']])}}"title="{{translate('messages.edit')}} {{translate('messages.banner')}}"><i class="tio-edit"></i>
                 </a>
-                <a class="btn btn-sm btn--danger btn-outline-danger action-btn" href="javascript:" onclick="form_alert('banner-{{$banner['id']}}','Want to delete this banner ?')" title="{{translate('messages.delete')}} {{translate('messages.banner')}}"><i class="tio-delete-outlined"></i>
+                <a class="btn btn-sm btn--danger btn-outline-danger action-btn" href="javascript:" onclick="form_alert('banner-{{$banner['id']}}','{{translate('Want to delete this banner')}}')" title="{{translate('messages.delete')}} {{translate('messages.banner')}}"><i class="tio-delete-outlined"></i>
                 </a>
                 <form action="{{route('admin.banner.delete',[$banner['id']])}}"
                             method="post" id="banner-{{$banner['id']}}">

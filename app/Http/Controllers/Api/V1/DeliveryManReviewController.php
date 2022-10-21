@@ -57,7 +57,7 @@ class DeliveryManReviewController extends Controller
 
         $dm = DeliveryMan::find($request->delivery_man_id);
         if (isset($dm) == false) {
-            $validator->errors()->add('delivery_man_id', trans('messages.not_found'));
+            $validator->errors()->add('delivery_man_id', translate('messages.not_found'));
         }
 
         if ($validator->errors()->count() > 0) {
@@ -67,8 +67,8 @@ class DeliveryManReviewController extends Controller
         $multi_review = DMReview::where(['delivery_man_id' => $request->delivery_man_id, 'user_id' => $request->user()->id, 'order_id'=>$request->order_id])->first();
         if (isset($multi_review)) {
             return response()->json([
-                'errors' => [ 
-                    ['code'=>'review','message'=> trans('messages.already_submitted')]
+                'errors' => [
+                    ['code'=>'review','message'=> translate('messages.already_submitted')]
                 ]
             ], 403);
         }
@@ -95,6 +95,6 @@ class DeliveryManReviewController extends Controller
         $review->attachment = json_encode($image_array);
         $review->save();
 
-        return response()->json(['message' => trans('messages.review_submited_successfully')], 200);
+        return response()->json(['message' => translate('messages.review_submited_successfully')], 200);
     }
 }

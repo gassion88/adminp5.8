@@ -23,105 +23,6 @@
     <link rel="stylesheet" href="{{ asset('public/assets/admin') }}/css/style.css">
     @stack('css_or_js')
 
-    <style>
-        :root {
-            --theameColor: #045cff;
-        }
-
-        .scroll-bar {
-            max-height: calc(100vh - 100px);
-            overflow-y: auto !important;
-        }
-
-        ::-webkit-scrollbar-track {
-            box-shadow: inset 0 0 1px #cfcfcf;
-            /*border-radius: 5px;*/
-        }
-
-        ::-webkit-scrollbar {
-            width: 3px !important;
-            height: 3px !important;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #c1c1c1;
-            /*border-radius: 5px;*/
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #003638;
-        }
-
-        @media only screen and (max-width: 768px) {
-
-            /* For mobile phones: */
-            .map-warper {
-                height: 250px;
-                padding-bottom: 10px;
-            }
-        }
-
-        .deco-none {
-            color: inherit;
-            text-decoration: inherit;
-        }
-
-        .qcont {
-            text-transform: lowercase;
-        }
-
-        .qcont:first-letter {
-            text-transform: capitalize;
-        }
-
-        /* .navbar-vertical .nav-link {
-            color: #ffffff !important;
-        }
-
-        .navbar .active > .nav-link, .navbar .nav-link.active, .navbar .nav-link.show, .navbar .show > .nav-link {
-            color: #C6FFC1 !important;
-        } */
-
-
-
-        .navbar-vertical .nav-link {
-            color: #ffffff;
-        }
-
-        .navbar .nav-link:hover {
-            color: #C6FFC1;
-        }
-
-        .navbar .active>.nav-link,
-        .navbar .nav-link.active,
-        .navbar .nav-link.show,
-        .navbar .show>.nav-link {
-            color: #C6FFC1;
-        }
-
-        .navbar-vertical .active .nav-indicator-icon,
-        .navbar-vertical .nav-link:hover .nav-indicator-icon,
-        .navbar-vertical .show>.nav-link>.nav-indicator-icon {
-            color: #C6FFC1;
-        }
-
-        .nav-subtitle {
-            display: block;
-            color: #fffbdf91;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: .03125rem;
-        }
-/*
-        .navbar-vertical .navbar-nav.nav-tabs .active .nav-link,
-        .navbar-vertical .navbar-nav.nav-tabs .active.nav-link {
-            border-left-color: #C6FFC1;
-        } */
-
-        .cursor-pointer {
-            cursor: pointer;
-        }
-    </style>
 
     <script src="{{ asset('public/assets/admin') }}/vendor/hs-navbar-vertical-aside/hs-navbar-vertical-aside-mini-cache.js">
     </script>
@@ -135,8 +36,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div id="loading" style="display: none;">
-                    <div style="position: fixed;z-index: 9999; left: 40%;top: 37% ;width: 100%">
+                <div id="loading" class="initial-hidden">
+                    <div class="loading--1">
                         <img width="200" src="{{ asset('public/assets/admin/img/loader.gif') }}">
                     </div>
                 </div>
@@ -169,11 +70,11 @@
                         <div class="row">
                             <div class="col-12">
                                 <center>
-                                    <h2 style="color: rgba(96,96,96,0.68)">
-                                        <i class="tio-shopping-cart-outlined"></i> You have new order, Check Please.
+                                    <h2 class="color-8a8a8a">
+                                        <i class="tio-shopping-cart-outlined"></i> {{translate('messages.You have new order, Check Please.')}}
                                     </h2>
                                     <hr>
-                                    <button onclick="check_order()" class="btn btn-primary">Ok, let me check</button>
+                                    <button onclick="check_order()" class="btn btn-primary">{{translate('messages.Ok, let me check')}}</button>
                                 </center>
                             </div>
                         </div>
@@ -188,12 +89,12 @@
                         <div class="row">
                             <div class="col-12">
                                 <center>
-                                    <h2 style="color: rgba(96,96,96,0.68)">
-                                        <i class="tio-messages"></i> {{ __('messages.message_description') }}
+                                    <h2 class="color-8a8a8a">
+                                        <i class="tio-messages"></i> {{ translate('messages.message_description') }}
                                     </h2>
                                     <hr>
                                     <button onclick="check_message()"
-                                        class="btn btn-primary">{{ __('messages.Ok, let me check') }}</button>
+                                        class="btn btn-primary">{{ translate('messages.Ok, let me check') }}</button>
                                 </center>
                             </div>
                         </div>
@@ -223,7 +124,7 @@
     @if ($errors->any())
         <script>
             @foreach ($errors->all() as $error)
-                toastr.error('{{ $error }}', Error, {
+                toastr.error('{{ translate($error) }}', Error, {
                     CloseButton: true,
                     ProgressBar: true
                 });
@@ -374,39 +275,19 @@
             @php($admin_order_notification = \App\Models\BusinessSetting::where('key', 'admin_order_notification')->first())
             @php($admin_order_notification = $admin_order_notification ? $admin_order_notification->value : 0)
             @if ($admin_order_notification)
-            
                 setInterval(function() {
                     $.get({
                         url: '{{ route('admin.get-restaurant-data') }}',
                         dataType: 'json',
                         success: function(response) {
                             let data = response.data;
-                            let pend = response.pend;
-                            let mess = response.mess;
-
-                           
                             if (data.new_order > 0) {
                                 playAudio();
                                 $('#popup-modal').appendTo("body").modal('show');
-                                
                             }
-                            if (pend.pending > 0 && !$("#danger-not").hasClass("btn-status-danger")) {
-                                $('#danger-not').addClass('btn-status-danger');                               
-                            }
-                            if(pend.pending == 0 && $("#danger-not").hasClass("btn-status-danger") ){
-                                $('#danger-not').removeClass('btn-status-danger');
-                            }
-                            /*
-                            if (mess.messages > 0 && !$("#danger-mess").hasClass("btn-status-danger")) {
-                                $('#danger-mess').addClass('btn-status-danger');                               
-                            }
-                            if(mess.messages == 0 && $("#danger-mess").hasClass("btn-status-danger") ){
-                                $('#danger-mess').removeClass('btn-status-danger');
-                            }
-                            */
                         },
                     });
-                }, 3000);
+                }, 10000);
 
                 function check_order() {
                     location.href = '{{ route('admin.order.list', ['status' => 'all']) }}';
@@ -417,7 +298,7 @@
             location.href = '{{ route('admin.message.list') }}';
         }
 
-        function route_alert(route, message, title = "{{ __('messages.are_you_sure') }}", processing = false) {
+        function route_alert(route, message, title = "{{ translate('messages.are_you_sure') }}", processing = false) {
             if (processing) {
                 Swal.fire({
                     title: title,
@@ -459,14 +340,14 @@
 
         function form_alert(id, message) {
             Swal.fire({
-                title: 'Are you sure?',
+                title: '{{ translate('messages.Are you sure ?') }}',
                 text: message,
                 type: 'warning',
                 showCancelButton: true,
                 cancelButtonColor: 'default',
                 confirmButtonColor: '#FC6A57',
-                cancelButtonText: 'No',
-                confirmButtonText: 'Yes',
+                cancelButtonText: '{{ translate('messages.No') }}',
+                confirmButtonText: '{{ translate('messages.Yes') }}',
                 reverseButtons: true
             }).then((result) => {
                 if (result.value) {
@@ -506,7 +387,7 @@
             /* Copy the text inside the text field */
             navigator.clipboard.writeText(copyText);
 
-            toastr.success('{{ __('messages.text_copied') }}', {
+            toastr.success('{{ translate('messages.text_copied') }}', {
                 CloseButton: true,
                 ProgressBar: true
             });
@@ -570,7 +451,7 @@
             }
         }
 
-        function converationList() {
+        function conversationList() {
             $.ajax({
                     url: "{{ route('admin.message.list') }}",
                     success: function(data) {
@@ -583,7 +464,6 @@
                 })
         }
 
-
         function conversationView() {
             var conversation_id = getUrlParameter('conversation');
             var user_id = getUrlParameter('user');
@@ -592,6 +472,30 @@
                 url: url,
                 success: function(data) {
                     $('#view-conversation').html(data.view);
+                }
+            })
+        }
+
+        function vendorConversationView() {
+            var conversation_id = getUrlParameter('conversation');
+            var user_id = getUrlParameter('user');
+            var url= '{{url('/')}}/admin/vendor/message/'+conversation_id+'/' + user_id;
+            $.ajax({
+                url: url,
+                success: function(data) {
+                    $('#vendor-view-conversation').html(data.view);
+                }
+            })
+        }
+
+        function dmConversationView() {
+            var conversation_id = getUrlParameter('conversation');
+            var user_id = getUrlParameter('user');
+            var url= '{{url('/')}}/admin/delivery-man/message/'+conversation_id+'/' + user_id;
+            $.ajax({
+                url: url,
+                success: function(data) {
+                    $('#dm-view-conversation').html(data.view);
                 }
             })
         }
@@ -609,12 +513,12 @@
                     $('#view-conversation').html(data.view);
                 }
             })
-            toastr.success('New message arrived', {
+            toastr.success('{{ translate('New message arrived') }}', {
                 CloseButton: true,
                 ProgressBar: true
             });
             if($('#conversation-list').scrollTop() == 0){
-                converationList();
+                conversationList();
             }
             // playAudio();
             //         $('#popup-modal-msg').appendTo("body").modal('show');
@@ -626,8 +530,10 @@
             // new Notification(title, options);
         });
         startFCM();
-        converationList();
+        conversationList();
         conversationView();
+        vendorConversationView();
+        dmConversationView();
     </script>
 
     <script>

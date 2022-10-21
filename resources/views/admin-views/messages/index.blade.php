@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title', 'Messages')
+@section('title', translate('Messages'))
 
 
 @section('content')
@@ -8,7 +8,7 @@
     <div class="content container-fluid">
         <!-- Page Header -->
         <div class="page-header">
-            <h1 class="page-header-title">{{ __('messages.conversation') }} {{ __('messages.list') }}</h1>
+            <h1 class="page-header-title">{{ translate('messages.conversation') }} {{ translate('messages.list') }}</h1>
         </div>
         <!-- End Page Header -->
 
@@ -21,7 +21,7 @@
                             <div class="input-group-prepend border-right-0">
                                 <span class="input-group-text border-right-0" id="basic-addon1"><i class="tio-search"></i></span>
                             </div>
-                            <input type="text" class="form-control border-left-0 pl-1" id="serach" placeholder="Search" aria-label="Username"
+                            <input type="text" class="form-control border-left-0 pl-1" id="serach" placeholder="{{ translate('messages.search') }}" aria-label="Username"
                                 aria-describedby="basic-addon1" autocomplete="off">
                         </div>
                     </div>
@@ -36,7 +36,7 @@
             </div>
             <div class="col-lg-8 col-nd-6" id="view-conversation">
                 <center class="mt-2">
-                    <h4 class="initial-29">{{ __('messages.view') }} {{ __('messages.conversation') }}
+                    <h4 class="initial-29">{{ translate('messages.view') }} {{ translate('messages.conversation') }}
                     </h4>
                 </center>
                 {{-- view here --}}
@@ -60,7 +60,7 @@
                 success: function(data) {
                     window.history.pushState('', 'New Page Title', new_url);
                     $('#view-conversation').html(data.view);
-                    converationList();
+                    conversationList();
                 }
             });
 

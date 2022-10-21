@@ -9,6 +9,13 @@ class UserInfo extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'user_id' => 'integer',
+        'vendor_id' => 'integer',
+        'deliveryman_id' => 'integer',
+        'admin_id' => 'integer'
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');

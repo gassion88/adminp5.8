@@ -9,9 +9,9 @@
     <div class="content container-fluid">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{route('vendor.dashboard')}}">{{__('messages.dashboard')}}</a></li>
-                <li class="breadcrumb-item" aria-current="page">{{__('messages.vendor')}}</li>
-                <li class="breadcrumb-item">{{__('messages.my_bank_info')}}</li>
+                <li class="breadcrumb-item"><a href="{{route('vendor.dashboard')}}">{{translate('messages.dashboard')}}</a></li>
+                <li class="breadcrumb-item" aria-current="page">{{translate('messages.vendor')}}</li>
+                <li class="breadcrumb-item">{{translate('messages.my_bank_info')}}</li>
             </ol>
         </nav>
 
@@ -20,20 +20,20 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="h3 mb-0 text-capitalize">{{__('messages.my_bank_info')}}  </h3>
+                        <h3 class="h3 mb-0 text-capitalize">{{translate('messages.my_bank_info')}}  </h3>
                     </div>
                     <div class="card-body">
                         <div class="col-md-8 mt-4">
-                            <h4>{{__('messages.bank_name')}}
+                            <h4>{{translate('messages.bank_name')}}
                                 : {{$data->bank_name ? $data->bank_name : 'No Data found'}}</h4>
-                            <h6>{{__('messages.branch')}} : {{$data->branch ? $data->branch : 'No Data found'}}</h6>
-                            <h6>{{__('messages.holder_name')}}
+                            <h6>{{translate('messages.branch')}} : {{$data->branch ? $data->branch : 'No Data found'}}</h6>
+                            <h6>{{translate('messages.holder_name')}}
                                 : {{$data->holder_name ? $data->holder_name : 'No Data found'}}</h6>
-                            <h6>{{__('messages.account_no')}} : {{$data->account_no ? $data->account_no : 'No Data found'}}</h6>
+                            <h6>{{translate('messages.account_no')}} : {{$data->account_no ? $data->account_no : 'No Data found'}}</h6>
 
 
                             <a class="btn btn-primary"
-                               href="{{route('vendor.profile.bankInfo')}}">{{__('messages.edit')}}</a>
+                               href="{{route('vendor.profile.bankInfo')}}">{{translate('messages.edit')}}</a>
                         </div>
                     </div>
                 </div>

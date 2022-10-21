@@ -19,23 +19,9 @@ class SystemController extends Controller
     public function restaurant_data()
     {
         $new_order = DB::table('orders')->where(['checked' => 0])->count();
-        $n_order = DB::table('orders')->where(['order_status' => 'pending'])->count();
-        //$mess = DB::table('conversations')->where(['receiver_type' => 'admin'])->value('unread_message_count');
-
         return response()->json([
             'success' => 1,
-            'data' => ['new_order' => $new_order],
-            'pend' => ['pending' => $n_order]
-        ]);
-        
-    }
-
-    public function pending_or()
-    {
-        $new_order = DB::table('orders')->where(['order_status' == 'pending'])->count();
-        return response()->json([
-            'success' => 1,
-            'pend' => ['pending' => $new_order]
+            'data' => ['new_order' => $new_order]
         ]);
     }
 
@@ -52,8 +38,8 @@ class SystemController extends Controller
             'email' => 'required|unique:admins,email,'.auth('admin')->id(),
             'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|unique:admins,phone,'.auth('admin')->id(),
         ], [
-            'f_name.required' => trans('messages.first_name_is_required'),
-            'l_name.required' => trans('messages.Last name is required!'),
+            'f_name.required' => translate('messages.first_name_is_required'),
+            'l_name.required' => translate('messages.Last name is required!'),
         ]);
 
         $admin = Admin::find(auth('admin')->id());
@@ -71,7 +57,7 @@ class SystemController extends Controller
         $admin->phone = $request->phone;
         $admin->image = $image_name;
         $admin->save();
-        Toastr::success(trans('messages.admin_updated_successfully'));
+        Toastr::success(translate('messages.admin_updated_successfully'));
         return back();
     }
 
@@ -85,7 +71,7 @@ class SystemController extends Controller
         $admin = Admin::find(auth('admin')->id());
         $admin->password = bcrypt($request['password']);
         $admin->save();
-        Toastr::success(trans('messages.admin_password_updated_successfully'));
+        Toastr::success(translate('messages.admin_password_updated_successfully'));
         return back();
     }
 

@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title',__('messages.landing_page_image_settings'))
+@section('title',translate('messages.landing_page_image_settings'))
 
 @push('css_or_js')
     <!-- Custom styles for this page -->
@@ -17,7 +17,7 @@
                 <img src="{{asset('/public/assets/admin/img/landing-page.png')}}" class="mw-26px" alt="public">
             </div>
             <span>
-                {{ __('messages.landing_page_settings') }}
+                {{ translate('messages.landing_page_settings') }}
             </span>
         </h1>
         <!-- End Page Header -->
@@ -27,37 +27,37 @@
             <ul class="nav nav-tabs page-header-tabs">
                 <li class="nav-item">
                     <a class="nav-link"
-                        href="{{ route('admin.business-settings.landing-page-settings', 'index') }}">{{ __('messages.text') }}</a>
+                        href="{{ route('admin.business-settings.landing-page-settings', 'index') }}">{{ translate('messages.text') }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"
                         href="{{ route('admin.business-settings.landing-page-settings', 'links') }}"
-                        aria-disabled="true">{{ __('messages.button_links') }}</a>
+                        aria-disabled="true">{{ translate('messages.button_links') }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"
                         href="{{ route('admin.business-settings.landing-page-settings', 'speciality') }}"
-                        aria-disabled="true">{{ __('messages.speciality') }}</a>
+                        aria-disabled="true">{{ translate('messages.speciality') }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"
                         href="{{ route('admin.business-settings.landing-page-settings', 'testimonial') }}"
-                        aria-disabled="true">{{ __('messages.testimonial') }}</a>
+                        aria-disabled="true">{{ translate('messages.testimonial') }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"
                         href="{{ route('admin.business-settings.landing-page-settings', 'feature') }}"
-                        aria-disabled="true">{{ __('messages.feature') }}</a>
+                        aria-disabled="true">{{ translate('messages.feature') }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active"
                         href="{{ route('admin.business-settings.landing-page-settings', 'image') }}"
-                        aria-disabled="true">{{ __('messages.image') }}</a>
+                        aria-disabled="true">{{ translate('messages.image') }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"
                         href="{{ route('admin.business-settings.landing-page-settings', 'backgroundChange') }}"
-                        aria-disabled="true">{{ __('messages.header_footer_bg') }}</a>
+                        aria-disabled="true">{{ translate('messages.header_footer_bg') }}</a>
                 </li>
             </ul>
             <!-- End Nav -->
@@ -77,7 +77,7 @@
                     <form action="{{route('admin.business-settings.landing-page-settings', 'image')}}" method="POST" enctype="multipart/form-data" class="d-flex flex-column h-100">
                         @csrf
                         <div class="form-group">
-                            <span class="input-label text-center mb-3 d-block">{{__('messages.top_content_image')}}<small class="text-danger">* ( {{__('messages.size')}}: 772 X 899 px )</small></span>
+                            <span class="input-label text-center mb-3 d-block">{{translate('messages.top_content_image')}}<small class="text-danger">* ( {{translate('messages.size')}}: 772 X 899 px )</small></span>
                             <label class="d-block">
                                 <div class="custom-file d-none">
                                     <input type="file" name="top_content_image" id="customFileEg1" class="custom-file-input"
@@ -93,8 +93,8 @@
                         </div>
                         <div class="form-group text-center mb-0 mt-auto">
                             <div class="landing--page-btns btn--container justify-content-center">
-                                <label class="btn btn--reset" for="customFileEg1">Change Image</label>
-                                <button type="submit" class="btn btn--primary">{{__('messages.upload')}}</button>
+                                <label class="btn btn--reset" for="customFileEg1">{{ translate('Change Image') }}</label>
+                                <button type="submit" class="btn btn--primary">{{translate('messages.upload')}}</button>
                             </div>
                         </div>
                     </form>
@@ -103,7 +103,7 @@
                     <form action="{{route('admin.business-settings.landing-page-settings', 'image')}}" method="POST" enctype="multipart/form-data" class="d-flex flex-column h-100">
                         @csrf
                         <div class="form-group">
-                            <span class="input-label text-center mb-3 d-block" >{{__('messages.about_us_image')}}<small class="text-danger">* ( {{__('messages.size')}}: 1241 X 1755 px )</small></span>
+                            <span class="input-label text-center mb-3 d-block" >{{translate('messages.about_us_image')}}<small class="text-danger">* ( {{translate('messages.size')}}: 1241 X 1755 px )</small></span>
                             <label class="d-block">
                                 <div class="custom-file d-none">
                                     <input type="file" name="about_us_image" id="customFileEg2" class="custom-file-input"
@@ -120,8 +120,8 @@
                         </div>
                         <div class="form-group text-center mb-0 mt-auto">
                             <div class="landing--page-btns btn--container justify-content-center">
-                                <label class="btn btn--reset" for="customFileEg2">Change Image</label>
-                                <button type="submit" class="btn btn--primary">{{__('messages.upload')}}</button>
+                                <label class="btn btn--reset" for="customFileEg2">{{ translate('Change Image') }}</label>
+                                <button type="submit" class="btn btn--primary">{{translate('messages.upload')}}</button>
                             </div>
                         </div>
                     </form>
@@ -130,7 +130,7 @@
                     <form action="{{route('admin.business-settings.landing-page-settings', 'image')}}" method="POST" enctype="multipart/form-data" class="d-flex flex-column h-100">
                         @csrf
                         <div class="form-group">
-                            <span class="input-label text-center mb-3 d-block" >{{__('messages.feature_section_image')}}<small class="text-danger">* ( {{__('messages.size')}}: 1241 X 1755 px )</small></span>
+                            <span class="input-label text-center mb-3 d-block" >{{translate('messages.feature_section_image')}}<small class="text-danger">* ( {{translate('messages.size')}}: 1241 X 1755 px )</small></span>
                             <label class="d-block">
                                 <div class="custom-file d-none">
                                     <input type="file" name="feature_section_image" id="customFileEg3" class="custom-file-input"
@@ -147,8 +147,8 @@
                         </div>
                         <div class="form-group text-center mb-0 mt-auto">
                             <div class="landing--page-btns btn--container justify-content-center">
-                                <label class="btn btn--reset" for="customFileEg3">Change Image</label>
-                                <button type="submit" class="btn btn--primary">{{__('messages.upload')}}</button>
+                                <label class="btn btn--reset" for="customFileEg3">{{ translate('Change Image') }}</label>
+                                <button type="submit" class="btn btn--primary">{{translate('messages.upload')}}</button>
                             </div>
                         </div>
                     </form>
@@ -157,7 +157,7 @@
                     <form action="{{route('admin.business-settings.landing-page-settings', 'image')}}" method="POST" enctype="multipart/form-data" class="d-flex flex-column h-100">
                             @csrf
                         <div class="form-group">
-                            <span class="input-label text-center mb-3 d-block" >{{__('messages.mobile_app_section_image')}}<small class="text-danger">* ( {{__('messages.size')}}: 1241 X 1755 px )</small></span>
+                            <span class="input-label text-center mb-3 d-block" >{{translate('messages.mobile_app_section_image')}}<small class="text-danger">* ( {{translate('messages.size')}}: 1241 X 1755 px )</small></span>
                             <label class="d-block">
                                 <div class="custom-file d-none">
                                     <input type="file" name="mobile_app_section_image" id="customFileEg4" class="custom-file-input"
@@ -174,8 +174,8 @@
                         </div>
                         <div class="form-group text-center mb-0 mt-auto">
                             <div class="landing--page-btns btn--container justify-content-center">
-                                <label class="btn btn--reset" for="customFileEg4">Change Image</label>
-                                <button type="submit" class="btn btn--primary">{{__('messages.upload')}}</button>
+                                <label class="btn btn--reset" for="customFileEg4">{{ translate('Change Image') }}</label>
+                                <button type="submit" class="btn btn--primary">{{translate('messages.upload')}}</button>
                             </div>
                         </div>
                     </form>

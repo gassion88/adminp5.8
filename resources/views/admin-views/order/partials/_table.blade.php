@@ -27,13 +27,13 @@
                    </span>
                 </a>
             @else
-                <label class="badge badge-danger">{{__('messages.invalid')}} {{__('messages.customer')}} {{__('messages.data')}}</label>
+                <label class="badge badge-danger">{{translate('messages.invalid')}} {{translate('messages.customer')}} {{translate('messages.data')}}</label>
             @endif
         </td>
         <td>
             <label class="m-0">
                 <a href="{{route('admin.vendor.view', $order->restaurant_id)}}" class="text--title" alt="view restaurant">
-                    {{Str::limit($order->restaurant?$order->restaurant->name:__('messages.Restaurant deleted!'),20,'...')}}
+                    {{Str::limit($order->restaurant?$order->restaurant->name:translate('messages.Restaurant deleted!'),20,'...')}}
                 </a>
             </label>
         </td>
@@ -44,11 +44,11 @@
                 </div>
                 @if($order->payment_status=='paid')
                     <strong class="text-success">
-                    {{__('messages.paid')}}
+                    {{translate('messages.paid')}}
                     </strong>
                 @else
                     <strong class="text-danger">
-                    {{__('messages.unpaid')}}
+                    {{translate('messages.unpaid')}}
                     </strong>
                 @endif
             </div>
@@ -56,27 +56,27 @@
         <td class="text-capitalize text-center">
             @if($order['order_status']=='pending')
                 <span class="badge badge-soft-info mb-1">
-                  {{__('messages.pending')}}
+                  {{translate('messages.pending')}}
                 </span>
             @elseif($order['order_status']=='confirmed')
                 <span class="badge badge-soft-info mb-1">
-                  {{__('messages.confirmed')}}
+                  {{translate('messages.confirmed')}}
                 </span>
             @elseif($order['order_status']=='processing')
                 <span class="badge badge-soft-warning mb-1">
-                  {{__('messages.processing')}}
+                  {{translate('messages.processing')}}
                 </span>
             @elseif($order['order_status']=='picked_up')
                 <span class="badge badge-soft-warning mb-1">
-                  {{__('messages.out_for_delivery')}}
+                  {{translate('messages.out_for_delivery')}}
                 </span>
             @elseif($order['order_status']=='delivered')
                 <span class="badge badge-soft-success mb-1">
-                  {{__('messages.delivered')}}
+                  {{translate('messages.delivered')}}
                 </span>
             @elseif($order['order_status']=='failed')
                 <span class="badge badge-soft-danger mb-1">
-                  {{__('messages.payment')}}  {{__('messages.failed')}}
+                  {{translate('messages.payment')}}  {{translate('messages.failed')}}
                 </span>
             @else
                 <span class="badge badge-soft-danger mb-1">
@@ -86,7 +86,7 @@
             <div class="text-capitalze opacity-7">
             @if($order['order_type']=='take_away')
                 <span>
-                    {{__('messages.take_away')}}
+                    {{translate('messages.take_away')}}
                 </span>
             @else
                 <span>

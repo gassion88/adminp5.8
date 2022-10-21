@@ -4,15 +4,11 @@
     <div class="container">
         <div class="card mt-6">
             <div class="card-body">
-                <div class="card-header">
-                   <div class="row" style="width: 100%">
-                       <div class="col-12">
-                           <div class="text-center">
-                               <h1 class="h3">StackFood Software Installation</h1>
-                               <p>Provide information which is required.</p>
-                           </div>
-                       </div>
-                   </div>
+                <div class="card-header d-block">
+                    <div class="text-center">
+                        <h1 class="h3">StackFood Software Installation</h1>
+                        <p>Provide information which is required.</p>
+                    </div>
                 </div>
                 <div class="row mt-4">
                     <div class="col-3"></div>
@@ -23,7 +19,7 @@
                             <li class="list-group-item text-semibold"><i class="fa fa-check"></i> Database Password</li>
                             <li class="list-group-item text-semibold"><i class="fa fa-check"></i> Database Hostname</li>
                         </ol>
-                        <p style="font-size: 14px;" class="pt-5">
+                        <p class="pt-5 font-sm">
                             We will check permission to write several files,proceed..
                         </p>
                         <br>

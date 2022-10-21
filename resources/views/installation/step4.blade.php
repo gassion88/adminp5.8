@@ -3,18 +3,14 @@
     <div class="container">
         <div class="card mt-6">
             <div class="card-body">
-                <div class="card-header">
-                    <div class="row" style="width: 100%">
-                        <div class="col-12">
-                            @if(session()->has('error'))
-                                <div class="alert alert-danger" role="alert">
-                                    {{session('error')}}
-                                </div>
-                            @endif
-                            <div class="mar-ver pad-btm text-center">
-                                <h1 class="h3">Import Software Database</h1>
-                            </div>
+                <div class="card-header d-block">
+                    @if(session()->has('error'))
+                        <div class="alert alert-danger" role="alert">
+                            {{session('error')}}
                         </div>
+                    @endif
+                    <div class="mar-ver pad-btm text-center">
+                        <h1 class="h3">Import Software Database</h1>
                     </div>
                 </div>
                 <div class="row pt-5">

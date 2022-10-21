@@ -2,15 +2,15 @@
 <div class="card-header">
     <h5 class="card-header-title">
         <img src="{{asset('/public/assets/admin/img/dashboard/statistics.png')}}" alt="dashboard" class="card-header-icon">
-        <span>{{trans('messages.top_customers')}}</span>
+        <span>{{translate('messages.top_customers')}}</span>
     </h5>
     @php($params=session('dash_params'))
     @if($params['zone_id']!='all')
         @php($zone_name=\App\Models\Zone::where('id',$params['zone_id'])->first()->name)
     @else
-        @php($zone_name='All')
+    @php($zone_name = translate('All'))
     @endif
-    <span class="badge badge-soft--info">Zone : {{$zone_name}}</span>
+    <span class="badge badge-soft--info my-2">{{ translate('messages.zone') }} : {{ $zone_name }}</span>
 </div>
 <!-- End Header -->
 

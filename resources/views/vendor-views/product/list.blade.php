@@ -1,6 +1,6 @@
 @extends('layouts.vendor.app')
 
-@section('title',__('messages.food_list'))
+@section('title',translate('messages.food_list'))
 
 @push('css_or_js')
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -11,24 +11,24 @@
         <!-- Page Header -->
         <div class="page-header">
             <div class="mb-2 mb-sm-0">
-                <h1 class="page-header-title"><i class="tio-filter-list"></i> {{__('messages.food')}} {{__('messages.list')}}<span class="badge badge-soft-dark ml-2" id="itemCount">{{$foods->total()}}</span></h1>
+                <h1 class="page-header-title"><i class="tio-filter-list"></i> {{translate('messages.food')}} {{translate('messages.list')}}<span class="badge badge-soft-dark ml-2" id="itemCount">{{$foods->total()}}</span></h1>
             </div>
             <div class="my-2">
                 <div class="row g-2 align-items-center justify-content-end">
                     @if ($toggle_veg_non_veg)
                     <!-- Veg/NonVeg filter -->
                     <div class="col-auto">
-                        <select name="category_id" onchange="set_filter('{{url()->full()}}',this.value, 'type')" data-placeholder="{{__('messages.all')}}" class="form-control w-100 max-sm-12">
-                            <option value="all" {{$type=='all'?'selected':''}}>{{__('messages.all')}}</option>
-                            <option value="veg" {{$type=='veg'?'selected':''}}>{{__('messages.veg')}}</option>
-                            <option value="non_veg" {{$type=='non_veg'?'selected':''}}>{{__('messages.non_veg')}}</option>
+                        <select name="category_id" onchange="set_filter('{{url()->full()}}',this.value, 'type')" data-placeholder="{{translate('messages.all')}}" class="form-control w-100 max-sm-12">
+                            <option value="all" {{$type=='all'?'selected':''}}>{{translate('messages.all')}}</option>
+                            <option value="veg" {{$type=='veg'?'selected':''}}>{{translate('messages.veg')}}</option>
+                            <option value="non_veg" {{$type=='non_veg'?'selected':''}}>{{translate('messages.non_veg')}}</option>
                         </select>
                     </div>
                     <!-- End Veg/NonVeg filter -->
                     @endif
                     <div class="col-auto">
                         <a href="{{route('vendor.food.add-new')}}" class="btn max-sm-12 btn--primary w-100"><i
-                                    class="tio-add-circle"></i> {{__('messages.add')}} {{__('messages.new')}} {{__('messages.food')}}</a>
+                                    class="tio-add-circle"></i> {{translate('messages.add')}} {{translate('messages.new')}} {{translate('messages.food')}}</a>
                     </div>
 
                 </div>
@@ -44,7 +44,7 @@
                         @csrf
                         <!-- Search -->
                         <div class="input-group input--group">
-                            <input id="datatableSearch" type="search" name="search" class="form-control" placeholder="Ex : Search by Food Name">
+                            <input id="datatableSearch" type="search" name="search" class="form-control" placeholder="{{ translate('messages.Ex : Search Food Name') }}">
                             <button type="submit" class="btn btn--secondary">
                                 <i class="tio-search"></i>
                             </button>
@@ -52,12 +52,12 @@
                     <!-- End Search -->
                     </form>
                     <!-- Unfold -->
-                    <div class="hs-unfold" style="width: 100%;max-width:220px">
-                        <select name="category_id" id="category" onchange="set_filter('{{url()->full()}}',this.value, 'category_id')" data-placeholder="{{__('messages.select_category')}}" class="js-data-example-ajax form-control">
+                    <div class="hs-unfold initial-89">
+                        <select name="category_id" id="category" onchange="set_filter('{{url()->full()}}',this.value, 'category_id')" data-placeholder="{{translate('messages.select_category')}}" class="js-data-example-ajax form-control">
                             @if($category)
-                                <option value="{{$category->id}}" selected>{{$category->name}} ({{$category->position == 0?__('messages.main'):__('messages.sub')}})</option>
+                                <option value="{{$category->id}}" selected>{{$category->name}} ({{$category->position == 0?translate('messages.main'):translate('messages.sub')}})</option>
                             @else
-                                <option value="all" selected>{{__('messages.all_categories')}}</option>
+                                <option value="all" selected>{{translate('messages.all_categories')}}</option>
                             @endif
                         </select>
                     </div>
@@ -70,10 +70,10 @@
                             "target": "#showHideDropdown",
                             "type": "css-animation"
                             }'>
-                            <i class="tio-table mr-1"></i> {{ translate('Columns') }} <span class="badge badge-soft-dark rounded-circle ml-1">6</span>
+                            <i class="tio-table mr-1"></i> {{ translate('Columns') }}
                         </a>
 
-                        <div id="showHideDropdown" class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-right dropdown-card" style="width: 15rem;">
+                        <div id="showHideDropdown" class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-right dropdown-card">
                             <div class="card card-sm">
                                 <div class="card-body">
                                     {{--<div class="d-flex justify-content-between align-items-center mb-3">
@@ -178,12 +178,12 @@
                     }'>
                     <thead class="thead-light">
                     <tr>
-                        <th>SL</th>
-                        <th style="width: 20%">{{__('messages.name')}}</th>
-                        <th style="width: 20%">{{__('messages.category')}}</th>
-                        <th class="text-center">{{__('messages.price')}}</th>
-                        <th class="text-center">{{__('messages.status')}}</th>
-                        <th class="text-center">{{__('messages.action')}}</th>
+                        <th>{{ translate('messages.sl') }}</th>
+                        <th class="w-20p">{{translate('messages.name')}}</th>
+                        <th class="w-20p">{{translate('messages.category')}}</th>
+                        <th class="text-center">{{translate('messages.price')}}</th>
+                        <th class="text-center">{{translate('messages.status')}}</th>
+                        <th class="text-center">{{translate('messages.action')}}</th>
                     </tr>
                     </thead>
 
@@ -204,9 +204,9 @@
                             {{Str::limit($food->category,20,'...')}}
                             </td>
                             <td>
-                                <div class="text-right mx-auto" style="max-width:36px;">
+                                <div class="text-right mx-auto mw-36px">
                                 <!-- Static Symbol -->
-                                
+
                                 <!-- Static Symbol -->
                                     {{($food['price'])}}
                                 </div>
@@ -226,10 +226,10 @@
                             <td>
                                 <div class="btn--container justify-content-center">
                                     <a class="btn action-btn btn--primary btn-outline-primary"
-                                        href="{{route('vendor.food.edit',[$food['id']])}}" title="{{__('messages.edit')}} {{__('messages.food')}}"><i class="tio-edit"></i>
+                                        href="{{route('vendor.food.edit',[$food['id']])}}" title="{{translate('messages.edit')}} {{translate('messages.food')}}"><i class="tio-edit"></i>
                                     </a>
                                     <a class="btn action-btn btn--danger btn-outline-danger" href="javascript:"
-                                        onclick="form_alert('food-{{$food['id']}}','Want to delete this item ?')" title="{{__('messages.delete')}} {{__('messages.food')}}"><i class="tio-delete-outlined"></i>
+                                        onclick="form_alert('food-{{$food['id']}}','{{ translate('Want to delete this item ?') }}')" title="{{translate('messages.delete')}} {{translate('messages.food')}}"><i class="tio-delete-outlined"></i>
                                     </a>
                                     <form action="{{route('vendor.food.delete',[$food['id']])}}"
                                             method="post" id="food-{{$food['id']}}">
@@ -280,8 +280,8 @@
           },
           language: {
             zeroRecords: '<div class="text-center p-4">' +
-                '<img class="mb-3" src="{{asset('public/assets/admin/svg/illustrations/sorry.svg')}}" alt="Image Description" style="width: 7rem;">' +
-                '<p class="mb-0">No data to show</p>' +
+                '<img class="mb-3 w-7rem" src="{{asset('public/assets/admin/svg/illustrations/sorry.svg')}}" alt="Image Description">' +
+                '<p class="mb-0">{{ translate('No data to show') }}</p>' +
                 '</div>'
           }
         });

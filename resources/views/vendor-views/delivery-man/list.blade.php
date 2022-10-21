@@ -1,6 +1,6 @@
 @extends('layouts.vendor.app')
 
-@section('title',__('messages.deliverymen'))
+@section('title',translate('messages.deliverymen'))
 
 @push('css_or_js')
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -10,7 +10,7 @@
     <div class="content container-fluid">
         <!-- Page Header -->
         <div class="page-header">
-            <h1 class="page-header-title"><i class="tio-filter-list"></i> {{__('messages.deliverymen')}}</h1>
+            <h1 class="page-header-title"><i class="tio-filter-list"></i> {{translate('messages.deliverymen')}}</h1>
         </div>
         <!-- End Page Header -->
         <!-- Card -->
@@ -18,12 +18,12 @@
             <!-- Header -->
             <div class="card-header py-2">
                 <div class="search--button-wrapper">
-                    <h5 class="card-title">{{__('messages.deliveryman')}} {{__('messages.list')}}<span class="badge badge-soft-dark ml-2" id="itemCount">{{$delivery_men->total()}}</span></h5>
+                    <h5 class="card-title">{{translate('messages.deliveryman')}} {{translate('messages.list')}}<span class="badge badge-soft-dark ml-2" id="itemCount">{{$delivery_men->total()}}</span></h5>
                     <form action="javascript:" id="search-form" >
                                     <!-- Search -->
                         @csrf
                         <div class="input-group input--group">
-                            <input id="datatableSearch_" type="search" name="search" class="form-control" placeholder="Ex : Delivery Men Name or Phone Number" aria-label="{{__('messages.search')}}" required>
+                            <input id="datatableSearch_" type="search" name="search" class="form-control" placeholder="{{ translate('messages.Ex :') }} Delivery Men Name or Phone Number" aria-label="{{translate('messages.search')}}" required>
                             <button type="submit" class="btn btn--secondary">
                                 <i class="tio-search"></i>
                             </button>
@@ -46,12 +46,12 @@
                         }'>
                     <thead class="thead-light">
                     <tr>
-                        <th class="text-capitalize">SL</th>
-                        <th class="text-capitalize">{{__('messages.name')}}</th>
-                        <th class="text-capitalize">{{__('messages.availability')}} {{__('messages.status')}}</th>
-                        <th class="text-capitalize">{{__('messages.phone')}}</th>
+                        <th class="text-capitalize">{{ translate('messages.sl') }}</th>
+                        <th class="text-capitalize">{{translate('messages.name')}}</th>
+                        <th class="text-capitalize">{{translate('messages.availability')}} {{translate('messages.status')}}</th>
+                        <th class="text-capitalize">{{translate('messages.phone')}}</th>
                         <th class="text-capitalize">{{ translate('Active Orders') }}</th>
-                        <th class="text-capitalize text-center">{{__('messages.action')}}</th>
+                        <th class="text-capitalize text-center">{{translate('messages.action')}}</th>
                     </tr>
                     </thead>
 
@@ -80,20 +80,20 @@
                                 @if($dm->application_status == 'approved')
                                     @if($dm->active)
                                     <div>
-                                        Active Status : <strong class="text-primary text-capitalize">{{__('messages.online')}}</strong>
+                                        Active Status : <strong class="text-primary text-capitalize">{{translate('messages.online')}}</strong>
                                     </div>
                                     @else
                                     <div>
-                                        Active Status : <strong class="text-secondary text-capitalize">{{__('messages.offline')}}</strong>
+                                        Active Status : <strong class="text-secondary text-capitalize">{{translate('messages.offline')}}</strong>
                                     </div>
                                     @endif
                                 @elseif ($dm->application_status == 'denied')
                                     <div>
-                                        Active Status : <strong class="text-danger text-capitalize">{{__('messages.denied')}}</strong>
+                                        Active Status : <strong class="text-danger text-capitalize">{{translate('messages.denied')}}</strong>
                                     </div>
                                 @else
                                     <div>
-                                        Active Status : <strong class="text-info text-capitalize">{{__('messages.pending')}}</strong>
+                                        Active Status : <strong class="text-info text-capitalize">{{translate('messages.pending')}}</strong>
                                     </div>
                                 @endif
                             </td>
@@ -101,15 +101,15 @@
                                 <a class="deco-none" href="tel:{{$dm['phone']}}">{{$dm['phone']}}</a>
                             </td>
                             <td>
-                                <div class="text-right" style="max-width:90px">
+                                <div class="text-right max-90px">
                                     {{ $dm->orders ? count($dm->orders):0 }}
                                 </div>
                             </td>
                             <td>
                                 <div class="btn--container justify-content-center">
-                                    <a class="btn btn--primary btn-outline-primary action-btn" href="{{route('vendor.delivery-man.edit',[$dm['id']])}}" title="{{__('messages.edit')}}"><i class="tio-edit"></i>
+                                    <a class="btn btn--primary btn-outline-primary action-btn" href="{{route('vendor.delivery-man.edit',[$dm['id']])}}" title="{{translate('messages.edit')}}"><i class="tio-edit"></i>
                                     </a>
-                                    <a class="btn btn--danger btn-outline-danger action-btn" href="javascript:" onclick="form_alert('delivery-man-{{$dm['id']}}','Want to remove this deliveryman ?')" title="{{__('messages.delete')}}"><i class="tio-delete-outlined"></i>
+                                    <a class="btn btn--danger btn-outline-danger action-btn" href="javascript:" onclick="form_alert('delivery-man-{{$dm['id']}}','Want to remove this deliveryman ?')" title="{{translate('messages.delete')}}"><i class="tio-delete-outlined"></i>
                                     </a>
                                     <form action="{{route('vendor.delivery-man.delete',[$dm['id']])}}" method="post" id="delivery-man-{{$dm['id']}}">
                                         @csrf @method('delete')

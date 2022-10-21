@@ -1,5 +1,5 @@
 @extends('layouts.admin.app')
-@section('title','Employee Add')
+@section('title',translate('Employee Add'))
 @push('css_or_js')
     <meta name="csrf-token" content="{{ csrf_token() }}">
 @endpush
@@ -14,7 +14,7 @@
                 <img src="{{asset('/public/assets/admin/img/employee.png')}}" alt="public">
             </div>
             <span>
-                Add New {{__('messages.Employee')}}
+                {{ translate('Add New Employee') }}
             </span>
         </h1>
     </div>
@@ -42,24 +42,24 @@
                                 <div class="row g-3">
                                     <div class="col-sm-6">
                                         <div class="form-group mb-0">
-                                            <label class="form-label qcont" for="fname">{{__('messages.first')}} {{__('messages.name')}}</label>
+                                            <label class="form-label qcont" for="fname">{{translate('messages.first')}} {{translate('messages.name')}}</label>
                                             <input type="text" name="f_name" class="form-control h--45px" id="fname"
-                                                    placeholder="Ex: John" value="{{old('f_name')}}" required>
+                                                    placeholder="{{ translate('Ex: John') }}" value="{{old('f_name')}}" required>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group mb-0">
-                                            <label class="form-label qcont" for="lname">{{__('messages.last')}} {{__('messages.name')}}</label>
+                                            <label class="form-label qcont" for="lname">{{translate('messages.last')}} {{translate('messages.name')}}</label>
                                             <input type="text" name="l_name" class="form-control h--45px" id="lname" value="{{old('l_name')}}"
-                                                    placeholder="Ex: Doe" value="{{old('name')}}">
+                                                    placeholder="{{ translate('Ex: Doe') }}" value="{{old('name')}}">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group mb-0">
-                                            <label class="form-label" for="title">{{__('messages.zone')}}</label>
+                                            <label class="form-label" for="title">{{translate('messages.zone')}}</label>
                                             <select name="zone_id" id="zone_id" class="form-control h--45px js-select2-custom">
                                                 @if(!isset(auth('admin')->user()->zone_id))
-                                                <option value="" {{!isset($e->zone_id)?'selected':''}}>{{__('messages.all')}}</option>
+                                                <option value="" {{!isset($e->zone_id)?'selected':''}}>{{translate('messages.all')}}</option>
                                                 @endif
                                                 @php($zones=\App\Models\Zone::all())
                                                 @foreach($zones as $zone)
@@ -70,9 +70,9 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group mb-0">
-                                            <label class="form-label qcont" for="role_id">{{__('messages.Role')}}</label>
+                                            <label class="form-label qcont" for="role_id">{{translate('messages.Role')}}</label>
                                             <select class="w-100 form-control h--45px js-select2-custom" name="role_id" id="role_id"  required>
-                                                <option value="" selected disabled>{{__('messages.select')}} {{__('messages.Role')}}</option>
+                                                <option value="" selected disabled>{{translate('messages.select')}} {{translate('messages.Role')}}</option>
                                                 @foreach($rls as $r)
                                                     <option value="{{$r->id}}">{{$r->name}}</option>
                                                 @endforeach
@@ -81,14 +81,14 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label class="form-label qcont" for="phone">{{__('messages.phone')}}</label>
+                                            <label class="form-label qcont" for="phone">{{translate('messages.phone')}}</label>
                                             <input type="tel" name="phone" value="{{old('phone')}}" class="form-control h--45px" id="phone"
-                                                placeholder="Ex : +88017********" required>
+                                                placeholder="{{ translate('Ex : +8801******') }}" required>
                                         </div>
                                     </div>
                                     {{-- <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label class="form-label qcont" for="address">{{__('messages.address')}}</label>
+                                            <label class="form-label qcont" for="address">{{translate('messages.address')}}</label>
                                             <textarea name="" id="" class="form-control h--120px"></textarea>
                                         </div>
                                     </div> --}}
@@ -97,7 +97,7 @@
                             <div class="col-md-4">
                                 <div class="h-100 d-flex flex-column justify-content-center">
                                     <label class="form-label d-block text-center mt-auto mb-3">
-                                        {{ translate('Employee Image') }} <span class="text-danger">(Ratio 1:1)</span>
+                                        {{ translate('Employee Image') }} <span class="text-danger">({{ translate('Ratio 1:1') }})</span>
                                     </label>
                                     <center class="mt-auto mb-auto">
                                         <img class="initial-24" id="viewer"
@@ -107,7 +107,7 @@
                                         <div class="custom-file">
                                             <input type="file" name="image" id="customFileUpload" class="custom-file-input h--45px"
                                                 accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" required>
-                                            <label class="custom-file-label  h--45px" for="customFileUpload">{{__('messages.choose')}} {{__('messages.file')}}</label>
+                                            <label class="custom-file-label  h--45px" for="customFileUpload">{{translate('messages.choose')}} {{translate('messages.file')}}</label>
                                         </div>
                                     </div>
                                 </div>
@@ -122,22 +122,22 @@
                                 <i class="tio-user"></i>
                             </span>
                             <span>
-                                {{__('messages.account')}} {{__('messages.info')}}
+                                {{translate('messages.account')}} {{translate('messages.info')}}
                             </span>
                         </h5>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-4">
-                                <label class="form-label qcont" for="email">{{__('messages.email')}}</label>
+                                <label class="form-label qcont" for="email">{{translate('messages.email')}}</label>
                                 <input type="email" name="email" value="{{old('email')}}" class="form-control h--45px" id="email"
-                                    placeholder="Ex : ex@gmail.com" required>
+                                    placeholder="{{ translate('Ex : ex@gmail.com') }}" required>
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label qcont" for="password">{{__('messages.password')}}</label>
+                                <label class="form-label qcont" for="password">{{translate('messages.password')}}</label>
                                     <div class="input-group input-group-merge">
                                     <input type="text" name="password" class="form-control h--45px" id="password" value="{{old('password')}}"
-                                        placeholder="{{__('messages.password_length_placeholder',['length'=>'6+'])}}" required>
+                                        placeholder="{{translate('messages.password_length_placeholder',['length'=>'6+'])}}" required>
                                     <div class="js-toggle-password-target-1 input-group-append">
                                         <a class="input-group-text" href="javascript:;">
                                             <i class="js-toggle-passowrd-show-icon-1 tio-visible-outlined"></i>
@@ -146,10 +146,10 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label qcont" for="password">{{__('messages.password')}}</label>
+                                <label class="form-label qcont" for="password">{{translate('messages.password')}}</label>
                                     <div class="input-group input-group-merge">
                                     <input type="text" name="password" class="form-control h--45px" id="password" value="{{old('password')}}"
-                                        placeholder="{{__('messages.password_length_placeholder',['length'=>'6+'])}}" required>
+                                        placeholder="{{translate('messages.password_length_placeholder',['length'=>'6+'])}}" required>
                                     <div class="js-toggle-password-target-1 input-group-append">
                                         <a class="input-group-text" href="javascript:;">
                                             <i class="js-toggle-passowrd-show-icon-1 tio-visible-outlined"></i>
@@ -162,9 +162,9 @@
                 </div>
                 <div class="btn--container justify-content-end">
                     <!-- Static Button -->
-                    <button type="reset" id="reset_btn" class="btn btn--reset">{{__('messages.reset')}}</button>
+                    <button type="reset" id="reset_btn" class="btn btn--reset">{{translate('messages.reset')}}</button>
                     <!-- Static Button -->
-                    <button type="submit" class="btn btn--primary">{{__('messages.submit')}}</button>
+                    <button type="submit" class="btn btn--primary">{{translate('messages.submit')}}</button>
                 </div>
             </form>
         </div>

@@ -246,7 +246,6 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.'], function () {
             Route::get('orders-export/{type}/{restaurant_id}', 'OrderController@orders_export')->name('export-orders');
 
             Route::get('add-delivery-man/{order_id}/{delivery_man_id}', 'OrderController@add_delivery_man')->name('add-delivery-man');
-            Route::get('dell-delivery-man/{order_id}', 'OrderController@dell_delivery_man')->name('dell-delivery-man');
             Route::get('payment-status', 'OrderController@payment_status')->name('payment-status');
             Route::get('generate-invoice/{id}', 'OrderController@generate_invoice')->name('generate-invoice');
             Route::post('add-payment-ref-code/{id}', 'OrderController@add_payment_ref_code')->name('add-payment-ref-code');

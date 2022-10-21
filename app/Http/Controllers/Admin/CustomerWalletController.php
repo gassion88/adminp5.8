@@ -18,9 +18,9 @@ class CustomerWalletController extends Controller
     {
         if(BusinessSetting::where('key','wallet_status')->first()->value != 1)
         {
-            Toastr::error(trans('messages.customer_wallet_disable_warning_admin'));
+            Toastr::error(translate('messages.customer_wallet_disable_warning_admin'));
             return back();
-        } 
+        }
         return view('admin-views.customer.wallet.add_fund');
     }
 
@@ -47,13 +47,13 @@ class CustomerWalletController extends Controller
             {
                 info($ex);
             }
-            
+
             return response()->json([], 200);
         }
 
         return response()->json(['errors'=>[
-            'message'=>trans('messages.failed_to_create_transaction')
-        ]], 200);  
+            'message'=>translate('messages.failed_to_create_transaction')
+        ]], 200);
     }
 
     public function report(Request $request)
@@ -69,7 +69,7 @@ class CustomerWalletController extends Controller
             $query->where('user_id',$request->customer_id);
         })
         ->get();
-        
+
         $transactions = WalletTransaction::
         when(($request->from && $request->to),function($query)use($request){
             $query->whereBetween('created_at', [$request->from.' 00:00:00', $request->to.' 23:59:59']);

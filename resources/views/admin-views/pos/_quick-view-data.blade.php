@@ -86,12 +86,11 @@
                     <div class="d-flex justify-content-between">
                         <div class="product-description-label mt-2 text-dark h3">{{translate('messages.quantity')}}:</div>
                         <div class="product-quantity d-flex align-items-center">
-                            <div class="input-group input-group--style-2 pr-3"
-                                    style="width: 160px;">
+                            <div class="input-group input-group--style-2 pr-3 w-160px">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-number text-dark" type="button"
+                                    <button class="btn btn-number text-dark p--10px" type="button"
                                             data-type="minus" data-field="quantity"
-                                            disabled="disabled" style="padding: 10px">
+                                            disabled="disabled">
                                             <i class="tio-remove  font-weight-bold"></i>
                                     </button>
                                 </span>
@@ -99,8 +98,8 @@
                                         class="form-control input-number text-center cart-qty-field"
                                         placeholder="1" value="1" min="1" max="100">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-number text-dark" type="button" data-type="plus"
-                                            data-field="quantity" style="padding: 10px">
+                                    <button class="btn btn-number text-dark p--10px" type="button" data-type="plus"
+                                            data-field="quantity">
                                             <i class="tio-add  font-weight-bold"></i>
                                     </button>
                                 </span>
@@ -154,7 +153,7 @@
                     <div class="d-flex justify-content-center mt-2">
                         <button class="btn btn--primary h--45px w-40p" onclick="addToCart()" type="button">
                             <i class="tio-shopping-cart"></i>
-                            {{ trans('messages.add_to_cart') }}
+                            {{ translate('messages.add_to_cart') }}
                         </button>
                     </div>
                 </form>

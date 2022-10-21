@@ -1,5 +1,5 @@
 @extends('layouts.admin.app')
-@section('title','Employee List')
+@section('title',translate('Employee List'))
 @push('css_or_js')
 
 @endpush
@@ -14,7 +14,7 @@
                 <img src="{{asset('/public/assets/admin/img/employee-list.png')}}" alt="public">
             </div>
             <span>
-                {{trans('messages.Employee')}} {{trans('messages.list')}}
+                {{translate('messages.Employee')}} {{translate('messages.list')}}
             </span>
         </h1>
     </div>
@@ -28,7 +28,7 @@
                             @csrf
                             <!-- Search -->
                             <div class="input--group input-group input-group-merge input-group-flush">
-                                <input id="datatableSearch_" type="search" name="search" class="form-control" placeholder="{{__('messages.search')}} by name & email" aria-label="Search">
+                                <input id="datatableSearch_" type="search" name="search" class="form-control" placeholder="{{ translate('Search by name or email') }}" aria-label="Search">
                                 <button type="submit" class="btn btn--secondary">
                                     <i class="tio-search"></i>
                                 </button>
@@ -44,43 +44,43 @@
                                 "target": "#usersExportDropdown",
                                 "type": "css-animation"
                             }'>
-                            <i class="tio-download-to mr-1"></i> {{__('messages.export')}}
+                            <i class="tio-download-to mr-1"></i> {{translate('messages.export')}}
                         </a>
 
                         <div id="usersExportDropdown"
                                 class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-sm-right">
-                            {{--<span class="dropdown-header">{{__('messages.options')}}</span>
+                            {{--<span class="dropdown-header">{{translate('messages.options')}}</span>
                             <a id="export-copy" class="dropdown-item" href="javascript:;">
                                 <img class="avatar avatar-xss avatar-4by3 mr-2"
                                         src="{{asset('public/assets/admin')}}/svg/illustrations/copy.svg"
                                         alt="Image Description">
-                                {{__('messages.copy')}}
+                                {{translate('messages.copy')}}
                             </a>
                             <a id="export-print" class="dropdown-item" href="javascript:;">
                                 <img class="avatar avatar-xss avatar-4by3 mr-2"
                                         src="{{asset('public/assets/admin')}}/svg/illustrations/print.svg"
                                         alt="Image Description">
-                                {{__('messages.print')}}
+                                {{translate('messages.print')}}
                             </a>
                             <div class="dropdown-divider"></div>--}}
-                            <span class="dropdown-header">{{__('messages.download')}} {{__('messages.options')}}</span>
+                            <span class="dropdown-header">{{translate('messages.download')}} {{translate('messages.options')}}</span>
                             <a id="export-excel" class="dropdown-item" href="{{route('admin.employee.export-employee', ['type'=>'excel'])}}">
                                 <img class="avatar avatar-xss avatar-4by3 mr-2"
                                         src="{{asset('public/assets/admin')}}/svg/components/excel.svg"
                                         alt="Image Description">
-                                {{__('messages.excel')}}
+                                {{translate('messages.excel')}}
                             </a>
                             <a id="export-csv" class="dropdown-item" href="{{route('admin.employee.export-employee', ['type'=>'csv'])}}">
                                 <img class="avatar avatar-xss avatar-4by3 mr-2"
                                         src="{{asset('public/assets/admin')}}/svg/components/placeholder-csv-format.svg"
                                         alt="Image Description">
-                                .{{__('messages.csv')}}
+                                .{{translate('messages.csv')}}
                             </a>
                             {{--<a id="export-pdf" class="dropdown-item" href="javascript:;">
                                 <img class="avatar avatar-xss avatar-4by3 mr-2"
                                         src="{{asset('public/assets/admin')}}/svg/components/pdf.svg"
                                         alt="Image Description">
-                                {{__('messages.pdf')}}
+                                {{translate('messages.pdf')}}
                             </a>--}}
                         </div>
                     </div>
@@ -106,16 +106,16 @@
                                }'>
                             <thead class="thead-light">
                             <tr>
-                                <th>SL</th>
-                                <th>Employee {{trans('messages.name')}}</th>
-                                <th>{{trans('messages.phone')}}</th>
-                                <th>{{trans('messages.email')}}</th>
+                                <th>{{ translate('messages.sl') }}</th>
+                                <th>{{translate('Employee Name')}}</th>
+                                <th>{{translate('messages.phone')}}</th>
+                                <th>{{translate('messages.email')}}</th>
                                 <th>
                                     <div class="pl-2">
                                             {{ translate('Created At') }}
                                         </div>
                                     </th>
-                                <th class="text-center w-120px">{{trans('messages.action')}}</th>
+                                <th class="text-center w-120px">{{translate('messages.action')}}</th>
                             </tr>
                             </thead>
                             <tbody id="set-rows">
@@ -133,10 +133,10 @@
                                     <td>
                                         <div class="btn--container">
                                             <a class="btn btn-sm btn--primary btn-outline-primary action-btn"
-                                                href="{{route('admin.employee.edit',[$e['id']])}}" title="{{__('messages.edit')}} {{__('messages.Employee')}}"><i class="tio-edit"></i>
+                                                href="{{route('admin.employee.edit',[$e['id']])}}" title="{{translate('messages.edit')}} {{translate('messages.Employee')}}"><i class="tio-edit"></i>
                                             </a>
                                             <a class="btn btn-sm btn--danger btn-outline-danger action-btn" href="javascript:"
-                                                onclick="form_alert('employee-{{$e['id']}}','{{__('messages.Want_to_delete_this_role')}}')" title="{{__('messages.delete')}} {{__('messages.Employee')}}"><i class="tio-delete-outlined"></i>
+                                                onclick="form_alert('employee-{{$e['id']}}','{{translate('messages.Want_to_delete_this_role')}}')" title="{{translate('messages.delete')}} {{translate('messages.Employee')}}"><i class="tio-delete-outlined"></i>
                                             </a>
                                         </div>
                                         <form action="{{route('admin.employee.delete',[$e['id']])}}"

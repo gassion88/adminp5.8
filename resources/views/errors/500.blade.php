@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Title -->
-    <title>{{__('messages.error')}} 500 | {{\App\Models\BusinessSetting::where(['key'=>'business_name'])->first()->value??'Stack Food'}}</title>
+    <title>{{translate('messages.error')}} 500 | {{\App\Models\BusinessSetting::where(['key'=>'business_name'])->first()->value??'Stack Food'}}</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="favicon.ico">
@@ -32,14 +32,14 @@
         <div class="row align-items-sm-center w-100">
             <div class="col-sm-6">
                 <div class="text-center text-sm-right mr-sm-4 mb-5 mb-sm-0">
-                    <img class="w-60 w-sm-100 mx-auto" src="{{asset('public/assets/admin')}}/svg/illustrations/think.svg" alt="Image Description" style="max-width: 15rem;">
+                    <img class="w-60 w-sm-100 mx-auto initial-61" src="{{asset('public/assets/admin')}}/svg/illustrations/think.svg" alt="Image Description">
                 </div>
             </div>
 
             <div class="col-sm-6 col-md-4 text-center text-sm-left">
                 <h1 class="display-1 mb-0">500</h1>
-                <p class="lead">{{__('messages.500_warning_message')}}</p>
-                <a class="btn btn-primary" href="{{url()->current()}}">{{__('messages.reload_page')}}</a>
+                <p class="lead">{{translate('messages.500_warning_message')}}</p>
+                <a class="btn btn-primary" href="{{url()->current()}}">{{translate('messages.reload_page')}}</a>
             </div>
         </div>
         <!-- End Row -->
@@ -51,7 +51,7 @@
 <div class="footer text-center">
     <ul class="list-inline list-separator">
         <li class="list-inline-item">
-            <a class="list-separator-link" target="_blank" href="https://6amtech.com/">{{\App\Models\BusinessSetting::where(['key'=>'business_name'])->first()->value??'Stack Food'}} {{__('messages.support')}}</a>
+            <a class="list-separator-link" target="_blank" href="https://6amtech.com/">{{\App\Models\BusinessSetting::where(['key'=>'business_name'])->first()->value??'Stack Food'}} {{translate('messages.support')}}</a>
         </li>
     </ul>
 </div>

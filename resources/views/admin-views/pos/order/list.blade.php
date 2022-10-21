@@ -197,9 +197,9 @@
                                                 </label>
                                                 <!-- End Checkbox Switch -->
                                             </div>
-                                            
+
                                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                                <span class="mr-2">{{__('messages.order')}} {{__('messages.type')}}</span>
+                                                <span class="mr-2">{{translate('messages.order')}} {{translate('messages.type')}}</span>
 
                                                 <!-- Checkbox Switch -->
                                                 <label class="toggle-switch toggle-switch-sm"
@@ -479,8 +479,8 @@
                 },
                 language: {
                     zeroRecords: '<div class="text-center p-4">' +
-                        '<img class="mb-3" src="{{ asset('public/assets/admin') }}/svg/illustrations/sorry.svg" alt="Image Description" style="width: 7rem;">' +
-                        '<p class="mb-0">No data to show</p>' +
+                        '<img class="w-7rem mb-3" src="{{ asset('public/assets/admin') }}/svg/illustrations/sorry.svg" alt="Image Description">' +
+                        '<p class="mb-0">{{ translate('No data to show') }}</p>' +
                         '</div>'
                 }
             });

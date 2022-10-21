@@ -12,7 +12,7 @@
         <div class="page-header">
             <div class="row align-items-center">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <h1 class="page-header-title"><i class="tio-add-circle-outlined"></i> {{__('messages.add')}} {{__('messages.new')}} {{__('messages.coupon')}}</h1>
+                    <h1 class="page-header-title"><i class="tio-add-circle-outlined"></i> {{translate('messages.add')}} {{translate('messages.new')}} {{translate('messages.coupon')}}</h1>
                 </div>
             </div>
         </div>
@@ -24,23 +24,23 @@
                    <div class="row">
                        <div class="col-4">
                            <div class="form-group">
-                               <label class="input-label" for="exampleFormControlInput1">{{__('messages.title')}}</label>
-                               <input type="text" name="title" class="form-control" placeholder="{{__('messages.new_coupon')}}" required>
+                               <label class="input-label" for="exampleFormControlInput1">{{translate('messages.title')}}</label>
+                               <input type="text" name="title" class="form-control" placeholder="{{translate('messages.new_coupon')}}" required>
                            </div>
                        </div>
                        <div class="col-4">
                            <div class="form-group">
-                               <label class="input-label" for="exampleFormControlInput1">{{__('messages.coupon')}} {{__('messages.type')}}</label>
+                               <label class="input-label" for="exampleFormControlInput1">{{translate('messages.coupon')}} {{translate('messages.type')}}</label>
                                <select name="coupon_type" class="form-control" onchange="coupon_type_change(this.value)">
-                                   <option value="default">{{__('messages.default')}}</option>
-                                   <option value="first_order">{{__('messages.first')}} {{__('messages.order')}}</option>
+                                   <option value="default">{{translate('messages.default')}}</option>
+                                   <option value="first_order">{{translate('messages.first')}} {{translate('messages.order')}}</option>
                                </select>
                            </div>
                        </div>
                        <div class="col-4" id="limit-for-user">
                            <div class="form-group">
-                               <label class="input-label" for="exampleFormControlInput1">{{__('messages.limit')}} {{__('messages.for')}} {{__('messages.same')}} {{__('messages.user')}}</label>
-                               <input type="number" name="limit" class="form-control" placeholder="EX: 10">
+                               <label class="input-label" for="exampleFormControlInput1">{{translate('messages.limit')}} {{translate('messages.for')}} {{translate('messages.same')}} {{translate('messages.user')}}</label>
+                               <input type="number" name="limit" class="form-control" placeholder="{{ translate('messages.Ex :') }} 10">
                            </div>
                        </div>
                    </div>
@@ -48,20 +48,20 @@
                     <div class="row">
                         <div class="col-md-4 col-6">
                             <div class="form-group">
-                                <label class="input-label" for="exampleFormControlInput1">{{__('messages.code')}}</label>
+                                <label class="input-label" for="exampleFormControlInput1">{{translate('messages.code')}}</label>
                                 <input type="text" name="code" class="form-control"
                                        placeholder="{{\Illuminate\Support\Str::random(8)}}" required>
                             </div>
                         </div>
                         <div class="col-md-4 col-6">
                             <div class="form-group">
-                                <label class="input-label" for="exampleFormControlInput1">{{__('messages.start')}} {{__('messages.date')}}</label>
+                                <label class="input-label" for="exampleFormControlInput1">{{translate('messages.start')}} {{translate('messages.date')}}</label>
                                 <input type="date" name="start_date" class="form-control" required>
                             </div>
                         </div>
                         <div class="col-md-4 col-6">
                             <div class="form-group">
-                                <label class="input-label" for="exampleFormControlInput1">{{__('messages.expire')}} {{__('messages.date')}}</label>
+                                <label class="input-label" for="exampleFormControlInput1">{{translate('messages.expire')}} {{translate('messages.date')}}</label>
                                 <input type="date" name="expire_date" class="form-control" required>
                             </div>
                         </div>
@@ -70,34 +70,34 @@
                     <div class="row">
                         <div class="col-md-3 col-6">
                             <div class="form-group">
-                                <label class="input-label" for="exampleFormControlInput1">{{__('messages.min')}} {{__('messages.purchase')}}</label>
+                                <label class="input-label" for="exampleFormControlInput1">{{translate('messages.min')}} {{translate('messages.purchase')}}</label>
                                 <input type="number" step="0.01" name="min_purchase" value="0" min="0" max="100000" class="form-control"
                                        placeholder="100">
                             </div>
                         </div>
                         <div class="col-md-3 col-6">
                             <div class="form-group">
-                                <label class="input-label" for="exampleFormControlInput1">{{__('messages.max')}} {{__('messages.discount')}}</label>
+                                <label class="input-label" for="exampleFormControlInput1">{{translate('messages.max')}} {{translate('messages.discount')}}</label>
                                 <input type="number" step="0.01" min="0" value="0" max="1000000" name="max_discount" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-4 col-6">
                             <div class="form-group">
-                                <label class="input-label" for="exampleFormControlInput1">{{__('messages.discount')}}</label>
+                                <label class="input-label" for="exampleFormControlInput1">{{translate('messages.discount')}}</label>
                                 <input type="number" step="0.01" min="1" max="10000" name="discount" class="form-control" required>
                             </div>
                         </div>
                         <div class="col-md-2 col-6">
                             <div class="form-group">
-                                <label class="input-label" for="exampleFormControlInput1">{{__('messages.discount')}} {{__('messages.type')}}</label>
+                                <label class="input-label" for="exampleFormControlInput1">{{translate('messages.discount')}} {{translate('messages.type')}}</label>
                                 <select name="discount_type" class="form-control">
-                                    <option value="amount">{{__('messages.amount')}}</option>
-                                    <option value="percent">{{__('messages.percent')}}</option>
+                                    <option value="amount">{{translate('messages.amount')}}</option>
+                                    <option value="percent">{{translate('messages.percent')}}</option>
                                 </select>
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">{{__('messages.submit')}}</button>
+                    <button type="submit" class="btn btn-primary">{{translate('messages.submit')}}</button>
                 </form>
             </div>
 
@@ -118,23 +118,23 @@
                                }'>
                             <thead class="thead-light">
                             <tr>
-                                <th>{{__('messages.#')}}</th>
-                                <th>{{__('messages.title')}}</th>
-                                <th>{{__('messages.code')}}</th>
-                                <th>{{__('messages.min')}} {{__('messages.purchase')}}</th>
-                                <th>{{__('messages.max')}} {{__('messages.discount')}}</th>
-                                <th>{{__('messages.discount')}}</th>
-                                <th>{{__('messages.discount')}} {{__('messages.type')}}</th>
-                                <th>{{__('messages.start')}} {{__('messages.date')}}</th>
-                                <th>{{__('messages.expire')}} {{__('messages.date')}}</th>
-                                <th>{{__('messages.status')}}</th>
-                                <th>{{__('messages.action')}}</th>
+                                <th>{{translate('messages.#')}}</th>
+                                <th>{{translate('messages.title')}}</th>
+                                <th>{{translate('messages.code')}}</th>
+                                <th>{{translate('messages.min')}} {{translate('messages.purchase')}}</th>
+                                <th>{{translate('messages.max')}} {{translate('messages.discount')}}</th>
+                                <th>{{translate('messages.discount')}}</th>
+                                <th>{{translate('messages.discount')}} {{translate('messages.type')}}</th>
+                                <th>{{translate('messages.start')}} {{translate('messages.date')}}</th>
+                                <th>{{translate('messages.expire')}} {{translate('messages.date')}}</th>
+                                <th>{{translate('messages.status')}}</th>
+                                <th>{{translate('messages.action')}}</th>
                             </tr>
                             <tr>
                                 <th></th>
                                 <th>
                                     <input type="text" id="column1_search" class="form-control form-control-sm"
-                                           placeholder="{{__('messages.search')}}">
+                                           placeholder="{{translate('messages.search')}}">
                                 </th>
                                 <th></th>
                                 <th></th>
@@ -176,14 +176,12 @@
                                     <td>{{$coupon['expire_date']}}</td>
                                     <td>
                                         @if($coupon['status']==1)
-                                            <div style="padding: 10px;border: 1px solid;cursor: pointer"
-                                                 onclick="location.href='{{route('vendor.coupon.status',[$coupon['id'],0])}}'">
-                                                <span class="legend-indicator bg-success"></span>{{__('messages.active')}}
+                                            <div class="initial-76" onclick="location.href='{{route('vendor.coupon.status',[$coupon['id'],0])}}'">
+                                                <span class="legend-indicator bg-success"></span>{{translate('messages.active')}}
                                             </div>
                                         @else
-                                            <div style="padding: 10px;border: 1px solid;cursor: pointer"
-                                                 onclick="location.href='{{route('vendor.coupon.status',[$coupon['id'],1])}}'">
-                                                <span class="legend-indicator bg-danger"></span>{{__('messages.disabled')}}
+                                            <div class="initial-76" onclick="location.href='{{route('vendor.coupon.status',[$coupon['id'],1])}}'">
+                                                <span class="legend-indicator bg-danger"></span>{{translate('messages.disabled')}}
                                             </div>
                                         @endif
                                     </td>
@@ -197,9 +195,9 @@
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                 <a class="dropdown-item"
-                                                   href="{{route('vendor.coupon.update',[$coupon['id']])}}">{{__('messages.edit')}}</a>
+                                                   href="{{route('vendor.coupon.update',[$coupon['id']])}}">{{translate('messages.edit')}}</a>
                                                 <a class="dropdown-item" href="javascript:"
-                                                   onclick="form_alert('coupon-{{$coupon['id']}}','Want to delete this coupon ?')">{{__('messages.delete')}}</a>
+                                                   onclick="form_alert('coupon-{{$coupon['id']}}','Want to delete this coupon ?')">{{translate('messages.delete')}}</a>
                                                 <form action="{{route('vendor.coupon.delete',[$coupon['id']])}}"
                                                       method="post" id="coupon-{{$coupon['id']}}">
                                                     @csrf @method('delete')

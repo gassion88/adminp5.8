@@ -23,14 +23,14 @@ class AttributeController extends Controller
         $request->validate([
             'name' => 'required|unique:attributes|max:100',
         ], [
-            'name.required' => trans('messages.Name is required!'),
+            'name.required' => translate('messages.Name is required!'),
         ]);
 
         $attribute = new Attribute;
         $attribute->name = $request->name;
         $attribute->save();
 
-        Toastr::success(trans('messages.attribute_added_successfully'));
+        Toastr::success(translate('messages.attribute_added_successfully'));
         return back();
     }
 
@@ -45,13 +45,13 @@ class AttributeController extends Controller
         $request->validate([
             'name' => 'required|max:100|unique:attributes,name,'.$id,
         ], [
-            'name.required' => trans('messages.Name is required!'),
+            'name.required' => translate('messages.Name is required!'),
         ]);
 
         $attribute = Attribute::findOrFail($id);
         $attribute->name = $request->name;
         $attribute->save();
-        Toastr::success(trans('messages.attribute_updated_successfully'));
+        Toastr::success(translate('messages.attribute_updated_successfully'));
         return back();
     }
 
@@ -59,7 +59,7 @@ class AttributeController extends Controller
     {
         $attribute = Attribute::findOrFail($request->id);
         $attribute->delete();
-        Toastr::success(trans('messages.attribute_deleted_successfully'));
+        Toastr::success(translate('messages.attribute_deleted_successfully'));
         return back();
     }
 
@@ -86,7 +86,7 @@ class AttributeController extends Controller
         try {
             $collections = (new FastExcel)->import($request->file('products_file'));
         } catch (\Exception $exception) {
-            Toastr::error(trans('messages.you_have_uploaded_a_wrong_format_file'));
+            Toastr::error(translate('messages.you_have_uploaded_a_wrong_format_file'));
             return back();
         }
 
@@ -94,7 +94,7 @@ class AttributeController extends Controller
         $skip = ['youtube_video_url'];
         foreach ($collections as $collection) {
                 if ($collection['name'] === "" ) {
-                    Toastr::error(trans('messages.please_fill_all_required_fields'));
+                    Toastr::error(translate('messages.please_fill_all_required_fields'));
                     return back();
                 }
 
@@ -106,7 +106,7 @@ class AttributeController extends Controller
             ]);
         }
         DB::table('attributes')->insert($data);
-        Toastr::success(trans('messages.attribute_imported_successfully',['count'=>count($data)]));
+        Toastr::success(translate('messages.attribute_imported_successfully',['count'=>count($data)]));
         return back();
     }
 

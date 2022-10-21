@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title',__('update'))
+@section('title',translate('update'))
 
 @push('css_or_js')
 
@@ -14,10 +14,10 @@
                 <div class="col-sm mb-2 mb-sm-0">
                     <h2 class="page-header-title text-capitalize">
                         <div class="card-header-icon d-inline-flex mr-2 img">
-                            <img src="http://localhost/stack-food/multivendor-food-admin/public/assets/admin/img/addon.png" alt="public">
+                            <img src="{{asset('/public/assets/admin/img/addon.png')}}" alt="public">
                         </div>
                         <span>
-                            {{__('messages.addon')}} {{__('messages.update')}}
+                            {{translate('messages.addon')}} {{translate('messages.update')}}
                         </span>
                     </h2>
                 </div>
@@ -58,24 +58,24 @@
                                     }
                                 ?>
                                 <div class="form-group {{$lang != $default_lang ? 'd-none':'fadeIn'}} lang_form" id="{{$lang}}-form">
-                                    <label class="input-label" for="exampleFormControlInput1">{{__('messages.name')}} ({{strtoupper($lang)}})</label>
-                                    <input type="text" name="name[]" class="form-control" placeholder="{{__('messages.new_addon')}}" maxlength="191" value="{{$lang==$default_lang?$addon['name']:($translate[$lang]['name']??'')}}" {{$lang == $default_lang? 'required':''}} oninvalid="document.getElementById('en-link').click()">
+                                    <label class="input-label" for="exampleFormControlInput1">{{translate('messages.name')}} ({{strtoupper($lang)}})</label>
+                                    <input type="text" name="name[]" class="form-control" placeholder="{{translate('messages.new_addon')}}" maxlength="191" value="{{$lang==$default_lang?$addon['name']:($translate[$lang]['name']??'')}}" {{$lang == $default_lang? 'required':''}} oninvalid="document.getElementById('en-link').click()">
                                 </div>
                                 <input type="hidden" name="lang[]" value="{{$lang}}">
                             @endforeach
                         @else
                             <div class="form-group">
-                                <label class="input-label" for="exampleFormControlInput1">{{__('messages.name')}}</label>
-                                <input type="text" name="name" class="form-control" placeholder="{{__('messages.new_addon')}}" value="{{ $attribute['name'] }}" required maxlength="191">
+                                <label class="input-label" for="exampleFormControlInput1">{{translate('messages.name')}}</label>
+                                <input type="text" name="name" class="form-control" placeholder="{{translate('messages.new_addon')}}" value="{{ $attribute['name'] }}" required maxlength="191">
                             </div>
                             <input type="hidden" name="lang[]" value="{{$lang}}">
                         @endif
                         </div>
                         <div class="col-sm-6 col-md-4">
                             <div class="form-group">
-                                <label class="input-label" for="exampleFormControlSelect1">{{__('messages.restaurant')}}<span
+                                <label class="input-label" for="exampleFormControlSelect1">{{translate('messages.restaurant')}}<span
                                         class="input-label-secondary"></span></label>
-                                <select name="restaurant_id" id="restaurant_id" class="form-control  js-data-example-ajax"  data-placeholder="{{__('messages.select')}} {{__('messages.restaurant')}}" required oninvalid="this.setCustomValidity('{{__('messages.please_select_restaurant')}}')">
+                                <select name="restaurant_id" id="restaurant_id" class="form-control  js-data-example-ajax"  data-placeholder="{{translate('messages.select')}} {{translate('messages.restaurant')}}" required oninvalid="this.setCustomValidity('{{translate('messages.please_select_restaurant')}}')">
                                 @if($addon->restaurant)
                                 <option value="{{$addon->restaurant_id}}" selected="selected">{{$addon->restaurant->name}}</option>
                                 @endif
@@ -84,15 +84,15 @@
                         </div>
                         <div class="col-sm-6 col-md-4">
                             <div class="form-group">
-                                <label class="input-label" for="exampleFormControlInput1">{{__('messages.price')}}</label>
+                                <label class="input-label" for="exampleFormControlInput1">{{translate('messages.price')}}</label>
                                 <input type="number" min="0" max="999999999999.99" step="0.01" name="price" value="{{$addon['price']}}" class="form-control" placeholder="200" required>
                             </div>
                         </div>
                     </div>
 
                     <div class="btn--container justify-content-end">
-                        <button type="reset" id="reset_btn" class="btn btn--reset">{{__('messages.reset')}}</button>
-                        <button type="submit" class="btn btn--primary">{{__('messages.update')}}</button>
+                        <button type="reset" id="reset_btn" class="btn btn--reset">{{translate('messages.reset')}}</button>
+                        <button type="submit" class="btn btn--primary">{{translate('messages.update')}}</button>
                     </div>
                 </form>
             </div>

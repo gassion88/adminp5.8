@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title',__('messages.landing_page_settings'))
+@section('title',translate('messages.landing_page_settings'))
 
 @push('css_or_js')
     <!-- Custom styles for this page -->
@@ -17,7 +17,7 @@
                 <img src="{{asset('/public/assets/admin/img/landing-page.png')}}" class="mw-26px" alt="public">
             </div>
             <span>
-                {{ __('messages.landing_page_settings') }}
+                {{ translate('messages.landing_page_settings') }}
             </span>
         </h1>
         <!-- End Page Header -->
@@ -27,37 +27,37 @@
             <ul class="nav nav-tabs page-header-tabs">
                 <li class="nav-item">
                     <a class="nav-link"
-                        href="{{ route('admin.business-settings.landing-page-settings', 'index') }}">{{ __('messages.text') }}</a>
+                        href="{{ route('admin.business-settings.landing-page-settings', 'index') }}">{{ translate('messages.text') }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active"
                         href="{{ route('admin.business-settings.landing-page-settings', 'links') }}"
-                        aria-disabled="true">{{ __('messages.button_links') }}</a>
+                        aria-disabled="true">{{ translate('messages.button_links') }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"
                         href="{{ route('admin.business-settings.landing-page-settings', 'speciality') }}"
-                        aria-disabled="true">{{ __('messages.speciality') }}</a>
+                        aria-disabled="true">{{ translate('messages.speciality') }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"
                         href="{{ route('admin.business-settings.landing-page-settings', 'testimonial') }}"
-                        aria-disabled="true">{{ __('messages.testimonial') }}</a>
+                        aria-disabled="true">{{ translate('messages.testimonial') }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"
                         href="{{ route('admin.business-settings.landing-page-settings', 'feature') }}"
-                        aria-disabled="true">{{ __('messages.feature') }}</a>
+                        aria-disabled="true">{{ translate('messages.feature') }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"
                         href="{{ route('admin.business-settings.landing-page-settings', 'image') }}"
-                        aria-disabled="true">{{ __('messages.image') }}</a>
+                        aria-disabled="true">{{ translate('messages.image') }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"
                         href="{{ route('admin.business-settings.landing-page-settings', 'backgroundChange') }}"
-                        aria-disabled="true">{{ __('messages.header_footer_bg') }}</a>
+                        aria-disabled="true">{{ translate('messages.header_footer_bg') }}</a>
                 </li>
             </ul>
             <!-- End Nav -->
@@ -78,7 +78,7 @@
                     <div class="col-sm-6 col-lg-4">
                         <div class="form-group">
                             <label class="toggle-switch toggle-switch-sm d-flex justify-content-between input-label mb-1" for="app_url_android_status">
-                                <span class="form-check-label">{{__('messages.app_url')}} ({{__('messages.play_store')}}) 
+                                <span class="form-check-label">{{translate('messages.app_url')}} ({{translate('messages.play_store')}})
                                 <!-- <span class="input-label-secondary" data-toggle="tooltip" data-placement="right" data-original-title=""><img src="{{asset('/public/assets/admin/img/info-circle.svg')}}" alt=""></span> -->
                                 </span>
                                 <input type="checkbox" class="toggle-switch-input" name="app_url_android_status" id="app_url_android_status" value="1" {{(isset($landing_page_links) && $landing_page_links['app_url_android_status'])?'checked':''}}>
@@ -92,7 +92,7 @@
                     <div class="col-sm-6 col-lg-4">
                         <div class="form-group">
                             <label class="toggle-switch toggle-switch-sm d-flex justify-content-between input-label mb-1" for="app_url_ios_status">
-                                <span class="form-check-label">{{__('messages.app_url')}} ({{__('messages.app_store')}}) </span>
+                                <span class="form-check-label">{{translate('messages.app_url')}} ({{translate('messages.app_store')}}) </span>
                                 <input type="checkbox" class="toggle-switch-input" name="app_url_ios_status" id="app_url_ios_status" value="1" {{(isset($landing_page_links) && $landing_page_links['app_url_ios_status'])?'checked':''}}>
                                 <span class="toggle-switch-label">
                                     <span class="toggle-switch-indicator"></span>
@@ -104,7 +104,7 @@
                     <div class="col-sm-6 col-lg-4">
                         <div class="form-group">
                             <label class="toggle-switch toggle-switch-sm d-flex justify-content-between input-label mb-1" for="web_app_url_status">
-                                <span class="form-check-label">{{__('messages.web_app_url')}} </span>
+                                <span class="form-check-label">{{translate('messages.web_app_url')}} </span>
                                 <input type="checkbox" class="toggle-switch-input" name="web_app_url_status" id="web_app_url_status" value="1" {{(isset($landing_page_links) && $landing_page_links['web_app_url_status'])?'checked':''}}>
                                 <span class="toggle-switch-label">
                                     <span class="toggle-switch-indicator"></span>
@@ -117,8 +117,8 @@
 
                 <div class="form-group mb-0">
                     <div class="btn--container justify-content-end">
-                        <button type="reset" class="btn btn--reset">{{ __('messages.reset') }}</button>
-                        <button type="submit" class="btn btn--primary">{{ __('messages.submit') }}</button>
+                        <button type="reset" class="btn btn--reset">{{ translate('messages.reset') }}</button>
+                        <button type="submit" class="btn btn--primary">{{ translate('messages.submit') }}</button>
                     </div>
                 </div>
             </form>

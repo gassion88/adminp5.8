@@ -1,11 +1,11 @@
-<div class="d-flex flex-row" style="max-height: 300px; overflow-y: scroll;">
+<div class="d-flex flex-row initial-47">
     <table class="table table-align-middle">
         <thead class="thead-light border-0 text-center">
             <tr>
-                <th class="py-2" scope="col">{{__('messages.item')}}</th>
-                <th class="py-2" scope="col" class="text-center">{{__('messages.qty')}}</th>
-                <th class="py-2" scope="col">{{__('messages.price')}}</th>
-                <th class="py-2" scope="col">{{__('messages.delete')}}</th>
+                <th class="py-2" scope="col">{{translate('messages.item')}}</th>
+                <th class="py-2" scope="col" class="text-center">{{translate('messages.qty')}}</th>
+                <th class="py-2" scope="col">{{translate('messages.price')}}</th>
+                <th class="py-2" scope="col">{{translate('messages.delete')}}</th>
             </tr>
         </thead>
         <tbody>
@@ -48,7 +48,7 @@
                     </div>
                 </td>
                 <td class="align-items-center text-center">
-                    <input type="number" data-key="{{$key}}" style="width:50px;text-align: center;" value="{{$cartItem['quantity']}}" min="1" onkeyup="updateQuantity(event)" class="rounded border">
+                    <input type="number" data-key="{{$key}}" class="w-50px text-center" value="{{$cartItem['quantity']}}" min="1" onkeyup="updateQuantity(event)" class="rounded border">
                 </td>
                 <td class="text-center px-0 py-1">
                     <div class="btn">
@@ -96,23 +96,23 @@ if (isset($cart['paid'])) {
     <div class="box p-3">
         <dl class="row">
 
-            <dt  class="col-6 font-regular">{{__('messages.addon')}}:</dt>
+            <dt  class="col-6 font-regular">{{translate('messages.addon')}}:</dt>
             <dd class="col-6 text-right">{{\App\CentralLogics\Helpers::format_currency($addon_price)}}</dd>
 
-            <dt  class="col-6 font-regular">{{__('messages.subtotal')}}:</dt>
+            <dt  class="col-6 font-regular">{{translate('messages.subtotal')}}:</dt>
             <dd class="col-6 text-right">{{\App\CentralLogics\Helpers::format_currency($subtotal+$addon_price)}}</dd>
 
 
-            <dt  class="col-6 font-regular">{{__('messages.discount')}} :</dt>
+            <dt  class="col-6 font-regular">{{translate('messages.discount')}} :</dt>
             <dd class="col-6 text-right">- {{\App\CentralLogics\Helpers::format_currency(round($discount_on_product,2))}}</dd>
-                    <dt class="col-6 font-regular">{{ __('messages.delivery_fee') }} :</dt>
+                    <dt class="col-6 font-regular">{{ translate('messages.delivery_fee') }} :</dt>
         <dd class="col-6 text-right" id="delivery_price">
             {{ \App\CentralLogics\Helpers::format_currency($delivery_fee, 2) }}</dd>
 
-            <dt  class="col-6 font-regular">{{__('messages.extra_discount')}} :</dt>
+            <dt  class="col-6 font-regular">{{translate('messages.extra_discount')}} :</dt>
             <dd class="col-6 text-right"><button class="btn btn-sm" type="button" data-toggle="modal" data-target="#add-discount"><i class="tio-edit"></i></button>- {{\App\CentralLogics\Helpers::format_currency(round($discount_amount,2))}}</dd>
 
-            <dt  class="col-6 font-regular">Tax  : </dt>
+            <dt  class="col-6 font-regular">{{ translate('messages.tax') }}  : </dt>
             <dd class="col-6 text-right"><button class="btn btn-sm" type="button" data-toggle="modal" data-target="#add-tax"><i class="tio-edit"></i></button>{{\App\CentralLogics\Helpers::format_currency(round($total_tax_amount,2))}}</dd>
             <dd class="col-12"><hr class="m-0"></dd>
             <dt  class="col-6 font-regular">{{ translate('Total') }}: </dt>
@@ -134,13 +134,13 @@ if (isset($cart['paid'])) {
                 @else
                 <li>
                     <label>
-                        <input type="radio" name="type" value="cash" hidden="" checked="">
+                        <input type="radio" name="type" value="cash" hidden="" checked>
                         <span>{{ translate('messages.Cash') }}</span>
                     </label>
                 </li>
                  <li>
                     <label>
-                        <input type="radio" name="type" value="card" hidden="" checked="">
+                        <input type="radio" name="type" value="card" hidden="">
                         <span>{{ translate('messages.Card') }}</span>
                     </label>
                 </li>
@@ -176,11 +176,11 @@ if (isset($cart['paid'])) {
         {{-- <div class="row pt-2 button--bottom-fixed g-1 bg-white">
             <div class="col-md-6">
                 <a href="#" class="btn btn--danger btn-sm btn-block" onclick="emptyCart()"><i
-                        class="fa fa-times-circle "></i> {{__('messages.cancel')}} </a>
+                        class="fa fa-times-circle "></i> {{translate('messages.cancel')}} </a>
             </div>
             <div class="col-md-6">
                 <button type="submit" class="btn  btn--primary btn-sm btn-block"><i class="fa fa-shopping-bag"></i>
-                    {{__('messages.order')}} </button>
+                    {{translate('messages.order')}} </button>
             </div>
         </div> --}}
     </div>
@@ -220,7 +220,7 @@ if (isset($cart['paid'])) {
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">{{__('messages.update_discount')}}</h5>
+                <h5 class="modal-title">{{translate('messages.update_discount')}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -229,18 +229,18 @@ if (isset($cart['paid'])) {
                 <form action="{{route('vendor.pos.discount')}}" method="post" class="row">
                     @csrf
                     <div class="form-group col-sm-6">
-                        <label for="">{{__('messages.discount')}}</label>
+                        <label for="">{{translate('messages.discount')}}</label>
                         <input type="number" class="form-control" name="discount" min="0" id="discount_input" value="{{$discount}}" max="{{$discount_type=='percent'?100:1000000000}}">
                     </div>
                     <div class="form-group col-sm-6">
-                        <label for="">{{__('messages.type')}}</label>
+                        <label for="">{{translate('messages.type')}}</label>
                         <select name="type" class="form-control" id="discount_input_type" onchange="document.getElementById('discount_input').max=(this.value=='percent'?100:1000000000);">
-                            <option value="amount" {{$discount_type=='amount'?'selected':''}}>{{__('messages.amount')}}({{\App\CentralLogics\Helpers::currency_symbol()}})</option>
-                            <option value="percent" {{$discount_type=='percent'?'selected':''}}>{{__('messages.percent')}}(%)</option>
+                            <option value="amount" {{$discount_type=='amount'?'selected':''}}>{{translate('messages.amount')}}({{\App\CentralLogics\Helpers::currency_symbol()}})</option>
+                            <option value="percent" {{$discount_type=='percent'?'selected':''}}>{{translate('messages.percent')}}(%)</option>
                         </select>
                     </div>
                     <div class="form-group col-sm-12">
-                        <button class="btn btn-sm btn--primary" type="submit">{{__('messages.submit')}}</button>
+                        <button class="btn btn-sm btn--primary" type="submit">{{translate('messages.submit')}}</button>
                     </div>
                 </form>
             </div>
@@ -252,7 +252,7 @@ if (isset($cart['paid'])) {
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">{{__('messages.update_tax')}}</h5>
+                <h5 class="modal-title">{{translate('messages.update_tax')}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -261,12 +261,12 @@ if (isset($cart['paid'])) {
                 <form action="{{route('vendor.pos.tax')}}" method="POST" class="row" id="order_submit_form">
                     @csrf
                     <div class="form-group col-12">
-                        <label for="">{{__('messages.tax')}}(%)</label>
+                        <label for="">{{translate('messages.tax')}}(%)</label>
                         <input type="number" class="form-control" name="tax" min="0">
                     </div>
 
                     <div class="form-group col-sm-12">
-                        <button class="btn btn-sm btn--primary" type="submit">{{__('messages.submit')}}</button>
+                        <button class="btn btn-sm btn--primary" type="submit">{{translate('messages.submit')}}</button>
                     </div>
                 </form>
             </div>
@@ -301,29 +301,29 @@ if (isset($cart['paid'])) {
                                 for="">{{ translate('messages.contact_person_name') }}<span
                                             class="input-label-secondary text-danger">*</span></label>
                             <input type="text" class="form-control" name="contact_person_name"
-                                value="{{ $old ? $old['contact_person_name'] : '' }}" placeholder="Ex: Jhone">
+                                value="{{ $old ? $old['contact_person_name'] : '' }}" placeholder="{{ translate('Ex: Jhone') }}">
                         </div>
                         <div class="col-md-6">
                             <label class="input-label"
                                 for="">{{ translate('Contact Number') }}<span
                                             class="input-label-secondary text-danger">*</span></label>
                             <input type="tel" class="form-control" name="contact_person_number"
-                                value="{{ $old ? $old['contact_person_number'] : '' }}"  placeholder="Ex: +3264124565">
+                                value="{{ $old ? $old['contact_person_number'] : '' }}"  placeholder="{{ translate('Ex: +3264124565') }}">
                         </div>
                         <div class="col-md-4">
                             <label class="input-label" for="">{{ translate('messages.Road') }}<span
                                             class="input-label-secondary text-danger">*</span></label>
-                            <input type="text" class="form-control" name="road" value="{{ $old ? $old['road'] : '' }}"  placeholder="Ex: 4th">
+                            <input type="text" class="form-control" name="road" value="{{ $old ? $old['road'] : '' }}"  placeholder="{{ translate('Ex: 4th') }}">
                         </div>
                         <div class="col-md-4">
                             <label class="input-label" for="">{{ translate('messages.House') }}<span
                                             class="input-label-secondary text-danger">*</span></label>
-                            <input type="text" class="form-control" name="house" value="{{ $old ? $old['house'] : '' }}" placeholder="Ex: 45/C">
+                            <input type="text" class="form-control" name="house" value="{{ $old ? $old['house'] : '' }}" placeholder="{{ translate('Ex: 45/C') }}">
                         </div>
                         <div class="col-md-4">
                             <label class="input-label" for="">{{ translate('messages.Floor') }}<span
                                             class="input-label-secondary text-danger">*</span></label>
-                            <input type="text" class="form-control" name="floor" value="{{ $old ? $old['floor'] : '' }}"  placeholder="Ex: 1A">
+                            <input type="text" class="form-control" name="floor" value="{{ $old ? $old['floor'] : '' }}"  placeholder="{{ translate('Ex: 1A') }}">
                         </div>
                         <div class="col-md-6">
                             <label class="input-label" for="">{{ translate('messages.longitude') }}<span
@@ -339,7 +339,7 @@ if (isset($cart['paid'])) {
                         </div>
                         <div class="col-md-12">
                             <label class="input-label" for="">{{ translate('messages.address') }}</label>
-                            <textarea name="address" class="form-control" cols="30" rows="3" placeholder="Ex: address">{{ $old ? $old['address'] : '' }}</textarea>
+                            <textarea name="address" class="form-control" cols="30" rows="3" placeholder="{{ translate('Ex: address') }}">{{ $old ? $old['address'] : '' }}</textarea>
                         </div>
                         <div class="col-12">
                             <div class="d-flex justify-content-between">
@@ -352,10 +352,9 @@ if (isset($cart['paid'])) {
                                     <strong>{{ $old ? $old['delivery_fee'] : 0 }} {{ \App\CentralLogics\Helpers::currency_symbol() }}</strong>
                                 </div>
                             </div>
-                            <input id="pac-input" class="controls rounded" style="height: 3em;width:fit-content;"
-                                title="{{ translate('messages.search_your_location_here') }}" type="text"
+                            <input id="pac-input" class="controls rounded initial-8" title="{{ translate('messages.search_your_location_here') }}" type="text"
                                 placeholder="{{ translate('messages.search_here') }}" />
-                            <div class="mb-2" id="map" style="height: 200px;"></div>
+                            <div class="mb-2 h-200px" id="map"></div>
                         </div>
                     </div>
                     <div class="col-md-12">

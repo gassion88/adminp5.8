@@ -356,7 +356,7 @@
                             @if ($order->delivery_man)
                                 <div class="media align-items-center" href="javascript:">
                                     <div class="avatar avatar-circle mr-3">
-                                        <img class="avatar-img w-75px" 
+                                        <img class="avatar-img w-75px"
                                             onerror="this.src='{{ asset('public/assets/admin/img/160x160/img1.jpg') }}'"
                                             src="{{ asset('storage/app/public/delivery-man/' . $order->delivery_man->image) }}"
                                             alt="Image Description">
@@ -537,7 +537,7 @@
                     <div class="card">
                         <!-- Header -->
                         <div class="card-header">
-                            <h4 class="card-header-title">{{ __('messages.restaurant') }}</h4>
+                            <h4 class="card-header-title">{{ translate('messages.restaurant') }}</h4>
                         </div>
                         <!-- End Header -->
 
@@ -556,13 +556,13 @@
                                     <span
                                         class="text-body text-hover-primary text-break">{{ $order->restaurant->name }}</span><br>
                                     <span class="badge badge-ligh">{{ $order->restaurant->orders_count }}
-                                        {{ __('messages.orders_served') }}</span>
+                                        {{ translate('messages.orders_served') }}</span>
                                 </div>
                             </a>
                             <hr>
 
                             <div class="d-flex justify-content-between align-items-center">
-                                <h5>{{ __('messages.contact') }} {{ __('messages.info') }}</h5>
+                                <h5>{{ translate('messages.contact') }} {{ translate('messages.info') }}</h5>
                             </div>
 
                             <ul class="list-unstyled list-unstyled-py-2">

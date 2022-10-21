@@ -9,6 +9,12 @@ class Conversation extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'sender_id' => 'integer',
+        'receiver_id' => 'integer',
+        'last_message_id' => 'integer'
+    ];
+
     public function messages()
     {
         return $this->hasMany(Message::class, 'conversation_id');

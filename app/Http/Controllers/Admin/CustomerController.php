@@ -48,8 +48,8 @@ class CustomerController extends Controller
                 if(isset($customer->cm_firebase_token))
                 {
                     $data = [
-                        'title' => trans('messages.suspended'),
-                        'description' => trans('messages.your_account_has_been_blocked'),
+                        'title' => translate('messages.suspended'),
+                        'description' => translate('messages.your_account_has_been_blocked'),
                         'order_id' => '',
                         'image' => '',
                         'type'=> 'block'
@@ -68,10 +68,10 @@ class CustomerController extends Controller
 
         }
         catch (\Exception $e) {
-            Toastr::warning(trans('messages.push_notification_faild'));
+            Toastr::warning(translate('messages.push_notification_faild'));
         }
 
-        Toastr::success(trans('messages.customer').trans('messages.status_updated'));
+        Toastr::success(translate('messages.customer').translate('messages.status_updated'));
         return back();
     }
 
@@ -97,7 +97,7 @@ class CustomerController extends Controller
             $orders = Order::latest()->where(['user_id' => $id])->Notpos()->paginate(config('default_pagination'));
             return view('admin-views.customer.customer-view', compact('customer', 'orders'));
         }
-        Toastr::error(trans('messages.customer_not_found'));
+        Toastr::error(translate('messages.customer_not_found'));
         return back();
     }
 
@@ -113,7 +113,7 @@ class CustomerController extends Controller
         })
         ->limit(8)
         ->get([DB::raw('id, CONCAT(f_name, " ", l_name, " (", phone ,")") as text')]);
-        if($request->all) $data[]=(object)['id'=>false, 'text'=>trans('messages.all')];
+        if($request->all) $data[]=(object)['id'=>false, 'text'=>translate('messages.all')];
 
 
         return response()->json($data);
@@ -134,7 +134,7 @@ class CustomerController extends Controller
     {
 
         if (env('APP_MODE') == 'demo') {
-            Toastr::info(trans('messages.update_option_is_disable_for_demo'));
+            Toastr::info(translate('messages.update_option_is_disable_for_demo'));
             return back();
         }
 
@@ -168,7 +168,7 @@ class CustomerController extends Controller
             'value' => $request['minimun_transfer_point']??0
         ]);
 
-        Toastr::success(trans('messages.customer_settings_updated_successfully'));
+        Toastr::success(translate('messages.customer_settings_updated_successfully'));
         return back();
     }
 

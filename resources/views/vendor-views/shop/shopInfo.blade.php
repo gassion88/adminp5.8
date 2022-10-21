@@ -1,9 +1,5 @@
 @extends('layouts.vendor.app')
-@section('title',__('messages.restaurant_view'))
-@push('css_or_js')
-    <!-- Custom styles for this page -->
-@endpush
-
+@section('title',translate('messages.restaurant_view'))
 @section('content')
 <div class="content container-fluid">
     <!-- Page Header -->
@@ -15,7 +11,7 @@
                         <img src="{{asset('/public/assets/admin/img/resturant-panel/page-title/resturant.png')}}" alt="public">
                     </div>
                     <span>
-                        {{__('messages.my_shop')}} {{__('messages.info')}}
+                        {{translate('messages.my_shop')}} {{translate('messages.info')}}
                     </span>
                 </div>
             </h2>
@@ -29,7 +25,7 @@
         <div class="card-body p-0">
             @if($shop->cover_photo)
                 <div>
-                    <img src="{{asset('storage/app/public/restaurant/cover/'.$shop->cover_photo)}}" onerror="this.src='{{asset('public/assets/admin/img/900x400/img1.jpg')}}'" style="width: 100%;border-radius:15px 15px 0 0;height:320px;object-fit:cover">
+                    <img src="{{asset('storage/app/public/restaurant/cover/'.$shop->cover_photo)}}" onerror="this.src='{{asset('public/assets/admin/img/900x400/img1.jpg')}}'" class="initial-93">
                 </div>
             @endif
             <div class="my-resturant--card">
@@ -40,35 +36,34 @@
                     onerror="this.src='{{asset('public/assets/admin/img/160x160/img1.jpg')}}'"
                     alt="User Pic">
                 </div>
-                
+
                 @else
-                
+
                     <div class="my-resturant--avatar">
                         <img src="{{asset('storage/app/public/restaurant/'.$shop->logo)}}" class="border"
                         onerror="this.src='{{asset('public/assets/admin/img/160x160/img1.jpg')}}'" alt="">
                     </div>
 
-                
+
                 @endif
-                
+
                 <!-- http://localhost/Food-multivendor/public/assets/admin/img/restaurant_cover.jpg -->
                 <div class="my-resturant--content">
                     <span class="d-block mb-1 pb-1">
-                        <strong>{{__('messages.name')}} :</strong> {{$shop->name}}
+                        <strong>{{translate('messages.name')}} :</strong> {{$shop->name}}
                     </span>
                     <span class="d-block mb-1 pb-1">
-                        <strong>{{__('messages.phone')}} :</strong> <a href="tel:{{$shop->phone}}">{{$shop->phone}}</a>
+                        <strong>{{translate('messages.phone')}} :</strong> <a href="tel:{{$shop->phone}}">{{$shop->phone}}</a>
                     </span>
                     <span class="d-block mb-1 pb-1">
-                        <strong>{{__('messages.address')}} :</strong> {{$shop->address}}
-                    </span>
-                    <!--
-                    <span class="d-block mb-1 pb-1">
-                        <strong>{{__('messages.admin_commission')}} :</strong> {{(isset($shop->comission)?$shop->comission:\App\Models\BusinessSetting::where('key','admin_commission')->first()->value)}}%
+                        <strong>{{translate('messages.address')}} :</strong> {{$shop->address}}
                     </span>
                     <span class="d-block mb-1 pb-1">
-                        <strong>{{__('messages.vat/tax')}} :</strong> {{$shop->tax}}%
-                    </span> -->
+                        <strong>{{translate('messages.admin_commission')}} :</strong> {{(isset($shop->comission)?$shop->comission:\App\Models\BusinessSetting::where('key','admin_commission')->first()->value)}}%
+                    </span>
+                    <span class="d-block mb-1 pb-1">
+                        <strong>{{translate('messages.vat/tax')}} :</strong> {{$shop->tax}}%
+                    </span>
                 </div>
             </div>
         </div>

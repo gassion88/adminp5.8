@@ -14,7 +14,7 @@
         {{Str::limit($food->category,20,'...')}}
         </td>
         <td>
-            <div class="text-right mx-auto" style="max-width:36px;">
+            <div class="text-right mx-auto mw-36px">
             <!-- Static Symbol -->
             {{ \App\CentralLogics\Helpers::currency_symbol() }}
             <!-- Static Symbol -->
@@ -36,10 +36,10 @@
         <td>
             <div class="btn--container justify-content-center">
                 <a class="btn action-btn btn--primary btn-outline-primary"
-                    href="{{route('vendor.food.edit',[$food['id']])}}" title="{{__('messages.edit')}} {{__('messages.food')}}"><i class="tio-edit"></i>
+                    href="{{route('vendor.food.edit',[$food['id']])}}" title="{{translate('messages.edit')}} {{translate('messages.food')}}"><i class="tio-edit"></i>
                 </a>
                 <a class="btn action-btn btn--danger btn-outline-danger" href="javascript:"
-                    onclick="form_alert('food-{{$food['id']}}','Want to delete this item ?')" title="{{__('messages.delete')}} {{__('messages.food')}}"><i class="tio-delete-outlined"></i>
+                    onclick="form_alert('food-{{$food['id']}}','{{ translate('messages.Want to delete this item ?') }}')" title="{{translate('messages.delete')}} {{translate('messages.food')}}"><i class="tio-delete-outlined"></i>
                 </a>
                 <form action="{{route('vendor.food.delete',[$food['id']])}}"
                         method="post" id="food-{{$food['id']}}">

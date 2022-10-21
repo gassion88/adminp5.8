@@ -135,7 +135,7 @@ class ConfigController extends Controller
         if (count($zones) < 1) {
             return response()->json([
                 'errors' => [
-                    ['code' => 'coordinates', 'message' => trans('messages.service_not_available_in_this_area')]
+                    ['code' => 'coordinates', 'message' => translate('messages.service_not_available_in_this_area')]
                 ]
             ], 404);
         }
@@ -151,7 +151,7 @@ class ConfigController extends Controller
 
         return response()->json([
             'errors' => [
-                ['code' => 'coordinates', 'message' => trans('messages.we_are_temporarily_unavailable_in_this_area')]
+                ['code' => 'coordinates', 'message' => translate('messages.we_are_temporarily_unavailable_in_this_area')]
             ]
         ], 403);
     }

@@ -283,8 +283,8 @@ class PaytmController extends Controller
     //payment functions
     public function payment(Request $request)
     {
-        $order = Order::with(['details', 'customer'])->where(['id' => session('order_id'), 'user_id'=>session('customer_id')])->first();
-        
+        $order = Order::with(['details', 'customer'])->where(['id' => $request->order_id, 'user_id'=>$request->customer_id])->first();
+
         $value = $order->order_amount;
         $user = $order->customer;
 

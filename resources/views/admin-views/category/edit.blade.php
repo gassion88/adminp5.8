@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title',__('messages.Update category'))
+@section('title',translate('messages.Update category'))
 
 @push('css_or_js')
 
@@ -17,7 +17,7 @@
                             <img src="{{asset('public/assets/admin/img/sub-category.png')}}" alt="">
                         </div>
                         <span>
-                            {{$category->position?__('messages.sub').' ':''}}{{__('messages.category')}} {{__('messages.update')}}
+                            {{$category->position?translate('messages.sub').' ':''}}{{translate('messages.category')}} {{translate('messages.update')}}
                         </span>
                     </h2>
                 </div>
@@ -53,15 +53,15 @@
                                 }
                             ?>
                             <div class="form-group {{$lang != $default_lang ? 'd-none':''}} lang_form" id="{{$lang}}-form">
-                                <label class="input-label" for="exampleFormControlInput1">{{__('messages.name')}} ({{strtoupper($lang)}})</label>
-                                <input id="name" type="text" name="name[]" class="form-control" placeholder="{{__('messages.new_category')}}" maxlength="191" value="{{$lang==$default_lang?$category['name']:($translate[$lang]['name']??'')}}" {{$lang == $default_lang? 'required':''}} oninvalid="document.getElementById('en-link').click()">
+                                <label class="input-label" for="exampleFormControlInput1">{{translate('messages.name')}} ({{strtoupper($lang)}})</label>
+                                <input id="name" type="text" name="name[]" class="form-control" placeholder="{{translate('messages.new_category')}}" maxlength="191" value="{{$lang==$default_lang?$category['name']:($translate[$lang]['name']??'')}}" {{$lang == $default_lang? 'required':''}} oninvalid="document.getElementById('en-link').click()">
                             </div>
                             <input type="hidden" name="lang[]" value="{{$lang}}">
                         @endforeach
                     @else
                         <div class="form-group">
-                            <label class="input-label" for="exampleFormControlInput1">{{__('messages.name')}}</label>
-                            <input id="name" type="text" name="name" class="form-control" placeholder="Ex : {{__('messages.new_category')}}" value="{{old('name')}}" required maxlength="191">
+                            <label class="input-label" for="exampleFormControlInput1">{{translate('messages.name')}}</label>
+                            <input id="name" type="text" name="name" class="form-control" placeholder="{{ translate('messages.Ex :') }} {{translate('messages.new_category')}}" value="{{old('name')}}" required maxlength="191">
                         </div>
                         <input type="hidden" name="lang[]" value="{{$lang}}">
                     @endif
@@ -75,19 +75,19 @@
                                 </center>
                             </div>
                             <div class="form-group mt-2">
-                                <label>{{__('messages.image')}}</label><small class="text-danger">* ( {{__('messages.ratio')}} 1:1)</small>
+                                <label>{{translate('messages.image')}}</label><small class="text-danger">* ( {{translate('messages.ratio')}} 1:1)</small>
                                 <div class="custom-file">
                                     <input type="file" name="image" id="customFileEg1" class="custom-file-input"
                                            accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
-                                    <label class="custom-file-label" for="customFileEg1">{{__('messages.choose')}} {{__('messages.file')}}</label>
+                                    <label class="custom-file-label" for="customFileEg1">{{translate('messages.choose')}} {{translate('messages.file')}}</label>
                                 </div>
                             </div>
                         </div>
                     </div>
                     @endif
                     <div class="btn--container justify-content-end">
-                        <button id="reset_btn" type="button" class="btn btn--reset">{{__('messages.reset')}}</button>
-                        <button type="submit" class="btn btn--primary">{{__('messages.update')}}</button>
+                        <button id="reset_btn" type="button" class="btn btn--reset">{{translate('messages.reset')}}</button>
+                        <button type="submit" class="btn btn--primary">{{translate('messages.update')}}</button>
                     </div>
                 </form>
             </div>

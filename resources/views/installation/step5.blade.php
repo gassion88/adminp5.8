@@ -4,13 +4,9 @@
         <div class="card mt-6">
             <div class="card-body">
                 <div class="card-header">
-                    <div class="row" style="width: 100%">
-                        <div class="col-12">
-                            <div class="mar-ver pad-btm text-center">
-                                <h1 class="h3">Admin Account Settings <i class="fa fa-cogs"></i></h1>
-                                <p>Provide your information.</p>
-                            </div>
-                        </div>
+                    <div class="mar-ver pad-btm text-center w-100">
+                        <h1 class="h3">Admin Account Settings <i class="fa fa-cogs"></i></h1>
+                        <p>Provide your information.</p>
                     </div>
                 </div>
                 <div class="row pt-5">

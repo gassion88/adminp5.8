@@ -79,7 +79,7 @@
                                                 <input id="datatableSearch" type="search"
                                                     value="{{ $keyword ? $keyword : '' }}" name="search"
                                                     class="form-control flex-grow-1 pl-5 border rounded h--45x"
-                                                    placeholder="Ex : Search Food Name"
+                                                    placeholder="{{ translate('Ex : Search Food Name') }}"
                                                     aria-label="{{ translate('messages.search_here') }}" disabled>
                                             </div>
                                             <!-- End Search -->
@@ -199,8 +199,8 @@
                             <center>
                                 <input type="button" class="btn text-white btn--primary non-printable"
                                     onclick="printDiv('printableArea')"
-                                    value="Proceed, If thermal printer is ready." />
-                                <a href="{{ url()->previous() }}" class="btn btn-danger non-printable">Back</a>
+                                    value="{{ translate('Proceed, If thermal printer is ready.') }}" />
+                                <a href="{{ url()->previous() }}" class="btn btn-danger non-printable">{{ translate('messages.back') }}</a>
                             </center>
                             <hr class="non-printable">
                         </div>
@@ -272,28 +272,28 @@
                             <div class="col-md-6">
                                 <label class="input-label"
                                     for="">{{ translate('person_name') }}</label>
-                                <input type="text" class="form-control" name="contact_person_name"  placeholder="Ex: Jhone">
+                                <input type="text" class="form-control" name="contact_person_name"  placeholder="{{ translate('messages.Ex :') }} Jhone">
                             </div>
                             <div class="col-md-6">
                                 <label class="input-label"
                                     for="">{{ translate('Contact Number') }}</label>
-                                <input type="text" class="form-control" name="contact_person_number" placeholder="Ex: +3264124565">
+                                <input type="text" class="form-control" name="contact_person_number" placeholder="{{ translate('messages.Ex :') }} +3264124565">
                             </div>
                             <div class="col-md-4">
                                 <label class="input-label" for="">{{ translate('messages.Road') }}</label>
-                                <input type="text" class="form-control" placeholder="Ex: 4th">
+                                <input type="text" class="form-control" placeholder="{{ translate('messages.Ex :') }} 4th">
                             </div>
                             <div class="col-md-4">
                                 <label class="input-label" for="">{{ translate('messages.House') }}</label>
-                                <input type="text" class="form-control" placeholder="Ex: 45/C">
+                                <input type="text" class="form-control" placeholder="{{ translate('messages.Ex :') }} 45/C">
                             </div>
                             <div class="col-md-4">
                                 <label class="input-label" for="">{{ translate('messages.Floor') }}</label>
-                                <input type="text" class="form-control"   placeholder="Ex: 1A">
+                                <input type="text" class="form-control"   placeholder="{{ translate('messages.Ex :') }} 1A">
                             </div>
                             <div class="col-md-12">
                                 <label class="input-label" for="">{{ translate('messages.address') }}</label>
-                                <textarea name="address" class="form-control" cols="30" rows="3" placeholder="Ex: address"></textarea>
+                                <textarea name="address" class="form-control" cols="30" rows="3" placeholder="{{ translate('messages.Ex :') }} address"></textarea>
                             </div>
                             <div class="col-12">
                                 <div class="d-flex justify-content-between">
@@ -932,7 +932,7 @@
             }, function(data) {
                 $('#del-add').empty();
                 updateCart();
-                toastr.info('Item has been removed from cart', {
+                toastr.info('{{ translate('messages.item_has_been_removed_from_cart') }}', {
                     CloseButton: true,
                     ProgressBar: true
                 });

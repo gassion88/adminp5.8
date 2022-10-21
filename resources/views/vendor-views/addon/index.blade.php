@@ -1,6 +1,6 @@
 @extends('layouts.vendor.app')
 
-@section('title',__('messages.add_new_addon'))
+@section('title',translate('messages.add_new_addon'))
 
 @push('css_or_js')
 
@@ -10,7 +10,7 @@
     <div class="content container-fluid">
         <!-- Page Header -->
         <div class="page-header">
-            <h1 class="page-header-title"><i class="tio-add-circle-outlined"></i> {{__('messages.add')}} {{__('messages.new')}} {{__('messages.addon')}}</h1>
+            <h1 class="page-header-title"><i class="tio-add-circle-outlined"></i> {{translate('messages.add')}} {{translate('messages.new')}} {{translate('messages.addon')}}</h1>
         </div>
         <!-- End Page Header -->
         <div class="card">
@@ -33,27 +33,27 @@
                         </div>
                         @foreach(json_decode($language) as $lang)
                             <div class="form-group col-md-6 {{$lang != $default_lang ? 'd-none':''}} lang_form" id="{{$lang}}-form">
-                                <label class="form-label" for="exampleFormControlInput1">{{__('messages.name')}} ({{strtoupper($lang)}})</label>
-                                <input type="text" name="name[]" class="form-control h--45px" placeholder="Ex : {{__('messages.new_addon')}}" maxlength="191" {{$lang == $default_lang? 'required':''}} oninvalid="document.getElementById('en-link').click()">
+                                <label class="form-label" for="exampleFormControlInput1">{{translate('messages.name')}} ({{strtoupper($lang)}})</label>
+                                <input type="text" name="name[]" class="form-control h--45px" placeholder="{{translate('Ex : New Addon ')}}" maxlength="191" {{$lang == $default_lang? 'required':''}} oninvalid="document.getElementById('en-link').click()">
                             </div>
                             <input type="hidden" name="lang[]" value="{{$lang}}">
                         @endforeach
                     @else
                         <div class="form-group col-md-6">
-                            <label class="form-label" for="exampleFormControlInput1">{{__('messages.name')}}</label>
-                            <input type="text" name="name" class="form-control h--45px" placeholder="Ex : {{__('messages.new_addon')}}" value="{{old('name')}}" required maxlength="191">
+                            <label class="form-label" for="exampleFormControlInput1">{{translate('messages.name')}}</label>
+                            <input type="text" name="name" class="form-control h--45px" placeholder="{{translate('Ex : New Addon ')}}" value="{{old('name')}}" required maxlength="191">
                         </div>
                         <input type="hidden" name="lang[]" value="{{$lang}}">
                     @endif
 
                     <div class="form-group col-md-6">
-                        <label class="form-label" for="exampleFormControlInput1">{{__('messages.price')}}</label>
-                        <input type="number" min="0" max="999999999999.99" name="price" step="0.01" class="form-control h--45px" placeholder="Ex : 100.00" value="{{old('price')}}" required>
+                        <label class="form-label" for="exampleFormControlInput1">{{translate('messages.price')}}</label>
+                        <input type="number" min="0" max="999999999999.99" name="price" step="0.01" class="form-control h--45px" placeholder="{{ translate('Ex : 100.00') }}" value="{{old('price')}}" required>
                     </div>
                     <div class="col-12">
                         <div class="btn--container justify-content-end">
-                            <button type="reset" class="btn btn--reset">{{__('messages.reset')}}</button>
-                            <button type="submit" class="btn btn--primary">{{__('messages.submit')}}</button>
+                            <button type="reset" class="btn btn--reset">{{translate('messages.reset')}}</button>
+                            <button type="submit" class="btn btn--primary">{{translate('messages.submit')}}</button>
                         </div>
                     </div>
                 </form>
@@ -64,11 +64,11 @@
             <div class="card-header py-2 border-0">
                 <div class="search--button-wrapper">
                     <h5 class="card-title">
-                        {{__('messages.addon')}} {{__('messages.list')}}<span class="badge badge-soft-dark ml-2" id="itemCount">{{$addons->total()}}</span>
+                        {{translate('messages.addon')}} {{translate('messages.list')}}<span class="badge badge-soft-dark ml-2" id="itemCount">{{$addons->total()}}</span>
                     </h5>
                     <div id="search-form">
                         <div class="input-group input--group">
-                            <input type="text" id="column1_search" class="form-control" placeholder="Ex : Search by Addon Name or Restaurant Name">
+                            <input type="text" id="column1_search" class="form-control" placeholder="{{ translate('Ex : Search by Addon Name or Restaurant Name') }}">
                             <button type="button" class="btn btn--secondary">
                                 <i class="tio-search"></i>
                             </button>
@@ -87,13 +87,13 @@
                        }'>
                     <thead class="thead-light">
                     <tr>
-                        <th style="width:100px">SL</th>
-                        <th style="width: 30%">{{__('messages.name')}}</th>
-                        <th style="width: 25%">{{__('messages.price')}}</th>
-                        <th class="text-center" style="width: 100px">{{__('messages.action')}}</th>
+                        <th class="w-100px">{{translate('messages.sl')}}</th>
+                        <th class="w-30p">{{translate('messages.name')}}</th>
+                        <th class="w-25p">{{translate('messages.price')}}</th>
+                        <th class="text-center w-100px">{{translate('messages.action')}}</th>
                     </tr>
                     </thead>
-    
+
                     <tbody>
                     @foreach($addons as $key=>$addon)
                         <tr>
@@ -107,9 +107,9 @@
                             <td>
                                 <div class="btn--container justify-content-center">
                                     <a class="btn action-btn btn--primary btn-outline-primary"
-                                            href="{{route('vendor.addon.edit',[$addon['id']])}}" title="{{__('messages.edit')}} {{__('messages.addon')}}"><i class="tio-edit"></i></a>
+                                            href="{{route('vendor.addon.edit',[$addon['id']])}}" title="{{translate('messages.edit')}} {{translate('messages.addon')}}"><i class="tio-edit"></i></a>
                                     <a class="btn action-btn btn--danger btn-outline-danger" href="javascript:"
-                                        onclick="form_alert('addon-{{$addon['id']}}','Want to delete this addon ?')" title="{{__('messages.delete')}} {{__('messages.addon')}}"><i class="tio-delete-outlined"></i></a>
+                                        onclick="form_alert('addon-{{$addon['id']}}','{{ translate('Want to delete this addon ?') }}')" title="{{translate('messages.delete')}} {{translate('messages.addon')}}"><i class="tio-delete-outlined"></i></a>
                                     <form action="{{route('vendor.addon.delete',[$addon['id']])}}"
                                                 method="post" id="addon-{{$addon['id']}}">
                                         @csrf @method('delete')

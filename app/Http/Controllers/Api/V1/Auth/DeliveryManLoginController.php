@@ -34,14 +34,14 @@ class DeliveryManLoginController extends Controller
             {
                 return response()->json([
                     'errors' => [
-                        ['code' => 'auth-003', 'message' => trans('messages.your_application_is_not_approved_yet')]
+                        ['code' => 'auth-003', 'message' => translate('messages.your_application_is_not_approved_yet')]
                     ]
                 ], 401);
             }
             else if(!auth('delivery_men')->user()->status)
             {
                 $errors = [];
-                array_push($errors, ['code' => 'auth-003', 'message' => trans('messages.your_account_has_been_suspended')]);
+                array_push($errors, ['code' => 'auth-003', 'message' => translate('messages.your_account_has_been_suspended')]);
                 return response()->json([
                     'errors' => $errors
                 ], 401);
@@ -73,9 +73,9 @@ class DeliveryManLoginController extends Controller
             'zone_id' => 'required',
             'earning' => 'required'
         ], [
-            'f_name.required' => trans('messages.first_name_is_required'),
-            'zone_id.required' => trans('messages.select_a_zone'),
-            'earning.required' => trans('messages.select_dm_type')
+            'f_name.required' => translate('messages.first_name_is_required'),
+            'zone_id.required' => translate('messages.select_a_zone'),
+            'earning.required' => translate('messages.select_dm_type')
         ]);
 
         if ($validator->fails()) {
@@ -114,6 +114,6 @@ class DeliveryManLoginController extends Controller
         $dm->password = bcrypt($request->password);
         $dm->save();
 
-        return response()->json(['message' => trans('messages.deliveryman_added_successfully')], 200);
+        return response()->json(['message' => translate('messages.deliveryman_added_successfully')], 200);
     }
 }

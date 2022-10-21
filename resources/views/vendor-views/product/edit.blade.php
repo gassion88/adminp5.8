@@ -12,7 +12,7 @@
     <div class="content container-fluid">
         <!-- Page Header -->
         <div class="page-header">
-            <h1 class="page-header-title"><i class="tio-edit"></i> {{__('messages.food')}} {{__('messages.update')}}</h1>
+            <h1 class="page-header-title"><i class="tio-edit"></i> {{translate('messages.food')}} {{translate('messages.update')}}</h1>
         </div>
         <!-- End Page Header -->
         <form action="javascript:" method="post" id="product_form"
@@ -64,26 +64,26 @@
                             ?>
                             <div class="{{$lang != $default_lang ? 'd-none':''}} lang_form" id="{{$lang}}-form">
                                 <div class="form-group mb-0">
-                                    <label class="form-label" for="{{$lang}}_name">{{__('messages.name')}} ({{strtoupper($lang)}})</label>
-                                    <input type="text" {{$lang == $default_lang? 'required':''}} name="name[]" id="{{$lang}}_name" class="form-control h--45px" placeholder="{{__('messages.new_food')}}" value="{{$translate[$lang]['name']??$product['name']}}" oninvalid="document.getElementById('en-link').click()">
+                                    <label class="form-label" for="{{$lang}}_name">{{translate('messages.name')}} ({{strtoupper($lang)}})</label>
+                                    <input type="text" {{$lang == $default_lang? 'required':''}} name="name[]" id="{{$lang}}_name" class="form-control h--45px" placeholder="{{translate('messages.new_food')}}" value="{{$translate[$lang]['name']??$product['name']}}" oninvalid="document.getElementById('en-link').click()">
                                 </div>
                                 <input type="hidden" name="lang[]" value="{{$lang}}">
                                 <div class="form-group pt-4 mb-0">
-                                    <label class="form-label" for="exampleFormControlInput1">{{__('messages.short')}} {{__('messages.description')}} ({{strtoupper($lang)}})</label>
-                                    <textarea type="text" name="description[]" class="form-control h--45px ckeditor" style="min-height:214px">{!! $translate[$lang]['description']??$product['description'] !!}</textarea>
+                                    <label class="form-label" for="exampleFormControlInput1">{{translate('messages.short')}} {{translate('messages.description')}} ({{strtoupper($lang)}})</label>
+                                    <textarea type="text" name="description[]" class="form-control h--45px ckeditor min-height-214px">{!! $translate[$lang]['description']??$product['description'] !!}</textarea>
                                 </div>
                             </div>
                         @endforeach
                     @else
                     <div id="{{$default_lang}}-form">
                         <div class="form-group mb-0">
-                            <label class="form-label" for="exampleFormControlInput1">{{__('messages.name')}} (EN)</label>
-                            <input type="text" name="name[]" class="form-control h--45px" placeholder="{{__('messages.new_food')}}" value="{{$product['name']}}" required>
+                            <label class="form-label" for="exampleFormControlInput1">{{translate('messages.name')}} (EN)</label>
+                            <input type="text" name="name[]" class="form-control h--45px" placeholder="{{translate('messages.new_food')}}" value="{{$product['name']}}" required>
                         </div>
                         <input type="hidden" name="lang[]" value="en">
                         <div class="form-group pt-4 mb-0">
-                            <label class="form-label" for="exampleFormControlInput1">{{__('messages.short')}} {{__('messages.description')}}</label>
-                            <textarea type="text" name="description[]" class="form-control h--45px ckeditor" style="min-height:214px">{!! $product['description'] !!}</textarea>
+                            <label class="form-label" for="exampleFormControlInput1">{{translate('messages.short')}} {{translate('messages.description')}}</label>
+                            <textarea type="text" name="description[]" class="form-control h--45px ckeditor min-height-214px">{!! $product['description'] !!}</textarea>
                         </div>
                     </div>
                     @endif
@@ -94,28 +94,28 @@
                 <div class="card h-100">
                     <div class="card-body d-flex flex-column">
                         <h5 class="form-label">
-                            {{ __('messages.food') }} {{ __('messages.image') }}
-                            <small class="text-danger">({{ __('messages.ratio') }} 1:1 )</small>
+                            {{ translate('messages.food') }} {{ translate('messages.image') }}
+                            <small class="text-danger">({{ translate('messages.ratio') }} 1:1 )</small>
                         </h5>
 
                         @if (isset($product['image']))
                             <center id="image-viewer-section" class="py-3 my-auto">
-                                <img style="height: 200px;width:200px;object-fit: cover; border-radius: 10px;" id="viewer"
+                                <img class="initial-87" id="viewer"
                                     src="{{ asset('storage/app/public/product') }}/{{ $product['image'] }}"
                                     onerror="this.src='{{ asset('/public/assets/admin/img/100x100/food-default-image.png') }}'"
                                     alt="product image" />
                             </center>
                         @else
                             <center id="image-viewer-section" class="py-3 my-auto">
-                                <img style="height: 200px;width:200px;object-fit: cover; border-radius: 10px;" id="viewer"
+                                <img class="initial-87" id="viewer"
                                     src="{{ asset('public/assets/admin/img/400x400/img2.jpg') }}" alt="banner image" />
                             </center>
                         @endif
                         <div class="custom-file">
                             <input type="file" name="image" id="customFileEg1" class="custom-file-input"
                                 accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
-                            <label class="custom-file-label" for="customFileEg1">{{ __('messages.choose') }}
-                                {{ __('messages.file') }}</label>
+                            <label class="custom-file-label" for="customFileEg1">{{ translate('messages.choose') }}
+                                {{ translate('messages.file') }}</label>
                         </div>
                     </div>
                 </div>
@@ -135,7 +135,7 @@
                         <div class="row g-2">
                             <div class="col-sm-6 col-md-4">
                                 <div class="form-group mb-0">
-                                    <label class="form-label" for="exampleFormControlSelect1">{{__('messages.category')}}<span
+                                    <label class="form-label" for="exampleFormControlSelect1">{{translate('messages.category')}}<span
                                             class="form-label-secondary">*</span></label>
                                     <select name="category_id" id="category-id" class="form-control h--45px js-select2-custom"
                                             onchange="getRequest('{{url('/')}}/vendor-panel/food/get-categories?parent_id='+this.value,'sub-categories')">
@@ -148,7 +148,7 @@
                             </div>
                             <div class="col-sm-6 col-md-4">
                                 <div class="form-group mb-0">
-                                    <label class="form-label" for="exampleFormControlSelect1">{{__('messages.sub_category')}}<span
+                                    <label class="form-label" for="exampleFormControlSelect1">{{translate('messages.sub_category')}}<span
                                             class="form-label-secondary"></span></label>
                                     <select name="sub_category_id" id="sub-categories"
                                             data-id="{{count($product_category)>=2?$product_category[1]->id:''}}"
@@ -160,10 +160,10 @@
                             </div>
                             <div class="col-sm-6 col-md-4">
                                 <div class="form-group mb-0">
-                                    <label class="form-label" for="exampleFormControlInput1">{{__('messages.item_type')}}</label>
+                                    <label class="form-label" for="exampleFormControlInput1">{{translate('messages.item_type')}}</label>
                                     <select name="veg" class="form-control h--45px js-select2-custom">
-                                        <option value="0" {{$product['veg']==0?'selected':''}}>{{__('messages.non_veg')}}</option>
-                                        <option value="1" {{$product['veg']==1?'selected':''}}>{{__('messages.veg')}}</option>
+                                        <option value="0" {{$product['veg']==0?'selected':''}}>{{translate('messages.non_veg')}}</option>
+                                        <option value="1" {{$product['veg']==1?'selected':''}}>{{translate('messages.veg')}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -184,31 +184,31 @@
                         <div class="row g-2">
                             <div class="col-md-4 col-sm-6">
                                 <div class="form-group mb-0">
-                                    <label class="form-label" for="exampleFormControlInput1">{{__('messages.price')}}</label>
+                                    <label class="form-label" for="exampleFormControlInput1">{{translate('messages.price')}}</label>
                                     <input type="number" value="{{$product['price']}}" min="0" max="100000" name="price"
                                         class="form-control h--45px" step="0.01"
-                                        placeholder="Ex : 100" required>
+                                        placeholder="{{ translate('messages.Ex :') }} 100" required>
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-6">
                                 <div class="form-group mb-0">
-                                    <label class="form-label" for="exampleFormControlInput1">{{__('messages.discount')}} {{__('messages.type')}}</label>
+                                    <label class="form-label" for="exampleFormControlInput1">{{translate('messages.discount')}} {{translate('messages.type')}}</label>
                                     <select name="discount_type" class="form-control h--45px js-select2-custom">
                                         <option value="percent" {{$product['discount_type']=='percent'?'selected':''}}>
-                                            {{__('messages.percent')}}
+                                            {{translate('messages.percent')}}
                                         </option>
                                         <option value="amount" {{$product['discount_type']=='amount'?'selected':''}}>
-                                            {{__('messages.amount')}}
+                                            {{translate('messages.amount')}}
                                         </option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-6">
                                 <div class="form-group mb-0">
-                                    <label class="form-label" for="exampleFormControlInput1">{{__('messages.discount')}}</label>
+                                    <label class="form-label" for="exampleFormControlInput1">{{translate('messages.discount')}}</label>
                                     <input type="number" min="0" value="{{$product['discount']}}" max="100000"
                                         name="discount" class="form-control h--45px"
-                                        placeholder="Ex : 100">
+                                        placeholder="{{ translate('messages.Ex :') }} 100">
                                 </div>
                             </div>
                         </div>
@@ -261,7 +261,7 @@
                             <span class="card-header-icon">
                                 <i class="tio-canvas-text"></i>
                             </span>
-                            <span>Addon</span>
+                            <span>Add{{ translate('messages.on') }}</span>
                         </h5>
                     </div>
                     <div class="card-body">
@@ -282,15 +282,15 @@
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group mb-0">
-                                    <label class="form-label" for="exampleFormControlInput1">{{__('messages.available')}} {{__('messages.time')}} {{__('messages.starts')}}</label>
+                                    <label class="form-label" for="exampleFormControlInput1">{{translate('messages.available')}} {{translate('messages.time')}} {{translate('messages.starts')}}</label>
                                     <input type="time" value="{{$product['available_time_starts']}}"
                                         name="available_time_starts" class="form-control h--45px"
-                                        placeholder="Ex : 10:30 am" required>
+                                        placeholder="{{ translate('messages.Ex :') }} 10:30 am" required>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-group mb-0">
-                                    <label class="form-label" for="exampleFormControlInput1">{{__('messages.available')}} {{__('messages.time')}} {{__('messages.ends')}}</label>
+                                    <label class="form-label" for="exampleFormControlInput1">{{translate('messages.available')}} {{translate('messages.time')}} {{translate('messages.ends')}}</label>
                                     <input type="time" value="{{$product['available_time_ends']}}"
                                         name="available_time_ends" class="form-control h--45px" placeholder="5:45 pm"
                                         required>
@@ -303,8 +303,8 @@
 
             <div class="col-lg-12">
                 <div class="btn--container justify-content-end mt-2">
-                    <button type="reset" id="reset_btn" class="btn btn--reset">{{__('messages.reset')}}</button>
-                    <button type="submit" class="btn btn--primary">{{__('messages.update')}}</button>
+                    <button type="reset" id="reset_btn" class="btn btn--reset">{{translate('messages.reset')}}</button>
+                    <button type="submit" class="btn btn--primary">{{translate('messages.update')}}</button>
                 </div>
             </div>
         </form>
@@ -378,7 +378,7 @@
 
         function add_more_customer_choice_option(i, name) {
             let n = name;
-            $('#customer_choice_options').append('<div class="col-lg-6 attr--item-added"><div class="left"><input type="hidden" name="choice_no[]" value="' + i + '"><input type="text" class="form-control h--45px" name="choice[]" value="' + n + '" placeholder="{{__('messages.choice_title')}}" readonly></div><div class="right"><input type="text" class="form-control h--45px" name="choice_options_' + i + '[]" placeholder="{{__('messages.enter_choice_values')}}" data-role="tagsinput" onchange="combination_update()"></div></div>');
+            $('#customer_choice_options').append('<div class="col-lg-6 attr--item-added"><div class="left"><input type="hidden" name="choice_no[]" value="' + i + '"><input type="text" class="form-control h--45px" name="choice[]" value="' + n + '" placeholder="{{translate('messages.choice_title')}}" readonly></div><div class="right"><input type="text" class="form-control h--45px" name="choice_options_' + i + '[]" placeholder="{{translate('messages.enter_choice_values')}}" data-role="tagsinput" onchange="combination_update()"></div></div>');
             $("input[data-role=tagsinput], select[multiple][data-role=tagsinput]").tagsinput();
         }
 
@@ -451,7 +451,7 @@
                             });
                         }
                     } else {
-                        toastr.success('{{__('messages.product_updated_successfully')}}', {
+                        toastr.success('{{translate('messages.product_updated_successfully')}}', {
                             CloseButton: true,
                             ProgressBar: true
                         });

@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title','Food Preview')
+@section('title',translate('Food Preview'))
 
 @push('css_or_js')
 
@@ -15,7 +15,7 @@
                     {{$product['name']}}
                 </h1>
                 <a href="{{route('admin.food.edit',[$product['id']])}}" class="btn btn--primary">
-                    <i class="tio-edit"></i> {{__('messages.edit')}} Info
+                    <i class="tio-edit"></i> {{translate('Edit Info')}}
                 </a>
             </div>
         </div>
@@ -29,10 +29,10 @@
                         <div class="row align-items-md-center">
                             <div class="col-lg-5 col-md-6 mb-3 mb-md-0">
                                 <div class="d-flex flex-wrap align-items-center food--media">
-                                    <img class="avatar avatar-xxl avatar-4by3 mr-4"
+                                    <img class="avatar avatar-xxl avatar-4by3 mr-4 initial-53"
                                             src="{{asset('storage/app/public/product')}}/{{$product['image']}}"
                                             onerror="this.src='{{asset('/public/assets/admin/img/100x100/food-default-image.png')}}'"
-                                            alt="Image Description" style="max-width:184px;aspect-ratio:1;height:unset;">
+                                            alt="Image Description">
                                     <div class="d-block">
                                             <div class="rating--review">
                                                 {{-- {{ dd($product->restaurant) }} --}}
@@ -136,7 +136,7 @@
                                             @endif
                                             <div class="info">
                                                 {{-- <span class="mr-3">of {{ $product->rating ? count(json_decode($product->rating, true)): 0 }} Rating</span> --}}
-                                                <span>{{__('messages.of')}} {{$product->reviews->count()}} {{__('messages.reviews')}}</span>
+                                                <span>{{translate('messages.of')}} {{$product->reviews->count()}} {{translate('messages.reviews')}}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -150,7 +150,7 @@
                                     <li class="d-flex align-items-center font-size-sm">
                                         @php($five=$product->rating?json_decode($product->rating, true)[5]:0)
                                         <span
-                                            class="progress-name mr-3">Excellent</span>
+                                            class="progress-name mr-3">{{ translate('Excellent') }}</span>
                                         <div class="progress flex-grow-1">
                                             <div class="progress-bar" role="progressbar"
                                                     style="width: {{$total==0?0:($five/$total)*100}}%;"
@@ -164,7 +164,7 @@
                                     <!-- Review Ratings -->
                                     <li class="d-flex align-items-center font-size-sm">
                                         @php($four=$product->rating?json_decode($product->rating, true)[4]:0)
-                                        <span class="progress-name mr-3">Good</span>
+                                        <span class="progress-name mr-3">{{ translate('Good') }}</span>
                                         <div class="progress flex-grow-1">
                                             <div class="progress-bar" role="progressbar"
                                                     style="width: {{$total==0?0:($four/$total)*100}}%;"
@@ -178,7 +178,7 @@
                                     <!-- Review Ratings -->
                                     <li class="d-flex align-items-center font-size-sm">
                                         @php($three=$product->rating?json_decode($product->rating, true)[3]:0)
-                                        <span class="progress-name mr-3">Average</span>
+                                        <span class="progress-name mr-3">{{ translate('Average') }}</span>
                                         <div class="progress flex-grow-1">
                                             <div class="progress-bar" role="progressbar"
                                                     style="width: {{$total==0?0:($three/$total)*100}}%;"
@@ -192,7 +192,7 @@
                                     <!-- Review Ratings -->
                                     <li class="d-flex align-items-center font-size-sm">
                                         @php($two=$product->rating?json_decode($product->rating, true)[2]:0)
-                                        <span class="progress-name mr-3">Below Average</span>
+                                        <span class="progress-name mr-3">{{ translate('Below Average') }}</span>
                                         <div class="progress flex-grow-1">
                                             <div class="progress-bar" role="progressbar"
                                                     style="width: {{$total==0?0:($two/$total)*100}}%;"
@@ -206,7 +206,7 @@
                                     <!-- Review Ratings -->
                                     <li class="d-flex align-items-center font-size-sm">
                                         @php($one=$product->rating?json_decode($product->rating, true)[1]:0)
-                                        <span class="progress-name mr-3">Poor</span>
+                                        <span class="progress-name mr-3">{{ translate('Poor') }}</span>
                                         <div class="progress flex-grow-1">
                                             <div class="progress-bar" role="progressbar"
                                                     style="width: {{$total==0?0:($one/$total)*100}}%;"
@@ -226,9 +226,9 @@
                 <div class="card h-100">
 
                     <div class="card-body d-flex flex-column justify-content-center">
-                    @if($product->restaurant)                       
+                    @if($product->restaurant)
                         <a class="resturant--information-single" href="{{route('admin.vendor.view', $product->restaurant_id)}}" title="{{$product->restaurant['name']}}">
-                            <img class="avatar-img" style="width: 100px;height:100px;object-fit:cover;border-radius:5px;margin:0 auto 10px;" onerror="this.src='{{asset('public/assets/admin/img/160x160/img1.jpg')}}'"
+                            <img class="avatar-img initial-54" onerror="this.src='{{asset('public/assets/admin/img/160x160/img1.jpg')}}'"
                             src="{{asset('storage/app/public/restaurant/'.$product->restaurant->logo)}}"
                             alt="Image Description">
                             <div class="text-center">
@@ -241,8 +241,8 @@
                             </div>
                         </a>
                     @else
-                        <div class="badge badge-soft-danger py-2">{{__('messages.restaurant')}} {{__('messages.deleted')}}</div>
-                    @endif                                    
+                        <div class="badge badge-soft-danger py-2">{{translate('messages.restaurant')}} {{translate('messages.deleted')}}</div>
+                    @endif
                     </div>
 
 
@@ -255,10 +255,10 @@
                     <table class="table table-borderless table-thead-bordered">
                         <thead class="thead-light">
                             <tr>
-                                <th class="px-4" style="width:140px"><h4 class="m-0">{{ translate('Short Description') }}</h4></th>
-                                <th class="px-4" style="width:120px"><h4 class="m-0">{{__('messages.price')}}</h4></th>
-                                <th class="px-4" style="width:100px"><h4 class="m-0">{{__('messages.variations')}}</h4></th>
-                                <th class="px-4" style="width:100px"><h4 class="m-0">{{ translate('Addons') }}</h4></th>
+                                <th class="px-4 w-140px"><h4 class="m-0">{{ translate('Short Description') }}</h4></th>
+                                <th class="px-4 w-120px"><h4 class="m-0">{{translate('messages.price')}}</h4></th>
+                                <th class="px-4 w-100px"><h4 class="m-0">{{translate('messages.variations')}}</h4></th>
+                                <th class="px-4 w-100px"><h4 class="m-0">{{ translate('Addons') }}</h4></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -273,14 +273,14 @@
                                         <span>{{ translate('Price') }}</span>
                                         <strong>{{\App\CentralLogics\Helpers::format_currency($product['price'])}}</strong>
                                     </span>
-                                    <span class="d-block mb-1">{{__('messages.discount')}} :
+                                    <span class="d-block mb-1">{{translate('messages.discount')}} :
                                         <strong>{{\App\CentralLogics\Helpers::format_currency(\App\CentralLogics\Helpers::discount_calculate($product,$product['price']))}}</strong>
                                     </span>
                                     <span class="d-block mb-1">
-                                        {{__('messages.available')}} {{__('messages.time')}} {{__('messages.starts')}} : <strong>{{date(config('timeformat'),strtotime($product['available_time_starts']))}}</strong>
+                                        {{translate('messages.available')}} {{translate('messages.time')}} {{translate('messages.starts')}} : <strong>{{date(config('timeformat'),strtotime($product['available_time_starts']))}}</strong>
                                     </span>
                                     <span class="d-block">
-                                        {{__('messages.available')}} {{__('messages.time')}} {{__('messages.ends')}} : <strong>{{date(config('timeformat'), strtotime($product['available_time_ends']))}}</strong>
+                                        {{translate('messages.available')}} {{translate('messages.time')}} {{translate('messages.ends')}} : <strong>{{date(config('timeformat'), strtotime($product['available_time_ends']))}}</strong>
                                     </span>
                                 </td>
                                 <td class="px-4">
@@ -309,7 +309,7 @@
         <!-- Card -->
         <div class="card">
             <div class="card-header">
-                <h5 class="card-title">{{__('messages.product')}} {{__('messages.reviews')}}</h5>
+                <h5 class="card-title">{{translate('messages.product')}} {{translate('messages.reviews')}}</h5>
             </div>
             <!-- Table -->
             <div class="table-responsive datatable-custom">
@@ -332,10 +332,10 @@
                    }'>
                     <thead class="thead-light">
                     <tr>
-                        <th>{{__('messages.reviewer')}}</th>
-                        <th>{{__('messages.review')}}</th>
-                        <th>{{__('messages.date')}}</th>
-                        <th>{{__('messages.status')}}</th>
+                        <th>{{translate('messages.reviewer')}}</th>
+                        <th>{{translate('messages.review')}}</th>
+                        <th>{{translate('messages.date')}}</th>
+                        <th>{{translate('messages.status')}}</th>
                     </tr>
                     </thead>
 
@@ -361,11 +361,11 @@
                                         </div>
                                     </a>
                                 @else
-                                {{__('messages.customer_not_found')}}
+                                {{translate('messages.customer_not_found')}}
                                 @endif
                             </td>
                             <td>
-                                <div class="text-wrap" style="max-width: 400px;">
+                                <div class="text-wrap mw-400">
                                     <label class="m-0 rating">
                                         {{$review->rating}} <i class="tio-star"></i>
                                     </label>
@@ -380,7 +380,7 @@
                             </td>
                             <td>
                                 <label class="toggle-switch toggle-switch-sm" for="reviewCheckbox{{$review->id}}">
-                                    <input type="checkbox" onclick="status_form_alert('status-{{$review['id']}}','{{$review->status?__('messages.you_want_to_hide_this_review_for_customer'):__('messages.you_want_to_show_this_review_for_customer')}}', event)" class="toggle-switch-input" id="reviewCheckbox{{$review->id}}" {{$review->status?'checked':''}}>
+                                    <input type="checkbox" onclick="status_form_alert('status-{{$review['id']}}','{{$review->status?translate('messages.you_want_to_hide_this_review_for_customer'):translate('messages.you_want_to_show_this_review_for_customer')}}', event)" class="toggle-switch-input" id="reviewCheckbox{{$review->id}}" {{$review->status?'checked':''}}>
                                     <span class="toggle-switch-label">
                                         <span class="toggle-switch-indicator"></span>
                                     </span>
@@ -425,7 +425,7 @@
     function status_form_alert(id, message, e) {
         e.preventDefault();
         Swal.fire({
-            title: '{{__('messages.are_you_sure')}}',
+            title: '{{translate('messages.are_you_sure')}}',
             text: message,
             type: 'warning',
             showCancelButton: true,

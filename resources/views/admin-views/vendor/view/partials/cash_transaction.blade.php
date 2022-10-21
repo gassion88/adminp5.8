@@ -1,16 +1,15 @@
 <div>
     <div class="table-responsive">
         <table id="datatable"
-            class="table table-hover table-borderless table-thead-bordered table-nowrap table-align-middle card-table"
-            style="width: 100%">
+            class="table table-hover table-borderless table-thead-bordered table-nowrap table-align-middle card-table">
             <thead class="thead-light">
                 <tr>
-                    <th>SL</th>
-                    <th>{{__('messages.received_at')}}</th>
-                    <th>{{__('messages.balance_before_transaction')}}</th>
-                    <th>{{__('messages.amount')}}</th>
-                    <th>{{__('messages.reference')}}</th>
-                    <th class="text-center">{{__('messages.action')}}</th>
+                    <th>{{ translate('messages.sl') }}</th>
+                    <th>{{translate('messages.received_at')}}</th>
+                    <th>{{translate('messages.balance_before_transaction')}}</th>
+                    <th>{{translate('messages.amount')}}</th>
+                    <th>{{translate('messages.reference')}}</th>
+                    <th class="text-center">{{translate('messages.action')}}</th>
                 </tr>
             </thead>
             <tbody>

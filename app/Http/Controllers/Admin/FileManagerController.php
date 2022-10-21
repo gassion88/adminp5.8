@@ -34,7 +34,7 @@ class FileManagerController extends Controller
     public function upload(Request $request)
     {
         if (env('APP_MODE') == 'demo') {
-            Toastr::info(trans('messages.upload_option_is_disable_for_demo'));
+            Toastr::info(translate('messages.upload_option_is_disable_for_demo'));
             return back();
         }
         $request->validate([
@@ -47,7 +47,7 @@ class FileManagerController extends Controller
 
             foreach($images as $image) {
                 $name = $image->getClientOriginalName();
-                Storage::disk('local')->put($request->path.'/'. $name, file_get_contents($image));  
+                Storage::disk('local')->put($request->path.'/'. $name, file_get_contents($image));
             }
         }
         if ($request->hasfile('file')) {
@@ -55,11 +55,11 @@ class FileManagerController extends Controller
             $name = $file->getClientOriginalName();
 
             Madzipper::make($file)->extractTo('storage/app/'.$request->path);
-            // Storage::disk('local')->put($request->path.'/'. $name, file_get_contents($file));  
+            // Storage::disk('local')->put($request->path.'/'. $name, file_get_contents($file));
 
         }
-        Toastr::success(trans('messages.image_uploaded_successfully'));
-        return back()->with('success', trans('messages.image_uploaded_successfully'));
+        Toastr::success(translate('messages.image_uploaded_successfully'));
+        return back()->with('success', translate('messages.image_uploaded_successfully'));
     }
 
 
@@ -97,7 +97,7 @@ class FileManagerController extends Controller
     public function destroy($file_path)
     {
         Storage::disk('local')->delete(base64_decode($file_path));
-        Toastr::success(trans('messages.image_deleted_successfully'));
-        return back()->with('success', trans('messages.image_deleted_successfully'));
+        Toastr::success(translate('messages.image_deleted_successfully'));
+        return back()->with('success', translate('messages.image_deleted_successfully'));
     }
 }

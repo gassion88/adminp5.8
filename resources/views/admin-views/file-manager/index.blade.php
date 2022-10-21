@@ -1,5 +1,5 @@
 @extends('layouts.admin.app')
-@section('title','Gallery')
+@section('title',translate('Gallery'))
 
 @section('content')
 <div class="content container-fluid">
@@ -7,13 +7,13 @@
     <div class="d-md-flex_ align-items-center justify-content-between mb-2">
         <div class="row gy-2 align-items-center">
             <div class="col-sm-auto">
-                <h3 class="h3 m-0 text-capitalize text-black-50">{{trans('messages.file_manager')}}</h3>
+                <h3 class="h3 m-0 text-capitalize text-black-50">{{translate('messages.file_manager')}}</h3>
             </div>
 
             <div class="col-sm-auto ml-auto">
                 <button type="button" class="btn btn--primary modalTrigger" data-toggle="modal" data-target="#exampleModal">
                     <i class="tio-add-circle"></i>
-                    <span class="text">{{trans('messages.add')}} {{trans('messages.new')}}</span>
+                    <span class="text">{{translate('Add New')}}</span>
                 </button>
             </div>
         </div>
@@ -27,7 +27,7 @@
                     $pwd = explode('/',base64_decode($folder_path));
                 @endphp
                     <h5 class="card-title"><span class="card-header-icon"><i class="tio-folder-opened-labeled"></i></span> {{end($pwd)}} <span class="badge badge-soft-dark ml-2" id="itemCount">{{count($data)}}</span></h5>
-                    <a class="btn btn-sm badge-soft-primary" href="{{url()->previous()}}"><i class="tio-arrow-long-left mr-2"></i>{{__('messages.back')}}</a>
+                    <a class="btn btn-sm badge-soft-primary" href="{{url()->previous()}}"><i class="tio-arrow-long-left mr-2"></i>{{translate('messages.back')}}</a>
                 </div>
                 <div class="card-body">
                     <div class="row g-3">
@@ -43,7 +43,7 @@
                             <div class="text-center" data-toggle="modal" data-target="#imagemodal{{$key}}" title="{{$file['name']}}">
                                 <div class="gallary-card initial-25">
                                     <img class="initial-26" src="{{asset('storage/app/'.$file['path'])}}" alt="{{$file['name']}}">
-                                </div>    
+                                </div>
                                 <p class="overflow-hidden">{{Str::limit($file['name'],10)}}</p>
                             </div>
                             <div class="modal fade" id="imagemodal{{$key}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -51,18 +51,18 @@
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h4 class="modal-title" id="myModalLabel">{{$file['name']}}</h4>
-                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">{{ translate('messages.Close') }}</span></button>
                                         </div>
                                         <div class="modal-body">
                                             <img src="{{asset('storage/app/'.$file['path'])}}" class="initial-27">
                                         </div>
                                         <div class="modal-footer">
-                                            <a class="btn btn-primary" href="{{route('admin.file-manager.download', base64_encode($file['path']))}}"><i class="tio-download"></i> {{__('messages.download')}} </a>
-                                            <button class="btn btn-info" onclick="copy_test('{{$file['db_path']}}')"><i class="tio-copy"></i> Copy path</button>
+                                            <a class="btn btn-primary" href="{{route('admin.file-manager.download', base64_encode($file['path']))}}"><i class="tio-download"></i> {{translate('messages.download')}} </a>
+                                            <button class="btn btn-info" onclick="copy_test('{{$file['db_path']}}')"><i class="tio-copy"></i> {{ translate('Copy path') }}</button>
                                             {{--<form action="{{route('admin.file-manager.destroy',base64_encode($file['path']))}}" method="post">
                                                 @csrf
-                                                @method('delete')    
-                                                <button class="btn btn-danger" type="submit"><i class="tio-delete"></i> {{__('messages.delete')}}</button>
+                                                @method('delete')
+                                                <button class="btn btn-danger" type="submit"><i class="tio-delete"></i> {{translate('messages.delete')}}</button>
                                             </form>--}}
                                         </div>
                                     </div>
@@ -82,7 +82,7 @@
           <div class="modal-content">
             <div class="indicator"></div>
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">{{__('messages.upload')}} {{__('messages.file')}} </h5>
+              <h5 class="modal-title" id="exampleModalLabel">{{translate('messages.upload')}} {{translate('messages.file')}} </h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
               </button>
@@ -94,20 +94,20 @@
                     <div class="form-group">
                         <div class="custom-file">
                             <input type="file" name="images[]" id="customFileUpload" class="custom-file-input" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" multiple>
-                            <label class="custom-file-label" for="customFileUpload">{{__('messages.choose')}} {{__('messages.images')}}</label>
+                            <label class="custom-file-label" for="customFileUpload">{{translate('messages.choose')}} {{translate('messages.images')}}</label>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="custom-file">
                             <input type="file" name="file" id="customZipFileUpload" class="custom-file-input"
                                                         accept=".zip">
-                            <label class="custom-file-label" id="zipFileLabel" for="customZipFileUpload">{{__('messages.upload_zip_file')}}</label>
+                            <label class="custom-file-label" id="zipFileLabel" for="customZipFileUpload">{{translate('messages.upload_zip_file')}}</label>
                         </div>
                     </div>
 
                     <div class="row" id="files"></div>
                     <div class="form-group">
-                        <input class="btn btn-primary" type="submit" value="{{__('messages.upload')}}">
+                        <input class="btn btn-primary" type="submit" value="{{translate('messages.upload')}}">
                     </div>
                 </form>
 
@@ -156,11 +156,11 @@
         /* Copy the text inside the text field */
         navigator.clipboard.writeText(copyText);
 
-        toastr.success('File path copied successfully!', {
+        toastr.success('{{ translate('File path copied successfully!') }}', {
             CloseButton: true,
             ProgressBar: true
         });
     }
-    
+
 </script>
 @endpush

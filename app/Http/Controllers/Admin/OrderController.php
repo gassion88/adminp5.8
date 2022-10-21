@@ -100,7 +100,7 @@ class OrderController extends Controller
             ->when(isset($request->from_date) && isset($request->to_date) && $request->from_date != null && $request->to_date != null, function ($query) use ($request) {
                 return $query->whereBetween('created_at', [$request->from_date . " 00:00:00", $request->to_date . " 23:59:59"]);
             })
-            ->Notpos()
+            // ->Notpos()
             ->orderBy('schedule_at', 'desc')
             ->paginate(config('default_pagination'));
         $orderstatus = isset($request->orderStatus) ? $request->orderStatus : [];
@@ -111,6 +111,7 @@ class OrderController extends Controller
         $to_date = isset($request->to_date) ? $request->to_date : null;
         $order_type = isset($request->order_type) ? $request->order_type : null;
         $total = $orders->total();
+        // dd($orders);
 
         return view('admin-views.order.list', compact('orders', 'status', 'orderstatus', 'scheduled', 'vendor_ids', 'zone_ids', 'from_date', 'to_date', 'total', 'order_type'));
     }
@@ -262,17 +263,7 @@ class OrderController extends Controller
                 $deliveryMen = DeliveryMan::where('restaurant_id', $order->restaurant_id)->available()->active()->get();
             } else {
                 if($order->restaurant !== null){
-                    $deliveryMen = DeliveryMan::where('zone_id', $order->restaurant->zone_id)->where('status', 1)->available()->active()->orderBy('updated_at','asc')->get();
-                    $deliveryAllMen = DeliveryMan::where('zone_id', $order->restaurant->zone_id)->where('status', 1)->active()->get();
-                    $deliver = array();
-                   //return count(Order::where('delivery_man_id', 1)->whereDate('delivered', \Carbon\Carbon::today())->get());
-                    for ($i = 0; $i <= count($deliveryAllMen)-1; $i++) {
-                        array_push($deliver, Order::where('delivery_man_id', $deliveryAllMen[$i]['id'])->latest()->first());
-                        $deliver[$i]['day_count'] = count(Order::where('delivery_man_id', $deliveryAllMen[$i]['id'])->whereDate('delivered', \Carbon\Carbon::today())->get());
-
-
-                    }
-                    
+                    $deliveryMen = DeliveryMan::where('zone_id', $order->restaurant->zone_id)->available()->active()->get();
                 } else{
                     $deliveryMen = DeliveryMan::where('zone_id', '=', NULL )->active()->get();
                 }
@@ -308,11 +299,10 @@ class OrderController extends Controller
             }
 
             $deliveryMen = Helpers::deliverymen_list_formatting($deliveryMen);
-            //$deliveryAllMen = Helpers::deliverymen_list_formatting($deliveryAllMen);
 
-            return view('admin-views.order.order-view', compact('order', 'deliveryMen', 'categories', 'products', 'category', 'keyword', 'editing', 'deliveryAllMen', 'deliver'));
+            return view('admin-views.order.order-view', compact('order', 'deliveryMen', 'categories', 'products', 'category', 'keyword', 'editing'));
         } else {
-            Toastr::info(trans('messages.no_more_orders'));
+            Toastr::info(translate('messages.no_more_orders'));
             return back();
         }
     }
@@ -336,17 +326,17 @@ class OrderController extends Controller
     {
         $order = Order::Notpos()->find($request->id);
         if (in_array($order->order_status, ['delivered', 'refunded', 'failed'])) {
-            Toastr::warning(trans('messages.you_can_not_change_the_status_of_a_completed_order'));
+            Toastr::warning(translate('messages.you_can_not_change_the_status_of_a_completed_order'));
             return back();
         }
 
         if ($order['delivery_man_id'] == null && $request->order_status == 'out_for_delivery') {
-            Toastr::warning(trans('messages.please_assign_deliveryman_first'));
+            Toastr::warning(translate('messages.please_assign_deliveryman_first'));
             return back();
         }
 
         if ($request->order_status == 'delivered' && $order['transaction_reference'] == null && !in_array($order['payment_method'],['cash_on_delivery','wallet'])) {
-            Toastr::warning(trans('messages.add_your_paymen_ref_first'));
+            Toastr::warning(translate('messages.add_your_paymen_ref_first'));
             return back();
         }
 
@@ -365,7 +355,7 @@ class OrderController extends Controller
                     $ol = OrderLogic::create_transaction($order, 'admin', null);
                 }
                 if (!$ol) {
-                    Toastr::warning(trans('messages.faield_to_create_order_transaction'));
+                    Toastr::warning(translate('messages.faield_to_create_order_transaction'));
                     return back();
                 }
             } else if ($order->delivery_man_id) {
@@ -376,7 +366,7 @@ class OrderController extends Controller
             if ($order->delivery_man) {
                 $dm = $order->delivery_man;
                 $dm->increment('order_count');
-                $dm->current_orders = $dm->current_orders > 1 ?  0 : 0;
+                $dm->current_orders = $dm->current_orders > 1 ? $dm->current_orders - 1 : 0;
                 $dm->save();
             }
             $order->details->each(function ($item, $key) {
@@ -388,14 +378,14 @@ class OrderController extends Controller
             $order->restaurant->increment('order_count');
         } else if ($request->order_status == 'refunded') {
             if ($order->payment_method == "cash_on_delivery" || $order->payment_status == "unpaid") {
-                Toastr::warning(trans('messages.you_can_not_refund_a_cod_order'));
+                Toastr::warning(translate('messages.you_can_not_refund_a_cod_order'));
                 return back();
             }
             if (isset($order->delivered)) {
                 $rt = OrderLogic::refund_order($order);
 
                 if (!$rt) {
-                    Toastr::warning(trans('messages.faield_to_create_order_transaction'));
+                    Toastr::warning(translate('messages.faield_to_create_order_transaction'));
                     return back();
                 }
             }
@@ -406,17 +396,17 @@ class OrderController extends Controller
 
             if ($order->delivery_man) {
                 $dm = $order->delivery_man;
-                $dm->current_orders = $dm->current_orders > 1 ? 0 : 0;
+                $dm->current_orders = $dm->current_orders > 1 ? $dm->current_orders - 1 : 0;
                 $dm->save();
             }
         } else if ($request->order_status == 'canceled') {
             if (in_array($order->order_status, ['delivered', 'canceled', 'refund_requested', 'refunded', 'failed'])) {
-                Toastr::warning(trans('messages.you_can_not_cancel_a_completed_order'));
+                Toastr::warning(translate('messages.you_can_not_cancel_a_completed_order'));
                 return back();
             }
             if ($order->delivery_man) {
                 $dm = $order->delivery_man;
-                $dm->current_orders = $dm->current_orders > 1 ? 0 : 0;
+                $dm->current_orders = $dm->current_orders > 1 ? $dm->current_orders - 1 : 0;
                 $dm->save();
             }
         }
@@ -428,49 +418,27 @@ class OrderController extends Controller
         $order->save();
 
         if (!Helpers::send_order_notification($order)) {
-            Toastr::warning(trans('messages.push_notification_faild'));
+            Toastr::warning(translate('messages.push_notification_faild'));
         }
 
-        Toastr::success(trans('messages.order') . trans('messages.status_updated'));
+        Toastr::success(translate('messages.order') . translate('messages.status_updated'));
         return back();
-    }
-
-    public function dell_delivery_man($order_id)
-    {
-        $order = Order::Notpos()->find($order_id);
-        $deliveryman = DeliveryMan::where('id', $order["delivery_man_id"])->get();
-
-            $dm = $order->delivery_man;
-            $dm->current_orders = 0;
-            $dm->save();
-
-            $order->delivery_man_id = null;
-            $order->save();
-
-            return back();
-        
-        
     }
 
     public function add_delivery_man($order_id, $delivery_man_id)
     {
         if ($delivery_man_id == 0) {
-            return response()->json(['message' => trans('messages.deliveryman') . ' ' . trans('messages.not_found')], 404);
+            return response()->json(['message' => translate('messages.deliveryman') . ' ' . translate('messages.not_found')], 404);
         }
         $order = Order::Notpos()->find($order_id);
-        if ($order->delivery_man) {
-            $dm = $order->delivery_man;
-            $dm->current_orders = 0;
-            $dm->save();
-        }
 
         $deliveryman = DeliveryMan::where('id', $delivery_man_id)->available()->active()->first();
         if ($order->delivery_man_id == $delivery_man_id) {
-            return response()->json(['message' => trans('messages.order_already_assign_to_this_deliveryman')], 400);
+            return response()->json(['message' => translate('messages.order_already_assign_to_this_deliveryman')], 400);
         }
         if ($deliveryman) {
             if ($deliveryman->current_orders >= config('dm_maximum_orders')) {
-                return response()->json(['message' => trans('messages.dm_maximum_order_exceed_warning')], 400);
+                return response()->json(['message' => translate('messages.dm_maximum_order_exceed_warning')], 400);
             }
 
             //check here
@@ -492,7 +460,7 @@ class OrderController extends Controller
             $deliveryman->current_orders = $deliveryman->current_orders + 1;
             $deliveryman->save();
             $deliveryman->increment('assigned_order_count');
-        
+
 
             if ($order->delivery_man) {
                 $dm = $order->delivery_man;
@@ -500,8 +468,8 @@ class OrderController extends Controller
                 $dm->save();
 
                 $data = [
-                    'title' => trans('messages.order_push_title'),
-                    'description' => trans('messages.you_are_unassigned_from_a_order'),
+                    'title' => translate('messages.order_push_title'),
+                    'description' => translate('messages.you_are_unassigned_from_a_order'),
                     'order_id' => '',
                     'image' => '',
                     'type' => 'assign'
@@ -523,12 +491,12 @@ class OrderController extends Controller
             $deliveryman->current_orders = $deliveryman->current_orders + 1;
             $deliveryman->save();
             $deliveryman->increment('assigned_order_count');
-            $fcm_token = $order->customer->cm_firebase_token;
             $value = Helpers::order_status_update_message('accepted');
             try {
-                if ($value) {
+                if ($value && $order->customer) {
+                    $fcm_token = $order->customer->cm_firebase_token;
                     $data = [
-                        'title' => trans('messages.order_push_title'),
+                        'title' => translate('messages.order_push_title'),
                         'description' => $value,
                         'order_id' => $order['id'],
                         'image' => '',
@@ -544,8 +512,8 @@ class OrderController extends Controller
                     ]);
                 }
                 $data = [
-                    'title' => trans('messages.order_push_title'),
-                    'description' => trans('messages.you_are_assigned_to_a_order'),
+                    'title' => translate('messages.order_push_title'),
+                    'description' => translate('messages.you_are_assigned_to_a_order'),
                     'order_id' => $order['id'],
                     'image' => '',
                     'type' => 'assign'
@@ -559,7 +527,7 @@ class OrderController extends Controller
                 ]);
             } catch (\Exception $e) {
                 info($e);
-                Toastr::warning(trans('messages.push_notification_faild'));
+                Toastr::warning(translate('messages.push_notification_faild'));
             }
             return response()->json([], 200);
         }
@@ -578,7 +546,7 @@ class OrderController extends Controller
             $point = new Point($request->latitude, $request->longitude);
             $zone = Zone::where('id', $order->restaurant->zone_id)->contains('coordinates', $point)->first();
             if (!$zone) {
-                Toastr::error(trans('messages.out_of_coverage'));
+                Toastr::error(translate('messages.out_of_coverage'));
                 return back();
             }
         }
@@ -596,7 +564,7 @@ class OrderController extends Controller
 
         $order->delivery_address = json_encode($address);
         $order->save();
-        Toastr::success(trans('messages.delivery_address_updated'));
+        Toastr::success(translate('messages.delivery_address_updated'));
         return back();
     }
 
@@ -615,7 +583,7 @@ class OrderController extends Controller
             'transaction_reference' => $request['transaction_reference']
         ]);
 
-        Toastr::success(trans('messages.payment_reference_code_is_added'));
+        Toastr::success(translate('messages.payment_reference_code_is_added'));
         return back();
     }
 
@@ -800,7 +768,7 @@ class OrderController extends Controller
         }])->where(['id' => $order->id])->Notpos()->first();
 
         if (!$request->session()->has('order_cart')) {
-            Toastr::error(trans('messages.order_data_not_found'));
+            Toastr::error(translate('messages.order_data_not_found'));
             return back();
         }
         $cart = $request->session()->get('order_cart', collect([]));
@@ -853,7 +821,7 @@ class OrderController extends Controller
                         $product_price += $price * $c['quantity'];
                         $restaurant_discount_amount += $c['discount_on_food'] * $c['quantity'];
                     } else {
-                        Toastr::error(trans('messages.food_not_found'));
+                        Toastr::error(translate('messages.food_not_found'));
                         return back();
                     }
                 } else {
@@ -892,7 +860,7 @@ class OrderController extends Controller
                         $product_price += $price * $c['quantity'];
                         $restaurant_discount_amount += $c['discount_on_food'] * $c['quantity'];
                     } else {
-                        Toastr::error(trans('messages.food_not_found'));
+                        Toastr::error(translate('messages.food_not_found'));
                         return back();
                     }
                 }
@@ -929,7 +897,7 @@ class OrderController extends Controller
         $tax = $restaurant->tax;
         $total_tax_amount = ($tax > 0) ? (($total_price * $tax) / 100) : 0;
         if ($restaurant->minimum_order > $product_price + $total_addon_price) {
-            Toastr::error(trans('messages.you_need_to_order_at_least', ['amount' => $restaurant->minimum_order . ' ' . Helpers::currency_code()]));
+            Toastr::error(translate('messages.you_need_to_order_at_least', ['amount' => $restaurant->minimum_order . ' ' . Helpers::currency_code()]));
             return back();
         }
 
@@ -950,7 +918,7 @@ class OrderController extends Controller
         $order->edited = true;
         $order->save();
         session()->forget('order_cart');
-        Toastr::success(trans('messages.order_updated_successfully'));
+        Toastr::success(translate('messages.order_updated_successfully'));
         return back();
     }
 

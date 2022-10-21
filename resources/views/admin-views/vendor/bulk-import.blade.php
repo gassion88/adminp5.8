@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title','Restaurant Bulk Import')
+@section('title',translate('Restaurant Bulk Import'))
 
 @push('css_or_js')
 
@@ -13,7 +13,7 @@
                 <div class="card-header-icon d-inline-flex mr-2 img">
                     <img src="{{asset('/public/assets/admin/img/export.png')}}" alt="">
                 </div>
-                    {{translate('messages.Restaurant')}} {{__('messages.bulk_import')}}
+                    {{translate('messages.Restaurant')}} {{translate('messages.bulk_import')}}
             </h1>
         </div>
         <!-- Content Row -->
@@ -45,22 +45,22 @@
                         </div>
                     </div>
                 </div>
-                <div class="jumbotron pt-1 pb-4 mb-0" style="background: white">
-                    <h2 class="mb-3 text-primary">Instructions</h2>
-                    <p>1. Download the format file and fill it with proper data.</p>
+                <div class="jumbotron pt-1 pb-4 mb-0 bg-white">
+                    <h2 class="mb-3 text-primary">{{ translate('Instructions') }}</h2>
+                    <p>{{ translate('1. Download the format file and fill it with proper data.') }}</p>
 
-                    <p><p>2. You can download the example file to understand how the data must be filled.</p>
+                    <p><p>{{ translate('2. You can download the example file to understand how the data must be filled.') }}</p>
 
-                    <p>3. Once you have downloaded and filled the format file, upload it in the form below and
-                        submit.Make sure the phone numbers and email addresses are unique.</p>
+                    <p>{{ translate('3. Once you have downloaded and filled the format file, upload it in the form below and
+                        submit.Make sure the phone numbers and email addresses are unique.') }}</p>
 
-                    <p>4. After uploading restaurants you need to edit them and set restaurants's logo and cover.</p>
+                    <p>{{ translate('4. After uploading restaurants you need to edit them and set restaurants`s logo and cover.') }}</p>
 
-                    <p>5. You can get category and zone id from their list, please input the right ids.</p>
+                    <p>{{ translate('5. You can get category and zone id from their list, please input the right ids.') }}</p>
 
-                    <p>6. You can upload your restaurant images in restaurant folder from gallery, and copy image`s path.</p>
+                    <p>{{ translate('6. You can upload your restaurant images in restaurant folder from gallery, and copy image`s path.') }}</p>
 
-                    <p>7. Default password for restaurant is 12345678.</p>
+                    <p>{{ translate('7. Default password for restaurant is 12345678.') }}</p>
                 </div>
                 <div class="text-center pb-4">
                     <h3 class="mb-3 export--template-title">{{ translate('Download Spreadsheet Template') }}</h3>

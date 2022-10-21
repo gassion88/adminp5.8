@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title','Update Banner')
+@section('title',translate('Update Banner'))
 
 
 @section('content')
@@ -9,7 +9,7 @@
         <div class="page-header">
             <div class="row align-items-center">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <h1 class="page-header-title"><i class="tio-edit"></i>{{__('messages.update')}} {{__('messages.banner')}}</h1>
+                    <h1 class="page-header-title"><i class="tio-edit"></i>{{translate('messages.update')}} {{translate('messages.banner')}}</h1>
                 </div>
             </div>
         </div>
@@ -23,13 +23,13 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="input-label" for="exampleFormControlInput1">{{__('messages.title')}}</label>
-                                        <input id="banner_title" type="text" name="title" class="form-control" placeholder="{{__('messages.new_banner')}}" value="{{$banner->title}}">
+                                        <label class="input-label" for="exampleFormControlInput1">{{translate('messages.title')}}</label>
+                                        <input id="banner_title" type="text" name="title" class="form-control" placeholder="{{translate('messages.new_banner')}}" value="{{$banner->title}}">
                                     </div>
                                     <div class="form-group">
-                                        <label class="input-label" for="title">{{__('messages.zone')}}</label>
+                                        <label class="input-label" for="title">{{translate('messages.zone')}}</label>
                                         <select name="zone_id" id="zone" class="form-control js-select2-custom" onchange="getRequest('{{url('/')}}/admin/food/get-foods?zone_id='+this.value,'choice_item')">
-                                            <option  disabled selected>---{{__('messages.select')}}---</option>
+                                            <option  disabled selected>---{{translate('messages.select')}}---</option>
                                             @php($zones=\App\Models\Zone::all())
                                             @foreach($zones as $zone)
                                                 @if(isset(auth('admin')->user()->zone_id))
@@ -43,14 +43,14 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label class="input-label" for="exampleFormControlInput1">{{__('messages.banner')}} {{__('messages.type')}}</label>
+                                        <label class="input-label" for="exampleFormControlInput1">{{translate('messages.banner')}} {{translate('messages.type')}}</label>
                                         <select id="banner_type" name="banner_type" class="form-control" onchange="banner_type_change(this.value)">
-                                            <option value="restaurant_wise" {{$banner->type == 'restaurant_wise'? 'selected':'' }}>{{__('messages.restaurant')}} {{__('messages.wise')}}</option>
-                                            <option value="item_wise" {{$banner->type == 'item_wise'? 'selected':'' }}>{{__('messages.food')}} {{__('messages.wise')}}</option>
+                                            <option value="restaurant_wise" {{$banner->type == 'restaurant_wise'? 'selected':'' }}>{{translate('messages.restaurant')}} {{translate('messages.wise')}}</option>
+                                            <option value="item_wise" {{$banner->type == 'item_wise'? 'selected':'' }}>{{translate('messages.food')}} {{translate('messages.wise')}}</option>
                                         </select>
                                     </div>
                                     <div class="form-group" id="restaurant_wise">
-                                        <label class="input-label" for="exampleFormControlSelect1">{{__('messages.restaurant')}}<span
+                                        <label class="input-label" for="exampleFormControlSelect1">{{translate('messages.restaurant')}}<span
                                                 class="input-label-secondary"></span></label>
                                         <select name="restaurant_id" class="js-data-example-ajax" id="resturant_ids"  title="Select Restaurant">
                                             @if($banner->type=='restaurant_wise')
@@ -62,17 +62,17 @@
                                         </select>
                                     </div>
                                     <div class="form-group" id="item_wise">
-                                        <label class="input-label" for="exampleFormControlInput1">{{__('messages.select')}} {{__('messages.food')}}</label>
-                                        <select name="item_id" id="choice_item" class="form-control js-select2-custom" placeholder="{{__('messages.select_food')}}">
-                                            
+                                        <label class="input-label" for="exampleFormControlInput1">{{translate('messages.select')}} {{translate('messages.food')}}</label>
+                                        <select name="item_id" id="choice_item" class="form-control js-select2-custom" placeholder="{{translate('messages.select_food')}}">
+
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group h-100 mb-0 d-flex flex-column">
                                         <label class="d-block text-center mt-auto">
-                                            {{__('messages.campaign')}} {{__('messages.image')}}
-                                            <small class="text-danger">* ( {{__('messages.ratio')}} 3:1 )</small>
+                                            {{translate('messages.campaign')}} {{translate('messages.image')}}
+                                            <small class="text-danger">* ( {{translate('messages.ratio')}} 3:1 )</small>
                                         </label>
                                         <center class="my-auto">
                                             <img class="initial-2" id="viewer" onerror="this.src='{{asset('public/assets/admin/img/900x400/img1.jpg')}}'" src="{{asset('storage/app/public/banner')}}/{{$banner['image']}}" alt="campaign image"/>
@@ -81,15 +81,15 @@
                                             <div class="custom-file">
                                                 <input type="file" name="image" id="customFileEg1" class="custom-file-input"
                                                     accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
-                                                <label class="custom-file-label" for="customFileEg1">{{__('messages.choose')}} {{__('messages.file')}}</label>
+                                                <label class="custom-file-label" for="customFileEg1">{{translate('messages.choose')}} {{translate('messages.file')}}</label>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="btn--container justify-content-end">
-                                <button id="reset_btn" type="button" class="btn btn--reset">{{__('messages.reset')}}</button>
-                                <button type="submit" class="btn btn--primary">{{__('messages.submit')}}</button>
+                                <button id="reset_btn" type="button" class="btn btn--reset">{{translate('messages.reset')}}</button>
+                                <button type="submit" class="btn btn--primary">{{translate('messages.submit')}}</button>
                             </div>
                         </form>
                     </div>
@@ -173,7 +173,7 @@
 
         $('.js-select2-custom').each(function () {
             var select2 = $.HSCore.components.HSSelect2.init($(this));
-        });   
+        });
     });
 
         function banner_type_change(order_type) {
@@ -194,7 +194,7 @@
         }
         @if($banner->type == 'item_wise')
         getRequest('{{url('/')}}/admin/food/get-foods?zone_id={{$banner->zone_id}}&data[]={{$banner->data}}','choice_item');
-        @endif 
+        @endif
         $('#banner_form').on('submit', function (e) {
             e.preventDefault();
             var formData = new FormData(this);
@@ -218,7 +218,7 @@
                             });
                         }
                     } else {
-                        toastr.success('{{__('messages.banner_updated_successfully')}}', {
+                        toastr.success('{{translate('messages.banner_updated_successfully')}}', {
                             CloseButton: true,
                             ProgressBar: true
                         });
@@ -231,7 +231,7 @@
         });
     </script>
 
-    
+
 
 
         <script>
@@ -246,7 +246,7 @@
                         $('#resturant_ids').val("{{$banner->data}}").trigger('change');
                     @elseif($banner->type == 'item_wise')
                         $('#choice_item').val("{{$banner->data}}").trigger('change');
-                    @endif                    
+                    @endif
                 }, 1000);
             })
 

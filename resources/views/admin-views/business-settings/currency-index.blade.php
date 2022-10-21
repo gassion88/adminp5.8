@@ -25,22 +25,22 @@
 
                     <div class="form-group mb-2">
                         <label class="form-label d-block">Country Name</label>
-                        <input type="text" placeholder="ex : Bangladesh" class="form-control" name="country">
+                        <input type="text" placeholder="{{ translate('messages.Ex :') }} Bangladesh" class="form-control" name="country">
                     </div>
 
                     <div class="form-group mb-2">
                         <label class="form-label d-block">Code</label>
-                        <input type="text" placeholder="ex : USD" class="form-control" name="currency_code">
+                        <input type="text" placeholder="{{ translate('messages.Ex :') }} USD" class="form-control" name="currency_code">
                     </div>
 
                     <div class="form-group mb-2">
                         <label class="form-label d-block">Symbol</label>
-                        <input type="text" placeholder="ex : $" class="form-control" name="symbol">
+                        <input type="text" placeholder="{{ translate('messages.Ex :') }} $" class="form-control" name="symbol">
                     </div>
 
                     <div class="form-group mb-2">
                         <label class="form-label d-block">Exchange Rate ( 1 USD ) with USD</label>
-                        <input type="number" placeholder="ex : 1" class="form-control" name="exchange_rate">
+                        <input type="number" placeholder="{{ translate('messages.Ex :') }} 1" class="form-control" name="exchange_rate">
                     </div>
 
                     <div class="btn--container justify-content-end">
@@ -61,7 +61,7 @@
                                }'>
                     <thead class="thead-light">
                     <tr>
-                        <th>#sl</th>
+                        <th>#{{ translate('messages.sl') }}</th>
                         <th class="w-30p">Country</th>
                         <th class="w-25p">Code</th>
                         <th>Symbol</th>

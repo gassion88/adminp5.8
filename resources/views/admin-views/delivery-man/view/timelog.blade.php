@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title','Delivery Man Preview')
+@section('title',translate('messages.Delivery Man Preview'))
 
 @push('css_or_js')
 
@@ -20,10 +20,10 @@
                 <!-- Nav -->
                 <ul class="nav nav-tabs page-header-tabs">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('admin.delivery-man.preview', ['id'=>$dm->id, 'tab'=> 'info'])}}"  aria-disabled="true">{{__('messages.info')}}</a>
+                        <a class="nav-link" href="{{route('admin.delivery-man.preview', ['id'=>$dm->id, 'tab'=> 'info'])}}"  aria-disabled="true">{{translate('messages.info')}}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('admin.delivery-man.preview', ['id'=>$dm->id, 'tab'=> 'transaction'])}}"  aria-disabled="true">{{__('messages.transaction')}}</a>
+                        <a class="nav-link" href="{{route('admin.delivery-man.preview', ['id'=>$dm->id, 'tab'=> 'transaction'])}}"  aria-disabled="true">{{translate('messages.transaction')}}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="{{route('admin.delivery-man.preview', ['id'=>$dm->id, 'tab'=> 'timelog'])}}"  aria-disabled="true">{{translate('messages.timelog')}}</a>
@@ -52,7 +52,7 @@
                                 class="form-control" required>
                     </div>
                     <div>
-                        <button type="submit" class="btn btn-primary btn-block">{{__('messages.show')}}</button>
+                        <button type="submit" class="btn btn-primary btn-block">{{translate('messages.show')}}</button>
                     </div>
                 </form>
             </div>

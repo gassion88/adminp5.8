@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title',__('messages.day_wise_report'))
+@section('title',translate('messages.day_wise_report'))
 
 @push('css_or_js')
 
@@ -12,7 +12,7 @@
         <!-- Page Header -->
         <div class="page-header">
             <h1 class="page-header-title">
-                <i class="tio-filter-list"></i> {{__('messages.day_wise_report')}}
+                <i class="tio-filter-list"></i> {{translate('messages.day_wise_report')}}
             </h1>
         </div>
         <!-- End Page Header -->
@@ -27,7 +27,7 @@
                                 <div class="d-flex flex-wrap justify-content-between align-items-center mb-md-0 mb-3">
                                     <div class="mx-1">
                                         <h5 class="form-label mb-0">
-                                            {{__('messages.show_data_by_date_range')}}
+                                            {{translate('messages.show_data_by_date_range')}}
                                         </h5>
                                     </div>
                                 </div>
@@ -35,7 +35,7 @@
                                     <div class="col-md-3">
                                         <select name="zone_id" class="form-control js-select2-custom h--45px"
                                             onchange="set_zone_filter('{{ url()->full() }}',this.value)" id="zone_id">
-                                            <option value="all">{{ 'All Zones' }}</option>
+                                            <option value="all">{{ translate('All Zones') }}</option>
                                             @foreach (\App\Models\Zone::orderBy('name')->get() as $z)
                                                 <option value="{{ $z['id'] }}" {{ isset($zone) && $zone->id == $z['id'] ? 'selected' : '' }}>
                                                     {{ $z['name'] }}
@@ -45,12 +45,12 @@
                                     </div>
                                     {{-- <div class="col-md-6">
                                         <select name="restaurant_id" onchange="set_restaurant_filter('{{ url()->full() }}',this.value)"
-                                            data-placeholder="{{ __('messages.select') }} {{ __('messages.restaurant') }}"
+                                            data-placeholder="{{ translate('messages.select') }} {{ translate('messages.restaurant') }}"
                                             class="js-data-example-ajax form-control h--45px">
                                             @if (isset($restaurant))
                                                 <option value="{{ $restaurant->id }}" selected>{{ $restaurant->name }}</option>
                                             @else
-                                                <option value="all" selected>{{ __('messages.all') }} {{ __('messages.restaurants') }}
+                                                <option value="all" selected>{{ translate('messages.all') }} {{ translate('messages.restaurants') }}
                                                 </option>
                                             @endif
                                         </select>
@@ -70,7 +70,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-3">
-                                        <button type="submit" class="btn btn--primary h--45px btn-block">{{__('messages.show')}} Data</button>
+                                        <button type="submit" class="btn btn--primary h--45px btn-block">{{translate('Show Data')}}</button>
                                     </div>
                                 </div>
                             </form>
@@ -100,7 +100,7 @@
                         <!-- Card -->
                         <div class="resturant-card resturant-card-2 bg--6">
                             <h4 class="title">{{\App\CentralLogics\Helpers::format_currency($admin_earned)}}</h4>
-                            <span class="subtitle">{{__('messages.admin')}} {{__('messages.earned')}}
+                            <span class="subtitle">{{translate('messages.admin')}} {{translate('messages.earned')}}
                                 <span  data-toggle="tooltip" data-placement="right" data-original-title='{{translate("messages.including_food_delivery_fee_commission")}}' class="input-label-secondary">
                                     <i class="tio-info-outined"></i>
                                 </span>
@@ -117,7 +117,7 @@
                             <h4 class="title">
                                 {{\App\CentralLogics\Helpers::format_currency($restaurant_earned)}}
                             </h4>
-                            <span class="subtitle">{{__('messages.restaurant')}} {{__('messages.earned')}}</span>
+                            <span class="subtitle">{{translate('messages.restaurant')}} {{translate('messages.earned')}}</span>
                             <img class="resturant-icon" src="{{asset('public/assets/admin/img/order-report/res-earned.png')}}" alt="order-report">
                         </div>
                     <!-- End Card -->
@@ -131,7 +131,7 @@
                                 {{\App\CentralLogics\Helpers::format_currency($deliveryman_earned)}}
                             </h4>
                             <span class="subtitle">
-                                {{__('messages.delivery_fee_earned')}}
+                                {{translate('messages.delivery_fee_earned')}}
                             </span>
                             <img class="resturant-icon" src="{{asset('public/assets/admin/img/order-report/delivery-fee.png')}}" alt="order-report">
                         </div>
@@ -146,7 +146,7 @@
                                 {{\App\CentralLogics\Helpers::format_currency($total_sell)}}
                             </h4>
                             <span class="subtitle">
-                                {{__('messages.total_sell')}}
+                                {{translate('messages.total_sell')}}
                             </span>
                             <img class="resturant-icon" src="{{asset('public/assets/admin/img/order-report/sell.png')}}" alt="order-report">
                         </div>
@@ -169,7 +169,7 @@
                                 {{$returned}}
                             </h4>
                             <span class="subtitle">
-                                {{__('messages.in_progress')}}
+                                {{translate('messages.in_progress')}}
                             </span>
                             <img class="resturant-icon" src="{{asset('public/assets/admin/img/order-report/progress.png')}}" alt="order-report">
                         </div>
@@ -191,7 +191,7 @@
                                 {{$delivered}}
                             </h4>
                             <span class="subtitle">
-                                {{__('messages.delivered')}}
+                                {{translate('messages.delivered')}}
                             </span>
                             <img class="resturant-icon" src="{{asset('public/assets/admin/img/order-report/delivered.png')}}" alt="order-report">
                         </div>
@@ -213,7 +213,7 @@
                                 {{$failed}}
                             </h4>
                             <span class="subtitle">
-                                {{__('messages.failed')}}
+                                {{translate('messages.failed')}}
                             </span>
                             <img class="resturant-icon" src="{{asset('public/assets/admin/img/order-report/failed.png')}}" alt="order-report">
                         </div>
@@ -235,7 +235,7 @@
                                 {{$canceled}}
                             </h4>
                             <span class="subtitle">
-                                {{__('messages.canceled')}}
+                                {{translate('messages.canceled')}}
                             </span>
                             <img class="resturant-icon" src="{{asset('public/assets/admin/img/order-report/canceled.png')}}" alt="order-report">
                         </div>
@@ -254,12 +254,12 @@
             <div class="card-header py-2 border-0">
                 <div class="search--button-wrapper">
                     <h3 class="card-title">
-                        {{ 'Day Wise Transaction Table' }} <span class="badge badge-soft-secondary">{{ count($order_transactions_list) }}</span>
+                        {{ translate('Day Wise Transaction Table') }} <span class="badge badge-soft-secondary">{{ $order_transactions_list->total() }}</span>
                     </h3>
                     <form action="javascript:" id="search-form" class="my-2 ml-auto mr-sm-2 mr-xl-4 ml-sm-auto flex-grow-1 flex-grow-sm-0">
                         <!-- Search -->
                         <div class="input--group input-group input-group-merge input-group-flush">
-                            <input class="form-control" placeholder="Search by Order ID">
+                            <input class="form-control" placeholder="{{ translate('Search by Order ID') }}">
                             <button type="submit" class="btn btn--secondary"><i class="tio-search"></i></button>
                         </div>
                         <!-- End Search -->
@@ -271,43 +271,43 @@
                                 "target": "#usersExportDropdown",
                                 "type": "css-animation"
                             }'>
-                            <i class="tio-download-to mr-1"></i> {{__('messages.export')}}
+                            <i class="tio-download-to mr-1"></i> {{translate('messages.export')}}
                         </a>
 
                         <div id="usersExportDropdown"
                                 class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-sm-right">
-                            {{--<span class="dropdown-header">{{__('messages.options')}}</span>
+                            {{--<span class="dropdown-header">{{translate('messages.options')}}</span>
                             <a id="export-copy" class="dropdown-item" href="javascript:;">
                                 <img class="avatar avatar-xss avatar-4by3 mr-2"
                                         src="{{asset('public/assets/admin')}}/svg/illustrations/copy.svg"
                                         alt="Image Description">
-                                {{__('messages.copy')}}
+                                {{translate('messages.copy')}}
                             </a>
                             <a id="export-print" class="dropdown-item" href="javascript:;">
                                 <img class="avatar avatar-xss avatar-4by3 mr-2"
                                         src="{{asset('public/assets/admin')}}/svg/illustrations/print.svg"
                                         alt="Image Description">
-                                {{__('messages.print')}}
+                                {{translate('messages.print')}}
                             </a>
                             <div class="dropdown-divider"></div>--}}
-                            <span class="dropdown-header">{{__('messages.download')}} {{__('messages.options')}}</span>
-                            <a id="export-excel" class="dropdown-item" href="{{route('admin.report.day-wise-report-export', ['type'=>'excel'])}}">
+                            <span class="dropdown-header">{{translate('messages.download')}} {{translate('messages.options')}}</span>
+                            <a id="export-excel" class="dropdown-item" href="{{route('admin.report.day-wise-report-export', ['type'=>'excel',request()->getQueryString()])}}">
                                 <img class="avatar avatar-xss avatar-4by3 mr-2"
                                         src="{{asset('public/assets/admin')}}/svg/components/excel.svg"
                                         alt="Image Description">
-                                {{__('messages.excel')}}
+                                {{translate('messages.excel')}}
                             </a>
-                            <a id="export-csv" class="dropdown-item" href="{{route('admin.report.day-wise-report-export', ['type'=>'csv'])}}">
+                            <a id="export-csv" class="dropdown-item" href="{{route('admin.report.day-wise-report-export', ['type'=>'csv',request()->getQueryString()])}}">
                                 <img class="avatar avatar-xss avatar-4by3 mr-2"
                                         src="{{asset('public/assets/admin')}}/svg/components/placeholder-csv-format.svg"
                                         alt="Image Description">
-                                .{{__('messages.csv')}}
+                                .{{translate('messages.csv')}}
                             </a>
                             {{--<a id="export-pdf" class="dropdown-item" href="javascript:;">
                                 <img class="avatar avatar-xss avatar-4by3 mr-2"
                                         src="{{asset('public/assets/admin')}}/svg/components/pdf.svg"
                                         alt="Image Description">
-                                {{__('messages.pdf')}}
+                                {{translate('messages.pdf')}}
                             </a>--}}
                         </div>
                     </div>
@@ -323,16 +323,16 @@
                         class="table table-thead-bordered table-align-middle card-table">
                         <thead class="thead-light">
                             <tr>
-                                <th>SL</th>
-                                <th>{{__('messages.order')}} {{__('messages.id')}}</th>
-                                <th>{{__('messages.total_order_amount')}}</th>
-                                <th>{{__('messages.restaurant_commission')}}</th>
-                                <th>{{__('messages.admin_commission')}}</th>
+                                <th>{{ translate('messages.sl') }}</th>
+                                <th>{{translate('messages.order')}} {{translate('messages.id')}}</th>
+                                <th>{{translate('messages.total_order_amount')}}</th>
+                                <th>{{translate('messages.restaurant_commission')}}</th>
+                                <th>{{translate('messages.admin_commission')}}</th>
                                 <th>{{translate('messages.delivery_fee')}}</th>
                                 <th>{{translate('messages.commission_on_delivery_fee')}}</th>
-                                <th>{{__('messages.vat/tax')}}</th>
+                                <th>{{translate('messages.vat/tax')}}</th>
                                 <th>{{translate('messages.amount_received_by')}}</th>
-                                <th>{{__('messages.created_at')}}</th>
+                                <th>{{translate('messages.created_at')}}</th>
                             </tr>
                         </thead>
                         <tbody id="set-rows">
@@ -346,7 +346,13 @@
                                 <td>{{\App\CentralLogics\Helpers::format_currency($ot->delivery_charge)}}</td>
                                 <td>{{\App\CentralLogics\Helpers::format_currency($ot->delivery_fee_comission)}}</td>
                                 <td>{{\App\CentralLogics\Helpers::format_currency($ot->tax)}}</td>
-                                <td class="text-capitalize">{{$ot->received_by}}</td>
+                                @if ($ot->received_by == 'admin')
+                                <td class="text-capitalize">{{translate('messages.admin')}}</td>
+                                @elseif ($ot->received_by == 'deliveryman')
+                                <td class="text-capitalize">{{translate('messages.delivery_man')}}</td>
+                                @elseif ($ot->received_by == 'restaurant')
+                                <td class="text-capitalize">{{translate('messages.restaurant')}}</td>
+                                @endif
                                 <td>{{$ot->created_at->format('Y/m/d '.config('timeformat'))}}</td>
                             </tr>
                         @endforeach

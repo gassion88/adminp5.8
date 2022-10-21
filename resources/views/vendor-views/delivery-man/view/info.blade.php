@@ -23,10 +23,10 @@
                     <!-- Nav -->
                     <ul class="nav nav-tabs page-header-tabs m-0">
                         <li class="nav-item">
-                            <a class="nav-link active" href="{{route('vendor.delivery-man.preview', ['id'=>$dm->id, 'tab'=> 'info'])}}"  aria-disabled="true">{{__('messages.info')}}</a>
+                            <a class="nav-link active" href="{{route('vendor.delivery-man.preview', ['id'=>$dm->id, 'tab'=> 'info'])}}"  aria-disabled="true">{{translate('messages.info')}}</a>
                         </li>
                         <!-- <li class="nav-item">
-                            <a class="nav-link" href="{{route('vendor.delivery-man.preview', ['id'=>$dm->id, 'tab'=> 'transaction'])}}"  aria-disabled="true">{{__('messages.transaction')}}</a>
+                            <a class="nav-link" href="{{route('vendor.delivery-man.preview', ['id'=>$dm->id, 'tab'=> 'transaction'])}}"  aria-disabled="true">{{translate('messages.transaction')}}</a>
                         </li> -->
                     </ul>
                     <!-- End Nav -->
@@ -37,7 +37,7 @@
                         <div class="resturant-card dashboard--card bg--2">
                             <h4 class="title">{{$dm->orders->count()}}</h4>
                             <span class="subtitle">
-                                {{__('messages.total')}} {{__('messages.delivered')}} {{__('messages.orders')}}
+                                {{translate('messages.total')}} {{translate('messages.delivered')}} {{translate('messages.orders')}}
                             </span>
                             <img class="resturant-icon" src="{{asset('public/assets/admin/img/resturant-panel/deliveryman/delivered.png')}}" alt="dashboard">
                         </div>
@@ -47,7 +47,7 @@
                     <div class="col-sm-6 col-md-4">
                         <div class="resturant-card dashboard--card bg--3">
                             <h4 class="title">{{\App\CentralLogics\Helpers::format_currency($dm->wallet?$dm->wallet->collected_cash:0.0)}}</h4>
-                            <span class="subtitle">{{__('messages.cash_in_hand')}}</span>
+                            <span class="subtitle">{{translate('messages.cash_in_hand')}}</span>
                             <img class="resturant-icon" src="{{asset('public/assets/admin/img/resturant-panel/deliveryman/cash.png')}}" alt="dashboard">
                         </div>
                     </div>
@@ -56,7 +56,7 @@
                     <div class="col-sm-6 col-md-4">
                         <div class="resturant-card dashboard--card bg--1">
                             <h4 class="title">{{\App\CentralLogics\Helpers::format_currency($dm->wallet?$dm->wallet->total_earning:0.00)}}</h4>
-                            <span class="subtitle">{{__('messages.total_earning')}}</span>
+                            <span class="subtitle">{{translate('messages.total_earning')}}</span>
                             <img class="resturant-icon" src="{{asset('public/assets/admin/img/resturant-panel/deliveryman/earning.png')}}" alt="dashboard">
                         </div>
                     </div>
@@ -69,10 +69,10 @@
             <div class="card-header border-0">
                 <h4 class="page-header-title">
                     <span class="mr-2">{{$dm['f_name'].' '.$dm['l_name']}}</span>
-                    @if($dm['status']) @if($dm['active']) <label class="badge badge-soft-primary m-0">{{__('messages.online')}}</label> @else <label class="badge badge-soft-success m-0">{{__('messages.offline')}}</label> @endif  @else <span class="badge badge-danger">{{__('messages.suspended')}}</span> @endif</h4>
+                    @if($dm['status']) @if($dm['active']) <label class="badge badge-soft-primary m-0">{{translate('messages.online')}}</label> @else <label class="badge badge-soft-success m-0">{{translate('messages.offline')}}</label> @endif  @else <span class="badge badge-danger">{{translate('messages.suspended')}}</span> @endif</h4>
 
                 <a  href="javascript:"  onclick="request_alert('{{route('vendor.delivery-man.status',[$dm['id'],$dm->status?0:1])}}','{{$dm->status?'Want to suspend this deliveryman ?':'Want to unsuspend this deliveryman'}}')" class="btn {{$dm->status?'btn--danger':'btn--success'}}">
-                        {{$dm->status?__('messages.suspend_this_delivery_man'):__('messages.unsuspend_this_delivery_man')}}
+                        {{$dm->status?translate('messages.suspend_this_delivery_man'):translate('messages.unsuspend_this_delivery_man')}}
                 </a>
             </div>
             <!-- Body -->
@@ -80,7 +80,7 @@
                 <div class="row align-items-md-center">
                     <div class="col-md-6">
                         <div class="d-flex align-items-center justify-content-center">
-                            <img class="avatar avatar-xxl avatar-4by3 mr-4" style="max-width:122px"
+                            <img class="avatar avatar-xxl avatar-4by3 mr-4 mw-120px"
                                  onerror="this.src='{{asset('public/assets/admin/img/160x160/img1.jpg')}}'"
                                  src="{{asset('storage/app/public/delivery-man')}}/{{$dm['image']}}"
                                  alt="Image Description">
@@ -188,15 +188,15 @@
                                         @endif
                                     @endif
                                     <div class="info">
-                                        {{-- <span class="mr-3">{{$dm->rating->count()}} {{__('messages.rating')}}</span> --}}
-                                        <span>{{$dm->reviews->count()}} {{__('messages.reviews')}}</span>
+                                        {{-- <span class="mr-3">{{$dm->rating->count()}} {{translate('messages.rating')}}</span> --}}
+                                        <span>{{$dm->reviews->count()}} {{translate('messages.reviews')}}</span>
                                     </div>
                                     </div>
                                 </div>
 
                             {{-- <div class="d-block">
                                 <h4 class="display-2 text-dark mb-0">{{count($dm->rating)>0?number_format($dm->rating[0]->average, 2, '.', ' '):0}}</h4>
-                                <p> of {{$dm->reviews->count()}} {{__('messages.reviews')}}
+                                <p> of {{$dm->reviews->count()}} {{translate('messages.reviews')}}
                                     <span class="badge badge-soft-dark badge-pill ml-1"></span>
                                 </p>
                             </div> --}}
@@ -308,10 +308,10 @@
                    }'>
                     <thead class="thead-light">
                     <tr>
-                        <th>{{__('messages.reviewer')}}</th>
+                        <th>{{translate('messages.reviewer')}}</th>
                         <th>Order ID</th>
-                        <th>{{__('messages.review')}}</th>
-                        <th>{{__('messages.date')}}</th>
+                        <th>{{translate('messages.review')}}</th>
+                        <th>{{translate('messages.date')}}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -341,7 +341,7 @@
                                 #10000000
                             </td>
                             <td>
-                                <div class="text-wrap" style="width: 18rem;">
+                                <div class="text-wrap w-18rem">
                                     <div class="d-flex mb-2">
                                         <label class="badge badge-soft-info">
                                             {{$review->rating}} <i class="tio-star"></i>

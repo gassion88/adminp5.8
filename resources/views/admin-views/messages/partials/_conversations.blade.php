@@ -76,7 +76,7 @@
                 </div>
                 <button type="submit"
                  {{-- onclick="replyConvs('{{route('admin.message.store',[$user->id])}}')" --}}
-                        class="btn btn-primary btn--primary con-reply-btn">{{__('messages.send')}} {{__('messages.reply')}}
+                        class="btn btn-primary btn--primary con-reply-btn">{{translate('messages.send')}}
                 </button>
             </div>
         </form>
@@ -113,13 +113,13 @@
 
             },
             onExtensionErr: function(index, file) {
-                toastr.error('{{ __('messages.please_only_input_png_or_jpg_type_file') }}', {
+                toastr.error('{{ translate('messages.please_only_input_png_or_jpg_type_file') }}', {
                     CloseButton: true,
                     ProgressBar: true
                 });
             },
             onSizeErr: function(index, file) {
-                toastr.error('{{ __('messages.file_size_too_big') }}', {
+                toastr.error('{{ translate('messages.file_size_too_big') }}', {
                     CloseButton: true,
                     ProgressBar: true
                 });
@@ -145,7 +145,8 @@
                 processData: false,
                 success: function(data) {
                     if (data.errors && data.errors.length > 0) {
-                        toastr.error('Reply message is required!', {
+                        $('button[type=submit], input[type=submit]').prop('disabled',false);
+                        toastr.error('{{ translate('Write something to send massage!') }}', {
                             CloseButton: true,
                             ProgressBar: true
                         });
@@ -159,7 +160,7 @@
                     }
                 },
                 error() {
-                    toastr.error('Reply message is required!', {
+                    toastr.error('{{ translate('Write something to send massage!') }}', {
                         CloseButton: true,
                         ProgressBar: true
                     });

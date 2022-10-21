@@ -1,15 +1,15 @@
-<div style="width:410px;">
+<div class="w-410px">
     @if ($order->restaurant)
     <div class="text-center pt-4 mb-3">
-        <h2 class="text-break" style="line-height: 1">{{$order->restaurant->name}}</h2>
-        <h5 class="text-break" style="font-size: 20px;font-weight: lighter;line-height: 1">
+        <h2 class="text-break lh-1">{{$order->restaurant->name}}</h2>
+        <h5 class="text-break initial-44">
             {{$order->restaurant->address}}
         </h5>
-        <h5 style="font-size: 16px;font-weight: lighter;line-height: 1">
+        <h5 class="initial-45">
             {{translate('messages.phone')}} : {{$order->restaurant->phone}}
         </h5>
         @if($order->restaurant->gst_status)
-        <h5 style="font-size: 12px;font-weight: lighter;line-height: 1">
+        <h5 class="initial-46">
             {{translate('messages.Gst No')}} : {{$order->restaurant->gst_code}}
         </h5>
         @endif
@@ -23,7 +23,7 @@
             <h5>{{translate('messages.Order ID')}} : {{$order['id']}}</h5>
         </div>
         <div class="col-6">
-            <h5 style="font-weight: lighter">
+            <h5 class="font-light">
                 {{date('d/M/Y '.config('timeformat'),strtotime($order['created_at']))}}
             </h5>
         </div>
@@ -43,11 +43,11 @@
     </div>
     <h5 class="text-uppercase"></h5>
     <span>---------------------------------------------------------------------------------</span>
-    <table class="table table-bordered mt-3" style="width: 98%">
+    <table class="table table-bordered mt-3">
         <thead>
         <tr>
-            <th style="width: 10%">{{trans('messages.qty')}}</th>
-            <th class="">{{trans('messages.DESC')}}</th>
+            <th class="w-10p">{{translate('messages.qty')}}</th>
+            <th class="">{{translate('messages.description')}}</th>
             <th class="">{{translate('messages.Price')}}</th>
         </tr>
         </thead>
@@ -91,7 +91,7 @@
                             @php($add_ons_cost+=$addon['price']*$addon['quantity'])
                         @endforeach
                     </td>
-                    <td style="width: 28%">
+                    <td class="w-28p">
                         @php($amount=($detail['price'])*$detail['quantity'])
                         {{\App\CentralLogics\Helpers::format_currency($amount)}}
                     </td>
@@ -132,7 +132,7 @@
                             @php($add_ons_cost+=$addon['price']*$addon['quantity'])
                         @endforeach
                     </td>
-                    <td style="width: 28%">
+                    <td class="w-28p">
                         @php($amount=($detail['price'])*$detail['quantity'])
                         {{\App\CentralLogics\Helpers::format_currency($amount)}}
                     </td>
@@ -157,13 +157,13 @@
                 <dt class="col-6">{{translate('messages.subtotal')}}:</dt>
                 <dd class="col-6">
                     {{\App\CentralLogics\Helpers::format_currency($sub_total+$total_tax+$add_ons_cost)}}</dd>
-                <dt class="col-6">{{__('messages.discount')}}:</dt>
+                <dt class="col-6">{{translate('messages.discount')}}:</dt>
                 <dd class="col-6">
                     - {{\App\CentralLogics\Helpers::format_currency($order['restaurant_discount_amount'])}}</dd>
                 <dt class="col-6">{{translate('messages.coupon_discount')}}:</dt>
                 <dd class="col-6">
                     - {{\App\CentralLogics\Helpers::format_currency($order['coupon_discount_amount'])}}</dd>
-                <dt class="col-6">{{__('messages.vat/tax')}}:</dt>
+                <dt class="col-6">{{translate('messages.vat/tax')}}:</dt>
                 <dd class="col-6">+ {{\App\CentralLogics\Helpers::format_currency($order['total_tax_amount'])}}</dd>
                 <dt class="col-6">{{translate('messages.Delivery Fee')}}:</dt>
                 <dd class="col-6">
@@ -172,8 +172,8 @@
                     <hr>
                 </dd>
 
-                <dt class="col-6" style="font-size: 20px">{{translate('messages.Total')}}:</dt>
-                <dd class="col-6" style="font-size: 20px">{{\App\CentralLogics\Helpers::format_currency($sub_total+$del_c+$order['total_tax_amount']+$add_ons_cost-$order['coupon_discount_amount'] - $order['restaurant_discount_amount'])}}</dd>
+                <dt class="col-6 fz-12px">{{translate('messages.Total')}}:</dt>
+                <dd class="col-6 fz-12px">{{\App\CentralLogics\Helpers::format_currency($sub_total+$del_c+$order['total_tax_amount']+$add_ons_cost-$order['coupon_discount_amount'] - $order['restaurant_discount_amount'])}}</dd>
             </dl>
         </div>
     </div>

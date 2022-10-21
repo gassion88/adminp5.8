@@ -1,6 +1,6 @@
 @extends('layouts.vendor.app')
 
-@section('title',__('messages.restaurant').' '.__('messages.wallet'))
+@section('title',translate('messages.restaurant').' '.translate('messages.wallet'))
 
 @push('css_or_js')
 
@@ -17,7 +17,7 @@
                             <img src="{{asset('/public/assets/admin/img/resturant-panel/page-title/wallet.png')}}" alt="public">
                         </div>
                         <span>
-                            {{__('messages.restaurant')}} {{__('messages.wallet')}}
+                            {{translate('messages.restaurant')}} {{translate('messages.wallet')}}
                         </span>
                     </h2>
                 </div>
@@ -42,7 +42,7 @@
             <div class="card bg--1 h-100">
                 <div class="card-body text-center d-flex flex-column justify-content-center align-items-center">
                     <div class="cash--subtitle">
-                        {{__('messages.withdraw_able_balance')}}
+                        {{translate('messages.withdraw_able_balance')}}
                     </div>
                     <div class="d-flex align-items-center justify-content-center mt-3">
                         <img class="cash-icon mr-3" src="{{asset('/public/assets/admin/img/transactions/cash.png')}}" alt="transactions">
@@ -53,9 +53,9 @@
                 </div>
                 <div class="card-footer pt-0 bg-transparent">
                     @if(\App\CentralLogics\Helpers::get_vendor_data()->account_no==null || \App\CentralLogics\Helpers::get_vendor_data()->bank_name==null)
-                    <a tabindex="0" class="btn btn-- bg--title h--45px w-100" role="button" data-toggle="popover" data-trigger="focus" title="{{__('messages.warning_missing_bank_info')}}" data-content="{{__('messages.warning_add_bank_info')}}">{{__('messages.request')}} {{__('messages.withdraw')}}</a>
-                    @else   
-                    <a class="btn btn-- bg--title h--45px w-100" style="background: #f9fafc;" href="javascript:" data-toggle="modal" data-target="#balance-modal">{{__('messages.request')}} {{__('messages.withdraw')}}</a>
+                    <a tabindex="0" class="btn btn-- bg--title h--45px w-100" role="button" data-toggle="popover" data-trigger="focus" title="{{translate('messages.warning_missing_bank_info')}}" data-content="{{translate('messages.warning_add_bank_info')}}">{{translate('messages.request')}} {{translate('messages.withdraw')}}</a>
+                    @else
+                    <a class="btn btn-- bg--title h--45px w-100" href="javascript:" data-toggle="modal" data-target="#balance-modal">{{translate('messages.request')}} {{translate('messages.withdraw')}}</a>
                     @endif
                 </div>
             </div>
@@ -67,7 +67,7 @@
                 <div class="col-sm-6">
                     <div class="resturant-card  bg--2" >
                         <h4 class="title">{{\App\CentralLogics\Helpers::format_currency($wallet->pending_withdraw)}}</h4>
-                        <span class="subtitle">{{__('messages.pending')}} {{__('messages.withdraw')}}</span>
+                        <span class="subtitle">{{translate('messages.pending')}} {{translate('messages.withdraw')}}</span>
                         <img class="resturant-icon" src="{{asset('/public/assets/admin/img/transactions/pending.png')}}" alt="public">
                     </div>
                 </div>
@@ -76,7 +76,7 @@
                 <div class="col-sm-6">
                     <div class="resturant-card  bg--3">
                         <h4 class="title">{{\App\CentralLogics\Helpers::format_currency($wallet->total_withdrawn)}}</h4>
-                        <span class="subtitle">{{__('messages.withdrawn')}}</span>
+                        <span class="subtitle">{{translate('messages.withdrawn')}}</span>
                         <img class="resturant-icon" src="{{asset('/public/assets/admin/img/transactions/withdraw-amount.png')}}" alt="public">
                     </div>
                 </div>
@@ -85,7 +85,7 @@
                 <div class="col-sm-6">
                     <div class="resturant-card  bg--5">
                         <h4 class="title">{{\App\CentralLogics\Helpers::format_currency($wallet->collected_cash)}}</h4>
-                        <span class="subtitle">{{__('messages.collected_cash')}}</span>
+                        <span class="subtitle">{{translate('messages.collected_cash')}}</span>
                         <img class="resturant-icon" src="{{asset('/public/assets/admin/img/transactions/withdraw-balance.png')}}" alt="public">
                     </div>
                 </div>
@@ -94,7 +94,7 @@
                 <div class="col-sm-6">
                     <div class="resturant-card  bg--1">
                         <h4 class="title">{{\App\CentralLogics\Helpers::format_currency($wallet->total_earning)}}</h4>
-                        <span class="subtitle">{{__('messages.total_earning')}}</span>
+                        <span class="subtitle">{{translate('messages.total_earning')}}</span>
                         <img class="resturant-icon" src="{{asset('/public/assets/admin/img/transactions/earning.png')}}" alt="public">
                     </div>
                 </div>
@@ -108,7 +108,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">
-                        {{__('messages.withdraw')}} {{__('messages.request')}}
+                        {{translate('messages.withdraw')}} {{translate('messages.request')}}
                     </h5>
                     <button type="button" class="close" data-dismiss="modal">
                         <span aria-hidden="true" class="btn btn--circle btn-soft-danger text-danger"><ti class="tio-clear"></ti></span>
@@ -118,15 +118,15 @@
                     <div class="modal-body">
                         @csrf
                         <div class="form-group">
-                            <label for="recipient-name" class="form-label">{{__('messages.amount')}}:</label>
+                            <label for="recipient-name" class="form-label">{{translate('messages.amount')}}:</label>
                             <input type="number" name="amount" step="0.01"
-                                    value="{{$wallet->balance}}" 
+                                    value="{{$wallet->balance}}"
                                     class="form-control h--45px" id="" min="0" max="{{$wallet->balance}}">
                         </div>
                     </div>
                     <div class="modal-footer pt-0 border-0">
-                        <button type="button" class="btn btn--reset" data-dismiss="modal">{{__('messages.cancel')}}</button>
-                        <button type="submit" class="btn btn--primary">{{__('messages.Submit')}}</button>
+                        <button type="button" class="btn btn--reset" data-dismiss="modal">{{translate('messages.cancel')}}</button>
+                        <button type="submit" class="btn btn--primary">{{translate('messages.Submit')}}</button>
                     </div>
                 </form>
             </div>
@@ -139,13 +139,12 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h5>{{ __('messages.withdraw')}} {{ __('messages.request')}} {{ __('messages.table')}}</h5>
+                    <h5>{{ translate('messages.withdraw')}} {{ translate('messages.request')}} {{ translate('messages.table')}}</h5>
                 </div>
-                <div class="card-body" style="padding: 0">
+                <div class="card-body p-0">
                     <div class="table-responsive">
                         <table id="datatable"
                                 class="table table-hover table-borderless table-thead-bordered table-nowrap table-align-middle card-table"
-                                style="width: 100%"
                                 data-hs-datatables-options='{
                                  "order": [],
                                  "orderCellsTop": true,
@@ -153,12 +152,12 @@
                                }'>
                             <thead class="thead-light">
                             <tr>
-                                <th>SL</th>
-                                <th>{{__('messages.note')}}</th>
-                                <th>{{__('messages.request_time')}}</th>
-                                <th>{{__('messages.amount')}}</th>
-                                <th>{{__('messages.status')}}</th>
-                                <th style="width: 5px">Close</th>
+                                <th>{{ translate('messages.sl') }}</th>
+                                <th>{{translate('messages.note')}}</th>
+                                <th>{{translate('messages.request_time')}}</th>
+                                <th>{{translate('messages.amount')}}</th>
+                                <th>{{translate('messages.status')}}</th>
+                                <th class="w-5px">{{ translate('messages.close') }}</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -173,20 +172,20 @@
                                     <td>$ {{$wr['amount']}}</td>
                                     <td>
                                         @if($wr->approved==0)
-                                            <label class="badge badge-soft-info">{{__('messages.pending')}}</label>
+                                            <label class="badge badge-soft-info">{{translate('messages.pending')}}</label>
                                         @elseif($wr->approved==1)
-                                            <label class="badge badge-soft-success">{{__('messages.approved')}}</label>
+                                            <label class="badge badge-soft-success">{{translate('messages.approved')}}</label>
                                         @else
-                                            <label class="badge badge-soft-danger">{{__('messages.denied')}}</label>
+                                            <label class="badge badge-soft-danger">{{translate('messages.denied')}}</label>
                                         @endif
                                     </td>
                                     <td>
                                         @if($wr->approved==0)
                                             {{-- <a href="{{route('vendor.withdraw.close',[$wr['id']])}}"
                                                 class="btn btn-outline-danger btn--danger action-btn">
-                                                {{__('messages.Delete')}}
+                                                {{translate('messages.Delete')}}
                                             </a> --}}
-                                            <a class="btn btn-outline-danger btn--danger action-btn" href="javascript:" onclick="form_alert('withdraw-{{$wr['id']}}','Want to delete this  ?')" title="{{__('messages.delete')}}"><i class="tio-delete-outlined"></i>
+                                            <a class="btn btn-outline-danger btn--danger action-btn" href="javascript:" onclick="form_alert('withdraw-{{$wr['id']}}','{{ translate('Want to delete this  ?') }}')" title="{{translate('messages.delete')}}"><i class="tio-delete-outlined"></i>
                                         </a>
 
                                             <form action="{{route('vendor.wallet.close-request',[$wr['id']])}}"
@@ -194,7 +193,7 @@
                                                 @csrf @method('delete')
                                             </form>
                                         @else
-                                            <label>{{__('messages.complete')}}</label>
+                                            <label>{{translate('messages.complete')}}</label>
                                         @endif
                                     </td>
                                 </tr>

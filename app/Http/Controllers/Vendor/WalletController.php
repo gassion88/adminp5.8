@@ -31,7 +31,7 @@ class WalletController extends Controller
             ];
             DB::table('withdraw_requests')->insert($data);
             RestaurantWallet::where('vendor_id', Helpers::get_vendor_id())->increment('pending_withdraw', $request['amount']);
-            Toastr::success('Withdraw request has been sent.');
+            Toastr::success(translate('Withdraw request has been sent.'));
             return redirect()->back();
         }
 
@@ -46,7 +46,7 @@ class WalletController extends Controller
             RestaurantWallet::where('vendor_id', Helpers::get_vendor_id())->decrement('pending_withdraw', $wr['amount']);
         }
         $wr->delete();
-        Toastr::success('request closed!');
+        Toastr::success(translate('request closed!'));
         return back();
     }
 }

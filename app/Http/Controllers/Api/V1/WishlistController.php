@@ -22,7 +22,7 @@ class WishlistController extends Controller
         }
         if ($request->food_id && $request->restaurant_id) {
             $errors = [];
-            array_push($errors, ['code' => 'data', 'message' => trans('messages.can_not_add_both_food_and_restaurant_at_same_time')]);
+            array_push($errors, ['code' => 'data', 'message' => translate('messages.can_not_add_both_food_and_restaurant_at_same_time')]);
             return response()->json([
                 'errors' => $errors
             ], 403);
@@ -34,10 +34,10 @@ class WishlistController extends Controller
             $wishlist->food_id = $request->food_id;
             $wishlist->restaurant_id = $request->restaurant_id;
             $wishlist->save();
-            return response()->json(['message' => trans('messages.added_successfully')], 200);
+            return response()->json(['message' => translate('messages.added_successfully')], 200);
         }
 
-        return response()->json(['message' => trans('messages.already_in_wishlist')], 409);
+        return response()->json(['message' => translate('messages.already_in_wishlist')], 409);
     }
 
     public function remove_from_wishlist(Request $request)
@@ -61,10 +61,10 @@ class WishlistController extends Controller
 
         if ($wishlist) {
             $wishlist->delete();
-            return response()->json(['message' => trans('messages.successfully_removed')], 200);
+            return response()->json(['message' => translate('messages.successfully_removed')], 200);
 
         }
-        return response()->json(['message' => trans('messages.not_found')], 404);
+        return response()->json(['message' => translate('messages.not_found')], 404);
     }
 
     public function wish_list(Request $request)

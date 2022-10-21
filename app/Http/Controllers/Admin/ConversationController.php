@@ -18,7 +18,7 @@ class ConversationController extends Controller
 {
     public function list(Request $request)
     {
-        $conversations = Conversation::query()->WhereUserType('admin');
+        $conversations = Conversation::with(['sender', 'receiver', 'last_message'])->WhereUserType('admin');
         if($request->query('key')) {
             $key = explode(' ', $request->get('key'));
             $conversations = $conversations->where(function($qu)use($key){
@@ -142,8 +142,8 @@ class ConversationController extends Controller
             $conversation->save();
             {
                 $data = [
-                    'title' =>trans('messages.message'),
-                    'description' =>trans('messages.message_description'),
+                    'title' =>translate('messages.message'),
+                    'description' =>translate('messages.message_description'),
                     'order_id' => '',
                     'image' => '',
                     'message' => json_encode($message),

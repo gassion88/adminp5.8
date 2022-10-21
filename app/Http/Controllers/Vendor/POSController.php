@@ -14,6 +14,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\CentralLogics\Helpers;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class POSController extends Controller
 {
@@ -308,6 +309,11 @@ class POSController extends Controller
 
         $data[]=(object)['id'=>false, 'text'=>translate('messages.walk_in_customer')];
 
+        $reversed = $data->toArray();
+
+        $data = array_reverse($reversed);
+
+
         return response()->json($data);
     }
 
@@ -355,7 +361,7 @@ class POSController extends Controller
         $order->payment_status = isset($address)?'unpaid':'paid';
         if($request->user_id){
 
-            $order->order_status = isset($address)?'pending':'delivered';
+            $order->order_status = isset($address)?'confirmed':'delivered';
             $order->order_type = isset($address)?'delivery':'take_away';
         }else{
             $order->order_status = 'delivered';
@@ -481,5 +487,31 @@ class POSController extends Controller
             'success' => 1,
             'view' => view('vendor-views.pos.order.invoice', compact('order'))->render(),
         ]);
+    }
+
+    public function customer_store(Request $request)
+    {
+        $request->validate([
+            'f_name' => 'required',
+            'l_name' => 'required',
+            'email' => 'required|email|unique:users',
+            'phone' => 'required|unique:users',
+        ]);
+        User::create([
+            'f_name' => $request['f_name'],
+            'l_name' => $request['l_name'],
+            'email' => $request['email'],
+            'phone' => $request['phone'],
+            'password' => bcrypt('password')
+        ]);
+        try {
+            if (config('mail.status')) {
+                Mail::to($request->email)->send(new \App\Mail\CustomerRegistration($request->f_name . ' ' . $request->l_name,true));
+            }
+        } catch (\Exception $ex) {
+            info($ex);
+        }
+        Toastr::success(translate('customer_added_successfully'));
+        return back();
     }
 }

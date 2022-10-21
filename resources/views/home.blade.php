@@ -63,13 +63,13 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12 about-us-right-column">
                     <div class="about-us__right animate__animated animate__backInRight">
-                        <h3>{{ __('messages.about_us') }}</h3>
+                        <h3>{{ translate('messages.about_us') }}</h3>
                         <h2>{{ isset($landing_page_text) ? $landing_page_text['about_title'] : '' }}</h2>
                         <p class="about-us-text">
                             {!! \Illuminate\Support\Str::limit(\App\CentralLogics\Helpers::get_settings('about_us'), 200) !!}
                         </p>
                         <a href="{{ route('about-us') }}"
-                            class="btn btn-lg read-more mt-4">{{ __('messages.read_more') }}</a>
+                            class="btn btn-lg read-more mt-4">{{ translate('messages.read_more') }}</a>
                     </div>
                 </div>
             </div>
@@ -84,7 +84,7 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-12 col-sm-12 mb-5 stuning-feature">
                         <div class="service-left animate__animated animate__backInLeft">
-                            <h2 class="section-heading">{{ isset($landing_page_text['feature_section_title']) ? $landing_page_text['feature_section_title'] :__('messages.our_features') }}</h2>
+                            <h2 class="section-heading">{{ isset($landing_page_text['feature_section_title']) ? $landing_page_text['feature_section_title'] :translate('messages.our_features') }}</h2>
                             <p class="stuning-p">
                                 {{ isset($landing_page_text['feature_section_description']) ? $landing_page_text['feature_section_description'] : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ex odio,  turpis accumsan congue.' }}
                             </p>
@@ -124,7 +124,7 @@
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12 our-app-text-box">
                         <div class="about-us-right align-center">
-                            <h3>{{ __('messages.our_mobile_applications') }}</h3>
+                            <h3>{{ translate('messages.our_mobile_applications') }}</h3>
                             <h2>{{ isset($landing_page_text['mobile_app_section_heading']) ? $landing_page_text['mobile_app_section_heading'] : 'Mobile app section heading' }}
                             </h2>
                             <p class="about-text">
@@ -186,10 +186,10 @@
             <div class="subscription">
                 <div class="row d-flex justify-content-center text-center">
                     <div class="col-md-12 col-lg-12 col-sm-12">
-                        <h2 class="news-letter-heading">{{ __('messages.news_letter_signup') }}</h2>
+                        <h2 class="news-letter-heading">{{ translate('messages.news_letter_signup') }}</h2>
                         <p class="news-letter-text">
 
-                            {{ __('messages.news_letter_signup_text') }}
+                            {{ translate('messages.news_letter_signup_text') }}
                         </p>
                         <div class="news-heading-underline mx-auto"></div>
                     </div>

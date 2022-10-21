@@ -1,5 +1,5 @@
 @extends('layouts.admin.app')
-@section('title', __('messages.subscriber_list'))
+@section('title', translate('messages.subscriber_list'))
 @push('css_or_js')
     <meta name="csrf-token" content="{{ csrf_token() }}">
 @endpush
@@ -12,7 +12,7 @@
                     <img src="{{asset('/public/assets/admin/img/mail.png')}}" alt="public">
                 </div>
                 <span>
-                    {{ __('messages.subscribed_mail_list') }}
+                    {{ translate('messages.subscribed_mail_list') }}
                         <span class="badge badge-soft-dark ml-2">{{ $subscribers->total() }}</span>
                 </span>
             </h1>
@@ -26,14 +26,14 @@
                 {{-- <form action="{{ route('admin.customer.subscribed') }}"> --}}
                     <div class="input--group input-group input-group-merge input-group-flush">
                         <input id="datatableSearch_" type="search" name="search" class="form-control"
-                            value="{{ request()->get('search') }}" placeholder="Ex: Search for emails"
+                            value="{{ request()->get('search') }}" placeholder="{{ translate('Ex: Search for emails') }}"
                             aria-label="Search" required>
                         <button type="submit" class="btn btn--secondary">
                                 <i class="tio-search"></i>
                         </button>
                         @if (request()->get('search'))
                             <button type="reset" class="btn btn--primary btn-sm mx-1"
-                                onclick="location.href = '{{ route('admin.customer.subscribed') }}'">{{ __('messages.reset') }}</button>
+                                onclick="location.href = '{{ route('admin.customer.subscribed') }}'">{{ translate('messages.reset') }}</button>
                         @endif
                     </div>
                     <!-- End Search -->
@@ -63,10 +63,10 @@
                     <thead class="thead-light">
                         <tr>
                             <th class="">
-                                SL
+                                {{ translate('messages.sl') }}
                             </th>
-                            <th>{{ __('messages.email') }}</th>
-                            <th>{{ __('messages.created_at') }}</th>
+                            <th>{{ translate('messages.email') }}</th>
+                            <th>{{ translate('messages.created_at') }}</th>
                         </tr>
                     </thead>
                     <tbody id="set-rows">
@@ -106,7 +106,7 @@
                     </div>
                 </div>
                 <!-- End Pagination -->
-            </div> 
+            </div>
             <!-- End Footer -->
         </div>
         <!-- End Card -->

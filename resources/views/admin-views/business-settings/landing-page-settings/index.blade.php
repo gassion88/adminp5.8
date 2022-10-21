@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title',__('messages.landing_page_settings'))
+@section('title',translate('messages.landing_page_settings'))
 
 @push('css_or_js')
     <!-- Custom styles for this page -->
@@ -17,7 +17,7 @@
                 <img src="{{asset('/public/assets/admin/img/landing-page.png')}}" class="mw-26px" alt="public">
             </div>
             <span>
-                {{ __('messages.landing_page_settings') }}
+                {{ translate('messages.landing_page_settings') }}
             </span>
         </h1>
         <!-- End Page Header -->
@@ -27,37 +27,37 @@
             <ul class="nav nav-tabs page-header-tabs">
                 <li class="nav-item">
                     <a class="nav-link active"
-                        href="{{ route('admin.business-settings.landing-page-settings', 'index') }}">{{ __('messages.text') }}</a>
+                        href="{{ route('admin.business-settings.landing-page-settings', 'index') }}">{{ translate('messages.text') }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"
                         href="{{ route('admin.business-settings.landing-page-settings', 'links') }}"
-                        aria-disabled="true">{{ __('messages.button_links') }}</a>
+                        aria-disabled="true">{{ translate('messages.button_links') }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"
                         href="{{ route('admin.business-settings.landing-page-settings', 'speciality') }}"
-                        aria-disabled="true">{{ __('messages.speciality') }}</a>
+                        aria-disabled="true">{{ translate('messages.speciality') }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"
                         href="{{ route('admin.business-settings.landing-page-settings', 'testimonial') }}"
-                        aria-disabled="true">{{ __('messages.testimonial') }}</a>
+                        aria-disabled="true">{{ translate('messages.testimonial') }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"
                         href="{{ route('admin.business-settings.landing-page-settings', 'feature') }}"
-                        aria-disabled="true">{{ __('messages.feature') }}</a>
+                        aria-disabled="true">{{ translate('messages.feature') }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"
                         href="{{ route('admin.business-settings.landing-page-settings', 'image') }}"
-                        aria-disabled="true">{{ __('messages.image') }}</a>
+                        aria-disabled="true">{{ translate('messages.image') }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"
                         href="{{ route('admin.business-settings.landing-page-settings', 'backgroundChange') }}"
-                        aria-disabled="true">{{ __('messages.header_footer_bg') }}</a>
+                        aria-disabled="true">{{ translate('messages.header_footer_bg') }}</a>
                 </li>
             </ul>
             <!-- End Nav -->
@@ -73,72 +73,72 @@
                 @php($landing_page_text = isset($landing_page_text->value) ? json_decode($landing_page_text->value, true) : null)
                 @csrf
                 <div class="form-group">
-                    <label class="form-label" for="header_title_1">Top Header Title</label>
+                    <label class="form-label" for="header_title_1">{{ translate('Top Header Title') }}</label>
                     <input type="text" id="header_title_1" name="header_title_1" class="form-control h--45px"
-                        value="{{ isset($landing_page_text) ? $landing_page_text['header_title_1'] : '' }}" placehlder="Ex: Stackfood App">
+                        value="{{ isset($landing_page_text) ? $landing_page_text['header_title_1'] : '' }}" placeholder="{{ translate('Ex: Stackfood App') }}">
                 </div>
                 <div class="form-group">
-                    <label class="form-label" for="header_title_3">Sub Title 1</label>
+                    <label class="form-label" for="header_title_3">{{ translate('Sub Title 1') }}</label>
                     <input type="text" id="header_title_3" name="header_title_3" class="form-control h--45px"
-                        value="{{ isset($landing_page_text) ? $landing_page_text['header_title_3'] : '' }}" placeholder="Ex: 10% off !">
+                        value="{{ isset($landing_page_text) ? $landing_page_text['header_title_3'] : '' }}" placeholder="{{ translate('Ex: 10% off !') }}">
                 </div>
                 <div class="form-group">
-                    <label class="form-label" for="header_title_2">Sub Title 2</label>
+                    <label class="form-label" for="header_title_2">{{ translate('Sub Title 2') }}</label>
                     <input type="text" id="header_title_2" name="header_title_2" class="form-control h--45px"
-                        value="{{ isset($landing_page_text) ? $landing_page_text['header_title_2'] : '' }}" placeholder="Ex: Why stay hungry when you can order from StackFood">
+                        value="{{ isset($landing_page_text) ? $landing_page_text['header_title_2'] : '' }}" placeholder="{{ translate('Ex: Why stay hungry when you can order from StackFood') }}">
                 </div>
                 <div class="form-group">
-                    <label class="form-label" for="about_title">About Section Title</label>
+                    <label class="form-label" for="about_title">{{ translate('About Section Title') }}</label>
                     <input type="text" id="about_title" name="about_title" class="form-control h--45px"
-                        value="{{ isset($landing_page_text) ? $landing_page_text['about_title'] : '' }}" placeholder="Ex: StackFood is Best Delivery Service Near You">
+                        value="{{ isset($landing_page_text) ? $landing_page_text['about_title'] : '' }}" placeholder="{{ translate('Ex: StackFood is Best Delivery Service Near You') }}">
                 </div>
                 <div class="form-group">
-                    <label class="form-label" for="feature_section_title">{{ __('messages.feature_section_title') }}</label>
+                    <label class="form-label" for="feature_section_title">{{ translate('messages.feature_section_title') }}</label>
                     <input type="text" id="feature_section_title" name="feature_section_title" class="form-control h--45px"
                         value="{{ isset($landing_page_text['feature_section_title']) ? $landing_page_text['feature_section_title'] : '' }}">
                 </div>
                 <div class="form-group">
-                    <label class="form-label" for="feature_section_description">{{ __('messages.feature_section_description') }}</label>
+                    <label class="form-label" for="feature_section_description">{{ translate('messages.feature_section_description') }}</label>
                     <textarea id="feature_section_description" name="feature_section_description" class="form-control" cols="30" rows="5"
-                        placeholder="Feature section description">
+                        placeholder="{{ translate('Feature section description') }}">
                         {{ isset($landing_page_text['feature_section_description']) ? $landing_page_text['feature_section_description'] : '' }}
                     </textarea>
                 </div>
                 <div class="form-group">
-                    <label class="form-label" for="mobile_app_section_heading">Mobile App Section Title</label>
+                    <label class="form-label" for="mobile_app_section_heading">{{ translate('Mobile App Section Title') }}</label>
                     <input type="text" id="mobile_app_section_heading" name="mobile_app_section_heading" class="form-control h--45px"
                     value="{{ isset($landing_page_text['mobile_app_section_heading']) ? $landing_page_text['mobile_app_section_heading'] : '' }}">
 
                 </div>
                 <div class="form-group">
-                    <label class="form-label" for="mobile_app_section_text">Mobile App Section Short Description</label>
+                    <label class="form-label" for="mobile_app_section_text">{{ translate('Mobile App Section Short Description') }}</label>
                     <input type="text" id="mobile_app_section_text" name="mobile_app_section_text" class="form-control h--45px"
-                    value="{{ isset($landing_page_text['mobile_app_section_text']) ? $landing_page_text['mobile_app_section_text'] : '' }}" placeholder="Mobile App Section Text">
+                    value="{{ isset($landing_page_text['mobile_app_section_text']) ? $landing_page_text['mobile_app_section_text'] : '' }}" placeholder="{{ translate('Mobile App Section Text') }}">
                 </div>
                 <div class="form-group">
-                    <label class="form-label" for="why_choose_us">Why Choose Us Section Title</label>
+                    <label class="form-label" for="why_choose_us">{{ translate('Why Choose Us Section Title') }}</label>
                     <input type="text" id="why_choose_us" name="why_choose_us" class="form-control h--45px"
-                        value="{{ isset($landing_page_text) ? $landing_page_text['why_choose_us'] : '' }}" placeholder="Ex: Why choose us">
+                        value="{{ isset($landing_page_text) ? $landing_page_text['why_choose_us'] : '' }}" placeholder="{{ translate('Ex: Why choose us') }}">
                 </div>
                 <div class="form-group">
-                    <label class="form-label" for="why_choose_us_title">Why Choose Us Short Description</label>
+                    <label class="form-label" for="why_choose_us_title">{{ translate('Why Choose Us Short Description') }}</label>
                     <input type="text" id="why_choose_us_title" name="why_choose_us_title" class="form-control h--45px"
-                        value="{{ isset($landing_page_text) ? $landing_page_text['why_choose_us_title'] : '' }}" placeholder="Ex: description">
+                        value="{{ isset($landing_page_text) ? $landing_page_text['why_choose_us_title'] : '' }}" placeholder="{{ translate('Ex: description') }}">
                 </div>
                 <div class="form-group">
-                    <label class="form-label" for="testimonial_title">Testimonial Section Title</label>
+                    <label class="form-label" for="testimonial_title">{{ translate('Testimonial Section Title') }}</label>
                     <input type="text" id="testimonial_title" name="testimonial_title" class="form-control h--45px"
                         value="{{ isset($landing_page_text) ? $landing_page_text['testimonial_title'] : '' }}">
                 </div>
                 <div class="form-group">
-                    <label class="form-label" for="footer_article">{{ __('messages.footer_article') }}</label>
+                    <label class="form-label" for="footer_article">{{ translate('messages.footer_article') }}</label>
                     <textarea type="text" id="footer_article" name="footer_article"
                         class="form-control">{{ isset($landing_page_text) ? $landing_page_text['footer_article'] : '' }}</textarea>
                 </div>
                 <div class="form-group mb-0">
                     <div class="btn--container justify-content-end">
-                        <button type="reset" class="btn btn--reset">{{ __('messages.reset') }}</button>
-                        <button type="submit" class="btn btn--primary">{{ __('messages.submit') }}</button>
+                        <button type="reset" class="btn btn--reset">{{ translate('messages.reset') }}</button>
+                        <button type="submit" class="btn btn--primary">{{ translate('messages.submit') }}</button>
                     </div>
                 </div>
             </form>

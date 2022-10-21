@@ -1,6 +1,6 @@
 @extends('layouts.vendor.app')
 
-@section('title','Sub category')
+@section('title',translate('messages.sub_category'))
 
 @push('css_or_js')
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -16,14 +16,14 @@
                             <img src="{{asset('/public/assets/admin/img/resturant-panel/page-title/category.png')}}" alt="public">
                         </div>
                         <span>
-                            {{__('messages.sub_category')}} {{__('messages.list')}}<span class="badge badge-soft-dark ml-2" id="itemCount">{{$categories->total()}}</span>
+                            {{translate('messages.sub_category')}} {{translate('messages.list')}}<span class="badge badge-soft-dark ml-2" id="itemCount">{{$categories->total()}}</span>
                         </span>
                     </h2>
                     <form action="javascript:"  id="search-form" class="search-form ml-auto">
                         @csrf
                         <!-- Search -->
                         <div class="input-group input--group">
-                            <input id="datatableSearch" name="search" type="search" class="form-control" placeholder="Ex : Search by sub categories..." aria-label="{{__('messages.search_sub_categories')}}">
+                            <input id="datatableSearch" name="search" type="search" class="form-control" placeholder="{{ translate('Ex : Search by sub categories...') }}" aria-label="{{translate('messages.search_sub_categories')}}">
                             <button class="btn btn--secondary" type="submit">
                                 <i class="tio-search"></i>
                             </button>
@@ -45,10 +45,10 @@
                         }'>
                         <thead class="thead-light">
                             <tr>
-                                <th style="width:100px;text-align:center">SL</th>
-                                <th style="width:30%;text-align:center">{{__('messages.id')}}</th>
-                                <th style="width:30%">{{__('messages.category')}}</th>
-                                <th style="width:30%">{{__('messages.sub_category')}}</th>
+                                <th class="w-100px text-center">{{ translate('messages.sl') }}</th>
+                                <th class="w-30p text-center">{{translate('messages.id')}}</th>
+                                <th class="w-30p">{{translate('messages.category')}}</th>
+                                <th class="w-30p">{{translate('messages.sub_category')}}</th>
                             </tr>
                         </thead>
 
@@ -113,8 +113,8 @@
                 },
                 language: {
                     zeroRecords: '<div class="text-center p-4">' +
-                    '<img class="mb-3" src="{{asset('public/assets/admin/svg/illustrations/sorry.svg')}}" alt="Image Description" style="width: 7rem;">' +
-                    '<p class="mb-0">No data to show</p>' +
+                    '<img class="mb-3 w-7rem" src="{{asset('public/assets/admin/svg/illustrations/sorry.svg')}}" alt="Image Description">' +
+                    '<p class="mb-0">{{ translate('No data to show') }}</p>' +
                     '</div>'
                 }
             });

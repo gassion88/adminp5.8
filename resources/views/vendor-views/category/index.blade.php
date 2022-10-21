@@ -1,6 +1,6 @@
 @extends('layouts.vendor.app')
 
-@section('title','Category')
+@section('title',translate('messages.Category'))
 
 @push('css_or_js')
 
@@ -16,7 +16,7 @@
                             <img src="{{asset('/public/assets/admin/img/resturant-panel/page-title/category.png')}}" alt="public">
                         </div>
                         <span>
-                            {{__('messages.category')}} {{__('messages.list')}}
+                            {{translate('messages.category')}} {{translate('messages.list')}}
                             <span class="badge badge-soft-dark ml-2" id="itemCount">{{$categories->total()}}</span>
                         </span>
                     </h2>
@@ -24,7 +24,7 @@
                         @csrf
                         <!-- Search -->
                         <div class="input-group input--group">
-                            <input type="search" name="search" class="form-control" placeholder="Ex : Search by category name..." aria-label="{{__('messages.search_categories')}}">
+                            <input type="search" name="search" class="form-control" placeholder="{{ translate('Ex : Search by category name...') }}" aria-label="{{translate('messages.search_categories')}}">
                             <button type="submit" class="btn btn--secondary">
                                 <i class="tio-search"></i>
                             </button>
@@ -46,9 +46,9 @@
                         }'>
                         <thead class="thead-light">
                             <tr>
-                                <th class="text-center" style="width:33%">SL</th>
-                                <th class="text-center" style="width:33%">Category {{__('messages.id')}}</th>
-                                <th class="text-center" style="width:33%">Category {{__('messages.name')}}</th>
+                                <th class="text-center w-33p">{{ translate('messages.sl') }}</th>
+                                <th class="text-center w-33p">{{ translate('messages.Category') }} {{translate('messages.id')}}</th>
+                                <th class="text-center w-33p">{{ translate('messages.Category') }} {{translate('messages.name')}}</th>
                             </tr>
                         </thead>
 

@@ -22,20 +22,20 @@
         @if($dm->application_status == 'approved')
             @if($dm->active)
             <div>
-                Active Status : <strong class="text-primary text-capitalize">{{__('messages.online')}}</strong>
+                Active Status : <strong class="text-primary text-capitalize">{{translate('messages.online')}}</strong>
             </div>
             @else
             <div>
-                Active Status : <strong class="text-secondary text-capitalize">{{__('messages.offline')}}</strong>
+                Active Status : <strong class="text-secondary text-capitalize">{{translate('messages.offline')}}</strong>
             </div>
             @endif
         @elseif ($dm->application_status == 'denied')
             <div>
-                Active Status : <strong class="text-danger text-capitalize">{{__('messages.denied')}}</strong>
+                Active Status : <strong class="text-danger text-capitalize">{{translate('messages.denied')}}</strong>
             </div>
         @else
             <div>
-                Active Status : <strong class="text-info text-capitalize">{{__('messages.pending')}}</strong>
+                Active Status : <strong class="text-info text-capitalize">{{translate('messages.pending')}}</strong>
             </div>
         @endif
     </td>
@@ -43,15 +43,15 @@
         <a class="deco-none" href="tel:{{$dm['phone']}}">{{$dm['phone']}}</a>
     </td>
     <td>
-        <div class="text-right" style="max-width:90px">
+        <div class="text-right max-90px">
             {{ $dm->orders ? count($dm->orders):0 }}
         </div>
     </td>
     <td>
         <div class="btn--container justify-content-center">
-            <a class="btn btn--primary btn-outline-primary action-btn" href="{{route('vendor.delivery-man.edit',[$dm['id']])}}" title="{{__('messages.edit')}}"><i class="tio-edit"></i>
+            <a class="btn btn--primary btn-outline-primary action-btn" href="{{route('vendor.delivery-man.edit',[$dm['id']])}}" title="{{translate('messages.edit')}}"><i class="tio-edit"></i>
             </a>
-            <a class="btn btn--danger btn-outline-danger action-btn" href="javascript:" onclick="form_alert('delivery-man-{{$dm['id']}}','Want to remove this deliveryman ?')" title="{{__('messages.delete')}}"><i class="tio-delete-outlined"></i>
+            <a class="btn btn--danger btn-outline-danger action-btn" href="javascript:" onclick="form_alert('delivery-man-{{$dm['id']}}','Want to remove this deliveryman ?')" title="{{translate('messages.delete')}}"><i class="tio-delete-outlined"></i>
             </a>
             <form action="{{route('vendor.delivery-man.delete',[$dm['id']])}}" method="post" id="delivery-man-{{$dm['id']}}">
                 @csrf @method('delete')

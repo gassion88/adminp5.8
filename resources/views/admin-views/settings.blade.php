@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title',__('messages.profile_settings'))
+@section('title',translate('messages.profile_settings'))
 
 @push('css_or_js')
 
@@ -15,12 +15,12 @@
                 <div>
                     <h1 class="page-header-title">
                         <span class="page-header-icon"><i class="tio-settings"></i></span>
-                        <span>{{__('messages.settings')}}</span>    
+                        <span>{{translate('messages.settings')}}</span>
                     </h1>
                 </div>
                 <div>
                     <a class="btn btn--primary" href="{{route('admin.dashboard')}}">
-                        <i class="tio-home mr-1"></i> {{__('messages.dashboard')}}
+                        <i class="tio-home mr-1"></i> {{translate('messages.dashboard')}}
                     </a>
                 </div>
             </div>
@@ -37,7 +37,7 @@
                             aria-label="Toggle navigation" aria-expanded="false" aria-controls="navbarVerticalNavMenu"
                             data-toggle="collapse" data-target="#navbarVerticalNavMenu">
                 <span class="d-flex justify-content-between align-items-center">
-                  <span class="h5 mb-0">{{__('messages.nav_menu')}}</span>
+                  <span class="h5 mb-0">{{translate('messages.nav_menu')}}</span>
 
                   <span class="navbar-toggle-default">
                     <i class="tio-menu-hamburger"></i>
@@ -56,12 +56,12 @@
                             class="js-sticky-block js-scrollspy navbar-nav navbar-nav-lg nav-tabs card card-navbar-nav">
                             <li class="nav-item">
                                 <a class="nav-link active text-dark" href="javascript:" id="generalSection">
-                                    <i class="tio-user-outlined nav-icon"></i> {{__('messages.basic_information')}}
+                                    <i class="tio-user-outlined nav-icon"></i> {{translate('messages.basic_information')}}
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" href="javascript:" id="passwordSection">
-                                    <i class="tio-lock-outlined nav-icon"></i> {{__('messages.password')}}
+                                    <i class="tio-lock-outlined nav-icon"></i> {{translate('messages.password')}}
                                 </a>
                             </li>
                         </ul>
@@ -107,7 +107,7 @@
                     <div class="card mb-3">
                         <div class="card-header">
                             <h2 class="card-title h4">
-                                <i class="tio-info"></i> {{__('messages.basic_information')}}
+                                <i class="tio-info"></i> {{translate('messages.basic_information')}}
                             </h2>
                         </div>
 
@@ -116,7 +116,7 @@
                             <!-- Form -->
                             <!-- Form Group -->
                             <div class="row form-group">
-                                <label for="firstNameLabel" class="col-sm-3 col-form-label input-label">{{__('messages.full_name')}} <i
+                                <label for="firstNameLabel" class="col-sm-3 col-form-label input-label">{{translate('messages.full_name')}} <i
                                         class="tio-help-outlined text-body ml-1" data-toggle="tooltip"
                                         data-placement="top"
                                         title="Display name"></i></label>
@@ -124,10 +124,10 @@
                                 <div class="col-sm-9">
                                     <div class="input-group input-group-sm-down-break">
                                         <input type="text" class="form-control h--45px" name="f_name" id="firstNameLabel"
-                                               placeholder="Ex: Jhone" aria-label="{{__('messages.your_first_name')}}"
+                                               placeholder="{{ translate('messages.Ex :') }} Jhone" aria-label="{{translate('messages.your_first_name')}}"
                                                value="{{auth('admin')->user()->f_name}}">
                                         <input type="text" class="form-control h--45px" name="l_name" id="lastNameLabel"
-                                               placeholder="Ex: Doe" aria-label="{{__('messages.your_last_name')}}"
+                                               placeholder="{{ translate('messages.Ex :') }} Doe" aria-label="{{translate('messages.your_last_name')}}"
                                                value="{{auth('admin')->user()->l_name}}">
                                     </div>
                                 </div>
@@ -136,12 +136,12 @@
 
                             <!-- Form Group -->
                             <div class="row form-group">
-                                <label for="phoneLabel" class="col-sm-3 col-form-label input-label">{{__('messages.phone')}} <span
-                                        class="input-label-secondary">({{__('messages.optional')}})</span></label>
+                                <label for="phoneLabel" class="col-sm-3 col-form-label input-label">{{translate('messages.phone')}} <span
+                                        class="input-label-secondary">({{translate('messages.optional')}})</span></label>
 
                                 <div class="col-sm-9">
                                     <input type="text" class="js-masked-input form-control h--45px" name="phone" id="phoneLabel"
-                                           placeholder="Ex: +x(xxx)xxx-xx-xx" aria-label="+(xxx)xx-xxx-xxxxx"
+                                           placeholder="{{ translate('messages.Ex :') }} +x(xxx)xxx-xx-xx" aria-label="+(xxx)xx-xxx-xxxxx"
                                            value="{{auth('admin')->user()->phone}}"
                                            data-hs-mask-options='{
                                            "template": "+(880)00-000-00000"
@@ -151,17 +151,17 @@
                             <!-- End Form Group -->
 
                             <div class="row form-group">
-                                <label for="newEmailLabel" class="col-sm-3 col-form-label input-label">{{__('messages.email')}}</label>
+                                <label for="newEmailLabel" class="col-sm-3 col-form-label input-label">{{translate('messages.email')}}</label>
 
                                 <div class="col-sm-9">
                                     <input type="email" class="form-control h--45px" name="email" id="newEmailLabel"
                                            value="{{auth('admin')->user()->email}}"
-                                           placeholder="Ex: jhone@company.com" aria-label="{{__('messages.enter_new_email_address')}}">
+                                           placeholder="{{ translate('messages.Ex :') }} jhone@company.com" aria-label="{{translate('messages.enter_new_email_address')}}">
                                 </div>
                             </div>
 
                             <div class="d-flex justify-content-end">
-                                <button type="button" onclick="{{env('APP_MODE')!='demo'?"form_alert('admin-settings-form','Want to update admin info ?')":"call_demo()"}}" class="btn btn--primary">{{__('messages.save')}}</button>
+                                <button type="button" onclick="{{env('APP_MODE')!='demo'?"form_alert('admin-settings-form','".translate('Want to update admin info ?')."')":"call_demo()"}}" class="btn btn--primary">{{translate('messages.save')}}</button>
                             </div>
 
                             <!-- End Form -->
@@ -174,7 +174,7 @@
                 <!-- Card -->
                 <div id="passwordDiv" class="card mb-3">
                     <div class="card-header">
-                        <h4 class="card-title"><i class="tio-lock"></i> {{__('messages.change_your_password')}}</h4>
+                        <h4 class="card-title"><i class="tio-lock"></i> {{translate('messages.change_your_password')}}</h4>
                     </div>
 
                     <!-- Body -->
@@ -186,12 +186,12 @@
 
                         <!-- Form Group -->
                             <div class="row form-group">
-                                <label for="newPassword" class="col-sm-3 col-form-label input-label">{{__('messages.new_password')}}</label>
+                                <label for="newPassword" class="col-sm-3 col-form-label input-label">{{translate('messages.new_password')}}</label>
 
                                 <div class="col-sm-9">
                                     <input type="password" class="js-pwstrength form-control h--45px" name="password"
-                                           id="newPassword" placeholder="Ex: 5+ characters required"
-                                           aria-label="{{__('messages.enter_new_password')}}"
+                                           id="newPassword" placeholder="{{ translate('messages.Ex :') }} 5+ characters required"
+                                           aria-label="{{translate('messages.enter_new_password')}}"
                                            data-hs-pwstrength-options='{
                                            "ui": {
                                              "container": "#changePasswordForm",
@@ -211,20 +211,20 @@
 
                             <!-- Form Group -->
                             <div class="row form-group">
-                                <label for="confirmNewPasswordLabel" class="col-sm-3 col-form-label input-label">{{__('messages.confirm_password')}}</label>
+                                <label for="confirmNewPasswordLabel" class="col-sm-3 col-form-label input-label">{{translate('messages.confirm_password')}}</label>
 
                                 <div class="col-sm-9">
                                     <div class="mb-3">
                                         <input type="password" class="form-control h--45px" name="confirm_password"
-                                               id="confirmNewPasswordLabel" placeholder="Ex: 5+ characters required"
-                                               aria-label="{{__('messages.confirm_new_password')}}" required>
+                                               id="confirmNewPasswordLabel" placeholder="{{ translate('messages.Ex :') }} 5+ characters required"
+                                               aria-label="{{translate('messages.confirm_new_password')}}" required>
                                     </div>
                                 </div>
                             </div>
                             <!-- End Form Group -->
 
                             <div class="d-flex justify-content-end">
-                                <button type="button" onclick="{{env('APP_MODE')!='demo'?"form_alert('changePasswordForm','".__('messages.want_to_update_admin_password')."')":"call_demo()"}}" class="btn btn--primary">{{__('messages.save')}}</button>
+                                <button type="button" onclick="{{env('APP_MODE')!='demo'?"form_alert('changePasswordForm','".translate('messages.want_to_update_admin_password')."')":"call_demo()"}}" class="btn btn--primary">{{translate('messages.save')}}</button>
                             </div>
                         </form>
                         <!-- End Form -->

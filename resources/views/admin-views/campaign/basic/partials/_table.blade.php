@@ -22,10 +22,10 @@
         <td>
             <div class="btn--container justify-content-center">
                 <a class="btn btn-sm btn--primary btn-outline-primary action-btn"
-                    href="{{route('admin.campaign.edit',['basic',$campaign['id']])}}" title="{{__('messages.edit')}} {{__('messages.campaign')}}"><i class="tio-edit"></i>
+                    href="{{route('admin.campaign.edit',['basic',$campaign['id']])}}" title="{{translate('messages.edit')}} {{translate('messages.campaign')}}"><i class="tio-edit"></i>
                 </a>
                 <a class="btn btn-sm btn--danger btn-outline-danger action-btn" href="javascript:"
-                    onclick="form_alert('campaign-{{$campaign['id']}}','{{__('messages.Want_to_delete_this_item')}}')" title="{{__('messages.delete')}} {{__('messages.campaign')}}"><i class="tio-delete-outlined"></i>
+                    onclick="form_alert('campaign-{{$campaign['id']}}','{{translate('messages.Want_to_delete_this_item')}}')" title="{{translate('messages.delete')}} {{translate('messages.campaign')}}"><i class="tio-delete-outlined"></i>
                 </a>
                 <form action="{{route('admin.campaign.delete',[$campaign['id']])}}"
                             method="post" id="campaign-{{$campaign['id']}}">

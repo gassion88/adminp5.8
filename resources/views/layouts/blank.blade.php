@@ -28,23 +28,16 @@
     <script
         src="{{asset('public/assets/admin')}}/vendor/hs-navbar-vertical-aside/hs-navbar-vertical-aside-mini-cache.js"></script>
     <link rel="stylesheet" href="{{asset('public/assets/admin')}}/css/toastr.css">
-    <style>
-        .btn-info{
-            background: #0b1226!important;
-            color: white!important;
-            border: #0b1226!important;
-        }
-    </style>
 </head>
 <!-- Body-->
-<body class="toolbar-enabled" style="background: black">
+<body class="toolbar-enabled bg-black">
 
 {{--loader--}}
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <div id="loading" style="display: none;">
-                <div style="position: fixed;z-index: 9999; left: 40%;top: 37% ;width: 100%">
+            <div id="loading" class="initial-hidden">
+                <div class="loading--1">
                     <img width="200" src="{{asset('public/assets/front-end/img/loader.gif')}}">
                 </div>
             </div>

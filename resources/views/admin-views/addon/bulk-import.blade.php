@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title','AddOn Bulk Import')
+@section('title',translate('AddOn Bulk Import'))
 
 @push('css_or_js')
 
@@ -14,7 +14,7 @@
                 <div class="card-header-icon d-inline-flex mr-2 img">
                     <img src="{{asset('/public/assets/admin/img/export.png')}}" alt="">
                 </div>
-                {{__('messages.addons')}} {{__('messages.bulk_import')}}
+                {{translate('messages.addons')}} {{translate('messages.bulk_import')}}
             </h1>
         </div>
         <!-- Content Row -->
@@ -50,10 +50,10 @@
                     <h2 class="mb-3 text-primary">{{ translate('Instructions') }}</h2>
                     <p> {{ translate('1. Download the format file and fill it with proper data.') }}</p>
 
-                    <p>2. You can download the example file to understand how the data must be filled.</p>
+                    <p>{{ translate('2. You can download the example file to understand how the data must be filled.') }}</p>
 
-                    <p>3. Once you have downloaded and filled the format file, upload it in the form below and
-                        submit.</p>
+                    <p>{{ translate('3. Once you have downloaded and filled the format file, upload it in the form below and
+                        submit.') }}</p>
                 </div>
                 <div class="text-center pb-4">
                     <h3 class="mb-3 export--template-title">{{ translate('Download Spreadsheet Template') }}</h3>

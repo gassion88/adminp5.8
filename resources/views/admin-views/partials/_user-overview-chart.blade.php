@@ -2,7 +2,7 @@
 @if ($params['zone_id'] != 'all')
     @php($zone_name = \App\Models\Zone::where('id', $params['zone_id'])->first()->name)
 @else
-    @php($zone_name = 'All')
+@php($zone_name=translate('All'))
 @endif
 <div class="chartjs-custom mx-auto">
     <canvas id="user-overview" class="mt-2"></canvas>
@@ -34,8 +34,8 @@
                 hoverOffset: 3
             }],
             labels: [
-                '{{ __('messages.customer') }}',
-                '{{ __('messages.restaurant') }}',
+                '{{ translate('messages.customer') }}',
+                '{{ translate('messages.restaurant') }}',
                 '{{ translate('messages.delivery_man') }}'
             ],
         },

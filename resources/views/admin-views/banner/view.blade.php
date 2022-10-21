@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title','Campaign view')
+@section('title',translate('Campaign view'))
 
 @push('css_or_js')
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -16,7 +16,7 @@
                 </div>
                 <div class="col-6">
                     <a href="{{url()->previous()}}" class="btn btn-primary float-right">
-                        <i class="tio-back-ui"></i> {{__('messages.back')}}
+                        <i class="tio-back-ui"></i> {{translate('messages.back')}}
                     </a>
                 </div>
             </div>
@@ -34,14 +34,14 @@
                                  onerror="this.src='{{asset('public/assets/admin/img/160x160/img2.jpg')}}'"
                                  alt="Image Description">
                             <div class="d-block">
-                                
-                                
+
+
                             </div>
                         </div>
                     </div>
 
                     <div class="col-md">
-                        <h4>{{__('messages.short')}} {{__('messages.description')}} : </h4>
+                        <h4>{{translate('messages.short')}} {{translate('messages.description')}} : </h4>
                         <p>{{$banner->description}}</p>
                     </div>
 
@@ -65,12 +65,12 @@
                             <thead class="thead-light">
                             <tr>
                                 <th>{{translate('sl')}}</th>
-                                <th class="w-15p">{{__('messages.logo')}}</th>
-                                <th class="w-20p">{{__('messages.name')}}</th>
-                                <th class="w-25p">{{__('messages.vendor')}}</th>
-                                <th>{{__('messages.email')}}</th>
-                                <th>{{__('messages.phone')}}</th>
-                                <th>{{__('messages.action')}}</th>
+                                <th class="w-15p">{{translate('messages.logo')}}</th>
+                                <th class="w-20p">{{translate('messages.name')}}</th>
+                                <th class="w-25p">{{translate('messages.vendor')}}</th>
+                                <th>{{translate('messages.email')}}</th>
+                                <th>{{translate('messages.phone')}}</th>
+                                <th>{{translate('messages.action')}}</th>
                             </tr>
                             <tr>
                                 <th colspan="3">
@@ -78,7 +78,7 @@
                                         @csrf
                                         <!-- Search -->
                                         <div class="row">
-                                            <div class="input-group-prepend col-md-7">   
+                                            <div class="input-group-prepend col-md-7">
                                             @php($allrestaurants=App\Models\Restaurant::all())
                                                 <select name="restaurant_id" id="restaurant_id" class="form-control">
                                                     @forelse($allrestaurants as $restaurant)
@@ -90,7 +90,7 @@
                                                     @endforelse
                                                 </select>
                                             </div>
-                                            <button type="submit" class="btn btn-primary col-md-5">{{__('messages.add')}} {{__('messages.restaurant')}}</button>
+                                            <button type="submit" class="btn btn-primary col-md-5">{{translate('messages.add')}} {{translate('messages.restaurant')}}</button>
 
                                         </div>
                                         <!-- End Search -->
@@ -107,14 +107,14 @@
                                                 </div>
                                             </div>
                                             <input id="datatableSearch_" type="search" name="search" class="form-control"
-                                                   placeholder="{{__('messages.search')}}" aria-label="Search" required>
-                                            <button type="submit" class="btn btn-primary">{{__('messages.search')}}</button>
+                                                   placeholder="{{translate('messages.search')}}" aria-label="Search" required>
+                                            <button type="submit" class="btn btn-primary">{{translate('messages.search')}}</button>
 
                                         </div>
                                         <!-- End Search -->
                                     </form>
                                 </th>
-                                
+
                                 <th></th>
                                 <th></th>
                             </tr>

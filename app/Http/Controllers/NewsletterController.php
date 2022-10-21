@@ -12,11 +12,11 @@ class NewsletterController extends Controller
     {
         $emailCount = Newsletter::where('email', $request->email)->count();
         if ($emailCount) {
-            Toastr::warning(trans('messages.subscription_exist'));
+            Toastr::warning(translate('messages.subscription_exist'));
             return back();
         } else {
             Newsletter::create($request->all());
-            Toastr::success(trans('messages.subscription_successful'));
+            Toastr::success(translate('messages.subscription_successful'));
             return back();
         }
     }

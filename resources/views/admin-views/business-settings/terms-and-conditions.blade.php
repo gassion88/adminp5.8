@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title','Terms and Conditions')
+@section('title',translate('messages.terms_and_condition'))
 
 @push('css_or_js')
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
@@ -12,7 +12,7 @@
         <div class="page-header_ pb-4">
             <div class="row align-items-center">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <h1 class="page-header-title">{{__('messages.terms_and_condition')}}</h1>
+                    <h1 class="page-header-title">{{translate('messages.terms_and_condition')}}</h1>
                 </div>
             </div>
         </div>
@@ -25,7 +25,7 @@
                         <textarea class="ckeditor form-control" name="tnc">{!! $tnc['value'] !!}</textarea>
                     </div>
                     <div class="btn--container justify-content-end">
-                        <button type="submit" class="btn btn--primary">{{__('messages.submit')}}</button>
+                        <button type="submit" class="btn btn--primary">{{translate('messages.submit')}}</button>
                     </div>
                 </form>
             </div>

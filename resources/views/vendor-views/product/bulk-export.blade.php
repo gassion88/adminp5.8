@@ -1,6 +1,6 @@
 @extends('layouts.vendor.app')
 
-@section('title','Food Bulk Export')
+@section('title',translate('Food Bulk Export'))
 
 @push('css_or_js')
 
@@ -43,43 +43,43 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label class="input-label" for="exampleFormControlSelect1">{{__('messages.type')}}<span
+                                <label class="input-label" for="exampleFormControlSelect1">{{translate('messages.type')}}<span
                                         class="input-label-secondary"></span></label>
-                                <select name="type" id="type" data-placeholder="{{__('messages.select')}} {{__('messages.type')}}" class="form-control" required title="Select Type">
-                                    <option value="all">{{__('messages.all')}} {{__('messages.data')}}</option>
-                                    <option value="date_wise">{{__('messages.date')}} {{__('messages.wise')}}</option>
-                                    <option value="id_wise">{{__('messages.id')}} {{__('messages.wise')}}</option>
+                                <select name="type" id="type" data-placeholder="{{translate('messages.select')}} {{translate('messages.type')}}" class="form-control" required title="Select Type">
+                                    <option value="all">{{translate('messages.all')}} {{translate('messages.data')}}</option>
+                                    <option value="date_wise">{{translate('messages.date')}} {{translate('messages.wise')}}</option>
+                                    <option value="id_wise">{{translate('messages.id')}} {{translate('messages.wise')}}</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group id_wise">
-                                <label class="input-label" for="exampleFormControlSelect1">{{__('messages.start')}} {{__('messages.id')}}<span
+                                <label class="input-label" for="exampleFormControlSelect1">{{translate('messages.start')}} {{translate('messages.id')}}<span
                                         class="input-label-secondary"></span></label>
                                 <input type="number" name="start_id" class="form-control">
                             </div>
                             <div class="form-group date_wise">
-                                <label class="input-label" for="exampleFormControlSelect1">{{__('messages.from')}} {{__('messages.date')}}<span
+                                <label class="input-label" for="exampleFormControlSelect1">{{translate('messages.from')}} {{translate('messages.date')}}<span
                                         class="input-label-secondary"></span></label>
                                 <input type="date" name="from_date" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group id_wise">
-                                <label class="input-label" for="exampleFormControlSelect1">{{__('messages.end')}} {{__('messages.id')}}<span
+                                <label class="input-label" for="exampleFormControlSelect1">{{translate('messages.end')}} {{translate('messages.id')}}<span
                                         class="input-label-secondary"></span></label>
                                 <input type="number" name="end_id" class="form-control">
                             </div>
                             <div class="form-group date_wise">
-                                <label class="input-label text-capitalize" for="exampleFormControlSelect1">{{__('messages.to')}} {{__('messages.date')}}<span
+                                <label class="input-label text-capitalize" for="exampleFormControlSelect1">{{translate('messages.to')}} {{translate('messages.date')}}<span
                                         class="input-label-secondary"></span></label>
                                 <input type="date" name="to_date" class="form-control">
                             </div>
                         </div>
                     </div>
                     <div class="btn--container justify-content-end">
-                        <button type="reset" class="btn btn--reset">{{__('messages.reset')}}</button>
-                        <button type="submit" class="btn btn--primary">{{__('messages.Submit')}}</button>
+                        <button type="reset" class="btn btn--reset">{{translate('messages.reset')}}</button>
+                        <button type="submit" class="btn btn--primary">{{translate('messages.Submit')}}</button>
                     </div>
                 </form>
             </div>

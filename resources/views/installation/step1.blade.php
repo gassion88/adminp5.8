@@ -3,14 +3,10 @@
     <div class="container">
         <div class="card mt-6">
             <div class="card-body">
-                <div class="card-header">
-                    <div class="row" style="width: 100%">
-                        <div class="col-12">
-                            <div class="mar-ver pad-btm text-center">
-                                <h1 class="h3">Installation Progress Started!</h1>
-                                <p>We are checking file permissions.</p>
-                            </div>
-                        </div>
+                <div class="card-header d-block">
+                    <div class="mar-ver pad-btm text-center">
+                        <h1 class="h3">Installation Progress Started!</h1>
+                        <p>We are checking file permissions.</p>
                     </div>
                 </div>
                 <div class="row pt-5">

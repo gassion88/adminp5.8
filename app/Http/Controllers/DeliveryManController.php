@@ -16,7 +16,7 @@ class DeliveryManController extends Controller
         $status = BusinessSetting::where('key', 'toggle_dm_registration')->first();
         if(!isset($status) || $status->value == '0')
         {
-            Toastr::error(trans('messages.not_found'));
+            Toastr::error(translate('messages.not_found'));
             return back();
         }
 
@@ -28,7 +28,7 @@ class DeliveryManController extends Controller
         $status = BusinessSetting::where('key', 'toggle_dm_registration')->first();
         if(!isset($status) || $status->value == '0')
         {
-            Toastr::error(trans('messages.not_found'));
+            Toastr::error(translate('messages.not_found'));
             return back();
         }
 
@@ -42,9 +42,9 @@ class DeliveryManController extends Controller
             'earning' => 'required',
             'password'=>'required|min:6',
         ], [
-            'f_name.required' => trans('messages.first_name_is_required'),
-            'zone_id.required' => trans('messages.select_a_zone'),
-            'earning.required' => trans('messages.select_dm_type')
+            'f_name.required' => translate('messages.first_name_is_required'),
+            'zone_id.required' => translate('messages.select_a_zone'),
+            'earning.required' => translate('messages.select_dm_type')
         ]);
 
         if ($request->has('image')) {
@@ -87,7 +87,7 @@ class DeliveryManController extends Controller
             info($ex);
         }
 
-        Toastr::success(trans('messages.application_placed_successfully'));
+        Toastr::success(translate('messages.application_placed_successfully'));
         return back();
     }
 }

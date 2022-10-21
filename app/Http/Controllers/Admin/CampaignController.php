@@ -30,7 +30,7 @@ class CampaignController extends Controller
         else{
             $campaigns=ItemCampaign::latest()->paginate(config('default_pagination'));
         }
-        
+
         return view('admin-views.campaign.'.$type.'.list', compact('campaigns'));
     }
 
@@ -41,7 +41,7 @@ class CampaignController extends Controller
             'description'=>'max:1000',
             'image' => 'required',
         ]);
-        
+
         if ($validator->fails()) {
             return response()->json(['errors' => Helpers::error_processor($validator)]);
         }
@@ -55,7 +55,7 @@ class CampaignController extends Controller
         $campaign->start_time = $request->start_time;
         $campaign->end_time = $request->end_time;
         $campaign->save();
-        
+
         $data = [];
         foreach ($request->lang as $index => $key) {
             if ($request->title[$index] && $key != 'en') {
@@ -93,7 +93,7 @@ class CampaignController extends Controller
         if ($validator->fails()) {
             return response()->json(['errors' => Helpers::error_processor($validator)]);
         }
-        
+
         $campaign->title = $request->title[array_search('en', $request->lang)];
         $campaign->description = $request->description[array_search('en', $request->lang)];
         $campaign->image = $request->has('image') ? Helpers::update('campaign/', $campaign->image, 'png', $request->file('image')) : $campaign->image;;
@@ -126,7 +126,7 @@ class CampaignController extends Controller
 
         return response()->json([], 200);
     }
-    
+
     public function storeItem(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -142,9 +142,9 @@ class CampaignController extends Controller
             'veg' => 'required',
             'description'=>'max:1000'
         ], [
-            'category_id.required' => trans('messages.select_category'),
+            'category_id.required' => translate('messages.select_category'),
         ]);
-        
+
         if ($validator->fails()) {
             return response()->json(['errors' => Helpers::error_processor($validator)]);
         }
@@ -156,7 +156,7 @@ class CampaignController extends Controller
         }
 
         if ($request['price'] <= $dis) {
-            $validator->getMessageBag()->add('unit_price', trans('messages.discount_can_not_be_more_than_or_equal'));
+            $validator->getMessageBag()->add('unit_price', translate('messages.discount_can_not_be_more_than_or_equal'));
         }
 
         if ($request['price'] <= $dis || $validator->fails()) {
@@ -191,7 +191,7 @@ class CampaignController extends Controller
             foreach ($request->choice_no as $key => $no) {
                 $str = 'choice_options_' . $no;
                 if ($request[$str][0] == null) {
-                    $validator->getMessageBag()->add('name', trans('messages.attribute_choice_option_value_can_not_be_null'));
+                    $validator->getMessageBag()->add('name', translate('messages.attribute_choice_option_value_can_not_be_null'));
                     return response()->json(['errors' => Helpers::error_processor($validator)]);
                 }
                 $item['name'] = 'choice_' . $no;
@@ -245,7 +245,7 @@ class CampaignController extends Controller
         $campaign->restaurant_id = $request->restaurant_id;
         $campaign->veg = $request->veg;
         $campaign->save();
-        
+
         $data = [];
         foreach ($request->lang as $index => $key) {
             if ($request->title[$index] && $key != 'en') {
@@ -282,7 +282,7 @@ class CampaignController extends Controller
             'veg' => 'required',
             'description.*'=>'max:1000',
         ]);
-        
+
         if ($validator->fails()) {
             return response()->json(['errors' => Helpers::error_processor($validator)]);
         }
@@ -294,7 +294,7 @@ class CampaignController extends Controller
         }
 
         if ($request['price'] <= $dis) {
-            $validator->getMessageBag()->add('unit_price', trans('messages.discount_can_not_be_more_than_or_equal'));
+            $validator->getMessageBag()->add('unit_price', translate('messages.discount_can_not_be_more_than_or_equal'));
         }
 
         if ($request['price'] <= $dis || $validator->fails()) {
@@ -327,7 +327,7 @@ class CampaignController extends Controller
             foreach ($request->choice_no as $key => $no) {
                 $str = 'choice_options_' . $no;
                 if ($request[$str][0] == null) {
-                    $validator->getMessageBag()->add('name', trans('messages.attribute_choice_option_value_can_not_be_null'));
+                    $validator->getMessageBag()->add('name', translate('messages.attribute_choice_option_value_can_not_be_null'));
                     return response()->json(['errors' => Helpers::error_processor($validator)]);
                 }
                 $item['name'] = 'choice_' . $no;
@@ -419,12 +419,12 @@ class CampaignController extends Controller
     }
 
     public function view($type, $campaign)
-    {   
+    {
         if($type=='basic')
         {
             $campaign = Campaign::findOrFail($campaign);
             $restaurants = $campaign->restaurants()->paginate(config('default_pagination'));
-            $restaurant_ids = []; 
+            $restaurant_ids = [];
             foreach($campaign->restaurants as $restaurant)
             {
                 $restaurant_ids[] = $restaurant->id;
@@ -436,7 +436,7 @@ class CampaignController extends Controller
             $campaign = ItemCampaign::findOrFail($campaign);
         }
         return view('admin-views.campaign.item.view', compact('campaign'));
-        
+
     }
 
     public function status($type, $id, $status)
@@ -450,7 +450,7 @@ class CampaignController extends Controller
         }
         $campaign->status = $status;
         $campaign->save();
-        Toastr::success(trans('messages.campaign_status_updated'));
+        Toastr::success(translate('messages.campaign_status_updated'));
         return back();
     }
 
@@ -461,7 +461,7 @@ class CampaignController extends Controller
         }
         $campaign->translations()->delete();
         $campaign->delete();
-        Toastr::success(trans('messages.campaign_deleted_successfully'));
+        Toastr::success(translate('messages.campaign_deleted_successfully'));
         return back();
     }
     public function delete_item(ItemCampaign $campaign)
@@ -471,7 +471,7 @@ class CampaignController extends Controller
         }
         $campaign->translations()->delete();
         $campaign->delete();
-        Toastr::success(trans('messages.campaign_deleted_successfully'));
+        Toastr::success(translate('messages.campaign_deleted_successfully'));
         return back();
     }
 
@@ -479,14 +479,14 @@ class CampaignController extends Controller
     {
         $campaign->restaurants()->detach($restaurant);
         $campaign->save();
-        Toastr::success(trans('messages.restaurant_remove_from_campaign'));
+        Toastr::success(translate('messages.restaurant_remove_from_campaign'));
         return back();
     }
     public function addrestaurant(Request $request, Campaign $campaign)
     {
         $campaign->restaurants()->attach($request->restaurant_id);
         $campaign->save();
-        Toastr::success(trans('messages.restaurant_added_to_campaign'));
+        Toastr::success(translate('messages.restaurant_added_to_campaign'));
         return back();
     }
 

@@ -20,7 +20,7 @@ class VendorController extends Controller
         $status = BusinessSetting::where('key', 'toggle_restaurant_registration')->first();
         if(!isset($status) || $status->value == '0')
         {
-            Toastr::error(trans('messages.not_found'));
+            Toastr::error(translate('messages.not_found'));
             return back();
         }
         return view('vendor-views.auth.register');
@@ -31,7 +31,7 @@ class VendorController extends Controller
         $status = BusinessSetting::where('key', 'toggle_restaurant_registration')->first();
         if(!isset($status) || $status->value == '0')
         {
-            Toastr::error(trans('messages.not_found'));
+            Toastr::error(translate('messages.not_found'));
             return back();
         }
         $validator = Validator::make($request->all(), [
@@ -55,7 +55,7 @@ class VendorController extends Controller
             $point = new Point($request->latitude, $request->longitude);
             $zone = Zone::contains('coordinates', $point)->where('id', $request->zone_id)->first();
             if(!$zone){
-                $validator->getMessageBag()->add('latitude', trans('messages.coordinates_out_of_zone'));
+                $validator->getMessageBag()->add('latitude', translate('messages.coordinates_out_of_zone'));
                 return back()->withErrors($validator)
                         ->withInput();
             }
@@ -97,9 +97,9 @@ class VendorController extends Controller
         }catch(\Exception $ex){
             info($ex);
         }
-        
 
-        Toastr::success(trans('messages.application_placed_successfully'));
+
+        Toastr::success(translate('messages.application_placed_successfully'));
         return back();
     }
 }

@@ -72,7 +72,7 @@ class EmployeeController extends Controller
             'email' => 'required|unique:vendor_employees,email,'.$id,
             'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|max:20|unique:vendor_employees,phone,'.$id,
         ], [
-            'f_name.required' => trans('messages.first_name_is_required'),
+            'f_name.required' => translate('messages.first_name_is_required'),
         ]);
 
         $e = VendorEmployee::where('restaurant_id', Helpers::get_restaurant_id())->find($id);
@@ -80,7 +80,7 @@ class EmployeeController extends Controller
             $pass = $e['password'];
         } else {
             if (strlen($request['password']) < 7) {
-                Toastr::warning(trans('messages.password_length_warning',['length'=>'8']));
+                Toastr::warning(translate('messages.password_length_warning',['length'=>'8']));
                 return back();
             }
             $pass = bcrypt($request['password']);
@@ -110,7 +110,7 @@ class EmployeeController extends Controller
     public function distroy($id)
     {
         $role=VendorEmployee::where('restaurant_id', Helpers::get_restaurant_id())->where(['id'=>$id])->delete();
-        Toastr::info(trans('messages.employee_deleted_successfully'));
+        Toastr::info(translate('messages.employee_deleted_successfully'));
         return back();
     }
 

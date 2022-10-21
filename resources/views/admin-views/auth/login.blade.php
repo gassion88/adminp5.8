@@ -9,7 +9,7 @@
         $icon = \App\CentralLogics\Helpers::get_business_settings('icon', false);
     @endphp
     <!-- Title -->
-    <title>{{__('messages.admin')}}  {{__('messages.login')}} | {{$app_name??'STACKFOOD'}}</title>
+    <title>{{ translate('messages.admin_login') }} | {{$app_name??translate('STACKFOOD')}}</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="{{asset($icon ? 'storage/app/public/business/'.$icon : 'public/favicon.ico')}}">
@@ -47,10 +47,10 @@
                 </a>
                 <div class="text-center">
                     <div class="auth-header mb-5">
-                        <h2 class="signin-txt">{{__('messages.admin')}} {{__('messages.signin')}}</h2>
-                        <p class="text-capitalize">{{__('messages.want')}} {{__('messages.to')}} {{__('messages.login')}} {{__('messages.your')}} {{__('messages.vendors')}}?
+                        <h2 class="signin-txt">{{ translate('messages.admin_or_employee_signin')}}</h2>
+                        <p class="text-capitalize">{{ translate('Want To Login Your Restaurants') }}?
                             <a href="{{route('vendor.auth.login')}}" class="text-yellow">
-                                {{__('messages.vendor')}} {{__('messages.login')}}
+                                {{ translate('Restaurant Login') }}
                             </a>
                         </p>
                         {{--<a class="btn btn-lg btn-block btn-white mb-4" href="#">
@@ -65,14 +65,14 @@
                 </div>
                 <!-- Content -->
                 <label class="badge badge-soft-success float-right initial-1">
-                    {{__('messages.software_version')}} : {{env('SOFTWARE_VERSION')}}
+                    {{translate('messages.software_version')}} : {{env('SOFTWARE_VERSION')}}
                 </label>
                 <!-- Form -->
                 <form class="login_form" action="{{route('admin.auth.login')}}" method="post" id="form-id">
                     @csrf
                     <!-- Form Group -->
                     <div class="js-form-message form-group mb-2">
-                        <label class="form-label text-capitalize" for="signinSrEmail">{{__('messages.your')}} {{__('messages.email')}}</label>
+                        <label class="form-label text-capitalize" for="signinSrEmail">{{translate('messages.your')}} {{translate('messages.email')}}</label>
                         <input type="email" class="form-control form-control-lg" name="email" id="signinSrEmail"
                             tabindex="1" aria-label="email@address.com"
                             required data-msg="Please enter a valid email address.">
@@ -84,14 +84,14 @@
                     <div class="js-form-message form-group">
                         <label class="form-label text-capitalize" for="signupSrPassword" tabindex="0">
                             <span class="d-flex justify-content-between align-items-center">
-                            {{__('messages.password')}}
+                            {{translate('messages.password')}}
                             </span>
                         </label>
                         <div class="input-group input-group-merge">
                             <input type="password" class="js-toggle-password form-control form-control-lg"
                                 name="password" id="signupSrPassword"
-                                aria-label="{{__('messages.password_length_placeholder',['length'=>'6+'])}}" required
-                                data-msg="{{__('messages.invalid_password_warning')}}"
+                                aria-label="{{translate('messages.password_length_placeholder',['length'=>'6+'])}}" required
+                                data-msg="{{translate('messages.invalid_password_warning')}}"
                                 data-hs-toggle-password-options='{
                                             "target": "#changePassTarget",
                                     "defaultClass": "tio-hidden-outlined",
@@ -115,7 +115,7 @@
                             <input type="checkbox" class="custom-control-input" id="termsCheckbox"
                                 name="remember">
                             <label class="custom-control-label text-muted" for="termsCheckbox">
-                                {{__('messages.remember_me')}}
+                                {{translate('messages.remember_me')}}
                             </label>
                         </div>
                     </div>
@@ -130,7 +130,7 @@
                         <div class="row py-2">
                             <div class="col-6 pr-0">
                                 <input type="text" class="form-control form-control-lg form-recapcha" name="custome_recaptcha"
-                                    id="custome_recaptcha" required placeholder="{{\__('Enter recaptcha value')}}" autocomplete="off" value="{{env('APP_DEBUG')?session('six_captcha'):''}}">
+                                    id="custome_recaptcha" required placeholder="{{translate('Enter recaptcha value')}}" autocomplete="off" value="{{env('APP_DEBUG')?session('six_captcha'):''}}">
                             </div>
                             <div class="col-6">
                                 <div class="capcha--img bg-white rounded">
@@ -140,7 +140,7 @@
                         </div>
                     @endif
 
-                    <button type="submit" class="btn btn-lg btn-block btn-primary">{{__('messages.sign_in')}}</button>
+                    <button type="submit" class="btn btn-lg btn-block btn-primary">{{translate('messages.sign_in')}}</button>
                 </form>
                 <!-- End Form -->
 
@@ -218,7 +218,7 @@
 
             if (response.length === 0) {
                 e.preventDefault();
-                toastr.error("{{__('messages.Please check the recaptcha')}}");
+                toastr.error("{{translate('messages.Please check the recaptcha')}}");
             }
         });
     </script>

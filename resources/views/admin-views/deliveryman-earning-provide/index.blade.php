@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title',__('messages.deliverymen_earning_provide'))
+@section('title',translate('messages.deliverymen_earning_provide'))
 
 @push('css_or_js')
 
@@ -11,7 +11,7 @@
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-2">
-        <!-- <h4 class=" mb-0 text-black-50">{{__('messages.account_transaction')}}</h4> -->
+        <!-- <h4 class=" mb-0 text-black-50">{{translate('messages.account_transaction')}}</h4> -->
     </div>
     <div class="card">
         <div class="card-header">
@@ -20,7 +20,7 @@
                     <i class="tio-money"></i>
                 </san>
                 <span>
-                    {{__('messages.provide')}} {{__('messages.deliverymen')}} {{__('messages.earning')}}
+                    {{translate('Provide Delivery Man Earning')}}
                 </span>
             </h4>
         </div>
@@ -30,16 +30,16 @@
                 <div class="row">
                     <div class="col-sm-6 col-12">
                         <div class="form-group">
-                            <label class="input-label" for="deliveryman">{{__('messages.deliveryman')}}<span class="input-label-secondary"></span></label>
-                            <select id="deliveryman" name="deliveryman_id" data-placeholder="{{__('messages.select')}} {{__('messages.deliveryman')}}" onchange="getAccountData('{{url('/')}}/admin/delivery-man/get-account-data/',this.value,'deliveryman')" class="form-control h--45px" title="Select deliveryman">
+                            <label class="input-label" for="deliveryman">{{translate('messages.deliveryman')}}<span class="input-label-secondary"></span></label>
+                            <select id="deliveryman" name="deliveryman_id" data-placeholder="{{translate('messages.select')}} {{translate('messages.deliveryman')}}" onchange="getAccountData('{{url('/')}}/admin/delivery-man/get-account-data/',this.value,'deliveryman')" class="form-control h--45px" title="Select deliveryman">
 
                             </select>
                         </div>
                     </div>
                     <div class="col-sm-6 col-12">
                         <div class="form-group">
-                            <label class="input-label" for="amount">{{__('messages.amount')}}<span class="input-label-secondary" id="account_info"></span></label>
-                            <input class="form-control h--45px" type="number" min="1" step="0.01" name="amount" id="amount" max="999999999999.99" placeholder="Ex : 100">
+                            <label class="input-label" for="amount">{{translate('messages.amount')}}<span class="input-label-secondary" id="account_info"></span></label>
+                            <input class="form-control h--45px" type="number" min="1" step="0.01" name="amount" id="amount" max="999999999999.99" placeholder="{{ translate('Ex : 100') }}">
                         </div>
                     </div>
                 </div>
@@ -47,21 +47,21 @@
                 <div class="row">
                     <div class="col-sm-6 col-12">
                         <div class="form-group">
-                            <label class="input-label" for="method">{{__('messages.method')}}<span class="input-label-secondary"></span></label>
-                            <input class="form-control h--45px" type="text" name="method" id="method" required maxlength="191" placeholder="Ex : Cash">
+                            <label class="input-label" for="method">{{translate('messages.method')}}<span class="input-label-secondary"></span></label>
+                            <input class="form-control h--45px" type="text" name="method" id="method" required maxlength="191" placeholder="{{ translate('Ex : Cash') }}">
                         </div>
                     </div>
                     <div class="col-sm-6 col-12">
                         <div class="form-group">
-                            <label class="input-label" for="ref">{{__('messages.reference')}}<span class="input-label-secondary"></span></label>
-                            <input  class="form-control h--45px" type="text" name="ref" id="ref" maxlength="191" placeholder="Ex : Collect Cash">
+                            <label class="input-label" for="ref">{{translate('messages.reference')}}<span class="input-label-secondary"></span></label>
+                            <input  class="form-control h--45px" type="text" name="ref" id="ref" maxlength="191" placeholder="{{ translate('Ex : Collect Cash') }}">
                         </div>
                     </div>
                 </div>
                 <div class="form-group mb-0">
                     <div class="btn--container justify-content-end">
-                        <button class="btn btn--reset" type="reset">{{__('messages.reset')}}</button>
-                        <button class="btn btn--primary" type="submit">{{__('messages.save')}}</button>
+                        <button class="btn btn--reset" type="reset">{{translate('messages.reset')}}</button>
+                        <button class="btn btn--primary" type="submit">{{translate('messages.save')}}</button>
                     </div>
                 </div>
             </form>
@@ -76,12 +76,12 @@
                             <span class="card-header-icon">
                                 <i class="tio-file-text-outlined"></i>
                             </span>
-                            <span>{{ __('messages.deliverymen_earning_provide')}} {{ __('messages.table')}}</span>
+                            <span>{{ translate('messages.deliverymen_earning_provide')}} {{ translate('messages.table')}}</span>
                         </h5>
                         <!-- Static Search Form -->
                         <form id="search-form" action="javascript:">
                             <div class="input--group input-group">
-                                <input type="text" name="search" class="form-control" placeholder="Ex: Search here by Name...">
+                                <input type="text" name="search" class="form-control" placeholder="{{ translate('Ex: Search here by Name...') }}">
                                 <button type="submit" class="btn btn--secondary"><i class="tio-search"></i></button>
                             </div>
                         </form>
@@ -94,43 +94,43 @@
                                     "target": "#usersExportDropdown",
                                     "type": "css-animation"
                                 }'>
-                                <i class="tio-download-to mr-1"></i> {{__('messages.export')}}
+                                <i class="tio-download-to mr-1"></i> {{translate('messages.export')}}
                             </a>
 
                             <div id="usersExportDropdown"
                                     class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-sm-right">
-                                {{--<span class="dropdown-header">{{__('messages.options')}}</span>
+                                {{--<span class="dropdown-header">{{translate('messages.options')}}</span>
                                 <a id="export-copy" class="dropdown-item" href="javascript:;">
                                     <img class="avatar avatar-xss avatar-4by3 mr-2"
                                             src="{{asset('public/assets/admin')}}/svg/illustrations/copy.svg"
                                             alt="Image Description">
-                                    {{__('messages.copy')}}
+                                    {{translate('messages.copy')}}
                                 </a>
                                 <a id="export-print" class="dropdown-item" href="javascript:;">
                                     <img class="avatar avatar-xss avatar-4by3 mr-2"
                                             src="{{asset('public/assets/admin')}}/svg/illustrations/print.svg"
                                             alt="Image Description">
-                                    {{__('messages.print')}}
+                                    {{translate('messages.print')}}
                                 </a>
                                 <div class="dropdown-divider"></div>--}}
-                                <span class="dropdown-header">{{__('messages.download')}} {{__('messages.options')}}</span>
+                                <span class="dropdown-header">{{translate('messages.download')}} {{translate('messages.options')}}</span>
                                 <a id="export-excel" class="dropdown-item" href="{{route('admin.export-deliveryman-earning', ['type'=>'excel'])}}">
                                     <img class="avatar avatar-xss avatar-4by3 mr-2"
                                             src="{{asset('public/assets/admin')}}/svg/components/excel.svg"
                                             alt="Image Description">
-                                    {{__('messages.excel')}}
+                                    {{translate('messages.excel')}}
                                 </a>
                                 <a id="export-csv" class="dropdown-item" href="{{route('admin.export-deliveryman-earning', ['type'=>'csv'])}}">
                                     <img class="avatar avatar-xss avatar-4by3 mr-2"
                                             src="{{asset('public/assets/admin')}}/svg/components/placeholder-csv-format.svg"
                                             alt="Image Description">
-                                    .{{__('messages.csv')}}
+                                    .{{translate('messages.csv')}}
                                 </a>
                                 {{--<a id="export-pdf" class="dropdown-item" href="javascript:;">
                                     <img class="avatar avatar-xss avatar-4by3 mr-2"
                                             src="{{asset('public/assets/admin')}}/svg/components/pdf.svg"
                                             alt="Image Description">
-                                    {{__('messages.pdf')}}
+                                    {{translate('messages.pdf')}}
                                 </a>--}}
                             </div>
                         </div>
@@ -143,19 +143,19 @@
                             class="table table-hover table-borderless table-thead-bordered table-nowrap table-align-middle card-table">
                             <thead class="thead-light">
                                 <tr>
-                                    <th>SL</th>
-                                    <th>{{__('messages.name')}}</th>
-                                    <th>{{__('messages.received_at')}}</th>
-                                    <th>{{__('messages.amount')}}</th>
-                                    <th>{{__('messages.method')}}</th>
-                                    <th>{{__('messages.reference')}}</th>
+                                    <th>{{ translate('messages.sl') }}</th>
+                                    <th>{{translate('messages.name')}}</th>
+                                    <th>{{translate('messages.received_at')}}</th>
+                                    <th>{{translate('messages.amount')}}</th>
+                                    <th>{{translate('messages.method')}}</th>
+                                    <th>{{translate('messages.reference')}}</th>
                                 </tr>
                             </thead>
                             <tbody id="set-rows">
                             @foreach($provide_dm_earning as $k=>$at)
                                 <tr>
                                     <td scope="row">{{$k+$provide_dm_earning->firstItem()}}</td>
-                                    <td>@if($at->delivery_man)<a href="{{route('admin.delivery-man.preview', $at->delivery_man_id)}}">{{$at->delivery_man->f_name.' '.$at->delivery_man->l_name}}</a> @else <label class="text-capitalize text-danger">{{__('messages.deliveryman')}} {{__('messages.deleted')}}</label> @endif </td>
+                                    <td>@if($at->delivery_man)<a href="{{route('admin.delivery-man.preview', $at->delivery_man_id)}}">{{$at->delivery_man->f_name.' '.$at->delivery_man->l_name}}</a> @else <label class="text-capitalize text-danger">{{translate('messages.deliveryman')}} {{translate('messages.deleted')}}</label> @endif </td>
                                     <td>{{$at->created_at->format('Y-m-d '.config('timeformat'))}}</td>
                                     <td>{{$at['amount']}}</td>
                                     <td>{{$at['method']}}</td>
@@ -240,7 +240,7 @@
                 url: route+data_id,
                 dataType: 'json',
                 success: function (data) {
-                    $('#account_info').html('({{__('messages.cash_in_hand')}}: '+data.cash_in_hand+' {{__('messages.earning_balance')}}: '+data.earning_balance+')');
+                    $('#account_info').html('({{translate('messages.cash_in_hand')}}: '+data.cash_in_hand+' {{translate('messages.earning_balance')}}: '+data.earning_balance+')');
                 },
             });
     }
@@ -295,7 +295,7 @@
                         });
                     }
                 } else {
-                    toastr.success('{{__('messages.transaction_saved')}}', {
+                    toastr.success('{{translate('messages.transaction_saved')}}', {
                         CloseButton: true,
                         ProgressBar: true
                     });

@@ -39,7 +39,7 @@ class VendorPasswordResetController extends Controller
             }catch(\Exception $ex){
                 info($ex);
             }
-            
+
             return response()->json(['message' => 'Email sent successfully.'], 200);
         }
         return response()->json(['errors' => [
@@ -83,7 +83,7 @@ class VendorPasswordResetController extends Controller
         if(env('APP_MODE') == 'demo') {
             if ($request['reset_token'] != '1234') {
                 return response()->json(['errors' => [
-                    ['code' => 'invalid', 'message' => trans('messages.invalid_otp')]
+                    ['code' => 'invalid', 'message' => translate('messages.invalid_otp')]
                 ]], 400);
             }
             if ($request['password'] == $request['confirm_password']) {
@@ -113,7 +113,7 @@ class VendorPasswordResetController extends Controller
             ]], 401);
         }
         return response()->json(['errors' => [
-            ['code' => 'invalid', 'message' => trans('messages.invalid_otp')]
+            ['code' => 'invalid', 'message' => translate('messages.invalid_otp')]
         ]], 400);
     }
 }

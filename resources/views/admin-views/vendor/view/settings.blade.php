@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title',$restaurant->name."'s Settings")
+@section('title',$restaurant->name."'s".translate('messages.settings'))
 
 @push('css_or_js')
     <!-- Custom styles for this page -->
@@ -19,13 +19,13 @@
         </div>
         <!-- Nav Scroller -->
         <div class="js-nav-scroller hs-nav-scroller-horizontal">
-            <span class="hs-nav-scroller-arrow-prev" style="display: none;">
+            <span class="hs-nav-scroller-arrow-prev initial-hidden">
                 <a class="hs-nav-scroller-arrow-link" href="javascript:;">
                     <i class="tio-chevron-left"></i>
                 </a>
             </span>
 
-            <span class="hs-nav-scroller-arrow-next" style="display: none;">
+            <span class="hs-nav-scroller-arrow-next initial-hidden">
                 <a class="hs-nav-scroller-arrow-link" href="javascript:;">
                     <i class="tio-chevron-right"></i>
                 </a>
@@ -34,28 +34,28 @@
             <!-- Nav -->
             <ul class="nav nav-tabs page-header-tabs">
             <li class="nav-item">
-                    <a class="nav-link" href="{{route('admin.vendor.view', $restaurant->id)}}">{{__('messages.overview')}}</a>
+                    <a class="nav-link" href="{{route('admin.vendor.view', $restaurant->id)}}">{{translate('messages.overview')}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'order'])}}"  aria-disabled="true">{{__('messages.orders')}}</a>
+                    <a class="nav-link" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'order'])}}"  aria-disabled="true">{{translate('messages.orders')}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'product'])}}"  aria-disabled="true">{{__('messages.foods')}}</a>
+                    <a class="nav-link" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'product'])}}"  aria-disabled="true">{{translate('messages.foods')}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'reviews'])}}"  aria-disabled="true">{{__('messages.reviews')}}</a>
+                    <a class="nav-link" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'reviews'])}}"  aria-disabled="true">{{translate('messages.reviews')}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'discount'])}}"  aria-disabled="true">{{__('discounts')}}</a>
+                    <a class="nav-link" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'discount'])}}"  aria-disabled="true">{{translate('discounts')}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'transaction'])}}"  aria-disabled="true">{{__('messages.transactions')}}</a>
+                    <a class="nav-link" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'transaction'])}}"  aria-disabled="true">{{translate('messages.transactions')}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'settings'])}}"  aria-disabled="true">{{__('messages.settings')}}</a>
+                    <a class="nav-link active" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'settings'])}}"  aria-disabled="true">{{translate('messages.settings')}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'conversations'])}}"  aria-disabled="true">{{__('messages.conversations')}}</a>
+                    <a class="nav-link" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'conversations'])}}"  aria-disabled="true">{{translate('messages.conversations')}}</a>
                 </li>
             </ul>
             <!-- End Nav -->
@@ -68,7 +68,7 @@
         <div class="card-header">
             <h5 class="card-title">
                 <span class="card-header-icon"><i class="tio-fastfood"></i></span>
-                <span>{{__('messages.restaurant')}} {{__('messages.settings')}}</span>
+                <span>{{translate('messages.restaurant')}} {{translate('messages.settings')}}</span>
             </h5>
         </div>
         <div class="card-body">
@@ -132,7 +132,7 @@ the restaurant web panel/ app won't get the access for managing foods.
                         <label class="toggle-switch toggle-switch-sm d-flex justify-content-between border  rounded px-3 form-control" for="schedule_order">
                             <span class="pr-2 d-flex">
                                 <span class="line--limit-1">
-                                    {{__('messages.scheduled')}} {{__('messages.order')}} {{translate('messages.option')}}
+                                    {{translate('messages.scheduled')}} {{translate('messages.order')}} {{translate('messages.option')}}
                                 </span>
                                 <span  data-toggle="tooltip" data-placement="right" data-original-title="{{translate(' If this status is turned on, the customer is able to place a scheduled order for this restaurant.')}}" class="input-label-secondary">
                                     <i class="tio-info-outined"></i>
@@ -169,7 +169,7 @@ the restaurant web panel/ app won't get the access for managing foods.
                         <label class="toggle-switch toggle-switch-sm d-flex justify-content-between border  rounded px-3 form-control" for="free_delivery">
                             <span class="pr-2 d-flex">
                                 <span class="line--limit-1">
-                                    {{__('messages.free_delivery')}} :
+                                    {{translate('messages.free_delivery')}} :
                                 </span>
                                 <span  data-toggle="tooltip" data-placement="right" data-original-title="{{translate(' If this option is on, customers will get free delivery for this restaurant. ')}}" class="input-label-secondary">
                                     <i class="tio-info-outined"></i>
@@ -209,7 +209,7 @@ the restaurant web panel/ app won't get the access for managing foods.
                         <label class="toggle-switch toggle-switch-sm d-flex justify-content-between border  rounded px-3 form-control" for="take_away">
                             <span class="pr-2 d-flex">
                                 <span class="line--limit-1">
-                                    {{__('messages.take_away')}}:
+                                    {{translate('messages.take_away')}}:
                                 </span>
                                 <span  data-toggle="tooltip" data-placement="right" data-original-title='{{translate("By disabling this option, customers can't place self-pickup / take-away orders.")}}' class="input-label-secondary">
                                     <i class="tio-info-outined"></i>
@@ -226,7 +226,7 @@ the restaurant web panel/ app won't get the access for managing foods.
                     <div class="col-xl-4 col-md-4 col-sm-6">
                         <div class="form-group mb-0">
                             <label class="toggle-switch toggle-switch-sm d-flex justify-content-between border  rounded px-3 form-control" for="veg">
-                            <span class="pr-2 text-capitalize">{{__('messages.veg')}}:</span>
+                            <span class="pr-2 text-capitalize">{{translate('messages.veg')}}:</span>
                                 <input type="checkbox" class="toggle-switch-input" onclick="location.href='{{route('admin.vendor.toggle-settings',[$restaurant->id,$restaurant->veg?0:1, 'veg'])}}'" id="veg" {{$restaurant->veg?'checked':''}}>
                                 <span class="toggle-switch-label">
                                     <span class="toggle-switch-indicator"></span>
@@ -237,7 +237,7 @@ the restaurant web panel/ app won't get the access for managing foods.
                     <div class="col-xl-4 col-md-4 col-sm-6">
                         <div class="form-group mb-0">
                             <label class="toggle-switch toggle-switch-sm d-flex justify-content-between border  rounded px-3 form-control" for="non_veg">
-                            <span class="pr-2 text-capitalize">{{__('messages.non_veg')}}:</span>
+                            <span class="pr-2 text-capitalize">{{translate('messages.non_veg')}}:</span>
                                 <input type="checkbox" class="toggle-switch-input" onclick="location.href='{{route('admin.vendor.toggle-settings',[$restaurant->id,$restaurant->non_veg?0:1, 'non_veg'])}}'" id="non_veg" {{$restaurant->non_veg?'checked':''}}>
                                 <span class="toggle-switch-label">
                                     <span class="toggle-switch-indicator"></span>
@@ -254,7 +254,7 @@ the restaurant web panel/ app won't get the access for managing foods.
                 <div class="row g-2 mt-4">
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label class="input-label text-capitalize">Restaurant Type</label>
+                            <label class="input-label text-capitalize">{{ translate('Restaurant Type') }}</label>
                             @php($restaurant_type = \App\Models\Restaurant::where(['id'=>$restaurant->id])->select('veg','non_veg')->first())
                             <div class="resturant-type-group border">
                                 <label class="form-check form--check mr-2 mr-md-4">
@@ -283,35 +283,35 @@ the restaurant web panel/ app won't get the access for managing foods.
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
-                            <label class="input-label text-capitalize" for="title">{{__('messages.minimum')}} {{__('messages.order')}} {{__('messages.amount')}}</label>
-                            <input type="number" name="minimum_order" step="0.01" min="0" max="100000" class="form-control" placeholder="Ex: 5" value="{{$restaurant->minimum_order??'0'}}">
+                            <label class="input-label text-capitalize" for="title">{{translate('messages.minimum')}} {{translate('messages.order')}} {{translate('messages.amount')}}</label>
+                            <input type="number" name="minimum_order" step="0.01" min="0" max="100000" class="form-control" placeholder="{{ translate('messages.Ex :') }} 5" value="{{$restaurant->minimum_order??'0'}}">
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
-                            <label class="d-flex justify-content-between switch toggle-switch-sm text-dark" for="tax">
-                                <span>{{__('messages.vat/tax')}}(%)</span>
+                            <label class="text-dark d-block">
+                                <span>{{translate('messages.vat/tax')}}(%)</span>
                             </label>
-                            <input type="number" id="tax" min="0" max="10000" step="0.01" name="tax" class="form-control" placeholder="Ex: 5" required value="{{$restaurant->tax??'0'}}" {{isset($restaurant->tax)?'':'readonly'}}>
+                            <input type="number" id="tax" min="0" max="10000" step="0.01" name="tax" class="form-control" placeholder="{{ translate('messages.Ex :') }} 5" required value="{{$restaurant->tax??'0'}}" {{isset($restaurant->tax)?'':'readonly'}}>
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
-                            <label class="input-label" for="minimum_delivery_time">{{__('messages.minimum_delivery_time')}}</label>
-                            <input type="text" name="minimum_delivery_time" id="minimum_delivery_time" class="form-control" placeholder="Ex: 5" pattern="^[0-9]{2}$" required value="{{explode('-',$restaurant->delivery_time)[0]}}">
+                            <label class="input-label" for="minimum_delivery_time">{{translate('messages.minimum_delivery_time')}}</label>
+                            <input type="text" name="minimum_delivery_time" id="minimum_delivery_time" class="form-control" placeholder="{{ translate('messages.Ex :') }} 5" pattern="^[0-9]{2}$" required value="{{explode('-',$restaurant->delivery_time)[0]}}">
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
-                            <label class="input-label" for="maximum_delivery_time">{{__('messages.maximum_delivery_time')}}</label>
-                            <input type="text" name="maximum_delivery_time" id="maximum_delivery_time" class="form-control" placeholder="Ex: 5" pattern="[0-9]{2}" required value="{{explode('-',$restaurant->delivery_time)[1]}}">
+                            <label class="input-label" for="maximum_delivery_time">{{translate('messages.maximum_delivery_time')}}</label>
+                            <input type="text" name="maximum_delivery_time" id="maximum_delivery_time" class="form-control" placeholder="{{ translate('messages.Ex :') }} 5" pattern="[0-9]{2}" required value="{{explode('-',$restaurant->delivery_time)[1]}}">
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6">
                         <div class="form-group">
                             <label class="toggle-switch toggle-switch-sm d-flex justify-content-between input-label mb-1" for="comission_status">
                                 <span class="form-check-label">
-                                    {{__('messages.admin_commission')}}(%)
+                                    {{translate('messages.admin_commission')}}(%)
                                 </span>
                                 <input type="checkbox" class="toggle-switch-input" name="comission_status" id="comission_status" value="1" {{isset($restaurant->comission)?'checked':''}}>
                                 <span class="toggle-switch-label text">
@@ -323,7 +323,7 @@ the restaurant web panel/ app won't get the access for managing foods.
                     </div>
                 </div>
                 <div class="text-right">
-                    <button type="submit" class="btn btn--primary">{{__('messages.save')}} {{__('messages.changes')}}</button>
+                    <button type="submit" class="btn btn--primary">{{translate('messages.save')}} {{translate('messages.changes')}}</button>
                 </div>
             </form>
         </div>
@@ -334,7 +334,7 @@ the restaurant web panel/ app won't get the access for managing foods.
                 <span class="card-header-icon">
                     <i class="tio-clock"></i>
                 </span>
-                <span>{{__('messages.Daily time schedule')}}</span>
+                <span>{{translate('messages.Daily time schedule')}}</span>
             </h5>
         </div>
         <div class="card-body" id="schedule">
@@ -349,7 +349,7 @@ the restaurant web panel/ app won't get the access for managing foods.
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{__('messages.Create Schedule')}}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{translate('messages.Create Schedule')}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -360,15 +360,15 @@ the restaurant web panel/ app won't get the access for managing foods.
                     <input type="hidden" name="day" id="day_id_input">
                     <input type="hidden" name="restaurant_id" value="{{$restaurant->id}}">
                     <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">{{__('messages.Start time')}}:</label>
+                        <label for="recipient-name" class="col-form-label">{{translate('messages.Start time')}}:</label>
                         <input type="time" class="form-control" name="start_time" required>
                     </div>
                     <div class="form-group">
-                        <label for="message-text" class="col-form-label">{{__('messages.End time')}}:</label>
+                        <label for="message-text" class="col-form-label">{{translate('messages.End time')}}:</label>
                         <input type="time" class="form-control" name="end_time" required>
                     </div>
                     <div class="text-right">
-                        <button type="submit" class="btn btn--primary">{{__('messages.Submit')}}</button>
+                        <button type="submit" class="btn btn--primary">{{translate('messages.Submit')}}</button>
                     </div>
                 </form>
             </div>
@@ -390,7 +390,7 @@ the restaurant web panel/ app won't get the access for managing foods.
                 var day_name = button.data('day');
                 var day_id = button.data('dayid');
                 var modal = $(this);
-                modal.find('.modal-title').text('{{__('messages.Create Schedule For ')}} ' + day_name);
+                modal.find('.modal-title').text('{{translate('messages.Create Schedule For ')}} ' + day_name);
                 modal.find('.modal-body input[name=day]').val(day_id);
             })
         });
@@ -448,14 +448,14 @@ the restaurant web panel/ app won't get the access for managing foods.
 
         function delete_schedule(route) {
             Swal.fire({
-                title: '{{__('messages.are_you_sure')}}',
-                text: '{{__('messages.You want to remove this schedule')}}',
+                title: '{{translate('messages.are_you_sure')}}',
+                text: '{{translate('messages.You want to remove this schedule')}}',
                 type: 'warning',
                 showCancelButton: true,
                 cancelButtonColor: 'default',
                 confirmButtonColor: '#377dff',
-                cancelButtonText: '{{__('messages.no')}}',
-                confirmButtonText: '{{__('messages.yes')}}',
+                cancelButtonText: '{{translate('messages.no')}}',
+                confirmButtonText: '{{translate('messages.yes')}}',
                 reverseButtons: true
             }).then((result) => {
                 if (result.value) {
@@ -474,14 +474,14 @@ the restaurant web panel/ app won't get the access for managing foods.
                                 }
                             } else {
                                 $('#schedule').empty().html(data.view);
-                                toastr.success('{{__('messages.Schedule removed successfully')}}', {
+                                toastr.success('{{translate('messages.Schedule removed successfully')}}', {
                                     CloseButton: true,
                                     ProgressBar: true
                                 });
                             }
                         },
                         error: function(XMLHttpRequest, textStatus, errorThrown) {
-                            toastr.error('{{__('messages.Schedule not found')}}', {
+                            toastr.error('{{translate('messages.Schedule not found')}}', {
                                 CloseButton: true,
                                 ProgressBar: true
                             });
@@ -522,7 +522,7 @@ the restaurant web panel/ app won't get the access for managing foods.
                     } else {
                         $('#schedule').empty().html(data.view);
                         $('#exampleModal').modal('hide');
-                        toastr.success('{{__('messages.Schedule added successfully')}}', {
+                        toastr.success('{{translate('messages.Schedule added successfully')}}', {
                             CloseButton: true,
                             ProgressBar: true
                         });

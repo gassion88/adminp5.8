@@ -38,7 +38,7 @@ class DatabaseSettingController extends Controller
         $tables = (array)$request->tables;
 
         if (count($tables) == 0) {
-            Toastr::error('No Table Updated');
+            Toastr::error(translate('No Table Updated'));
             return back();
         }
 
@@ -49,11 +49,11 @@ class DatabaseSettingController extends Controller
                 }
             });
         } catch (\Exception $exception) {
-            Toastr::error('Failed to update!');
+            Toastr::error(translate('Failed to update!'));
             return back();
         }
 
-        Toastr::success('Updated successfully!');
+        Toastr::success(translate('messages.updated_successfully'));
         return back();
     }
 }

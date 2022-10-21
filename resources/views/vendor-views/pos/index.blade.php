@@ -1,6 +1,6 @@
 @extends('layouts.vendor.app')
 
-@section('title','POS')
+@section('title',translate('messages.pos'))
 
 @push('css_or_js')
 
@@ -23,8 +23,8 @@
                         <div class="row g-2 mb-4">
                             <div class="col-sm-6">
                                 <div class="input-group">
-                                    <select name="category" id="category" class="form-control js-select2-custom" title="{{__('messages.select')}} {{__('messages.category')}}" onchange="set_category_filter(this.value)">
-                                        <option value="">{{__('messages.all_categories')}}</option>
+                                    <select name="category" id="category" class="form-control js-select2-custom" title="{{translate('messages.select')}} {{translate('messages.category')}}" onchange="set_category_filter(this.value)">
+                                        <option value="">{{translate('messages.all_categories')}}</option>
                                         @foreach ($categories as $item)
                                         <option value="{{$item->id}}" {{$category==$item->id?'selected':''}}>{{Str::limit($item->name,20 ,'...')}}</option>
                                         @endforeach
@@ -32,7 +32,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-6">
-                                <form id="search-form" class="header-item" style="max-width:100%;width:100%">
+                                <form id="search-form" class="header-item w-100 mw-100">
                                     <!-- Search -->
                                     <div class="input-group input-group-merge input-group-flush w-100">
                                         <div class="input-group-prepend pl-2">
@@ -40,7 +40,7 @@
                                                 <i class="tio-search"></i>
                                             </div>
                                         </div>
-                                        <input id="datatableSearch" type="search" value="{{$keyword?$keyword:''}}" name="search" class="form-control flex-grow-1 pl-5 border rounded h--45x" placeholder="Ex : Search Food Name" aria-label="{{__('messages.search_here')}}">
+                                        <input id="datatableSearch" type="search" value="{{$keyword?$keyword:''}}" name="search" class="form-control flex-grow-1 pl-5 border rounded h--45x" placeholder="{{ translate('messages.Ex : Search Food Name') }}" aria-label="{{translate('messages.search_here')}}">
                                     </div>
                                     <!-- End Search -->
                                 </form>
@@ -86,7 +86,7 @@
                     </div>
                     <div class="w-100">
                         <div class="d-flex flex-wrap flex-row p-2 add--customer-btn">
-                            <select id='customer' name="customer_id" data-placeholder="{{__('messages.walk_in_customer')}}" class="js-data-example-ajax form-control"></select>
+                            <select id='customer' name="customer_id" data-placeholder="{{translate('messages.walk_in_customer')}}" class="js-data-example-ajax form-control"></select>
                             <button class="btn btn--primary" data-toggle="modal" data-target="#add-customer">{{ translate('Add New Customer') }}</button>
                         </div>
                         @if ($restaurant_data->self_delivery_system == 1)
@@ -128,21 +128,21 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">{{__('messages.print')}} {{__('messages.invoice')}}</h5>
+                        <h5 class="modal-title">{{translate('messages.print')}} {{translate('messages.invoice')}}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body row" style="font-family: emoji;">
+                    <div class="modal-body row ff-emoji">
                         <div class="col-md-12">
                             <center>
                                 <input type="button" class="btn btn--primary non-printable" onclick="printDiv('printableArea')"
-                                    value="Proceed, If thermal printer is ready."/>
-                                <a href="{{url()->previous()}}" class="btn btn-danger non-printable">Back</a>
+                                    value="{{ translate('messages.Proceed, If thermal printer is ready.') }}"/>
+                                <a href="{{url()->previous()}}" class="btn btn-danger non-printable">{{ translate('messages.back') }}</a>
                             </center>
                             <hr class="non-printable">
                         </div>
-                        <div class="row" id="printableArea" style="margin: auto;">
+                        <div class="row m-auto" id="printableArea">
                             @include('vendor-views.pos.order.invoice')
                         </div>
 
@@ -168,31 +168,31 @@
                             <div class="row g-2">
                                 <div class="col-md-6">
                                     <label class="input-label" for="">{{ translate('Contact person name') }}</label>
-                                    <input type="text" class="form-control" name="contact_person_name" value="" placeholder="Ex: Jhone">
+                                    <input type="text" class="form-control" name="contact_person_name" value="" placeholder="{{ translate('messages.Ex :') }} Jhone">
                                 </div>
                                 <div class="col-md-6">
                                     <label class="input-label" for="">{{ translate('Contact Number') }}</label>
-                                    <input type="text" class="form-control" name="contact_person_number" value="" placeholder="Ex: +3264124565">
+                                    <input type="text" class="form-control" name="contact_person_number" value="" placeholder="{{ translate('messages.Ex :') }} +3264124565">
                                 </div>
                                 <div class="col-md-4">
                                     <label class="input-label" for="">{{ translate('Road') }}</label>
-                                    <input type="text" class="form-control" name="road" value="" placeholder="Ex: 4th">
+                                    <input type="text" class="form-control" name="road" value="" placeholder="{{ translate('messages.Ex :') }} 4th">
                                 </div>
                                 <div class="col-md-4">
                                     <label class="input-label" for="">{{ translate('House') }}</label>
-                                    <input type="text" class="form-control" name="house" value="" placeholder="Ex: 45/C">
+                                    <input type="text" class="form-control" name="house" value="" placeholder="{{ translate('messages.Ex :') }} 45/C">
                                 </div>
                                 <div class="col-md-4">
                                     <label class="input-label" for="">{{ translate('Floor') }}</label>
-                                    <input type="text" class="form-control" name="floor" value="" placeholder="Ex: 1A">
+                                    <input type="text" class="form-control" name="floor" value="" placeholder="{{ translate('messages.Ex :') }} 1A">
                                 </div>
 
                                 <div class="col-md-12">
                                     <label class="input-label" for="">{{ translate('Address') }}</label>
-                                    <textarea name="address" class="form-control" cols="30" rows="3" placeholder="Ex: address"></textarea>
+                                    <textarea name="address" class="form-control" cols="30" rows="3" placeholder="{{ translate('messages.Ex :') }} address"></textarea>
                                 </div>
                                 <div class="col-12">
-                                    <div class="mb-3" id="map" style="height: 200px;"></div>
+                                    <div class="mb-3 h-200px" id="map"></div>
                                 </div>
                             </div>
                             <div class="btn--container justify-content-end">
@@ -218,7 +218,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ route('admin.pos.customer-store') }}" method="post" id="product_form">
+                        <form action="{{ route('vendor.pos.customer-store') }}" method="post" id="product_form">
                             @csrf
                             <div class="row pl-2">
                                 <div class="col-12 col-lg-6">
@@ -498,7 +498,7 @@
 @if ($errors->any())
     <script>
         @foreach($errors->all() as $error)
-        toastr.error('{{$error}}', Error, {
+        toastr.error('{{translate($error)}}', Error, {
             CloseButton: true,
             ProgressBar: true
         });
@@ -659,7 +659,7 @@
                 Swal.fire({
                     icon: 'error',
                     title: 'Cart',
-                    text: 'Sorry, the minimum value was reached'
+                    text: '{{ translate('Sorry, the minimum value was reached') }}'
                 });
                 $(this).val($(this).data('oldValue'));
             }
@@ -669,7 +669,7 @@
                 Swal.fire({
                     icon: 'error',
                     title: 'Cart',
-                    text: 'Sorry, stock limit exceeded.'
+                    text: '{{ translate('Sorry, stock limit exceeded.') }}'
                 });
                 $(this).val($(this).data('oldValue'));
             }
@@ -729,7 +729,7 @@
                         Swal.fire({
                             icon: 'info',
                             title: 'Cart',
-                            text: "{{__('messages.product_already_added_in_cart')}}"
+                            text: "{{translate('messages.product_already_added_in_cart')}}"
                         });
                         return false;
                     }
@@ -738,7 +738,7 @@
                         Swal.fire({
                             icon: 'info',
                             title: 'Cart',
-                            text: "{{__('messages.product_has_been_updated_in_cart')}}"
+                            text: "{{translate('messages.product_has_been_updated_in_cart')}}"
                         });
 
                         return false;
@@ -747,13 +747,13 @@
                         Swal.fire({
                             icon: 'error',
                             title: 'Cart',
-                            text: 'Sorry, product out of stock.'
+                            text: '{{ translate('messages.Sorry, product out of stock') }}'
                         });
                         return false;
                     }
                     $('.call-when-done').click();
 
-                    toastr.success('{{__('messages.product_has_been_added_in_cart')}}', {
+                    toastr.success('{{translate('messages.product_has_been_added_in_cart')}}', {
                         CloseButton: true,
                         ProgressBar: true
                     });
@@ -768,7 +768,7 @@
             Swal.fire({
                 type: 'info',
                 title: 'Cart',
-                text: 'Please choose all the options'
+                text: '{{ translate('Please choose all the options') }}'
             });
         }
     }
@@ -784,7 +784,7 @@
                 }
             } else {
                 updateCart();
-                toastr.info('{{__('messages.item_has_been_removed_from_cart')}}', {
+                toastr.info('{{translate('messages.item_has_been_removed_from_cart')}}', {
                     CloseButton: true,
                     ProgressBar: true
                 });
@@ -797,7 +797,7 @@
         $.post('{{ route('vendor.pos.emptyCart') }}', {_token: '{{ csrf_token() }}'}, function (data) {
             $('#del-add').empty();
             updateCart();
-            toastr.info('Item has been removed from cart', {
+            toastr.info('{{ translate('messages.item_has_been_removed_from_cart') }}', {
                 CloseButton: true,
                 ProgressBar: true
             });
@@ -890,7 +890,7 @@
             Swal.fire({
                 icon: 'error',
                 title: 'Cart',
-                text: 'Sorry, the minimum value was reached'
+                text: '{{ translate('Sorry, the minimum value was reached') }}'
             });
             element.val(element.data('oldValue'));
         }

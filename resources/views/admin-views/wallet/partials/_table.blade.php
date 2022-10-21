@@ -30,10 +30,10 @@
             class="btn btn-sm btn--primary btn-outline-primary action-btn"><i class="tio-invisible"></i>
             </a>
             @else
-            {{__('messages.restaurant').' '.__('messages.deleted') }}
+            {{translate('messages.restaurant').' '.translate('messages.deleted') }}
             @endif
             {{--<a class="btn btn-sm btn--warning btn-outline-warning action-btn" href="javascript:"
-            onclick="form_alert('withdraw-{{$wr['id']}}','Want to delete this  ?')">{{__('messages.Delete')}}</a>
+            onclick="form_alert('withdraw-{{$wr['id']}}','Want to delete this  ?')">{{translate('messages.Delete')}}</a>
             <form action="{{route('vendor.withdraw.close',[$wr['id']])}}"
                 method="post" id="withdraw-{{$wr['id']}}">
                 @csrf @method('delete')

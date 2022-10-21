@@ -20,13 +20,13 @@
                 <div class="card">
                     <div class="card-header py-2 border-0">
                         <div class="search--button-wrapper">
-                            <h5 class="card-title">{{ __('messages.withdraw')}} {{ __('messages.request')}} {{ __('messages.table')}} <span id="itemCount"
+                            <h5 class="card-title">{{ translate('Withdraw Request Table')}} <span id="itemCount"
                                     class="badge badge-soft-dark ml-2">{{$withdraw_req->total()}}</span></h5>
 
                             <form action="javascript:" id="search-form" class="my-2 ml-auto mr-sm-2 mr-xl-4 ml-sm-auto flex-grow-1 flex-grow-sm-0">
                                 <!-- Search -->
                                 <div class="input--group input-group input-group-merge input-group-flush">
-                                    <input id="datatableSearch_" type="search" name="search" class="form-control" placeholder="Ex : Search by Restaurant name of Phone number" aria-label="Search" required="">
+                                    <input id="datatableSearch_" type="search" name="search" class="form-control" placeholder="{{ translate('Ex : Search by Restaurant name of Phone number') }}" aria-label="Search" required="">
                                     <button type="submit" class="btn btn--secondary"><i class="tio-search"></i></button>
                                 </div>
                                 <!-- End Search -->
@@ -37,19 +37,19 @@
                                     class="custom-select">
                                 <option
                                     value="all" {{session()->has('withdraw_status_filter') && session('withdraw_status_filter') == 'all'?'selected':''}}>
-                                    {{__('messages.all')}}
+                                    {{translate('messages.all')}}
                                 </option>
                                 <option
                                     value="approved" {{session()->has('withdraw_status_filter') && session('withdraw_status_filter') == 'approved'?'selected':''}}>
-                                    {{__('messages.approved')}}
+                                    {{translate('messages.approved')}}
                                 </option>
                                 <option
                                     value="denied" {{session()->has('withdraw_status_filter') && session('withdraw_status_filter') == 'denied'?'selected':''}}>
-                                    {{__('messages.denied')}}
+                                    {{translate('messages.denied')}}
                                 </option>
                                 <option
                                     value="pending" {{session()->has('withdraw_status_filter') && session('withdraw_status_filter') == 'pending'?'selected':''}}>
-                                    {{__('messages.pending')}}
+                                    {{ translate('Pending') }}
                                 </option>
 
                             </select>
@@ -62,26 +62,26 @@
                                         "target": "#usersExportDropdown",
                                         "type": "css-animation"
                                     }'>
-                                    <i class="tio-download-to mr-1"></i> {{__('messages.export')}}
+                                    <i class="tio-download-to mr-1"></i> {{translate('messages.export')}}
                                 </a>
 
                                 <div id="usersExportDropdown"
                                         class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-sm-right">
-                                    {{--<span class="dropdown-header">{{__('messages.options')}}</span>
+                                    {{--<span class="dropdown-header">{{translate('messages.options')}}</span>
                                     <a id="export-copy" class="dropdown-item" href="javascript:;">
                                         <img class="avatar avatar-xss avatar-4by3 mr-2"
                                                 src="{{asset('public/assets/admin')}}/svg/illustrations/copy.svg"
                                                 alt="Image Description">
-                                        {{__('messages.copy')}}
+                                        {{translate('messages.copy')}}
                                     </a>
                                     <a id="export-print" class="dropdown-item" href="javascript:;">
                                         <img class="avatar avatar-xss avatar-4by3 mr-2"
                                                 src="{{asset('public/assets/admin')}}/svg/illustrations/print.svg"
                                                 alt="Image Description">
-                                        {{__('messages.print')}}
+                                        {{translate('messages.print')}}
                                     </a>
                                     <div class="dropdown-divider"></div>--}}
-                                    <span class="dropdown-header">{{__('messages.download')}} {{__('messages.options')}}</span>
+                                    <span class="dropdown-header">{{translate('messages.download')}} {{translate('messages.options')}}</span>
                                     {{-- <form action="{{route('admin.vendor.withdraw-list-export')}}" method="post">
                                         @csrf
                                         <input type="hidden" name="type" value="excel">
@@ -89,14 +89,14 @@
                                             <img class="avatar avatar-xss avatar-4by3 mr-2"
                                             src="{{asset('public/assets/admin')}}/svg/components/excel.svg"
                                             alt="Image Description">
-                                            {{__('messages.excel')}}
+                                            {{translate('messages.excel')}}
                                         </button>
                                     </form> --}}
                                     <a id="export-excel" class="dropdown-item" href="{{route('admin.vendor.withdraw-list-export', ['type'=>'excel'])}}">
                                         <img class="avatar avatar-xss avatar-4by3 mr-2"
                                                 src="{{asset('public/assets/admin')}}/svg/components/excel.svg"
                                                 alt="Image Description">
-                                        {{__('messages.excel')}}
+                                        {{translate('messages.excel')}}
                                     </a>
 
                                     {{-- <form action="{{route('admin.vendor.withdraw-list-export')}}" method="post">
@@ -106,40 +106,39 @@
                                             <img class="avatar avatar-xss avatar-4by3 mr-2"
                                             src="{{asset('public/assets/admin')}}/svg/components/placeholder-csv-format.svg"
                                             alt="Image Description">
-                                            .{{__('messages.csv')}}
+                                            .{{translate('messages.csv')}}
                                         </button>
                                     </form> --}}
                                     <a id="export-csv" class="dropdown-item" href="{{route('admin.vendor.withdraw-list-export', ['type'=>'csv'])}}">
                                         <img class="avatar avatar-xss avatar-4by3 mr-2"
                                                 src="{{asset('public/assets/admin')}}/svg/components/placeholder-csv-format.svg"
                                                 alt="Image Description">
-                                        .{{__('messages.csv')}}
+                                        .{{translate('messages.csv')}}
                                     </a>
                                     {{--<a id="export-pdf" class="dropdown-item" href="javascript:;">
                                         <img class="avatar avatar-xss avatar-4by3 mr-2"
                                                 src="{{asset('public/assets/admin')}}/svg/components/pdf.svg"
                                                 alt="Image Description">
-                                        {{__('messages.pdf')}}
+                                        {{translate('messages.pdf')}}
                                     </a>--}}
                                 </div>
                             </div>
                             <!-- Export Button Static -->
                         </div>
                     </div>
-                    <div class="card-body" style="padding: 0">
+                    <div class="card-body p-0">
                         <div class="table-responsive">
                             <table id="datatable"
-                                   class="table table-hover table-borderless table-thead-bordered table-nowrap table-align-middle card-table"
-                                   style="width: 100%">
+                                   class="table table-hover table-borderless table-thead-bordered table-nowrap table-align-middle card-table">
                                 <thead class="thead-light">
                                 <tr>
-                                    <th>SL</th>
-                                    <th>{{__('messages.amount')}}</th>
-                                    {{-- <th>{{__('messages.note')}}</th> --}}
-                                    <th>{{ __('messages.restaurant') }}</th>
-                                    <th>{{__('messages.request_time')}}</th>
-                                    <th>{{__('messages.status')}}</th>
-                                    <th class="text-center">{{__('messages.action')}}</th>
+                                    <th>{{ translate('messages.sl') }}</th>
+                                    <th>{{translate('messages.amount')}}</th>
+                                    {{-- <th>{{translate('messages.note')}}</th> --}}
+                                    <th>{{ translate('messages.restaurant') }}</th>
+                                    <th>{{translate('messages.request_time')}}</th>
+                                    <th>{{translate('messages.status')}}</th>
+                                    <th class="text-center">{{translate('messages.action')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody id="set-rows">
@@ -175,10 +174,10 @@
                                                 class="btn btn-sm btn--primary btn-outline-primary action-btn"><i class="tio-invisible"></i>
                                                 </a>
                                                 @else
-                                                {{__('messages.restaurant').' '.__('messages.deleted') }}
+                                                {{translate('messages.restaurant').' '.translate('messages.deleted') }}
                                                 @endif
                                                 {{--<a class="btn btn-sm btn--warning btn-outline-warning action-btn" href="javascript:"
-                                                onclick="form_alert('withdraw-{{$wr['id']}}','Want to delete this  ?')">{{__('messages.Delete')}}</a>
+                                                onclick="form_alert('withdraw-{{$wr['id']}}','Want to delete this  ?')">{{translate('messages.Delete')}}</a>
                                                 <form action="{{route('vendor.withdraw.close',[$wr['id']])}}"
                                                     method="post" id="withdraw-{{$wr['id']}}">
                                                     @csrf @method('delete')

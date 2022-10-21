@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title','Item Campaign Preview')
+@section('title',translate('Item Campaign Preview'))
 
 @push('css_or_js')
 
@@ -13,7 +13,7 @@
             <div class="d-flex flex-wrap justify-content-between">
                 <h1 class="page-header-title text-break">{{$campaign['title']}}</h1>
                 <a href="{{route('admin.campaign.edit',['item',$campaign['id']])}}" class="btn btn--primary float-right">
-                    <i class="tio-edit"></i> {{__('messages.edit')}}
+                    <i class="tio-edit"></i> {{translate('messages.edit')}}
                 </a>
             </div>
         </div>
@@ -29,19 +29,19 @@
                     </div>
                     <div class="col-md-6">
                         <span class="d-block mb-1">
-                            {{__('messages.campaign')}} {{__('messages.starts')}} {{__('messages.from')}} :
+                            {{translate('messages.campaign')}} {{translate('messages.starts')}} {{translate('messages.from')}} :
                             <strong class="text--title">{{$campaign->start_date->format('Y-M-d')}}</strong>
                         </span>
                         <span class="d-block mb-1">
-                            {{__('messages.campaign')}} {{__('messages.ends')}} {{__('messages.at')}} :
+                            {{translate('messages.campaign')}} {{translate('messages.ends')}} {{translate('messages.at')}} :
                             <strong class="text--title">{{$campaign->end_date->format('Y-M-d')}}</strong>
                         </span>
                         <span class="d-block mb-1">
-                            {{__('messages.available')}} {{__('messages.time')}} {{__('messages.starts')}} :
+                            {{translate('messages.available')}} {{translate('messages.time')}} {{translate('messages.starts')}} :
                             <strong class="text--title">{{$campaign->start_time->format(config('timeformat'))}}</strong>
                         </span>
                         <span class="d-block">
-                            {{__('messages.available')}} {{__('messages.time')}} {{__('messages.ends')}} :
+                            {{translate('messages.available')}} {{translate('messages.time')}} {{translate('messages.ends')}} :
                             <strong class="text--title">{{$campaign->end_time->format(config('timeformat'))}}</strong>
                         </span>
                     </div>
@@ -65,7 +65,7 @@
                                 <h2 class="m-0">{{$campaign->restaurant['name']}}</h2>
                             </a>
                             @else
-                            <span class="badge-info">{{__('messages.restaurant')}} {{__('messages.deleted')}}</span>
+                            <span class="badge-info">{{translate('messages.restaurant')}} {{translate('messages.deleted')}}</span>
                             @endif
                         </div>
                     </div>
@@ -89,8 +89,8 @@
                                 <thead class="thead-light">
                                     <tr>
                                         <th class="px-4 w-120px"><h4 class="m-0">{{translate('short_description')}}</h4></th>
-                                        <th class="px-4 w-120px"><h4 class="m-0">{{__('messages.price')}}</h4></th>
-                                        <th class="px-4 w-120px"><h4 class="m-0">{{__('messages.variations')}}</h4></th>
+                                        <th class="px-4 w-120px"><h4 class="m-0">{{translate('messages.price')}}</h4></th>
+                                        <th class="px-4 w-120px"><h4 class="m-0">{{translate('messages.variations')}}</h4></th>
                                         <th class="px-4 w-120px"><h4 class="m-0">{{translate('addons')}}</h4></th>
                                     </tr>
                                 </thead>
@@ -102,12 +102,12 @@
                                         <td class="px-4">
                                             <div>
 
-                                                <span class="d-block text-dark">{{__('messages.price')}} : <strong>{{\App\CentralLogics\Helpers::format_currency($campaign['price'])}}</strong>
+                                                <span class="d-block text-dark">{{translate('messages.price')}} : <strong>{{\App\CentralLogics\Helpers::format_currency($campaign['price'])}}</strong>
                                                 </span class="d-block text-dark">
-                                                <span class="d-block text-dark">{{__('messages.tax')}} :
+                                                <span class="d-block text-dark">{{translate('messages.tax')}} :
                                                     <strong>{{\App\CentralLogics\Helpers::format_currency(\App\CentralLogics\Helpers::tax_calculate($campaign,$campaign['price']))}}</strong>
                                                 </span class="d-block text-dark">
-                                                <span class="d-block text-dark">{{__('messages.discount')}} :
+                                                <span class="d-block text-dark">{{translate('messages.discount')}} :
                                                     <strong>{{\App\CentralLogics\Helpers::format_currency(\App\CentralLogics\Helpers::discount_calculate($campaign,$campaign['price']))}}</strong>
                                                 </span class="text-dark">
                                             </div>
@@ -150,7 +150,7 @@
                     </h5>
                     <form>
                         <div class="input--group input-group">
-                            <input type="text" class="form-control" placeholder="Search here by restaurants">
+                            <input type="text" class="form-control" placeholder="{{ translate('Search here by restaurants') }}">
                             <button type="submit" class="btn btn--secondary"><i class="tio-search"></i></button>
                         </div>
                     </form>
@@ -161,23 +161,23 @@
                                 "target": "#usersExportDropdown",
                                 "type": "css-animation"
                             }'>
-                            <i class="tio-download-to mr-1"></i> {{__('messages.export')}}
+                            <i class="tio-download-to mr-1"></i> {{translate('messages.export')}}
                         </a>
 
                         <div id="usersExportDropdown"
                                 class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-sm-right">
-                            <span class="dropdown-header">{{__('messages.download')}} {{__('messages.options')}}</span>
+                            <span class="dropdown-header">{{translate('messages.download')}} {{translate('messages.options')}}</span>
                             <a id="export-excel" class="dropdown-item" href="javascript:;">
                                 <img class="avatar avatar-xss avatar-4by3 mr-2"
                                         src="{{asset('public/assets/admin')}}/svg/components/excel.svg"
                                         alt="Image Description">
-                                {{__('messages.excel')}}
+                                {{translate('messages.excel')}}
                             </a>
                             <a id="export-csv" class="dropdown-item" href="javascript:;">
                                 <img class="avatar avatar-xss avatar-4by3 mr-2"
                                         src="{{asset('public/assets/admin')}}/svg/components/placeholder-csv-format.svg"
                                         alt="Image Description">
-                                .{{__('messages.csv')}}
+                                .{{translate('messages.csv')}}
                             </a>
                         </div>
                     </div>
@@ -209,13 +209,13 @@
                             <th>
                                 SL
                             </th>
-                            <th class="table-column-pl-0">{{__('messages.order')}}</th>
-                            <th>{{__('messages.date')}}</th>
-                            <th>{{__('messages.customer')}}</th>
-                            <th>{{__('messages.vendor')}}</th>
-                            <th>{{__('messages.payment')}} {{__('messages.status')}}</th>
-                            <th>{{__('messages.total')}}</th>
-                            <th>{{__('messages.order')}} {{__('messages.status')}}</th>
+                            <th class="table-column-pl-0">{{translate('messages.order')}}</th>
+                            <th>{{translate('messages.date')}}</th>
+                            <th>{{translate('messages.customer')}}</th>
+                            <th>{{translate('messages.vendor')}}</th>
+                            <th>{{translate('messages.payment')}} {{translate('messages.status')}}</th>
+                            <th>{{translate('messages.total')}}</th>
+                            <th>{{translate('messages.order')}} {{translate('messages.status')}}</th>
                         </tr>
                         </thead>
 
@@ -234,20 +234,20 @@
                                     @if($order->order->customer)
                                         <a class="text-body text-capitalize" href="{{route('admin.customer.view',[$order->order['user_id']])}}">{{$order->order->customer['f_name'].' '.$order->order->customer['l_name']}}</a>
                                     @else
-                                        <label class="badge badge-danger">{{__('messages.invalid')}} {{__('messages.customer')}} {{__('messages.data')}}</label>
+                                        <label class="badge badge-danger">{{translate('messages.invalid')}} {{translate('messages.customer')}} {{translate('messages.data')}}</label>
                                     @endif
                                 </td>
                                 <td>
-                                    <label class="badge badge-soft-primary">{{Str::limit($order->order->restaurant?$order->order->restaurant->name:__('messages.Restaurant deleted!'),20,'...')}}</label>
+                                    <label class="badge badge-soft-primary">{{Str::limit($order->order->restaurant?$order->order->restaurant->name:translate('messages.Restaurant deleted!'),20,'...')}}</label>
                                 </td>
                                 <td>
                                     @if($order->order->payment_status=='paid')
                                         <span class="badge badge-soft-success">
-                                        {{__('messages.paid')}}
+                                        {{translate('messages.paid')}}
                                         </span>
                                     @else
                                         <span class="badge badge-soft-danger">
-                                        {{__('messages.unpaid')}}
+                                        {{translate('messages.unpaid')}}
                                         </span>
                                     @endif
                                 </td>
@@ -255,23 +255,23 @@
                                 <td class="text-capitalize">
                                     @if($order->order['order_status']=='pending')
                                         <span class="badge badge-soft-info ml-2 ml-sm-3">
-                                        {{__('messages.pending')}}
+                                        {{translate('messages.pending')}}
                                         </span>
                                     @elseif($order->order['order_status']=='confirmed')
                                         <span class="badge badge-soft-info ml-2 ml-sm-3">
-                                        {{__('messages.confirmed')}}
+                                        {{translate('messages.confirmed')}}
                                         </span>
                                     @elseif($order->order['order_status']=='processing')
                                         <span class="badge badge-soft-warning ml-2 ml-sm-3">
-                                        {{__('messages.processing')}}
+                                        {{translate('messages.processing')}}
                                         </span>
                                     @elseif($order->order['order_status']=='out_for_delivery')
                                         <span class="badge badge-soft-warning ml-2 ml-sm-3">
-                                        {{__('messages.out_for_delivery')}}
+                                        {{translate('messages.out_for_delivery')}}
                                         </span>
                                     @elseif($order->order['order_status']=='delivered')
                                         <span class="badge badge-soft-success ml-2 ml-sm-3">
-                                        {{__('messages.delivered')}}
+                                        {{translate('messages.delivered')}}
                                         </span>
                                     @else
                                         <span class="badge badge-soft-danger ml-2 ml-sm-3">

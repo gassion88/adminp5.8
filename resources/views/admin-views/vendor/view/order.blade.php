@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title',$restaurant->name."'s Orders")
+@section('title',$restaurant->name."'s".translate('messages.order'))
 
 @push('css_or_js')
     <!-- Custom styles for this page -->
@@ -20,13 +20,13 @@
         </div>
         <!-- Nav Scroller -->
         <div class="js-nav-scroller hs-nav-scroller-horizontal">
-            <span class="hs-nav-scroller-arrow-prev" style="display: none;">
+            <span class="hs-nav-scroller-arrow-prev initial-hidden">
                 <a class="hs-nav-scroller-arrow-link" href="javascript:;">
                     <i class="tio-chevron-left"></i>
                 </a>
             </span>
 
-            <span class="hs-nav-scroller-arrow-next" style="display: none;">
+            <span class="hs-nav-scroller-arrow-next initial-hidden">
                 <a class="hs-nav-scroller-arrow-link" href="javascript:;">
                     <i class="tio-chevron-right"></i>
                 </a>
@@ -35,28 +35,28 @@
             <!-- Nav -->
             <ul class="nav nav-tabs page-header-tabs">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('admin.vendor.view', $restaurant->id)}}">{{__('messages.overview')}}</a>
+                    <a class="nav-link" href="{{route('admin.vendor.view', $restaurant->id)}}">{{translate('messages.overview')}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'order'])}}"  aria-disabled="true">{{__('messages.orders')}}</a>
+                    <a class="nav-link active" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'order'])}}"  aria-disabled="true">{{translate('messages.orders')}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'product'])}}"  aria-disabled="true">{{__('messages.foods')}}</a>
+                    <a class="nav-link" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'product'])}}"  aria-disabled="true">{{translate('messages.foods')}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'reviews'])}}"  aria-disabled="true">{{__('messages.reviews')}}</a>
+                    <a class="nav-link" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'reviews'])}}"  aria-disabled="true">{{translate('messages.reviews')}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'discount'])}}"  aria-disabled="true">{{__('discounts')}}</a>
+                    <a class="nav-link" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'discount'])}}"  aria-disabled="true">{{translate('discounts')}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'transaction'])}}"  aria-disabled="true">{{__('messages.transactions')}}</a>
+                    <a class="nav-link" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'transaction'])}}"  aria-disabled="true">{{translate('messages.transactions')}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'settings'])}}"  aria-disabled="true">{{__('messages.settings')}}</a>
+                    <a class="nav-link" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'settings'])}}"  aria-disabled="true">{{translate('messages.settings')}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'conversations'])}}"  aria-disabled="true">{{__('messages.conversations')}}</a>
+                    <a class="nav-link" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'conversations'])}}"  aria-disabled="true">{{translate('messages.conversations')}}</a>
                 </li>
             </ul>
             <!-- End Nav -->
@@ -70,14 +70,14 @@
                 <div class="order-info-icon">
                     <img src="{{asset('/public/assets/admin/img/resturant/navbar/all.png')}}" alt="public">
                 </div>
-                    <h6 class="card-subtitle">{{__('messages.all')}} {{__('messages.orders')}} <span class="amount text--primary">{{\App\Models\Order::where('restaurant_id', $restaurant->id)->count()}}</span></h6>
+                    <h6 class="card-subtitle">{{translate('messages.all')}} {{translate('messages.orders')}} <span class="amount text--primary">{{\App\Models\Order::where('restaurant_id', $restaurant->id)->count()}}</span></h6>
             </div>
             <span class="order-info-seperator"></span>
             <div class="order-info-item" onclick="location.href='{{route('admin.order.list',['scheduled'])}}?vendor[]={{$restaurant->id}}'">
                 <div class="order-info-icon">
                     <img src="{{asset('/public/assets/admin/img/resturant/navbar/schedule.png')}}" alt="public">
                 </div>
-                <h6 class="card-subtitle">{{__('messages.scheduled')}} {{__('messages.orders')}}
+                <h6 class="card-subtitle">{{translate('messages.scheduled')}} {{translate('messages.orders')}}
                 <span class="amount text--warning">{{\App\Models\Order::Scheduled()->where('restaurant_id', $restaurant->id)->count()}}</span></h6>
             </div>
             <span class="order-info-seperator"></span>
@@ -85,7 +85,7 @@
                 <div class="order-info-icon">
                     <img src="{{asset('/public/assets/admin/img/resturant/navbar/pending.png')}}" alt="public">
                 </div>
-                <h6 class="card-subtitle">{{__('messages.pending')}} {{__('messages.orders')}}
+                <h6 class="card-subtitle">{{translate('messages.pending')}} {{translate('messages.orders')}}
                 <span class="amount text--info">
                 {{\App\Models\Order::where(['order_status'=>'pending','restaurant_id'=>$restaurant->id])->count()}}</span></h6>
             </div>
@@ -94,7 +94,7 @@
                 <div class="order-info-icon">
                     <img src="{{asset('/public/assets/admin/img/resturant/navbar/delivered.png')}}" alt="public">
                 </div>
-                <h6 class="card-subtitle">{{__('messages.delivered')}} {{__('messages.orders')}}
+                <h6 class="card-subtitle">{{translate('messages.delivered')}} {{translate('messages.orders')}}
                 <span class="amount text--success">{{\App\Models\Order::where(['order_status'=>'delivered', 'restaurant_id'=>$restaurant->id])->count()}}</span></h6>
             </div>
             <span class="order-info-seperator"></span>
@@ -102,7 +102,7 @@
                 <div class="order-info-icon">
                     <img src="{{asset('/public/assets/admin/img/resturant/navbar/cancel.png')}}" alt="public">
                 </div>
-                <h6 class="card-subtitle">{{__('messages.canceled')}} {{__('messages.orders')}}
+                <h6 class="card-subtitle">{{translate('messages.canceled')}} {{translate('messages.orders')}}
                 <span class="amount text--danger">{{\App\Models\Order::where(['order_status'=>'canceled', 'restaurant_id'=>$restaurant->id])->count()}}</span></h6>
             </div>
 
@@ -120,7 +120,7 @@
                     <input type="hidden" name="restaurant_id" value="{{$restaurant->id}}">
                     <div class="input--group input-group input-group-merge input-group-flush">
                         <input id="datatableSearch_" type="search" name="search" class="form-control"
-                                placeholder="Search by ID ... " aria-label="{{__('messages.search')}}" required>
+                                placeholder="Search by ID ... " aria-label="{{translate('messages.search')}}" required>
                         <button type="submit" class="btn btn--secondary"><i class="tio-search"></i></button>
 
                     </div>
@@ -133,26 +133,26 @@
                             "target": "#usersExportDropdown",
                             "type": "css-animation"
                         }'>
-                        <i class="tio-download-to mr-1"></i> {{__('messages.export')}}
+                        <i class="tio-download-to mr-1"></i> {{translate('messages.export')}}
                     </a>
 
                     <div id="usersExportDropdown"
                             class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-sm-right">
-                        {{--<span class="dropdown-header">{{__('messages.options')}}</span>
+                        {{--<span class="dropdown-header">{{translate('messages.options')}}</span>
                         <a id="export-copy" class="dropdown-item" href="javascript:;">
                             <img class="avatar avatar-xss avatar-4by3 mr-2"
                                     src="{{asset('public/assets/admin')}}/svg/illustrations/copy.svg"
                                     alt="Image Description">
-                            {{__('messages.copy')}}
+                            {{translate('messages.copy')}}
                         </a>
                         <a id="export-print" class="dropdown-item" href="javascript:;">
                             <img class="avatar avatar-xss avatar-4by3 mr-2"
                                     src="{{asset('public/assets/admin')}}/svg/illustrations/print.svg"
                                     alt="Image Description">
-                            {{__('messages.print')}}
+                            {{translate('messages.print')}}
                         </a>
                         <div class="dropdown-divider"></div>--}}
-                        <span class="dropdown-header">{{__('messages.download')}} {{__('messages.options')}}</span>
+                        <span class="dropdown-header">{{translate('messages.download')}} {{translate('messages.options')}}</span>
 {{--                         <form action="{{route('admin.order.export-orders')}}" method="post">
                             @csrf
                             <input type="hidden" name="restaurant_id" value="{{$restaurant->id}}">
@@ -161,20 +161,20 @@
                                 <img class="avatar avatar-xss avatar-4by3 mr-2"
                                 src="{{asset('public/assets/admin')}}/svg/components/excel.svg"
                                 alt="Image Description">
-                                {{__('messages.excel')}}
+                                {{translate('messages.excel')}}
                             </button>
                         </form> --}}
                         <a target="__blank" id="export-excel" class="dropdown-item" href="{{route('admin.order.export-orders', ['type'=>'excel', 'restaurant_id'=>$restaurant->id])}}">
                             <img class="avatar avatar-xss avatar-4by3 mr-2"
                             src="{{asset('public/assets/admin')}}/svg/components/excel.svg"
                             alt="Image Description">
-                            {{__('messages.excel')}}
+                            {{translate('messages.excel')}}
                         </a>
                         <a target="__blank" id="export-csv" class="dropdown-item" href="{{route('admin.order.export-orders', ['type'=>'csv', 'restaurant_id'=>$restaurant->id])}}">
                             <img class="avatar avatar-xss avatar-4by3 mr-2"
                             src="{{asset('public/assets/admin')}}/svg/components/placeholder-csv-format.svg"
                             alt="Image Description">
-                            .{{__('messages.csv')}}
+                            .{{translate('messages.csv')}}
                         </a>
 {{--                         <form action="{{route('admin.order.export-orders')}}" method="post">
                             @csrf
@@ -184,20 +184,20 @@
                                 <img class="avatar avatar-xss avatar-4by3 mr-2"
                                 src="{{asset('public/assets/admin')}}/svg/components/placeholder-csv-format.svg"
                                 alt="Image Description">
-                                .{{__('messages.csv')}}
+                                .{{translate('messages.csv')}}
                             </button>
                         </form> --}}
 {{--                         <a id="export-csv" class="dropdown-item" href="javascript:;">
                             <img class="avatar avatar-xss avatar-4by3 mr-2"
                                     src="{{asset('public/assets/admin')}}/svg/components/placeholder-csv-format.svg"
                                     alt="Image Description">
-                            .{{__('messages.csv')}}
+                            .{{translate('messages.csv')}}
                         </a> --}}
                         {{--<a id="export-pdf" class="dropdown-item" href="javascript:;">
                             <img class="avatar avatar-xss avatar-4by3 mr-2"
                                     src="{{asset('public/assets/admin')}}/svg/components/pdf.svg"
                                     alt="Image Description">
-                            {{__('messages.pdf')}}
+                            {{translate('messages.pdf')}}
                         </a>--}}
                     </div>
                 </div>
@@ -210,7 +210,6 @@
             <div class="table-responsive datatable-custom">
                 <table id="datatable"
                     class="table table-hover table-borderless table-thead-bordered table-nowrap table-align-middle card-table"
-                    style="width: 100%"
                     data-hs-datatables-options='{
                     "columnDefs": [{
                         "targets": [0],
@@ -229,19 +228,19 @@
                 }'>
                     <thead class="thead-light">
                     <tr>
-                        <th class="text-center pl-4" style="width:100px">
+                        <th class="text-center pl-4 w-100px">
                             SL
                         </th>
-                        <th class="table-column-pl-0">{{__('messages.order')}} {{__('messages.id')}}</th>
+                        <th class="table-column-pl-0">{{translate('messages.order')}} {{translate('messages.id')}}</th>
                         <th>
                             <div class="pl-2">
-                                {{__('messages.order')}} {{__('messages.date')}}
+                                {{translate('messages.order')}} {{translate('messages.date')}}
                             </div>
                         </th>
-                        <th>{{__('messages.customer')}} {{__('messages.info')}}</th>
-                        <th>{{__('messages.total')}} {{__('messages.amount')}}</th>
-                        <th>{{__('messages.order')}} {{__('messages.status')}}</th>
-                        <th style="width:100px">{{__('messages.action')}}</th>
+                        <th>{{translate('messages.customer')}} {{translate('messages.info')}}</th>
+                        <th>{{translate('messages.total')}} {{translate('messages.amount')}}</th>
+                        <th>{{translate('messages.order')}} {{translate('messages.status')}}</th>
+                        <th class="w-100px">{{translate('messages.action')}}</th>
                     </tr>
                     </thead>
 
@@ -270,7 +269,7 @@
                                             <small class="d-block">{{$order->customer['phone']}}</small>
                                         </a>
                                     @else
-                                        <label class="badge badge-danger">{{__('messages.invalid')}} {{__('messages.customer')}} {{__('messages.data')}}</label>
+                                        <label class="badge badge-danger">{{translate('messages.invalid')}} {{translate('messages.customer')}} {{translate('messages.data')}}</label>
                                     @endif
                                 </div>
                             </td>
@@ -281,11 +280,11 @@
                                     </div>
                                     @if($order->payment_status=='paid')
                                         <strong class="text--success order--status">
-                                            {{__('messages.paid')}}
+                                            {{translate('messages.paid')}}
                                         </strong>
                                     @else
                                         <strong class="text--danger order--status">
-                                            {{__('messages.unpaid')}}
+                                            {{translate('messages.unpaid')}}
                                         </strong>
                                     @endif
                                 </div>
@@ -293,27 +292,27 @@
                             <td class="text-capitalize">
                                 @if($order['order_status']=='pending')
                                     <span class="badge badge-soft-info badge--pending">
-                                        {{__('messages.pending')}}
+                                        {{translate('messages.pending')}}
                                     </span>
                                 @elseif($order['order_status']=='confirmed')
                                     <span class="badge badge-soft-info ">
-                                        {{__('messages.confirmed')}}
+                                        {{translate('messages.confirmed')}}
                                     </span>
                                 @elseif($order['order_status']=='processing')
                                     <span class="badge badge-soft-warning">
-                                        {{__('messages.processing')}}
+                                        {{translate('messages.processing')}}
                                     </span>
                                 @elseif($order['order_status']=='out_for_delivery')
                                     <span class="badge badge-soft-warning badge--on-the-way">
-                                        {{__('messages.out_for_delivery')}}
+                                        {{translate('messages.out_for_delivery')}}
                                     </span>
                                 @elseif($order['order_status']=='delivered')
                                     <span class="badge badge-soft-success ">
-                                        {{__('messages.delivered')}}
+                                        {{translate('messages.delivered')}}
                                     </span>
                                 @elseif($order['order_status']=='accepted')
                                     <span class="badge badge-soft-success badge--accepted">
-                                        {{__('messages.accepted')}}
+                                        {{translate('messages.accepted')}}
                                     </span>
                                 @else
                                     <span class="badge badge-soft-danger badge--cancel">

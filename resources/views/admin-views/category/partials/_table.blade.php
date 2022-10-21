@@ -14,9 +14,9 @@
     <td>
         <form action="{{route('admin.category.priority',$category->id)}}">
         <select name="priority" id="priority" class=" form-control form--control-select {{$category->priority == 0 ? 'text--title':''}} {{$category->priority == 1 ? 'text--info':''}} {{$category->priority == 2 ? 'text--success':''}} " onchange="this.form.submit()">
-            <option class="text--title" value="0" {{$category->priority == 0?'selected':''}}>{{__('messages.normal')}}</option>
-            <option class="text--info" value="1" {{$category->priority == 1?'selected':''}}>{{__('messages.medium')}}</option>
-            <option class="text--success" value="2" {{$category->priority == 2?'selected':''}}>{{__('messages.high')}}</option>
+            <option class="text--title" value="0" {{$category->priority == 0?'selected':''}}>{{translate('messages.normal')}}</option>
+            <option class="text--info" value="1" {{$category->priority == 1?'selected':''}}>{{translate('messages.medium')}}</option>
+            <option class="text--success" value="2" {{$category->priority == 2?'selected':''}}>{{translate('messages.high')}}</option>
         </select>
         </form>
     </td>
@@ -31,10 +31,10 @@
     <td>
         <div class="btn--container">
             <a class="btn btn-sm btn--primary btn-outline-primary action-btn"
-                href="{{route('admin.category.edit',[$category['id']])}}" title="{{__('messages.edit')}} {{__('messages.category')}}"><i class="tio-edit"></i>
+                href="{{route('admin.category.edit',[$category['id']])}}" title="{{translate('messages.edit')}} {{translate('messages.category')}}"><i class="tio-edit"></i>
             </a>
             <a class="btn btn-sm btn--danger btn-outline-danger action-btn" href="javascript:"
-            onclick="form_alert('category-{{$category['id']}}','Want to delete this category')" title="{{__('messages.delete')}} {{__('messages.category')}}"><i class="tio-delete-outlined"></i>
+            onclick="form_alert('category-{{$category['id']}}','Want to delete this category')" title="{{translate('messages.delete')}} {{translate('messages.category')}}"><i class="tio-delete-outlined"></i>
             </a>
         </div>
 

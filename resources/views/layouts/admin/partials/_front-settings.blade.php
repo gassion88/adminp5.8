@@ -1,5 +1,4 @@
-<div id="styleSwitcherDropdown" class="hs-unfold-content sidebar sidebar-bordered sidebar-box-shadow"
-     style="width: 35rem;">
+<div id="styleSwitcherDropdown" class="hs-unfold-content sidebar sidebar-bordered sidebar-box-shadow w-35rem">
     <div class="card card-lg border-0 h-100">
         <div class="card-header align-items-start">
             <div class="mr-2">
@@ -24,8 +23,7 @@
 
         <!-- Body -->
         <div class="card-body sidebar-scrollbar">
-            <h4 class="mb-1">Layout skins <span id="js-builder-disabled" class="badge badge-soft-danger"
-                                                style="opacity: 0">Disabled</span></h4>
+            <h4 class="mb-1">Layout skins <span id="js-builder-disabled" class="badge badge-soft-danger opacity-0">Disabled</span></h4>
             <p>3 kinds of layout skins to choose from.</p>
 
             <div class="row gx-2 mb-5">

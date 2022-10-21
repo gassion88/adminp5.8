@@ -3,10 +3,10 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
 @endphp
 @extends('layouts.vendor.app')
 
-@section('title', 'Order Details')
-@php($add = json_decode($order->delivery_address, true))
+@section('title', translate('messages.Order Details'))
+
 @section('content')
-    <?php $campaign_order = $order->details[0]->campaign ? true : false; ?>
+    <?php $campaign_order = isset($order->details[0]->campaign) ? true : false; ?>
     <div class="content container-fluid item-box-page">
 
     <div class="page-header d-print-none">
@@ -16,17 +16,17 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                     <img src="{{asset('public/assets/admin/img/orders.png')}}" alt="public">
                 </div>
                 <span>
-                    Order Details
+                    {{ translate('messages.Order Details') }}
                 </span>
                 <div class="d-flex ml-auto">
                     <a class="btn btn-icon btn-sm btn-soft-primary rounded-circle mr-1"
                         href="{{ route('vendor.order.details', [$order['id'] - 1]) }}" data-toggle="tooltip"
-                        data-placement="top" title="Previous order">
+                        data-placement="top" title="{{ translate('Previous order') }}">
                         <i class="tio-chevron-left m-0"></i>
                     </a>
                     <a class="btn btn-icon btn-sm btn-soft-primary rounded-circle"
                         href="{{ route('vendor.order.details', [$order['id'] + 1]) }}" data-toggle="tooltip"
-                        data-placement="top" title="Next order">
+                        data-placement="top" title="{{ translate('Next order') }}">
                         <i class="tio-chevron-right m-0"></i>
                     </a>
                 </div>
@@ -43,7 +43,7 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                         <div class="order-invoice-left">
                             <h1 class="page-header-title mt-2">
                                 <span>
-                                    {{ __('messages.order') }} #{{ $order['id'] }}
+                                    {{ translate('messages.order') }} #{{ $order['id'] }}
                                 </span>
 
                                 {{-- <span class="badge badge-soft-success text-capitalize my-2 ml-2">
@@ -51,7 +51,7 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                                 </span> --}}
                                 @if ($order->edited)
                                     <span class="badge badge-soft-danger text-capitalize px-2 ml-2">
-                                        {{ __('messages.edited') }}
+                                        {{ translate('messages.edited') }}
                                     </span>
                                 @endif
                                 <a class="btn btn--primary m-2 print--btn d-sm-none ml-auto" href="{{ route('vendor.order.generate-invoice', [$order['id']]) }}">
@@ -64,18 +64,18 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                             </span>
                             @if ($order->schedule_at && $order->scheduled)
                                 <span class="text-capitalize d-block mt-1">
-                                    {{ __('messages.scheduled_at') }}
+                                    {{ translate('messages.scheduled_at') }}
                                     : <label  class="fz-10px badge badge-soft-primary">{{ date('d M Y ' . config('timeformat'), strtotime($order['schedule_at'])) }}</label>
                                 </span>
                             @endif
                             @if ($campaign_order)
                             <span class="badge mt-2 badge-soft-primary">
-                                {{ __('messages.campaign_order') }}
+                                {{ translate('messages.campaign_order') }}
                             </span>
                             @endif
                             @if($order['order_note'])
                             <h6>
-                                {{ __('messages.order') }} {{ __('messages.note') }} :
+                                {{ translate('messages.order') }} {{ translate('messages.note') }} :
                                 {{ $order['order_note'] }}
                             </h6>
                             @endif
@@ -83,76 +83,66 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                         <div class="order-invoice-right">
                             <div class="d-none d-sm-flex flex-wrap ml-auto align-items-center justify-content-end m-n-5rem">
                                 <a class="btn btn--primary m-2 print--btn" href="{{ route('vendor.order.generate-invoice', [$order['id']]) }}">
-                                    <i class="tio-print mr-1"></i> {{ __('messages.print') }} {{ __('messages.invoice') }}
+                                    <i class="tio-print mr-1"></i> {{ translate('messages.print') }} {{ translate('messages.invoice') }}
                                 </a>
                             </div>
                             <div class="text-right mt-3 order-invoice-right-contents text-capitalize">
                                 <h6>
-                                    <span>Status :</span>
+                                    <span>{{ translate('Status') }} :</span>
                                     @if ($order['order_status'] == 'pending')
                                         <span class="badge badge-soft-info ml-2 ml-sm-3">
-                                            {{ __('messages.pending') }}
+                                            {{ translate('messages.pending') }}
                                         </span>
                                     @elseif($order['order_status'] == 'confirmed')
                                         <span class="badge badge-soft-info ml-2 ml-sm-3">
-                                            {{ __('messages.confirmed') }}
+                                            {{ translate('messages.confirmed') }}
                                         </span>
                                     @elseif($order['order_status'] == 'processing')
                                         <span class="badge badge-soft-warning ml-2 ml-sm-3">
-                                            {{ __('messages.cooking') }}
+                                            {{ translate('messages.cooking') }}
                                         </span>
                                     @elseif($order['order_status'] == 'picked_up')
                                         <span class="badge badge-soft-warning ml-2 ml-sm-3">
-                                            {{ __('messages.out_for_delivery') }}
+                                            {{ translate('messages.out_for_delivery') }}
                                         </span>
                                     @elseif($order['order_status'] == 'delivered')
                                         <span class="badge badge-soft-success ml-2 ml-sm-3">
-                                            {{ __('messages.delivered') }}
+                                            {{ translate('messages.delivered') }}
                                         </span>
                                     @else
                                         <span class="badge badge-soft-danger ml-2 ml-sm-3">
-                                            {{ str_replace('_', ' ', $order['order_status']) }}
+                                            {{ translate(str_replace('_', ' ', $order['order_status'])) }}
                                         </span>
                                     @endif
                                 </h6>
                                 <h6>
                                     <span>
-                                    {{ __('messages.payment') }} {{ __('messages.method') }} :</span>
+                                    {{ translate('messages.payment') }} {{ translate('messages.method') }} :</span>
                                     <strong>
-                                    {{ str_replace('_', ' ', $order['payment_method']) }}</strong>
+                                    {{ translate(str_replace('_', ' ', $order['payment_method'])) }}</strong>
                                 </h6>
                                 <h6>
-                                    <span>Order Type :</span>
-                                    <strong class="text--title">{{ str_replace('_', ' ', $order['order_type']) }}</strong>
+                                    <span>{{ translate('Order Type') }} :</span>
+                                    <strong class="text--title">{{ translate(str_replace('_', ' ', $order['order_type'])) }}</strong>
                                 </h6>
                                 <h6>
-                                    <span>Payment Status :</span>
+                                    <span>{{ translate('Payment Status') }} :</span>
                                     @if ($order['payment_status'] == 'paid')
                                         <strong class="text-success">
-                                            {{ __('messages.paid') }}
+                                            {{ translate('messages.paid') }}
                                         </strong>
                                     @else
                                         <strong class="text-danger">
-                                            {{ __('messages.unpaid') }}
+                                            {{ translate('messages.unpaid') }}
                                         </strong>
                                     @endif
                                 </h6>
-                                @if ( isset($add['number']) )
-                                <h6>
-                                    <span>Номер клиента :</span>
-                                        <strong class="text-success">
-                                            {{ $add['number'] }}
-                                        </strong>
-                                </h6>
-                                @endif
                             </div>
                         </div>
                     </div>
                     <!-- End Header -->
 
                     <!-- Body -->
-
-                    @if ( !isset($add['number']) )
                     <div class="card-body p-0">
                         <?php
                         $total_addon_price = 0;
@@ -197,11 +187,11 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                                                                     @endif
 
                                                                     <div>
-                                                                        <strong>Price :</strong>
+                                                                        <strong>{{ translate('messages.Price') }} :</strong>
                                                                         {{ \App\CentralLogics\Helpers::format_currency($detail['price']) }}
                                                                     </div>
                                                                     <div>
-                                                                        <strong>Qty :</strong> {{ $detail['quantity'] }}
+                                                                        <strong>{{ translate('messages.Qty') }} :</strong> {{ $detail['quantity'] }}
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -255,11 +245,11 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                                                                 @endforeach
                                                             @endif
                                                             <div>
-                                                                <strong>Price : </strong>
+                                                                <strong>{{ translate('messages.Price') }} : </strong>
                                                                 <span>{{ \App\CentralLogics\Helpers::format_currency($detail['price']) }}</span>
                                                             </div>
                                                             <div>
-                                                                <strong>Qty : </strong>
+                                                                <strong>{{ translate('messages.Qty') }} : </strong>
                                                                 <span>
                                                                     {{ $detail['quantity'] }}
                                                                 </span>
@@ -307,34 +297,34 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                             <div class="row justify-content-md-end mb-3">
                                 <div class="col-md-9 col-lg-8">
                                     <dl class="row text-sm-right">
-                                        <dt class="col-sm-6">{{ __('messages.items') }} {{ __('messages.price') }}:
+                                        <dt class="col-sm-6">{{ translate('messages.items') }} {{ translate('messages.price') }}:
                                         </dt>
                                         <dd class="col-sm-6">
                                             {{ \App\CentralLogics\Helpers::format_currency($product_price) }}</dd>
-                                        <dt class="col-sm-6">{{ __('messages.addon') }} {{ __('messages.cost') }}:
+                                        <dt class="col-sm-6">{{ translate('messages.addon') }} {{ translate('messages.cost') }}:
                                         </dt>
                                         <dd class="col-sm-6">
                                             {{ \App\CentralLogics\Helpers::format_currency($total_addon_price) }}
                                             <hr>
                                         </dd>
 
-                                        <dt class="col-sm-6">{{ __('messages.subtotal') }}:</dt>
+                                        <dt class="col-sm-6">{{ translate('messages.subtotal') }}:</dt>
                                         <dd class="col-sm-6">
                                             {{ \App\CentralLogics\Helpers::format_currency($product_price + $total_addon_price) }}
                                         </dd>
-                                        <dt class="col-sm-6">{{ __('messages.discount') }}:</dt>
+                                        <dt class="col-sm-6">{{ translate('messages.discount') }}:</dt>
                                         <dd class="col-sm-6">
                                             - {{ \App\CentralLogics\Helpers::format_currency($restaurant_discount_amount) }}
                                         </dd>
-                                        <dt class="col-sm-6">{{ __('messages.coupon') }}
-                                            {{ __('messages.discount') }}:
+                                        <dt class="col-sm-6">{{ translate('messages.coupon') }}
+                                            {{ translate('messages.discount') }}:
                                         </dt>
                                         <dd class="col-sm-6">
                                             - {{ \App\CentralLogics\Helpers::format_currency($coupon_discount_amount) }}</dd>
-                                        <dt class="col-sm-6">{{ __('messages.vat/tax') }}:</dt>
+                                        <dt class="col-sm-6">{{ translate('messages.vat/tax') }}:</dt>
                                         <dd class="col-sm-6">
                                             + {{ \App\CentralLogics\Helpers::format_currency($total_tax_amount) }}</dd>
-                                        <dt class="col-sm-6">{{ __('messages.delivery_man_tips') }}
+                                        <dt class="col-sm-6">{{ translate('messages.delivery_man_tips') }}
 
                                         </dt>
                                         <dd class="col-sm-6">
@@ -342,8 +332,8 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                                             + {{ \App\CentralLogics\Helpers::format_currency($dm_tips) }}
 
                                         </dd>
-                                        <dt class="col-sm-6">{{ __('messages.delivery') }}
-                                            {{ __('messages.fee') }}:
+                                        <dt class="col-sm-6">{{ translate('messages.delivery') }}
+                                            {{ translate('messages.fee') }}:
                                         </dt>
                                         <dd class="col-sm-6">
                                             @php($del_c = $order['delivery_charge'])
@@ -351,7 +341,7 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                                             <hr>
                                         </dd>
 
-                                        <dt class="col-sm-6">{{ __('messages.total') }}:</dt>
+                                        <dt class="col-sm-6">{{ translate('messages.total') }}:</dt>
                                         <dd class="col-sm-6">
                                             {{ \App\CentralLogics\Helpers::format_currency($product_price + $del_c + $total_tax_amount + $total_addon_price + $dm_tips - $coupon_discount_amount - $restaurant_discount_amount) }}
                                         </dd>
@@ -362,13 +352,11 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                         </div>
                         <!-- End Row -->
                     </div>
-                    @endif
                     <!-- End Body -->
                 </div>
                 <!-- End Card -->
             </div>
 
-            
             <div class="col-lg-4 order-print-area-right">
                 <!-- Card -->
                 @if ($order['order_status'] != 'delivered')
@@ -384,77 +372,32 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                     <div class="card-body">
                         <!-- Unfold -->
                         @php($order_delivery_verification = (bool) \App\Models\BusinessSetting::where(['key' => 'order_delivery_verification'])->first()->value)
-                         @if ($order['order_type'] == 'take_away')
                         <div class="order-btn-wraper">
                             @if ($order['order_status'] == 'pending')
                                 <a class="btn w-100 mb-3 btn-sm btn--primary"
-                                    onclick="order_status_change_alert('{{ route('vendor.order.status', ['id' => $order['id'], 'order_status' => 'confirmed']) }}','Change status to confirmed ?')"
+                                    onclick="order_status_change_alert('{{ route('vendor.order.status', ['id' => $order['id'], 'order_status' => 'confirmed']) }}','{{ translate('Change status to confirmed ?') }}')"
                                     href="javascript:">
                                     {{ translate('Confirm Order') }}
                                 </a>
                                 @if (config('canceled_by_restaurant'))
                                     <a class="btn w-100 mb-3 btn-sm btn-outline-danger btn--danger mt-3"
-                                        onclick="order_status_change_alert('{{ route('vendor.order.status', ['id' => $order['id'], 'order_status' => 'canceled']) }}', '{{ __('messages.order_canceled_confirmation') }}')"
+                                        onclick="order_status_change_alert('{{ route('vendor.order.status', ['id' => $order['id'], 'order_status' => 'canceled']) }}', '{{ translate('messages.order_canceled_confirmation') }}')"
                                         href="javascript:">{{ translate('Cancel Order') }}</a>
                                 @endif
                             @elseif ($order['order_status'] == 'confirmed' || $order['order_status'] == 'accepted')
                                 <a class="btn btn-sm btn--primary w-100 mb-3"
-                                    onclick="order_status_change_alert('{{ route('vendor.order.status', ['id' => $order['id'], 'order_status' => 'processing']) }}','Change status to cooking ?', verification = false, {{ $max_processing_time }})"
-                                    href="javascript:">{{ __('messages.Proceed_for_cooking') }}</a>
+                                    onclick="order_status_change_alert('{{ route('vendor.order.status', ['id' => $order['id'], 'order_status' => 'processing']) }}','{{ translate('Change status to cooking ?') }}', verification = false, {{ $max_processing_time }})"
+                                    href="javascript:">{{ translate('messages.Proceed_for_cooking') }}</a>
                             @elseif ($order['order_status'] == 'processing')
                                 <a class="btn btn-sm btn--primary w-100 mb-3"
-                                    onclick="order_status_change_alert('{{ route('vendor.order.status', ['id' => $order['id'], 'order_status' => 'handover']) }}','Change status to ready for handover ?')"
-                                    href="javascript:">{{ __('messages.make_ready_for_handover') }}</a>
+                                    onclick="order_status_change_alert('{{ route('vendor.order.status', ['id' => $order['id'], 'order_status' => 'handover']) }}','{{ translate('Change status to ready for handover ?') }}')"
+                                    href="javascript:">{{ translate('messages.make_ready_for_handover') }}</a>
                             @elseif ($order['order_status'] == 'handover' && ($order['order_type'] == 'take_away' || \App\CentralLogics\Helpers::get_restaurant_data()->self_delivery_system))
                                 <a class="btn btn-sm btn--primary w-100 mb-3"
-                                    onclick="order_status_change_alert('{{ route('vendor.order.status', ['id' => $order['id'], 'order_status' => 'delivered']) }}','Change status to delivered (payment status will be paid if not) ?', {{ $order_delivery_verification ? 'true' : 'false' }})"
-                                    href="javascript:">{{ __('messages.maek_delivered') }}</a>
+                                    onclick="order_status_change_alert('{{ route('vendor.order.status', ['id' => $order['id'], 'order_status' => 'delivered']) }}','{{ translate('Change status to delivered (payment status will be paid if not) ?') }}', {{ $order_delivery_verification ? 'true' : 'false' }})"
+                                    href="javascript:">{{ translate('messages.maek_delivered') }}</a>
                             @endif
-                         
                         </div>
-                        @endif
-                        @if ($order->order_status != 'refunded')
-                        @if ($order['order_type'] != 'take_away')                       
-                                        <div>
-                                            <div class="dropdown">
-                                                @if (isset($order->restaurant))
-                                                    <button class="form-control h--45px dropdown-toggle d-flex justify-content-between align-items-center" type="button"
-                                                        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                                        aria-expanded="false">
-                                                        {{ __('messages.status') }}
-                                                    </button>
-                                                @endif
-                                                @php($order_delivery_verification = (bool) \App\Models\BusinessSetting::where(['key' => 'order_delivery_verification'])->first()->value)
-                                                <div class="dropdown-menu text-capitalize" aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item {{ $order['order_status'] == 'pending' ? 'active' : '' }}"
-                                                        onclick="route_alert('{{ route('vendor.order.statuss', ['id' => $order['id'], 'order_status' => 'pending']) }}','Change status to pending ?')"
-                                                        href="javascript:">{{ __('messages.pending') }}</a>
-                                                    <a class="dropdown-item {{ $order['order_status'] == 'confirmed' ? 'active' : '' }}"
-                                                        onclick="route_alert('{{ route('vendor.order.statuss', ['id' => $order['id'], 'order_status' => 'confirmed']) }}','Change status to confirmed ?')"
-                                                        href="javascript:">{{ __('messages.confirmed') }}</a>
-
-                                                    <a class="dropdown-item {{ $order['order_status'] == 'processing' ? 'active' : '' }}"
-                                                        onclick="route_alert('{{ route('vendor.order.statuss', ['id' => $order['id'], 'order_status' => 'processing']) }}', 'Change status to processing ?','Are you sure?', '{{ $max_processing_time }}')"
-                                                        href="javascript:">
-                                                        {{ __('messages.processing') }}</a>
-
-                                                    <a class="dropdown-item {{ $order['order_status'] == 'handover' ? 'active' : '' }}"
-                                                        onclick="route_alert('{{ route('vendor.order.statuss', ['id' => $order['id'], 'order_status' => 'handover']) }}','Change status to handover ?')"
-                                                        href="javascript:">{{ __('messages.handover') }}</a>
-                                                    <a class="dropdown-item {{ $order['order_status'] == 'picked_up' ? 'active' : '' }}"
-                                                        onclick="route_alert('{{ route('vendor.order.statuss', ['id' => $order['id'], 'order_status' => 'picked_up']) }}','Change status to out for delivery ?')"
-                                                        href="javascript:">{{ __('messages.out_for_delivery') }}</a>
-                                                    <a class="dropdown-item {{ $order['order_status'] == 'delivered' ? 'active' : '' }}"
-                                                        onclick="route_alert('{{ route('vendor.order.statuss', ['id' => $order['id'], 'order_status' => 'delivered']) }}','Change status to delivered (payment status will be paid if not)?')"
-                                                        href="javascript:">{{ __('messages.delivered') }}</a>
-                                                    <a class="dropdown-item {{ $order['order_status'] == 'canceled' ? 'active' : '' }}"
-                                                        onclick="route_alert('{{ route('vendor.order.statuss', ['id' => $order['id'], 'order_status' => 'canceled']) }}','Change status to canceled ?')"
-                                                        href="javascript:">{{ __('messages.canceled') }}</a>
-                                                </div>
-                                            </div>
-                                        </div> 
-                                        @endif                                          
-                                    @endif
                         <!-- End Unfold -->
                         @if ($order['order_type'] != 'take_away')
                             @if ($order->delivery_man)
@@ -480,7 +423,7 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                                             <strong class="text--title font-semibold">
                                                 {{ $order->delivery_man->orders_count }}
                                             </strong>
-                                            {{ __('messages.orders') }}
+                                            {{ translate('messages.orders') }}
                                         </span>
                                         <span class="d-block">
                                             <a class="text--title font-semibold" href="tel:{{ $order->delivery_man['phone'] }}">
@@ -501,7 +444,7 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                                     <hr>
                                     @php($address = $order->dm_last_location)
                                     <div class="d-flex justify-content-between align-items-center">
-                                        <h5>{{ __('messages.last') }} {{ __('messages.location') }}</h5>
+                                        <h5>{{ translate('messages.last') }} {{ translate('messages.location') }}</h5>
                                     </div>
                                     @if (isset($address))
                                         <span class="d-block">
@@ -512,14 +455,14 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                                         </span>
                                     @else
                                         <span class="d-block text-lowercase qcont">
-                                            {{ __('messages.location') . ' ' . __('messages.not_found') }}
+                                            {{ translate('messages.location') . ' ' . translate('messages.not_found') }}
                                         </span>
                                     @endif
                                 @endif
                             @else
                                 <div class="py-3 w-100 text-center mt-3">
                                     <span class="d-block text-capitalize qcont">
-                                        <i class="tio-security-warning"></i> {{ __('messages.deliveryman') . ' ' . __('messages.not_found') }}
+                                        <i class="tio-security-warning"></i> {{ translate('messages.deliveryman') . ' ' . translate('messages.not_found') }}
                                     </span>
                                 </div>
                             @endif
@@ -527,15 +470,14 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                     </div>
                 </div>
                 @endif
-                @if ( !isset($add['number']) )                
-                <div class="card">                  
+                <div class="card">
                     <div class="card-body">
                         <h5 class="card-title mb-3">
                             <span class="card-header-icon">
                                 <i class="tio-user"></i>
                             </span>
                             <span>
-                                {{ __('messages.customer') }} {{ __('messages.info') }}
+                                {{ translate('messages.customer') }} {{ translate('messages.info') }}
                             </span>
                         </h5>
                         @if ($order->customer)
@@ -585,19 +527,19 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                                         <i class="tio-user"></i>
                                     </span>
                                     <span>
-                                        {{ __('messages.delivery') }} {{ __('messages.info') }}
+                                        {{ translate('messages.delivery') }} {{ translate('messages.info') }}
                                     </span>
                                 </h5>
-                                @if (isset($address))
+                                {{-- @if (isset($address))
                                     <a class="link" data-toggle="modal" data-target="#shipping-address-modal"
                                         href="javascript:"><i class="tio-edit"></i></a>
-                                @endif
+                                @endif --}}
                             </div>
                             @if (isset($address))
                             <span class="delivery--information-single mt-3">
-                                <span class="name">{{ __('messages.name') }}:</span>
+                                <span class="name">{{ translate('messages.name') }}:</span>
                                 <span class="info">{{ $address['contact_person_name'] }}</span>
-                                <span class="name">{{ __('messages.contact') }}:</span>
+                                <span class="name">{{ translate('messages.contact') }}:</span>
                                 <a class="info" href="tel:{{ $address['contact_person_number'] }}">
                                     {{ $address['contact_person_number'] }}
                                 </a>
@@ -628,9 +570,7 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                         </div>
                     </div>
                 @endif
-            @endif           
             </div>
-           
         </div>
         <!-- End Row -->
     </div>
@@ -675,7 +615,7 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                         <div class="modal-body">
                             <div class="row mb-3">
                                 <label for="requiredLabel" class="col-md-2 col-form-label input-label text-md-right">
-                                    {{ __('messages.type') }}
+                                    {{ translate('messages.type') }}
                                 </label>
                                 <div class="col-md-10 js-form-message">
                                     <input type="text" class="form-control h--45px" name="address_type"
@@ -684,7 +624,7 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                             </div>
                             <div class="row mb-3">
                                 <label for="requiredLabel" class="col-md-2 col-form-label input-label text-md-right">
-                                    {{ __('messages.contact') }}
+                                    {{ translate('messages.contact') }}
                                 </label>
                                 <div class="col-md-10 js-form-message">
                                     <input type="text" class="form-control h--45px" name="contact_person_number"
@@ -693,7 +633,7 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                             </div>
                             <div class="row mb-3">
                                 <label for="requiredLabel" class="col-md-2 col-form-label input-label text-md-right">
-                                    {{ __('messages.name') }}
+                                    {{ translate('messages.name') }}
                                 </label>
                                 <div class="col-md-10 js-form-message">
                                     <input type="text" class="form-control h--45px" name="contact_person_name"
@@ -702,7 +642,7 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                             </div>
                             <div class="row mb-3">
                                 <label for="requiredLabel" class="col-md-2 col-form-label input-label text-md-right">
-                                    {{ __('messages.address') }}
+                                    {{ translate('messages.address') }}
                                 </label>
                                 <div class="col-md-10 js-form-message">
                                     <input type="text" class="form-control h--45px" name="address"
@@ -711,14 +651,14 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                             </div>
                             <div class="row mb-3">
                                 <label for="requiredLabel" class="col-md-2 col-form-label input-label text-md-right">
-                                    {{ __('messages.latitude') }}
+                                    {{ translate('messages.latitude') }}
                                 </label>
                                 <div class="col-md-4 js-form-message">
                                     <input type="text" class="form-control h--45px" name="latitude"
                                         value="{{ $address['latitude'] }}" required>
                                 </div>
                                 <label for="requiredLabel" class="col-md-2 col-form-label input-label text-md-right">
-                                    {{ __('messages.longitude') }}
+                                    {{ translate('messages.longitude') }}
                                 </label>
                                 <div class="col-md-4 js-form-message">
                                     <input type="text" class="form-control h--45px" name="longitude"
@@ -728,9 +668,9 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn--reset"
-                                data-dismiss="modal">{{ __('messages.close') }}</button>
-                            <button type="submit" class="btn btn--primary">{{ __('messages.save') }}
-                                {{ __('messages.changes') }}</button>
+                                data-dismiss="modal">{{ translate('messages.close') }}</button>
+                            <button type="submit" class="btn btn--primary">{{ translate('messages.save') }}
+                                {{ translate('messages.changes') }}</button>
                         </div>
                     </form>
                 @endif
@@ -748,7 +688,7 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
         function order_status_change_alert(route, message, verification, processing = false) {
             if (verification) {
                 Swal.fire({
-                    title: 'Enter order verification code',
+                    title: '{{ translate('Enter order verification code') }}',
                     input: 'text',
                     inputAttributes: {
                         autocapitalize: 'off'
@@ -756,7 +696,7 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                     showCancelButton: true,
                     cancelButtonColor: 'default',
                     confirmButtonColor: '#FC6A57',
-                    confirmButtonText: 'Submit',
+                    confirmButtonText: '{{ translate('messages.submit') }}',
                     showLoaderOnConfirm: true,
                     preConfirm: (otp) => {
                         location.href = route + '&otp=' + otp;
@@ -785,16 +725,16 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
             } else if (processing) {
                 Swal.fire({
                     //text: message,
-                    title: '{{ translate('Are you sure ?') }}',
+                    title: '{{ translate('messages.Are you sure ?') }}',
                     type: 'warning',
                     showCancelButton: true,
                     cancelButtonColor: 'default',
                     confirmButtonColor: '#FC6A57',
-                    cancelButtonText: '{{ translate('Are you sure ?') }}Cancel',
-                    confirmButtonText: 'Submit',
-                    inputPlaceholder: "Enter processing time",
+                    cancelButtonText: '{{ translate('messages.Cancel') }}',
+                    confirmButtonText: '{{ translate('messages.submit') }}',
+                    inputPlaceholder: "{{ translate('Enter processing time') }}",
                     input: 'text',
-                    html: message + '<br/>'+'<label>Enter Processing time in minutes</label>',
+                    html: message + '<br/>'+'<label>{{ translate('Enter Processing time in minutes') }}</label>',
                     inputValue: processing,
                     preConfirm: (processing_time) => {
                         location.href = route + '&processing_time=' + processing_time;
@@ -803,14 +743,14 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                 })
             } else {
                 Swal.fire({
-                    title: 'Are you sure?',
+                    title: '{{ translate('messages.Are you sure ?') }}',
                     text: message,
                     type: 'warning',
                     showCancelButton: true,
                     cancelButtonColor: 'default',
                     confirmButtonColor: '#FC6A57',
-                    cancelButtonText: 'No',
-                    confirmButtonText: 'Yes',
+                    cancelButtonText: '{{ translate('messages.No') }}',
+                    confirmButtonText: '{{ translate('messages.Yes') }}',
                     reverseButtons: true
                 }).then((result) => {
                     if (result.value) {
@@ -821,7 +761,7 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
         }
 
         function last_location_view() {
-            toastr.warning('Only available when order is out for delivery!', {
+            toastr.warning('{{ translate('Only available when order is out for delivery!') }}', {
                 CloseButton: true,
                 ProgressBar: true
             });

@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title','Add new sub sub category')
+@section('title',translate('Add new sub sub category'))
 
 @push('css_or_js')
 
@@ -12,7 +12,7 @@
         <div class="page-header">
             <div class="row align-items-center">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <h1 class="page-header-title">Sub Sub Category</h1>
+                    <h1 class="page-header-title">{{ translate('Sub Sub Category') }}</h1>
                 </div>
             </div>
         </div>
@@ -22,7 +22,7 @@
                 <form action="{{route('admin.category.store')}}" method="post">
                     @csrf
                     <div class="form-group">
-                        <label class="input-label" for="exampleFormControlSelect1">Sub Categories
+                        <label class="input-label" for="exampleFormControlSelect1">{{ translate('Sub Categories') }}
                             <span class="input-label-secondary">*</span></label>
                         <select id="exampleFormControlSelect1" name="parent_id" class="form-control" required>
                             @foreach(\App\Models\Category::where(['position'=>1])->get() as $category)
@@ -32,11 +32,11 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="input-label" for="exampleFormControlInput1">Name</label>
-                        <input type="text" name="name" class="form-control" placeholder="{{__('messages.new_category')}}" required>
+                        <label class="input-label" for="exampleFormControlInput1">{{ translate('Name') }}</label>
+                        <input type="text" name="name" class="form-control" placeholder="{{translate('messages.new_category')}}" required>
                     </div>
                     <input name="position" value="2" class="initial-hidden">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">{{ translate('Submit') }}</button>
                 </form>
             </div>
 
@@ -57,10 +57,10 @@
                             <thead class="thead-light">
                             <tr>
                                 <th>{{translate('sl')}}</th>
-                                <th class="w-50p">Sub Category</th>
-                                <th class="w-50p">Sub Sub Category</th>
-                                <th class="w-20p">Status</th>
-                                <th class="w-20p">Action</th>
+                                <th class="w-50p">{{ translate('Sub Category') }}</th>
+                                <th class="w-50p">{{ translate('Sub Sub Category') }}</th>
+                                <th class="w-20p">{{ translate('Status') }}</th>
+                                <th class="w-20p">{{ translate('Action') }}</th>
                             </tr>
                             <tr>
                                 <th></th>
@@ -80,9 +80,9 @@
                                               "minimumResultsForSearch": "Infinity",
                                               "customClass": "custom-select custom-select-sm text-capitalize"
                                             }'>
-                                        <option value="">Any</option>
-                                        <option value="Active">Active</option>
-                                        <option value="Disabled">Disabled</option>
+                                        <option value="">{{ translate('Any') }}</option>
+                                        <option value="Active">{{ translate('Active') }}</option>
+                                        <option value="Disabled">{{ translate('Disabled') }}</option>
                                     </select>
                                 </th>
                                 <th>
@@ -110,14 +110,14 @@
 
                                     <td>
                                         @if($category['status']==1)
-                                            <div style="padding: 10px;border: 1px solid;cursor: pointer"
+                                            <div class="cate--status"
                                                  onclick="location.href='{{route('admin.category.status',[$category['id'],0])}}'">
-                                                <span class="legend-indicator bg-success"></span>Active
+                                                <span class="legend-indicator bg-success"></span>{{ translate('Active') }}
                                             </div>
                                         @else
-                                            <div style="padding: 10px;border: 1px solid;cursor: pointer"
+                                            <div class="cate--status"
                                                  onclick="location.href='{{route('admin.category.status',[$category['id'],1])}}'">
-                                                <span class="legend-indicator bg-danger"></span>Disabled
+                                                <span class="legend-indicator bg-danger"></span>{{ translate('Disabled') }}
                                             </div>
                                         @endif
                                     </td>
@@ -131,9 +131,9 @@
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                 <a class="dropdown-item"
-                                                   href="{{route('admin.category.edit',[$category['id']])}}">Edit</a>
+                                                   href="{{route('admin.category.edit',[$category['id']])}}">{{ translate('Edit') }}</a>
                                                 <a class="dropdown-item" href="javascript:"
-                                                   onclick="$('#category-{{$category['id']}}').submit()">Delete</a>
+                                                   onclick="$('#category-{{$category['id']}}').submit()">{{ translate('Delete') }}</a>
                                                 <form action="{{route('admin.category.delete',[$category['id']])}}"
                                                       method="post" id="category-{{$category['id']}}">
                                                     @csrf @method('delete')

@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title',__('messages.landing_page_settings'))
+@section('title',translate('messages.landing_page_settings'))
 
 @push('css_or_js')
     <!-- Custom styles for this page -->
@@ -17,7 +17,7 @@
                 <img src="{{asset('/public/assets/admin/img/landing-page.png')}}" class="mw-26px" alt="public">
             </div>
             <span>
-                {{ __('messages.landing_page_settings') }}
+                {{ translate('messages.landing_page_settings') }}
             </span>
         </h1>
         <!-- End Page Header -->
@@ -27,37 +27,37 @@
             <ul class="nav nav-tabs page-header-tabs">
                 <li class="nav-item">
                     <a class="nav-link"
-                        href="{{ route('admin.business-settings.landing-page-settings', 'index') }}">{{ __('messages.text') }}</a>
+                        href="{{ route('admin.business-settings.landing-page-settings', 'index') }}">{{ translate('messages.text') }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"
                         href="{{ route('admin.business-settings.landing-page-settings', 'links') }}"
-                        aria-disabled="true">{{ __('messages.button_links') }}</a>
+                        aria-disabled="true">{{ translate('messages.button_links') }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"
                         href="{{ route('admin.business-settings.landing-page-settings', 'speciality') }}"
-                        aria-disabled="true">{{ __('messages.speciality') }}</a>
+                        aria-disabled="true">{{ translate('messages.speciality') }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active"
                         href="{{ route('admin.business-settings.landing-page-settings', 'testimonial') }}"
-                        aria-disabled="true">{{ __('messages.testimonial') }}</a>
+                        aria-disabled="true">{{ translate('messages.testimonial') }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"
                         href="{{ route('admin.business-settings.landing-page-settings', 'feature') }}"
-                        aria-disabled="true">{{ __('messages.feature') }}</a>
+                        aria-disabled="true">{{ translate('messages.feature') }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"
                         href="{{ route('admin.business-settings.landing-page-settings', 'image') }}"
-                        aria-disabled="true">{{ __('messages.image') }}</a>
+                        aria-disabled="true">{{ translate('messages.image') }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"
                         href="{{ route('admin.business-settings.landing-page-settings', 'backgroundChange') }}"
-                        aria-disabled="true">{{ __('messages.header_footer_bg') }}</a>
+                        aria-disabled="true">{{ translate('messages.header_footer_bg') }}</a>
                 </li>
             </ul>
             <!-- End Nav -->
@@ -77,21 +77,21 @@
                 <div class="row gy-3">
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <label class="input-label" for="reviewer_name">{{__('messages.reviewer')}}</label>
-                            <input type="text" id="reviewer_name"  name="reviewer_name" class="form-control h--45px" placeholder="Ex: Jhone Dhoe">
+                            <label class="input-label" for="reviewer_name">{{translate('messages.reviewer')}}</label>
+                            <input type="text" id="reviewer_name"  name="reviewer_name" class="form-control h--45px" placeholder="{{ translate('Ex: Jhone Dhoe') }}">
                         </div>
                         <div class="form-group">
-                            <label class="input-label" for="reviewer_designation">{{__('messages.designation')}}</label>
-                            <input type="text" id="reviewer_designation"  name="reviewer_designation" class="form-control h--45px" placeholder="Ex: Frontend Web Developer">
+                            <label class="input-label" for="reviewer_designation">{{translate('messages.designation')}}</label>
+                            <input type="text" id="reviewer_designation"  name="reviewer_designation" class="form-control h--45px" placeholder="{{ translate('Ex: Frontend Web Developer') }}">
                         </div>
                         <div class="form-group mb-0">
-                            <label class="input-label" for="review">{{__('messages.review')}}</label>
-                            <textarea type="text" id="review"  name="review" class="form-control" placeholder="Ex: description"></textarea>
+                            <label class="input-label" for="review">{{translate('messages.review')}}</label>
+                            <textarea type="text" id="review"  name="review" class="form-control" placeholder="{{ translate('Ex: description') }}"></textarea>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group h-100 d-flex flex-column mb-0">
-                            <label class="input-label text-center d-block mt-auto mb-lg-0" >{{__('messages.image')}}<small class="text-danger">* ( {{__('messages.size')}}: 200 X 200 px )</small></label>
+                            <label class="input-label text-center d-block mt-auto mb-lg-0" >{{translate('messages.image')}}<small class="text-danger">* ( {{translate('messages.size')}}: 200 X 200 px )</small></label>
 
                             <center id="image-viewer-section" class="pt-2 mt-auto mb-auto">
                                 <img class="initial-5" id="viewer"
@@ -101,7 +101,7 @@
                             <div class="custom-file mt-2">
                                 <input type="file" name="image" id="customFileEg1" class="custom-file-input"
                                         accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" required>
-                                <label class="custom-file-label" for="customFileEg1">{{__('messages.choose')}} {{__('messages.file')}}</label>
+                                <label class="custom-file-label" for="customFileEg1">{{translate('messages.choose')}} {{translate('messages.file')}}</label>
                             </div>
                         </div>
                     </div>
@@ -110,19 +110,19 @@
 
                 <div class="form-group mt-3">
                     <div class="btn--container justify-content-end">
-                        <button type="reset" id="reset_btn" class="btn btn--reset">{{__('messages.reset')}}</button>
-                        <button type="submit" class="btn btn--primary">{{__('messages.submit')}}</button>
+                        <button type="reset" id="reset_btn" class="btn btn--reset">{{translate('messages.reset')}}</button>
+                        <button type="submit" class="btn btn--primary">{{translate('messages.submit')}}</button>
                     </div>
                 </div>
             </form>
             <table class="table table-borderless table-thead-bordered table-align-middle card-table">
                 <thead class="thead-light">
                     <tr>
-                        <th scope="col" class="w-10p">SL</th>
-                        <th scope="col" class="w-25p">{{__('messages.reviewer')}}</th>
-                        <th scope="col" class="w-15p">{{__('messages.designation')}}</th>
-                        <th scope="col" class="w-40p">{{__('messages.review')}}</th>
-                        <th scope="col" class="w-10p" class="text-center">{{__('messages.action')}}</th>
+                        <th scope="col" class="w-10p">{{ translate('messages.sl') }}</th>
+                        <th scope="col" class="w-25p">{{translate('messages.reviewer')}}</th>
+                        <th scope="col" class="w-15p">{{translate('messages.designation')}}</th>
+                        <th scope="col" class="w-40p">{{translate('messages.review')}}</th>
+                        <th scope="col" class="w-10p" class="text-center">{{translate('messages.action')}}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -148,7 +148,7 @@
                                     {{-- <a class="btn btn--primary btn-outline-primary action-btn" href="javascript:void(0)" data-toggle="tooltip" data-placement="right" data-original-title="Edit Now"><i class="tio-edit"></i>
                                     </a> --}}
                                     <a class="btn btn--danger btn-outline-danger action-btn" href="javascript:"
-                                        onclick="form_alert('sp-{{$key}}','{{__('messages.Want_to_delete_this_item')}}')" title="{{__('messages.delete')}}"><i class="tio-delete-outlined"></i>
+                                        onclick="form_alert('sp-{{$key}}','{{translate('messages.Want_to_delete_this_item')}}')" title="{{translate('messages.delete')}}"><i class="tio-delete-outlined"></i>
                                     </a>
                                 </div>
                                 <form action="{{route('admin.business-settings.landing-page-settings-delete',['tab'=>'testimonial', 'key'=>$key])}}"

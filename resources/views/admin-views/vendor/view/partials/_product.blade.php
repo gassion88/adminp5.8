@@ -33,10 +33,10 @@
     <td>
         <div class="btn--container justify-content-center">
             <a class="btn btn-sm btn--primary btn-outline-primary action-btn"
-                href="{{route('admin.food.edit',[$food['id']])}}" title="{{__('messages.edit')}} {{__('messages.food')}}"><i class="tio-edit"></i>
+                href="{{route('admin.food.edit',[$food['id']])}}" title="{{translate('messages.edit')}} {{translate('messages.food')}}"><i class="tio-edit"></i>
             </a>
             <a class="btn btn-sm btn--danger btn-outline-danger action-btn" href="javascript:"
-                onclick="form_alert('food-{{$food['id']}}','Want to delete this item ?')" title="{{__('messages.delete')}} {{__('messages.food')}}"><i class="tio-delete-outlined"></i>
+                onclick="form_alert('food-{{$food['id']}}','Want to delete this item ?')" title="{{translate('messages.delete')}} {{translate('messages.food')}}"><i class="tio-delete-outlined"></i>
             </a>
             <form action="{{route('admin.food.delete',[$food['id']])}}"
                     method="post" id="food-{{$food['id']}}">

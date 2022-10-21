@@ -21,7 +21,7 @@ class BannerController extends Controller
     }
 
     public function store(Request $request)
-    {        
+    {
         $validator = Validator::make($request->all(), [
             'title' => 'required|max:191',
             'image' => 'required',
@@ -30,9 +30,9 @@ class BannerController extends Controller
             'restaurant_id' => 'required_if:banner_type,restaurant_wise',
             'item_id' => 'required_if:banner_type,item_wise',
         ], [
-            'zone_id.required' => trans('messages.select_a_zone'),
-            'restaurant_id.required_if'=> trans('messages.Restaurant is required when banner type is restaurant wise'),
-            'item_id.required_if'=> trans('messages.Food is required when banner type is food wise'),
+            'zone_id.required' => translate('messages.select_a_zone'),
+            'restaurant_id.required_if'=> translate('messages.Restaurant is required when banner type is restaurant wise'),
+            'item_id.required_if'=> translate('messages.Food is required when banner type is food wise'),
         ]);
 
         if ($validator->fails()) {
@@ -46,7 +46,7 @@ class BannerController extends Controller
         $banner->image = Helpers::upload('banner/', 'png', $request->file('image'));
         $banner->data = ($request->banner_type == 'restaurant_wise')?$request->restaurant_id:$request->item_id;
         $banner->save();
- 
+
         return response()->json([], 200);
     }
 
@@ -67,7 +67,7 @@ class BannerController extends Controller
         $banner = Banner::findOrFail($request->id);
         $banner->status = $request->status;
         $banner->save();
-        Toastr::success(trans('messages.banner_status_updated'));
+        Toastr::success(translate('messages.banner_status_updated'));
         return back();
     }
 
@@ -80,12 +80,12 @@ class BannerController extends Controller
             'restaurant_id' => 'required_if:banner_type,restaurant_wise',
             'item_id' => 'required_if:banner_type,item_wise',
         ], [
-            'zone_id.required' => trans('messages.select_a_zone'),
-            'restaurant_id.required_if'=> trans('messages.Restaurant is required when banner type is restaurant wise'),
-            'item_id.required_if'=> trans('messages.Food is required when banner type is food wise'),
+            'zone_id.required' => translate('messages.select_a_zone'),
+            'restaurant_id.required_if'=> translate('messages.Restaurant is required when banner type is restaurant wise'),
+            'item_id.required_if'=> translate('messages.Food is required when banner type is food wise'),
         ]);
 
-   
+
         if ($validator->fails()) {
             return response()->json(['errors' => Helpers::error_processor($validator)]);
         }
@@ -98,7 +98,7 @@ class BannerController extends Controller
         $banner->save();
 
         return response()->json([], 200);
-        // Toastr::success(trans('messages.banner_updated_successfully'));
+        // Toastr::success(translate('messages.banner_updated_successfully'));
         // return redirect('admin/banner/add-new');
     }
 
@@ -108,7 +108,7 @@ class BannerController extends Controller
             Storage::disk('public')->delete('banner/' . $banner['image']);
         }
         $banner->delete();
-        Toastr::success(trans('messages.banner_deleted_successfully'));
+        Toastr::success(translate('messages.banner_deleted_successfully'));
         return back();
     }
 

@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title',__('messages.update').' '.__('messages.notification'))
+@section('title',translate('messages.update').' '.translate('messages.notification'))
 
 @push('css_or_js')
 
@@ -17,7 +17,7 @@
                             <img src="{{asset('/public/assets/admin/img/bell.png')}}" alt="public">
                         </div>
                         <span>
-                            {{__('messages.notification')}} {{__('messages.update')}}
+                            {{translate('messages.notification')}} {{translate('messages.update')}}
                         </span>
                     </h1>
                 </div>
@@ -31,15 +31,15 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label class="input-label" for="exampleFormControlInput1">{{__('messages.title')}}</label>
-                                <input id="notification_title" type="text" value="{{$notification['title']}}" name="notification_title" class="form-control" placeholder="{{__('messages.new_notification')}}" required maxlength="191">
+                                <label class="input-label" for="exampleFormControlInput1">{{translate('messages.title')}}</label>
+                                <input id="notification_title" type="text" value="{{$notification['title']}}" name="notification_title" class="form-control" placeholder="{{translate('messages.new_notification')}}" required maxlength="191">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label class="input-label" for="exampleFormControlInput1">{{__('messages.zone')}}</label>
+                                <label class="input-label" for="exampleFormControlInput1">{{translate('messages.zone')}}</label>
                                 <select id="zone" name="zone" class="form-control js-select2-custom" >
-                                    <option value="all" {{isset($notification->zone_id)?'':'selected'}}>{{__('messages.all')}} {{__('messages.zone')}}</option>
+                                    <option value="all" {{isset($notification->zone_id)?'':'selected'}}>{{translate('messages.all')}} {{translate('messages.zone')}}</option>
                                     @foreach(\App\Models\Zone::orderBy('name')->get() as $z)
                                         <option value="{{$z['id']}}"  {{$notification->zone_id==$z['id']?'selected':''}}>{{$z['name']}}</option>
                                     @endforeach
@@ -48,12 +48,12 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label class="input-label" for="tergat">{{__('messages.send')}} {{__('messages.to')}}</label>
-                        
-                                <select id="tergat" name="tergat" class="form-control" id="tergat" data-placeholder="{{__('messages.select')}} {{__('messages.tergat')}}" required>
-                                    <option value="customer" {{$notification->tergat=='customer'?'selected':''}}>{{__('messages.customer')}}</option>
-                                    <option value="deliveryman" {{$notification->tergat=='deliveryman'?'selected':''}}>{{__('messages.deliveryman')}}</option>
-                                    <option value="restaurant" {{$notification->tergat=='restaurant'?'selected':''}}>{{__('messages.restaurant')}}</option>
+                                <label class="input-label" for="tergat">{{translate('messages.send_to')}}</label>
+
+                                <select id="tergat" name="tergat" class="form-control" id="tergat" data-placeholder="{{translate('messages.select')}} {{translate('messages.tergat')}}" required>
+                                    <option value="customer" {{$notification->tergat=='customer'?'selected':''}}>{{translate('messages.customer')}}</option>
+                                    <option value="deliveryman" {{$notification->tergat=='deliveryman'?'selected':''}}>{{translate('messages.deliveryman')}}</option>
+                                    <option value="restaurant" {{$notification->tergat=='restaurant'?'selected':''}}>{{translate('messages.restaurant')}}</option>
                                 </select>
                             </div>
                         </div>
@@ -64,21 +64,21 @@
                                     <img  class="initial-30" id="viewer"
                                         src="{{asset('storage/app/public/notification')}}/{{$notification['image']}}"  onerror="src='{{asset('public/assets/admin/img/900x400/img1.jpg')}}'" alt="image"/>
                                 </center>
-                                <label>{{__('messages.notification')}} {{__('messages.banner')}}</label><small class="text-danger">* ( {{__('messages.ratio')}} 3:1 )</small>
+                                <label>{{translate('messages.notification')}} {{translate('messages.banner')}}</label><small class="text-danger">* ( {{translate('messages.ratio')}} 3:1 )</small>
                                 <div class="custom-file">
                                     <input type="file" name="image" id="customFileEg1" class="custom-file-input"
                                         accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
-                                    <label class="custom-file-label" for="customFileEg1">{{__('messages.choose')}} {{__('messages.file')}}</label>
+                                    <label class="custom-file-label" for="customFileEg1">{{translate('messages.choose')}} {{translate('messages.file')}}</label>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-8">
-                            <label class="input-label" for="exampleFormControlInput1">{{__('messages.description')}}</label>
+                            <label class="input-label" for="exampleFormControlInput1">{{translate('messages.description')}}</label>
                             <textarea id="description" name="description" class="form-control h--md-200px" required>{{$notification['description']}}</textarea>
                         </div>
                     </div>
                     <div class="btn--container justify-content-end mb-0">
-                        <button id="reset_btn" type="button" class="btn btn--reset">{{__('messages.reset')}}</button>
+                        <button id="reset_btn" type="button" class="btn btn--reset">{{translate('messages.reset')}}</button>
                         <button type="submit" class="btn btn--primary">{{translate('send_again')}}</button>
                     </div>
                 </form>

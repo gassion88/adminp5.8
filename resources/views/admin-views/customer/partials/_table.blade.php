@@ -1,40 +1,42 @@
 @foreach($customers as $key=>$customer)
-    <tr class="">
-        <td class="">
-            {{$key+1}}
-        </td>
-        <td class="table-column-pl-0">
-            <a href="{{route('admin.customer.view',[$customer['id']])}}">
-                {{$customer['f_name']." ".$customer['l_name']}}
-            </a>
-        </td>
-        <td>
+<tr class="">
+    <td class="">
+        {{$key+1}}
+    </td>
+    <td class="table-column-pl-0">
+        <a href="{{route('admin.customer.view',[$customer['id']])}}" class="text--title text-hover">
+            {{$customer['f_name']." ".$customer['l_name']}}
+        </a>
+    </td>
+    <td>
+        <div>
             {{$customer['email']}}
-        </td>
-        <td>
+        </div>
+        <div>
             {{$customer['phone']}}
-        </td>
-        <td>
-            <label class="badge badge-soft-info">
-                {{$customer->order_count}}
+        </div>
+    </td>
+    <td>
+        <div class="pl-4 ml-2">
+            {{$customer->order_count}}
+        </div>
+    </td>
+    <td>
+        <div class="d-flex justify-content-center">
+            <label class="toggle-switch toggle-switch-sm" for="stocksCheckbox{{$customer->id}}">
+                <input type="checkbox" onclick="status_change_alert('{{route('admin.customer.status',[$customer->id,$customer->status?0:1])}}', '{{$customer->status?translate('messages.you_want_to_block_this_customer'):translate('messages.you_want_to_unblock_this_customer')}}', event)" class="toggle-switch-input" id="stocksCheckbox{{$customer->id}}" {{$customer->status?'checked':''}}>
+                <span class="toggle-switch-label">
+                    <span class="toggle-switch-indicator"></span>
+                </span>
             </label>
-        </td>
-        <td>
-            <div class="dropdown">
-                <button class="btn btn-outline-secondary dropdown-toggle" type="button"
-                        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
-                    <i class="tio-settings"></i>
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="{{route('admin.customer.view',[$customer['id']])}}">
-                        <i class="tio-visible"></i> {{__('messages.view')}}
-                    </a>
-                    {{--<a class="dropdown-item" target="" href="">
-                        <i class="tio-download"></i> Suspend
-                    </a>--}}
-                </div>
-            </div>
-        </td>
-    </tr>
+        </div>
+    </td>
+    <td>
+        <div class="btn--container">
+            <a class="btn btn-sm btn--warning btn-outline-warning action-btn"
+                href="{{route('admin.customer.view',[$customer['id']])}}" title="{{translate('messages.view')}} {{translate('messages.customer')}}"><i class="tio-visible-outlined"></i>
+            </a>
+        </div>
+    </td>
+</tr>
 @endforeach

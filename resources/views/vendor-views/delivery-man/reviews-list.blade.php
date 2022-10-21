@@ -12,7 +12,7 @@
         <div class="page-header">
             <div class="row align-items-center">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <h1 class="page-header-title">{{__('messages.deliveryman')}} {{__('messages.reviews')}}</h1>
+                    <h1 class="page-header-title">{{translate('messages.deliveryman')}} {{translate('messages.reviews')}}</h1>
                 </div>
             </div>
         </div>
@@ -38,11 +38,11 @@
                                }'>
                             <thead class="thead-light">
                             <tr>
-                                <th>{{__('messages.#')}}</th>
-                                <th style="width: 30%">{{__('messages.deliveryman')}}</th>
-                                <th style="width: 25%">{{__('messages.customer')}}</th>
-                                <th>{{__('messages.review')}}</th>
-                                <th>{{__('messages.rating')}}</th>
+                                <th>{{translate('messages.#')}}</th>
+                                <th class="w-30p">{{translate('messages.deliveryman')}}</th>
+                                <th class="w-25p">{{translate('messages.customer')}}</th>
+                                <th>{{translate('messages.review')}}</th>
+                                <th>{{translate('messages.rating')}}</th>
                             </tr>
                             </thead>
 
@@ -60,7 +60,7 @@
                                         </td>
                                         <td>
                                             @if ($review->customer)
-                                                {{$review->customer?$review->customer->f_name:""}} {{$review->customer?$review->customer->l_name:""}}                                             
+                                                {{$review->customer?$review->customer->f_name:""}} {{$review->customer?$review->customer->l_name:""}}
                                             @else
                                                 {{translate('messages.customer_not_found')}}
                                             @endif

@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title',__('messages.add_fund'))
+@section('title',translate('messages.add_fund'))
 
 @push('css_or_js')
 
@@ -15,7 +15,7 @@
                     <img src="{{asset('/public/assets/admin/img/money.png')}}" alt="public">
                 </div>
                 <span>
-                    {{__('messages.add_fund')}}
+                    {{translate('messages.add_fund')}}
                 </span>
             </h1>
         </div>
@@ -27,30 +27,30 @@
                     <div class="row">
                         <div class="col-sm-6 col-12">
                             <div class="form-group">
-                                <label class="form-label" for="customer">{{__('messages.customer')}}</label>
-                                <select id='customer' name="customer_id" data-placeholder="{{__('messages.select_customer')}}" class="js-data-example-ajax form-control h--45px" required>
+                                <label class="form-label" for="customer">{{translate('messages.customer')}}</label>
+                                <select id='customer' name="customer_id" data-placeholder="{{translate('messages.select_customer')}}" class="js-data-example-ajax form-control h--45px" required>
 
                                 </select>
                             </div>
                         </div>
                         <div class="col-sm-6 col-12">
                             <div class="form-group">
-                                <label class="form-label" for="amount">{{__('messages.amount')}}</label>
+                                <label class="form-label" for="amount">{{translate('messages.amount')}}</label>
 
                                 <input type="number" class="form-control h--45px" name="amount" id="amount" step=".01" required>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-group">
-                                <label class="form-label" for="referance">{{__('messages.reference')}} <small>({{__('messages.optional')}})</small></label>
+                                <label class="form-label" for="referance">{{translate('messages.reference')}} <small>({{translate('messages.optional')}})</small></label>
 
                                 <input type="text" class="form-control h--45px" name="referance" id="referance">
                             </div>
                         </div>
                     </div>
                     <div class="btn--container justify-content-end">
-                        <button type="reset" id="reset" class="btn btn--reset">{{__('messages.reset')}}</button>
-                        <button type="submit" id="submit" class="btn btn--primary">{{__('messages.submit')}}</button>
+                        <button type="reset" id="reset" class="btn btn--reset">{{translate('messages.reset')}}</button>
+                        <button type="submit" id="submit" class="btn btn--primary">{{translate('messages.submit')}}</button>
                     </div>
                 </form>
             </div>
@@ -99,14 +99,14 @@
             var formData = new FormData(this);
 
             Swal.fire({
-                title: '{{__('messages.are_you_sure')}}',
-                text: '{{__('messages.you_want_to_add_fund')}}'+$('#amount').val()+' {{\App\CentralLogics\Helpers::currency_code().' '.__('messages.to')}} '+$('#customer option:selected').text()+'{{__('messages.to_wallet')}}',
+                title: '{{translate('messages.are_you_sure')}}',
+                text: '{{translate('messages.you_want_to_add_fund')}}'+$('#amount').val()+' {{\App\CentralLogics\Helpers::currency_code().' '.translate('messages.to')}} '+$('#customer option:selected').text()+'{{translate('messages.to_wallet')}}',
                 type: 'info',
                 showCancelButton: true,
                 cancelButtonColor: 'default',
                 confirmButtonColor: 'primary',
-                cancelButtonText: '{{__('messages.no')}}',
-                confirmButtonText: '{{__('messages.add')}}',
+                cancelButtonText: '{{translate('messages.no')}}',
+                confirmButtonText: '{{translate('messages.add')}}',
                 reverseButtons: true
             }).then((result) => {
                 if (result.value) {

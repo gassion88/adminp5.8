@@ -12,7 +12,7 @@
         <div class="page-header">
             <div class="row align-items-center">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <h1 class="page-header-title"><i class="tio-edit"></i> {{__('messages.coupon')}} {{__('messages.update')}}</h1>
+                    <h1 class="page-header-title"><i class="tio-edit"></i> {{translate('messages.coupon')}} {{translate('messages.update')}}</h1>
                 </div>
             </div>
         </div>
@@ -24,29 +24,29 @@
                     <div class="row">
                         <div class="col-4">
                             <div class="form-group">
-                                <label class="input-label" for="exampleFormControlInput1">{{__('messages.title')}}</label>
+                                <label class="input-label" for="exampleFormControlInput1">{{translate('messages.title')}}</label>
                                 <input type="text" name="title" value="{{$coupon['title']}}" class="form-control"
-                                       placeholder="{{__('messages.new_coupon')}}" required>
+                                       placeholder="{{translate('messages.new_coupon')}}" required>
                             </div>
                         </div>
                         <div class="col-4">
                             <div class="form-group">
-                                <label class="input-label" for="exampleFormControlInput1">{{__('messages.coupon')}} {{__('messages.type')}}</label>
+                                <label class="input-label" for="exampleFormControlInput1">{{translate('messages.coupon')}} {{translate('messages.type')}}</label>
                                 <select name="coupon_type" class="form-control" onchange="coupon_type_change(this.value)">
                                     <option value="default" {{$coupon['coupon_type']=='default'?'selected':''}}>
-                                        {{__('messages.default')}}
+                                        {{translate('messages.default')}}
                                     </option>
                                     <option value="first_order" {{$coupon['coupon_type']=='first_order'?'selected':''}}>
-                                        {{__('messages.first')}} {{__('messages.order')}}
+                                        {{translate('messages.first')}} {{translate('messages.order')}}
                                     </option>
                                 </select>
                             </div>
                         </div>
-                        <div class="col-4" id="limit-for-user" style="display: {{$coupon['coupon_type']=='first_order'?'none':'block'}}">
+                        <div class="col-4 {{$coupon['coupon_type']=='first_order'?'d-none':'d-block'}}" id="limit-for-user">
                             <div class="form-group">
-                                <label class="input-label" for="exampleFormControlInput1">{{__('messages.limit')}} {{__('messages.for')}} {{__('messages.same')}} {{__('messages.user')}}</label>
+                                <label class="input-label" for="exampleFormControlInput1">{{translate('messages.limit')}} {{translate('messages.for')}} {{translate('messages.same')}} {{translate('messages.user')}}</label>
                                 <input type="number" name="limit" value="{{$coupon['limit']}}" class="form-control"
-                                       placeholder="EX: 10">
+                                       placeholder="{{ translate('messages.Ex :') }} 10">
                             </div>
                         </div>
                     </div>
@@ -54,15 +54,15 @@
                     <div class="row">
                         <div class="col-md-4 col-6">
                             <div class="form-group">
-                                <label class="input-label" for="exampleFormControlInput1">{{__('messages.code')}}</label>
+                                <label class="input-label" for="exampleFormControlInput1">{{translate('messages.code')}}</label>
                                 <input type="text" name="code" class="form-control" value="{{$coupon['code']}}"
                                        placeholder="{{\Illuminate\Support\Str::random(8)}}" required>
                             </div>
                         </div>
                         <div class="col-md-4 col-6">
                             <div class="form-group">
-                                <label class="input-label" for="">{{__('messages.start')}} {{__('messages.date')}}</label>
-                                <input type="text" name="start_date" class="js-flatpickr form-control flatpickr-custom" placeholder="{{__('messages.select_date')}}" value="{{date('Y/m/d',strtotime($coupon['start_date']))}}"
+                                <label class="input-label" for="">{{translate('messages.start')}} {{translate('messages.date')}}</label>
+                                <input type="text" name="start_date" class="js-flatpickr form-control flatpickr-custom" placeholder="{{translate('messages.select_date')}}" value="{{date('Y/m/d',strtotime($coupon['start_date']))}}"
                                        data-hs-flatpickr-options='{
                                      "dateFormat": "Y/m/d"
                                    }'>
@@ -70,8 +70,8 @@
                         </div>
                         <div class="col-md-4 col-6">
                             <div class="form-group">
-                                <label class="input-label" for="">{{__('messages.expire')}} {{__('messages.date')}}</label>
-                                <input type="text" name="expire_date" class="js-flatpickr form-control flatpickr-custom" placeholder="{{__('messages.select_date')}}" value="{{date('Y/m/d',strtotime($coupon['expire_date']))}}"
+                                <label class="input-label" for="">{{translate('messages.expire')}} {{translate('messages.date')}}</label>
+                                <input type="text" name="expire_date" class="js-flatpickr form-control flatpickr-custom" placeholder="{{translate('messages.select_date')}}" value="{{date('Y/m/d',strtotime($coupon['expire_date']))}}"
                                        data-hs-flatpickr-options='{
                                      "dateFormat": "Y/m/d"
                                    }'>
@@ -82,7 +82,7 @@
                     <div class="row">
                         <div class="col-md-3 col-6">
                             <div class="form-group">
-                                <label class="input-label" for="exampleFormControlInput1">{{__('messages.min')}} {{__('messages.purchase')}}</label>
+                                <label class="input-label" for="exampleFormControlInput1">{{translate('messages.min')}} {{translate('messages.purchase')}}</label>
                                 <input type="number" name="min_purchase" step="0.01" value="{{$coupon['min_purchase']}}"
                                        min="0" max="100000" class="form-control"
                                        placeholder="100">
@@ -90,32 +90,32 @@
                         </div>
                         <div class="col-md-3 col-6">
                             <div class="form-group">
-                                <label class="input-label" for="exampleFormControlInput1">{{__('messages.max')}} {{__('messages.discount')}}</label>
+                                <label class="input-label" for="exampleFormControlInput1">{{translate('messages.max')}} {{translate('messages.discount')}}</label>
                                 <input type="number" min="0" max="1000000" step="0.01"
                                        value="{{$coupon['max_discount']}}" name="max_discount" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-4 col-6">
                             <div class="form-group">
-                                <label class="input-label" for="exampleFormControlInput1">{{__('messages.discount')}}</label>
+                                <label class="input-label" for="exampleFormControlInput1">{{translate('messages.discount')}}</label>
                                 <input type="number" min="1" max="10000" step="0.01" value="{{$coupon['discount']}}"
                                        name="discount" class="form-control" required>
                             </div>
                         </div>
                         <div class="col-md-2 col-6">
                             <div class="form-group">
-                                <label class="input-label" for="exampleFormControlInput1">{{__('messages.discount')}} {{__('messages.type')}}</label>
+                                <label class="input-label" for="exampleFormControlInput1">{{translate('messages.discount')}} {{translate('messages.type')}}</label>
                                 <select name="discount_type" class="form-control">
-                                    <option value="amount" {{$coupon['discount_type']=='amount'?'selected':''}}>{{__('messages.amount')}}
+                                    <option value="amount" {{$coupon['discount_type']=='amount'?'selected':''}}>{{translate('messages.amount')}}
                                     </option>
                                     <option value="percent" {{$coupon['discount_type']=='percent'?'selected':''}}>
-                                        {{__('messages.percent')}}
+                                        {{translate('messages.percent')}}
                                     </option>
                                 </select>
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn--primary">{{__('messages.update')}}</button>
+                    <button type="submit" class="btn btn--primary">{{translate('messages.update')}}</button>
                 </form>
             </div>
             <!-- End Table -->

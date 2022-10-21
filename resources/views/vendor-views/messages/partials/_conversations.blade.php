@@ -1,10 +1,4 @@
-<style>
-    div.scroll-down {
-        max-height: 300px;
-        overflow-y: scroll;
-    }
 
-</style>
 <div class="card h-100">
     <!-- Header -->
     <div class="card-header">
@@ -33,7 +27,7 @@
                             @if($con->file!=null)
                             @foreach (json_decode($con->file) as $img)
                             <br>
-                                <img style="width:100%"
+                                <img class="w-100"
                                 src="{{asset('storage/app/public/conversation').'/'.$img}}">
                                 @endforeach
                             @endif
@@ -49,7 +43,7 @@
                             @if($con->file!=null)
                             @foreach (json_decode($con->file) as $img)
                             <br>
-                                <img style="width:100%"
+                                <img class="w-100"
                                 src="{{asset('storage/app/public/conversation').'/'.$img}}">
                                 @endforeach
                             @endif
@@ -83,7 +77,7 @@
                 </div>
                 <button type="submit"
                  {{-- onclick="replyConvs('{{route('vendor.message.store',['user_id'=>$user->id,'user_type'=>$user_type])}}')" --}}
-                        class="btn btn-primary btn--primary con-reply-btn">{{__('messages.send')}} {{__('messages.reply')}}
+                        class="btn btn-primary btn--primary con-reply-btn">{{translate('messages.send')}}
                 </button>
             </div>
         </form>
@@ -118,13 +112,13 @@
 
             },
             onExtensionErr: function(index, file) {
-                toastr.error('{{ __('messages.please_only_input_png_or_jpg_type_file') }}', {
+                toastr.error('{{ translate('messages.please_only_input_png_or_jpg_type_file') }}', {
                     CloseButton: true,
                     ProgressBar: true
                 });
             },
             onSizeErr: function(index, file) {
-                toastr.error('{{ __('messages.file_size_too_big') }}', {
+                toastr.error('{{ translate('messages.file_size_too_big') }}', {
                     CloseButton: true,
                     ProgressBar: true
                 });
@@ -150,7 +144,8 @@
                 processData: false,
                 success: function(data) {
                     if (data.errors && data.errors.length > 0) {
-                        toastr.error('Reply message is required!', {
+                        $('button[type=submit], input[type=submit]').prop('disabled',false);
+                        toastr.error('Write something to send massage!', {
                             CloseButton: true,
                             ProgressBar: true
                         });
@@ -164,7 +159,7 @@
                     }
                 },
                 error() {
-                    toastr.error('Reply message is required!', {
+                    toastr.error('Write something to send massage!', {
                         CloseButton: true,
                         ProgressBar: true
                     });

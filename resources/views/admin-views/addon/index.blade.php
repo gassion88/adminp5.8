@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title',__('messages.add_new_addon'))
+@section('title',translate('messages.add_new_addon'))
 
 @push('css_or_js')
 
@@ -14,15 +14,15 @@
                 <div class="col-sm mb-2 mb-sm-0">
                     <h2 class="page-header-title text-capitalize">
                         <div class="card-header-icon d-inline-flex mr-2 img">
-                            <img src="http://localhost/stack-food/multivendor-food-admin/public/assets/admin/img/addon.png" alt="public">
+                            <img src="{{asset('/public/assets/admin/img/addon.png')}}" alt="public">
                         </div>
                         <span>
-                            {{__('messages.add_new_addon')}}
+                            {{translate('messages.add_new_addon')}}
                         </span>
                     </h2>
                 </div>
                 @if(isset($addon))
-                <a href="{{route('admin.addon.add-new')}}" class="btn btn--primary pull-right"><i class="tio-add-circle"></i> {{__('messages.add')}} {{__('messages.new')}} {{__('messages.addon')}}</a>
+                <a href="{{route('admin.addon.add-new')}}" class="btn btn--primary pull-right"><i class="tio-add-circle"></i> {{translate('messages.add')}} {{translate('messages.new')}} {{translate('messages.addon')}}</a>
                 @endif
             </div>
         </div>
@@ -49,31 +49,31 @@
                         @if ($language)
                             @foreach(json_decode($language) as $lang)
                                 <div class="form-group {{$lang != $default_lang ? 'd-none':''}} lang_form" id="{{$lang}}-form">
-                                    <label class="input-label" for="exampleFormControlInput1">{{__('messages.name')}} ({{strtoupper($lang)}})</label>
-                                    <input type="text" name="name[]" class="form-control" placeholder="Ex : {{__('Water')}}" maxlength="191" {{$lang == $default_lang? 'required':''}} oninvalid="document.getElementById('en-link').click()">
+                                    <label class="input-label" for="exampleFormControlInput1">{{translate('messages.name')}} ({{strtoupper($lang)}})</label>
+                                    <input type="text" name="name[]" class="form-control" placeholder="{{ translate('messages.Ex :') }} {{translate('Water')}}" maxlength="191" {{$lang == $default_lang? 'required':''}} oninvalid="document.getElementById('en-link').click()">
                                 </div>
                                 <input type="hidden" name="lang[]" value="{{$lang}}">
                             @endforeach
                         @else
                             <div class="form-group">
-                                <label class="input-label" for="exampleFormControlInput1">{{__('messages.name')}}</label>
-                                <input type="text" name="name" class="form-control" placeholder="Ex : {{__('Water')}}" value="{{old('name')}}" required maxlength="191">
+                                <label class="input-label" for="exampleFormControlInput1">{{translate('messages.name')}}</label>
+                                <input type="text" name="name" class="form-control" placeholder="{{ translate('messages.Ex :') }} {{translate('Water')}}" value="{{old('name')}}" required maxlength="191">
                             </div>
                             <input type="hidden" name="lang[]" value="{{$lang}}">
                         @endif
                         </div>
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label class="input-label" for="exampleFormControlSelect1">{{__('messages.restaurant')}}<span
+                                <label class="input-label" for="exampleFormControlSelect1">{{translate('messages.restaurant')}}<span
                                         class="input-label-secondary"></span></label>
-                                <select name="restaurant_id" id="restaurant_id" class="js-data-example-ajax form-control"  data-placeholder="{{__('messages.select')}} {{__('messages.restaurant')}}" oninvalid="this.setCustomValidity('{{__('messages.please_select_restaurant')}}')">
+                                <select name="restaurant_id" id="restaurant_id" class="js-data-example-ajax form-control"  data-placeholder="{{translate('messages.select')}} {{translate('messages.restaurant')}}" oninvalid="this.setCustomValidity('{{translate('messages.please_select_restaurant')}}')">
 
                                 </select>
                             </div>
                         </div>
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label class="input-label" for="exampleFormControlInput1">{{__('messages.price')}}</label>
+                                <label class="input-label" for="exampleFormControlInput1">{{translate('messages.price')}}</label>
                                 <input type="number" min="0" max="999999999999.99" name="price" step="0.01" value="{{old('price')}}" class="form-control" placeholder="100" required>
                             </div>
                         </div>
@@ -81,9 +81,9 @@
 
                     <div class="form-group mb-0">
                         <div class="btn--container justify-content-end">
-                            <button type="reset" id="reset_btn" class="btn btn--reset">{{__('messages.reset')}}</button>
+                            <button type="reset" id="reset_btn" class="btn btn--reset">{{translate('messages.reset')}}</button>
 
-                            <button type="submit" class="btn btn--primary">{{isset($addon)?__('messages.update'):__('messages.submit')}}</button>
+                            <button type="submit" class="btn btn--primary">{{isset($addon)?translate('messages.update'):translate('messages.submit')}}</button>
                         </div>
                     </div>
 
@@ -94,13 +94,13 @@
         <div class="card mt-2">
             <div class="card-header py-2 border-0">
                 <div class="search--button-wrapper">
-                    <h5 class="card-title"> {{__('messages.addon')}} {{__('messages.list')}}<span class="badge badge-soft-dark ml-2" id="itemCount">{{$addons->total()}}</span></h5>
+                    <h5 class="card-title"> {{translate('messages.addon')}} {{translate('messages.list')}}<span class="badge badge-soft-dark ml-2" id="itemCount">{{$addons->total()}}</span></h5>
                     <div class="mr-sm-3">
-                        <select name="restaurant_id" id="restaurant" onchange="set_restaurant_filter('{{route('admin.addon.add-new')}}',this.value)" data-placeholder="{{__('messages.select')}} {{__('messages.restaurant')}}" class="js-data-example-ajax form-control"   title="Select Restaurant">
+                        <select name="restaurant_id" id="restaurant" onchange="set_restaurant_filter('{{route('admin.addon.add-new')}}',this.value)" data-placeholder="{{translate('messages.select')}} {{translate('messages.restaurant')}}" class="js-data-example-ajax form-control"   title="Select Restaurant">
                             @if(isset($restaurant))
                             <option value="{{$restaurant->id}}" selected>{{$restaurant->name}}</option>
                             @else
-                            <option value="all" selected>{{__('messages.all_restaurants')}}</option>
+                            <option value="all" selected>{{translate('messages.all_restaurants')}}</option>
                             @endif
                         </select>
                     </div>
@@ -108,7 +108,7 @@
                         @csrf
                         <!-- Search -->
                         <div class="input--group input-group input-group-merge input-group-flush">
-                            <input id="datatableSearch" type="search" name="search" class="form-control" placeholder="Ex : {{translate('Search_by_name')}}" aria-label="Search addons">
+                            <input id="datatableSearch" type="search" name="search" class="form-control" placeholder="{{ translate('messages.Ex :') }} {{translate('Search_by_name')}}" aria-label="Search addons">
                             <button type="submit" class="btn btn--secondary">
                                 <i class="tio-search"></i>
                             </button>
@@ -128,7 +128,7 @@
                             "target": "#showHideDropdown",
                             "type": "css-animation"
                             }'>
-                            <i class="tio-table mr-1"></i> {{__('messages.columns')}} <span class="badge badge-soft-dark rounded-circle ml-1">5</span>
+                            <i class="tio-table mr-1"></i> {{translate('messages.columns')}} <span class="badge badge-soft-dark rounded-circle ml-1">5</span>
                         </a>
 
                         <div id="showHideDropdown" class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-right dropdown-card">
@@ -146,7 +146,7 @@
                                     <!-- End Checkbox Switch -->
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <span class="mr-2">{{__('messages.name')}}</span>
+                                        <span class="mr-2">{{translate('messages.name')}}</span>
                                         <!-- Checkbox Switch -->
                                         <label class="toggle-switch toggle-switch-sm" for="toggleColumn_name">
                                             <input type="checkbox" class="toggle-switch-input" id="toggleColumn_name" checked>
@@ -157,7 +157,7 @@
                                     <!-- End Checkbox Switch -->
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <span class="mr-2">{{__('messages.price')}}</span>
+                                        <span class="mr-2">{{translate('messages.price')}}</span>
                                         <!-- Checkbox Switch -->
                                         <label class="toggle-switch toggle-switch-sm" for="toggleColumn_price">
                                             <input type="checkbox" class="toggle-switch-input" id="toggleColumn_price" checked>
@@ -170,7 +170,7 @@
 
 
                                     <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <span class="mr-2">{{__('messages.restaurant')}}</span>
+                                        <span class="mr-2">{{translate('messages.restaurant')}}</span>
 
                                         <!-- Checkbox Switch -->
                                         <label class="toggle-switch toggle-switch-sm" for="toggleColumn_vendor">
@@ -184,7 +184,7 @@
 
 
                                     <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <span class="mr-2">{{__('messages.status')}}</span>
+                                        <span class="mr-2">{{translate('messages.status')}}</span>
 
                                         <!-- Checkbox Switch -->
                                         <label class="toggle-switch toggle-switch-sm" for="toggleColumn_status">
@@ -197,7 +197,7 @@
                                     </div>
 
                                     <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <span class="mr-2">{{__('messages.action')}}</span>
+                                        <span class="mr-2">{{translate('messages.action')}}</span>
 
                                         <!-- Checkbox Switch -->
                                         <label class="toggle-switch toggle-switch-sm" for="toggleColumn_action">
@@ -228,11 +228,11 @@
                         <thead class="thead-light">
                         <tr>
                             <th>{{translate('sl')}}</th>
-                            <th class="text-center w-20p">{{__('messages.name')}}</th>
-                            <th class="text-center w-20p">{{__('messages.price')}}</th>
-                            <th class="w-26p">{{__('messages.restaurant')}}</th>
-                            <th class="w-12p">{{__('messages.status')}}</th>
-                            <th class="text-center w-12p">{{__('messages.action')}}</th>
+                            <th class="text-center w-20p">{{translate('messages.name')}}</th>
+                            <th class="text-center w-20p">{{translate('messages.price')}}</th>
+                            <th class="w-26p">{{translate('messages.restaurant')}}</th>
+                            <th class="w-12p">{{translate('messages.status')}}</th>
+                            <th class="text-center w-12p">{{translate('messages.action')}}</th>
                         </tr>
                         </thead>
 
@@ -250,7 +250,7 @@
                                         {{\App\CentralLogics\Helpers::format_currency($addon['price'])}}
                                     </div>
                                 </td>
-                                <td  class="pl-3">{{Str::limit($addon->restaurant?$addon->restaurant->name:__('messages.restaurant').' '.__('messages.deleted'),25,'...')}}</td>
+                                <td  class="pl-3">{{Str::limit($addon->restaurant?$addon->restaurant->name:translate('messages.restaurant').' '.translate('messages.deleted'),25,'...')}}</td>
                                 <td>
                                     <label class="toggle-switch toggle-switch-sm" for="stausCheckbox{{$addon->id}}">
                                     <input type="checkbox" onclick="location.href='{{route('admin.addon.status',[$addon['id'],$addon->status?0:1])}}'"class="toggle-switch-input" id="stausCheckbox{{$addon->id}}" {{$addon->status?'checked':''}}>
@@ -262,9 +262,9 @@
                                 <td>
                                     <div class="btn--container justify-content-center">
                                         <a class="btn btn-sm btn--primary btn-outline-primary action-btn"
-                                        href="{{route('admin.addon.edit',[$addon['id']])}}" title="{{__('messages.edit')}} {{__('messages.addon')}}"><i class="tio-edit"></i></a>
+                                        href="{{route('admin.addon.edit',[$addon['id']])}}" title="{{translate('messages.edit')}} {{translate('messages.addon')}}"><i class="tio-edit"></i></a>
                                         <a class="btn btn-sm btn--danger btn-outline-danger action-btn"     href="javascript:"
-                                            onclick="form_alert('addon-{{$addon['id']}}','Want to delete this addon ?')" title="{{__('messages.delete')}} {{__('messages.addon')}}"><i class="tio-delete-outlined"></i></a>
+                                            onclick="form_alert('addon-{{$addon['id']}}','Want to delete this addon ?')" title="{{translate('messages.delete')}} {{translate('messages.addon')}}"><i class="tio-delete-outlined"></i></a>
                                         <form action="{{route('admin.addon.delete',[$addon['id']])}}"
                                                     method="post" id="addon-{{$addon['id']}}">
                                             @csrf @method('delete')
@@ -319,8 +319,8 @@
           },
           language: {
             zeroRecords: '<div class="text-center p-4">' +
-                '<img class="mb-3" src="{{asset('public/assets/admin/svg/illustrations/sorry.svg')}}" alt="Image Description" style="width: 7rem;">' +
-                '<p class="mb-0">No data to show</p>' +
+                '<img class="w-7rem mb-3" src="{{asset('public/assets/admin/svg/illustrations/sorry.svg')}}" alt="Image Description">' +
+                '<p class="mb-0">{{ translate('No data to show') }}</p>' +
                 '</div>'
           }
         });

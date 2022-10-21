@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title','Vendor List')
+@section('title',translate('Vendor List'))
 
 @push('css_or_js')
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -10,15 +10,15 @@
     <div class="content container-fluid">
         <!-- Page Header -->
         <div class="page-header">
-            <h1 class="page-header-title"><i class="tio-filter-list"></i> {{__('messages.restaurants')}} <span class="badge badge-soft-dark ml-2" id="itemCount">{{$restaurants->total()}}</span></h1>
+            <h1 class="page-header-title"><i class="tio-filter-list"></i> {{translate('messages.restaurants')}} <span class="badge badge-soft-dark ml-2" id="itemCount">{{$restaurants->total()}}</span></h1>
             <div class="page-header-select-wrapper">
                 @if ($toggle_veg_non_veg)
                 <div class="select-item">
                 <!-- Veg/NonVeg filter -->
-                    <select name="category_id" onchange="set_filter('{{url()->full()}}',this.value, 'type')" data-placeholder="{{__('messages.all')}}" class="form-control w--sm-unset ml-auto">
-                        <option value="all" {{$type=='all'?'selected':''}}>{{__('messages.all')}}</option>
-                        <option value="veg" {{$type=='veg'?'selected':''}}>{{__('messages.veg')}}</option>
-                        <option value="non_veg" {{$type=='non_veg'?'selected':''}}>{{__('messages.non_veg')}}</option>
+                    <select name="category_id" onchange="set_filter('{{url()->full()}}',this.value, 'type')" data-placeholder="{{translate('messages.all')}}" class="form-control w--sm-unset ml-auto">
+                        <option value="all" {{$type=='all'?'selected':''}}>{{translate('messages.all')}}</option>
+                        <option value="veg" {{$type=='veg'?'selected':''}}>{{translate('messages.veg')}}</option>
+                        <option value="non_veg" {{$type=='non_veg'?'selected':''}}>{{translate('messages.non_veg')}}</option>
                     </select>
                 <!-- End Veg/NonVeg filter -->
                 </div>
@@ -119,13 +119,13 @@
 
                     <div class="card-header py-2 border-0">
                         <div class="search--button-wrapper">
-                            <h3 class="card-title">{{__('messages.restaurants')}} {{__('messages.list')}}</h3>
+                            <h3 class="card-title">{{translate('messages.restaurants')}} {{translate('messages.list')}}</h3>
                             <form action="javascript:" id="search-form" class="my-2 ml-auto mr-sm-2 mr-xl-4 ml-sm-auto flex-grow-1 flex-grow-sm-0">
                                 <!-- Search -->
                                 @csrf
                                 <div class="input--group input-group input-group-merge input-group-flush">
                                     <input id="datatableSearch_" type="search" name="search" class="form-control"
-                                            placeholder="Ex : {{__('messages.search')}} by Restaurant name of Phone number" aria-label="{{__('messages.search')}}" required>
+                                            placeholder="{{ translate('Ex : search by Restaurant name of Phone number') }}" aria-label="{{translate('messages.search')}}" required>
                                     <button type="submit" class="btn btn--secondary"><i class="tio-search"></i></button>
 
                                 </div>
@@ -139,44 +139,44 @@
                                         "target": "#usersExportDropdown",
                                         "type": "css-animation"
                                     }'>
-                                    <i class="tio-download-to mr-1"></i> {{__('messages.export')}}
+                                    <i class="tio-download-to mr-1"></i> {{translate('messages.export')}}
                                 </a>
 
                                 <div id="usersExportDropdown"
                                         class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-sm-right">
-                                    {{--<span class="dropdown-header">{{__('messages.options')}}</span>
+                                    {{--<span class="dropdown-header">{{translate('messages.options')}}</span>
                                     <a id="export-copy" class="dropdown-item" href="javascript:;">
                                         <img class="avatar avatar-xss avatar-4by3 mr-2"
                                                 src="{{asset('public/assets/admin')}}/svg/illustrations/copy.svg"
                                                 alt="Image Description">
-                                        {{__('messages.copy')}}
+                                        {{translate('messages.copy')}}
                                     </a>
                                     <a id="export-print" class="dropdown-item" href="javascript:;">
                                         <img class="avatar avatar-xss avatar-4by3 mr-2"
                                                 src="{{asset('public/assets/admin')}}/svg/illustrations/print.svg"
                                                 alt="Image Description">
-                                        {{__('messages.print')}}
+                                        {{translate('messages.print')}}
                                     </a>
                                     <div class="dropdown-divider"></div>--}}
-                                    <span class="dropdown-header">{{__('messages.download')}} {{__('messages.options')}}</span>
+                                    <span class="dropdown-header">{{translate('messages.download')}} {{translate('messages.options')}}</span>
                                     <a target="__blank" id="export-excel" class="dropdown-item" href="{{route('admin.vendor.restaurants-export', ['type'=>'excel'])}}">
                                         <img class="avatar avatar-xss avatar-4by3 mr-2"
                                         src="{{asset('public/assets/admin')}}/svg/components/excel.svg"
                                         alt="Image Description">
-                                        {{__('messages.excel')}}
+                                        {{translate('messages.excel')}}
                                     </a>
 
                                     <a id="export-excel" class="dropdown-item" href="{{route('admin.vendor.restaurants-export', ['type'=>'csv'])}}">
                                         <img class="avatar avatar-xss avatar-4by3 mr-2"
                                                     src="{{asset('public/assets/admin')}}/svg/components/placeholder-csv-format.svg"
                                                     alt="Image Description">
-                                                    {{__('messages.csv')}}
+                                                    {{translate('messages.csv')}}
                                     </a>
 {{--                                     <a id="export-excel" class="dropdown-item" href="">
                                         <img class="avatar avatar-xss avatar-4by3 mr-2"
                                                 src="{{asset('public/assets/admin')}}/svg/components/excel.svg"
                                                 alt="Image Description">
-                                        {{__('messages.excel')}}
+                                        {{translate('messages.excel')}}
                                     </a> --}}
 
 {{--                                     <form action="{{route('admin.vendor.restaurants-export')}}" method="post">
@@ -187,7 +187,7 @@
                                                 <img class="avatar avatar-xss avatar-4by3 mr-2"
                                                     src="{{asset('public/assets/admin')}}/svg/components/placeholder-csv-format.svg"
                                                     alt="Image Description">
-                                                    {{__('messages.csv')}}
+                                                    {{translate('messages.csv')}}
                                             </button>
 
                                         </a>
@@ -196,7 +196,7 @@
                                         <img class="avatar avatar-xss avatar-4by3 mr-2"
                                                 src="{{asset('public/assets/admin')}}/svg/components/pdf.svg"
                                                 alt="Image Description">
-                                        {{__('messages.pdf')}}
+                                        {{translate('messages.pdf')}}
                                     </a>--}}
                                 </div>
                             </div>
@@ -217,12 +217,12 @@
                                }'>
                             <thead class="thead-light">
                             <tr>
-                                <th style="width: 90px;" class="text-uppercase">{{__('messages.sl')}}</th>
-                                <th style="width: 155px;max-width:220px">{{__('messages.restaurant')}} {{__('messages.info')}}</th>
-                                <th style="width: 230px;" class="text-center">{{__('messages.owner')}} {{__('messages.info')}} </th>
-                                <th style="width: 130px;">{{__('messages.zone')}}</th>
-                                <th style="width: 100px;">{{__('messages.status')}}</th>
-                                <th style="width: 87px;text-align:center">{{__('messages.action')}}</th>
+                                <th class="text-uppercase w-90px">{{translate('messages.sl')}}</th>
+                                <th class="initial-58">{{translate('messages.restaurant')}} {{translate('messages.info')}}</th>
+                                <th class="w-230px text-center">{{translate('messages.owner')}} {{translate('messages.info')}} </th>
+                                <th class="w-130px">{{translate('messages.zone')}}</th>
+                                <th class="w-100px">{{translate('messages.status')}}</th>
+                                <th class="text-center w-60px">{{translate('messages.action')}}</th>
                             </tr>
                             </thead>
 
@@ -257,36 +257,36 @@
                                         </span>
                                     </td>
                                     <td>
-                                        {{$dm->zone?$dm->zone->name:__('messages.zone').' '.__('messages.deleted')}}
+                                        {{$dm->zone?$dm->zone->name:translate('messages.zone').' '.translate('messages.deleted')}}
                                         {{--<span class="d-block font-size-sm">{{$banner['image']}}</span>--}}
                                     </td>
                                     <td>
                                         @if(isset($dm->vendor->status))
                                             @if($dm->vendor->status)
                                             <label class="toggle-switch toggle-switch-sm" for="stocksCheckbox{{$dm->id}}">
-                                                <input type="checkbox" onclick="status_change_alert('{{route('admin.vendor.status',[$dm->id,$dm->status?0:1])}}', '{{__('messages.you_want_to_change_this_restaurant_status')}}', event)" class="toggle-switch-input" id="stocksCheckbox{{$dm->id}}" {{$dm->status?'checked':''}}>
+                                                <input type="checkbox" onclick="status_change_alert('{{route('admin.vendor.status',[$dm->id,$dm->status?0:1])}}', '{{translate('messages.you_want_to_change_this_restaurant_status')}}', event)" class="toggle-switch-input" id="stocksCheckbox{{$dm->id}}" {{$dm->status?'checked':''}}>
                                                 <span class="toggle-switch-label">
                                                     <span class="toggle-switch-indicator"></span>
                                                 </span>
                                             </label>
                                             @else
-                                            <span class="badge badge-soft-danger">{{__('messages.denied')}}</span>
+                                            <span class="badge badge-soft-danger">{{translate('messages.denied')}}</span>
                                             @endif
                                         @else
-                                            <span class="badge badge-soft-danger">{{__('messages.pending')}}</span>
+                                            <span class="badge badge-soft-danger">{{translate('messages.pending')}}</span>
                                         @endif
                                     </td>
                                     <td>
                                         <div class="btn--container justify-content-center">
                                             <a class="btn btn-sm btn--primary btn-outline-primary action-btn"
-                                                href="{{route('admin.vendor.edit',[$dm['id']])}}" title="{{__('messages.edit')}} {{__('messages.restaurant')}}"><i class="tio-edit"></i>
+                                                href="{{route('admin.vendor.edit',[$dm['id']])}}" title="{{translate('messages.edit')}} {{translate('messages.restaurant')}}"><i class="tio-edit"></i>
                                             </a>
                                             <a class="btn btn-sm btn--warning btn-outline-warning action-btn"
-                                                href="{{route('admin.vendor.view',[$dm['id']])}}" title="{{__('messages.view')}} {{__('messages.restaurant')}}"><i class="tio-invisible"></i>
+                                                href="{{route('admin.vendor.view',[$dm['id']])}}" title="{{translate('messages.view')}} {{translate('messages.restaurant')}}"><i class="tio-invisible"></i>
                                             </a>
                                         </div>
                                         {{--<a class="btn btn-sm btn-white" href="javascript:"
-                                        onclick="form_alert('vendor-{{$dm['id']}}','Want to remove this information ?')" title="{{__('messages.delete')}} {{__('messages.restaurant')}}"><i class="tio-delete-outlined text-danger"></i>
+                                        onclick="form_alert('vendor-{{$dm['id']}}','Want to remove this information ?')" title="{{translate('messages.delete')}} {{translate('messages.restaurant')}}"><i class="tio-delete-outlined text-danger"></i>
                                         </a>
                                         <form action="{{route('admin.vendor.delete',[$dm['id']])}}" method="post" id="vendor-{{$dm['id']}}">
                                             @csrf @method('delete')

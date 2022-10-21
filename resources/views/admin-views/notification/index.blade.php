@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title',__('messages.notification'))
+@section('title',translate('messages.notification'))
 
 
 @section('content')
@@ -14,7 +14,7 @@
                             <img src="{{asset('/public/assets/admin/img/bell.png')}}" alt="public">
                         </div>
                         <span>
-                            {{__('messages.notification')}}
+                            {{translate('messages.notification')}}
                         </span>
                     </h1>
                 </div>
@@ -29,15 +29,15 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label class="input-label" for="exampleFormControlInput1">{{__('messages.title')}}</label>
-                                <input id="notification_title" type="text" name="notification_title" class="form-control" placeholder="Ex: Notification Title" required maxlength="191">
+                                <label class="input-label" for="exampleFormControlInput1">{{translate('messages.title')}}</label>
+                                <input id="notification_title" type="text" name="notification_title" class="form-control" placeholder="{{ translate('Ex: Notification Title') }}" required maxlength="191">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label class="input-label" for="exampleFormControlInput1">{{__('messages.zone')}}</label>
+                                <label class="input-label" for="exampleFormControlInput1">{{translate('messages.zone')}}</label>
                                 <select id="zone" name="zone" class="form-control js-select2-custom" >
-                                    <option value="all">{{__('messages.all')}}</option>
+                                    <option value="all">{{translate('messages.all')}}</option>
                                     @foreach(\App\Models\Zone::orderBy('name')->get() as $z)
                                         <option value="{{$z['id']}}">{{$z['name']}}</option>
                                     @endforeach
@@ -46,12 +46,12 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label class="input-label" for="tergat">{{__('messages.send')}} {{__('messages.to')}}</label>
-                        
-                                <select name="tergat" class="form-control" id="tergat" data-placeholder="Ex: contact@company.com" required>
-                                    <option value="customer">{{__('messages.customer')}}</option>
-                                    <option value="deliveryman">{{__('messages.deliveryman')}}</option>
-                                    <option value="restaurant">{{__('messages.restaurant')}}</option>
+                                <label class="input-label" for="tergat">{{translate('messages.send_to')}}</label>
+
+                                <select name="tergat" class="form-control" id="tergat" data-placeholder="{{ translate('messages.Ex :') }} contact@company.com" required>
+                                    <option value="customer">{{translate('messages.customer')}}</option>
+                                    <option value="deliveryman">{{translate('messages.deliveryman')}}</option>
+                                    <option value="restaurant">{{translate('messages.restaurant')}}</option>
                                 </select>
                             </div>
                         </div>
@@ -64,25 +64,25 @@
                                     <img class="initial-30" id="viewer"
                                         src="{{asset('public/assets/admin/img/900x400/img1.png')}}" alt="image"/>
                                 </center>
-                                
-                                <label>{{__('messages.notification')}} {{__('messages.banner')}}</label><small class="text-danger">* ( {{__('messages.ratio')}} 3:1 )</small>
+
+                                <label>{{translate('messages.notification')}} {{translate('messages.banner')}}</label><small class="text-danger">* ( {{translate('messages.ratio')}} 3:1 )</small>
                                 <div class="custom-file">
                                     <input type="file" name="image" id="customFileEg1" class="custom-file-input"
                                         accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
-                                    <label class="custom-file-label" for="customFileEg1">{{__('messages.choose')}} {{__('messages.file')}}</label>
+                                    <label class="custom-file-label" for="customFileEg1">{{translate('messages.choose')}} {{translate('messages.file')}}</label>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-8">
                             <div class="form-group">
-                                <label class="input-label" for="exampleFormControlInput1">{{__('messages.description')}}</label>
-                                <textarea id="description" name="description" class="form-control h--md-200px" placeholder="Ex : Notification Descriptions " required></textarea>
+                                <label class="input-label" for="exampleFormControlInput1">{{translate('messages.description')}}</label>
+                                <textarea id="description" name="description" class="form-control h--md-200px" placeholder="{{ translate('Ex : Notification Descriptions ') }}" required></textarea>
                             </div>
                         </div>
                     </div>
                     <div class="btn--container justify-content-end mb-0">
-                        <button type="button" id="reset_btn" class="btn btn--reset">{{__('messages.reset')}}</button>
-                        <button type="submit" id="submit" class="btn btn--primary">{{__('messages.send')}} {{__('messages.notification')}}</button>
+                        <button type="button" id="reset_btn" class="btn btn--reset">{{translate('messages.reset')}}</button>
+                        <button type="submit" id="submit" class="btn btn--primary">{{translate('messages.send')}} {{translate('messages.notification')}}</button>
                     </div>
                 </form>
             </div>
@@ -99,41 +99,41 @@
                     <!-- Search -->
                         <div class="input--group input-group input-group-merge input-group-flush">
                             <input type="search" id="column1_search" class="form-control"
-                                placeholder="Ex : {{__('messages.search')}} by title">
+                                placeholder="{{ translate('Search by title') }}">
                             <button type="submit" class="btn btn--secondary">
                                 <i class="tio-search"></i>
                             </button>
                         </div>
                     <!-- End Search -->
                     </form>
-                    
+
                 <div class="hs-unfold ml-3">
                     <a class="js-hs-unfold-invoker btn btn-sm btn-white dropdown-toggle btn export-btn btn-outline-primary btn--primary font--sm" href="javascript:;"
                         data-hs-unfold-options='{
                             "target": "#usersExportDropdown",
                             "type": "css-animation"
                         }'>
-                        <i class="tio-download-to mr-1"></i> {{__('messages.export')}}
+                        <i class="tio-download-to mr-1"></i> {{translate('messages.export')}}
                     </a>
 
                     <div id="usersExportDropdown"
                             class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-sm-right">
-                        <span class="dropdown-header">{{__('messages.download')}} {{__('messages.options')}}</span>
+                        <span class="dropdown-header">{{translate('messages.download')}} {{translate('messages.options')}}</span>
                         <a target="_blank" id="export-excel" class="dropdown-item" href="{{route('admin.notification.export', ['type'=>'excel'])}}">
                             <img class="avatar avatar-xss avatar-4by3 mr-2"
                                     src="{{asset('public/assets/admin')}}/svg/components/excel.svg"
                                     alt="Image Description">
-                            {{__('messages.excel')}}
+                            {{translate('messages.excel')}}
                         </a>
                         <a target="_blank" id="export-csv" class="dropdown-item" href="{{route('admin.notification.export', ['type'=>'excel'])}}">
                             <img class="avatar avatar-xss avatar-4by3 mr-2"
                                     src="{{asset('public/assets/admin')}}/svg/components/placeholder-csv-format.svg"
                                     alt="Image Description">
-                            .{{__('messages.csv')}}
+                            .{{translate('messages.csv')}}
                         </a>
                     </div>
                 </div>
-                </div>                        
+                </div>
             </div>
             <!-- Table -->
             <div class="table-responsive datatable-custom">
@@ -147,13 +147,13 @@
                     <thead class="thead-light">
                         <tr>
                             <th>{{translate('sl')}}</th>
-                            <th class="w-20p">{{__('messages.title')}}</th>
-                            <th>{{__('messages.description')}}</th>
-                            <th>{{__('messages.image')}}</th>
-                            <th class="w-08p">{{__('messages.zone')}}</th>
-                            <th>{{__('messages.tergat')}}</th>
-                            <th class="w-08p">{{__('messages.status')}}</th>
-                            <th class="text-center w-12p">{{__('messages.action')}}</th>
+                            <th class="w-20p">{{translate('messages.title')}}</th>
+                            <th>{{translate('messages.description')}}</th>
+                            <th>{{translate('messages.image')}}</th>
+                            <th class="w-08p">{{translate('messages.zone')}}</th>
+                            <th>{{translate('messages.tergat')}}</th>
+                            <th class="w-08p">{{translate('messages.status')}}</th>
+                            <th class="text-center w-12p">{{translate('messages.action')}}</th>
                         </tr>
                     </thead>
 
@@ -173,11 +173,21 @@
                                 <img class="initial-31" src="{{asset('storage/app/public/notification')}}/{{$notification['image']}}" onerror="src='{{asset('public/assets/admin/img/900x400/img1.jpg')}}'">
                             </td>
                             <td>
-                                {{$notification->zone_id==null?__('messages.all'):($notification->zone?$notification->zone->name:__('messages.zone').' '.__('messages.deleted'))}}
+                                {{$notification->zone_id==null?translate('messages.all'):($notification->zone?$notification->zone->name:translate('messages.zone').' '.translate('messages.deleted'))}}
                             </td>
+                            @if ($notification->tergat == 'customer')
                             <td class="text-capitalize">
-                                {{$notification->tergat}}
+                                {{translate('messages.customer')}}
                             </td>
+                            @elseif ($notification->tergat=='deliveryman')
+                            <td class="text-capitalize">
+                                {{translate('messages.delivery_man')}}
+                            </td>
+                            @elseif ($notification->tergat=='restaurant')
+                            <td class="text-capitalize">
+                                {{translate('messages.restaurant')}}
+                            </td>
+                            @endif
                             <td>
                                 <label class="toggle-switch toggle-switch-sm" for="stocksCheckbox{{$notification->id}}">
                                     <input type="checkbox" onclick="location.href='{{route('admin.notification.status',[$notification['id'],$notification->status?0:1])}}'"class="toggle-switch-input" id="stocksCheckbox{{$notification->id}}" {{$notification->status?'checked':''}}>
@@ -189,10 +199,10 @@
                             <td>
                                 <div class="btn--container justify-content-center">
                                     <a class="btn btn--primary btn-outline-primary action-btn"
-                                        href="{{route('admin.notification.edit',[$notification['id']])}}" title="{{__('messages.edit')}} {{__('messages.notification')}}"><i class="tio-edit"></i>
+                                        href="{{route('admin.notification.edit',[$notification['id']])}}" title="{{translate('messages.edit')}} {{translate('messages.notification')}}"><i class="tio-edit"></i>
                                     </a>
                                     <a class="btn btn--danger btn-outline-danger action-btn" href="javascript:"
-                                        onclick="form_alert('notification-{{$notification['id']}}','Want to delete this notification ?')" title="{{__('messages.delete')}} {{__('messages.notification')}}"><i class="tio-delete-outlined"></i>
+                                        onclick="form_alert('notification-{{$notification['id']}}','{{ translate('Want to delete this notification ?') }}')" title="{{translate('messages.delete')}} {{translate('messages.notification')}}"><i class="tio-delete-outlined"></i>
                                     </a>
                                 </div>
                                 <form action="{{route('admin.notification.delete',[$notification['id']])}}" method="post" id="notification-{{$notification['id']}}">
@@ -274,19 +284,19 @@
         });
 
         $('#notification').on('submit', function (e) {
-            
+
             e.preventDefault();
             var formData = new FormData(this);
-            
+
             Swal.fire({
-                title: '{{__('messages.are_you_sure')}}',
-                text: '{{__('messages.you want to sent notification to')}}'+$('#tergat').val()+'?',
+                title: '{{translate('messages.are_you_sure')}}',
+                text: '{{translate('You want to sent notification?')}}',
                 type: 'info',
                 showCancelButton: true,
                 cancelButtonColor: 'default',
                 confirmButtonColor: 'primary',
-                cancelButtonText: '{{__('messages.no')}}',
-                confirmButtonText: '{{__('messages.send')}}',
+                cancelButtonText: '{{translate('messages.no')}}',
+                confirmButtonText: '{{translate('messages.send')}}',
                 reverseButtons: true
             }).then((result) => {
                 if (result.value) {
@@ -310,7 +320,7 @@
                                     });
                                 }
                             } else {
-                                toastr.success('Notifiction sent successfully!', {
+                                toastr.success('{{ translate('Notifiction sent successfully!') }}', {
                                     CloseButton: true,
                                     ProgressBar: true
                                 });

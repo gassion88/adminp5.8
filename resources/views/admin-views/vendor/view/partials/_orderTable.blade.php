@@ -20,7 +20,7 @@
                         <small class="d-block">{{$order->customer['phone']}}</small>
                     </a>
                 @else
-                    <label class="badge badge-danger">{{__('messages.invalid')}} {{__('messages.customer')}} {{__('messages.data')}}</label>
+                    <label class="badge badge-danger">{{translate('messages.invalid')}} {{translate('messages.customer')}} {{translate('messages.data')}}</label>
                 @endif
             </div>
         </td>
@@ -31,11 +31,11 @@
                 </div>
                 @if($order->payment_status=='paid')
                     <strong class="text--success order--status">
-                        {{__('messages.paid')}}
+                        {{translate('messages.paid')}}
                     </strong>
                 @else
                     <strong class="text--danger order--status">
-                        {{__('messages.unpaid')}}
+                        {{translate('messages.unpaid')}}
                     </strong>
                 @endif
             </div>
@@ -43,27 +43,27 @@
         <td class="text-capitalize">
             @if($order['order_status']=='pending')
                 <span class="badge badge-soft-info badge--pending">
-                    {{__('messages.pending')}}
+                    {{translate('messages.pending')}}
                 </span>
             @elseif($order['order_status']=='confirmed')
                 <span class="badge badge-soft-info ">
-                    {{__('messages.confirmed')}}
+                    {{translate('messages.confirmed')}}
                 </span>
             @elseif($order['order_status']=='processing')
                 <span class="badge badge-soft-warning">
-                    {{__('messages.processing')}}
+                    {{translate('messages.processing')}}
                 </span>
             @elseif($order['order_status']=='out_for_delivery')
                 <span class="badge badge-soft-warning badge--on-the-way">
-                    {{__('messages.out_for_delivery')}}
+                    {{translate('messages.out_for_delivery')}}
                 </span>
             @elseif($order['order_status']=='delivered')
                 <span class="badge badge-soft-success ">
-                    {{__('messages.delivered')}}
+                    {{translate('messages.delivered')}}
                 </span>
             @elseif($order['order_status']=='accepted')
                 <span class="badge badge-soft-success badge--accepted">
-                    {{__('messages.accepted')}}
+                    {{translate('messages.accepted')}}
                 </span>
             @else
                 <span class="badge badge-soft-danger badge--cancel">

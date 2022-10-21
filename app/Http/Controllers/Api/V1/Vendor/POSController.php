@@ -118,7 +118,7 @@ class POSController extends Controller
         $total_price = $product_price + $total_addon_price - $restaurant_discount_amount;
         $tax = isset($request['tax'])?$request['tax']:$restaurant->tax;
         $total_tax_amount= ($tax > 0)?(($total_price * $tax)/100):0;
-        $coupon_discount_amount = 0; 
+        $coupon_discount_amount = 0;
         $total_price = $product_price + $total_addon_price - $restaurant_discount_amount - $coupon_discount_amount;
 
         $tax = $restaurant->tax;
@@ -126,7 +126,7 @@ class POSController extends Controller
 
         // if($restaurant->minimum_order > $product_price + $total_addon_price )
         // {
-        //     Toastr::warning(trans('messages.you_need_to_order_at_least', ['amount'=>$restaurant->minimum_order.' '.Helpers::currency_code()]));
+        //     Toastr::warning(translate('messages.you_need_to_order_at_least', ['amount'=>$restaurant->minimum_order.' '.Helpers::currency_code()]));
         //     return back();
         // }
         // dd(['pro'=>$product_price, 'add'=>$total_addon_price, 'discount'=>$restaurant_discount_amount, 'tax'=>$total_tax_amount ,'cart'=>$cart]);
@@ -141,14 +141,14 @@ class POSController extends Controller
             }
             OrderDetail::insert($order_details);
             return response()->json([
-                'message' => trans('messages.order_placed_successfully'),
+                'message' => translate('messages.order_placed_successfully'),
                 'order_id' => $order->id,
                 'total_ammount' => $total_price+$order->delivery_charge+$total_tax_amount
             ], 200);
         } catch (\Exception $e) {
             info($e);
         }
-        Toastr::warning(trans('messages.failed_to_place_order'));
+        Toastr::warning(translate('messages.failed_to_place_order'));
         return back();
     }
 
@@ -195,7 +195,7 @@ class POSController extends Controller
 
         return response()->json([
             'errors' => [
-                ['code' => 'order', 'message' => trans('messages.not_found')]
+                ['code' => 'order', 'message' => translate('messages.not_found')]
             ]
         ],404);
     }
@@ -219,8 +219,8 @@ class POSController extends Controller
         })
         ->limit(8)
         ->get([DB::raw('id, CONCAT(f_name, " ", l_name, " (", phone ,")") as text')]);
-        
-        $data[]=(object)['id'=>false, 'text'=>trans('messages.walk_in_customer')];
+
+        $data[]=(object)['id'=>false, 'text'=>translate('messages.walk_in_customer')];
 
         return response()->json($data);
     }

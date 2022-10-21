@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Str;
 use Stripe\Charge;
+use Illuminate\Http\Request;
 use Stripe\Stripe;
 use App\Models\BusinessSetting;
 use PHPUnit\Exception;
@@ -17,11 +18,10 @@ use PHPUnit\Exception;
 
 class StripePaymentController extends Controller
 {
-    public function payment_process_3d()
+    public function payment_process_3d(Request $request)
     {
         $tran = Str::random(6) . '-' . rand(1, 1000);
-        $order_id = session('order_id');
-        session()->put('transaction_ref', $tran);
+        $order_id = $request->order_id;
         $order = Order::with(['details'])->where(['id' => $order_id])->first();
         $config = Helpers::get_business_settings('stripe');
         Stripe::setApiKey($config['api_key']);
@@ -51,19 +51,19 @@ class StripePaymentController extends Controller
                 'quantity' => 1,
             ]],
             'mode' => 'payment',
-            'success_url' => $YOUR_DOMAIN . '/pay-stripe/success',
+            'success_url' => (String)route('pay-stripe.success',['order_id'=>$order->id,'transaction_ref'=>$tran]),
             'cancel_url' => url()->previous(),
         ]);
 
         return response()->json(['id' => $checkout_session->id]);
     }
 
-    public function success()
+    public function success($order_id,$transaction_ref)
     {
-        $order = Order::find(session('order_id'));
+        $order = Order::find($order_id);
         $order->order_status='confirmed';
         $order->payment_method='stripe';
-        $order->transaction_reference=session('transaction_ref');
+        $order->transaction_reference=$transaction_ref;
         $order->payment_status='paid';
         $order->confirmed=now();
         $order->save();

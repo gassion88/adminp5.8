@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title','Campaign List')
+@section('title',translate('Campaign List'))
 
 @push('css_or_js')
 
@@ -12,12 +12,12 @@
         <div class="page-header">
             <div class="row align-items-center">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <h1 class="page-header-title"><i class="tio-notice"></i> {{__('messages.food')}} {{__('messages.campaign')}} <span class="badge badge-soft-dark ml-2" id="itemCount">{{$campaigns->total()}}</span></h1>
+                    <h1 class="page-header-title"><i class="tio-notice"></i> {{translate('messages.food')}} {{translate('messages.campaign')}} <span class="badge badge-soft-dark ml-2" id="itemCount">{{$campaigns->total()}}</span></h1>
                 </div>
 
                 <div class="col-sm-auto">
                     <a class="btn btn--primary" href="{{route('admin.campaign.add-new', 'item')}}">
-                        <i class="tio-add"></i> {{__('messages.add')}} {{__('messages.new')}} {{__('messages.campaign')}}
+                        <i class="tio-add"></i> {{translate('messages.add')}} {{translate('messages.new')}} {{translate('messages.campaign')}}
                     </a>
                 </div>
             </div>
@@ -33,7 +33,7 @@
                             @csrf
                             <!-- Search -->
                             <div class="input--group input-group input-group-merge input-group-flush">
-                                <input id="datatableSearch" type="search" name="search" class="form-control" placeholder="Ex : {{__('messages.title')}}" aria-label="{{__('messages.search_here')}}">
+                                <input id="datatableSearch" type="search" name="search" class="form-control" placeholder="{{ translate('Ex :') }} {{translate('messages.title')}}" aria-label="{{translate('messages.search_here')}}">
                                 <button type="submit" class="btn btn--secondary"><i class="tio-search"></i></button>
                             </div>
                             <!-- End Search -->
@@ -50,13 +50,13 @@
                                }'>
                                <thead class="thead-light">
                             <tr>
-                                <th>SL</th>
-                                <th >{{__('messages.title')}}</th>
-                                <th >{{__('messages.date')}}</th>
-                                <th >{{__('messages.time')}}</th>
-                                <th >{{__('messages.price')}}</th>
-                                <th>{{__('messages.status')}}</th>
-                                <th class="text-center">{{__('messages.action')}}</th>
+                                <th>{{ translate('messages.sl') }}</th>
+                                <th >{{translate('messages.title')}}</th>
+                                <th >{{translate('messages.date')}}</th>
+                                <th >{{translate('messages.time')}}</th>
+                                <th >{{translate('messages.price')}}</th>
+                                <th>{{translate('messages.status')}}</th>
+                                <th class="text-center">{{translate('messages.action')}}</th>
                             </tr>
 
                             </thead>
@@ -87,10 +87,10 @@
                                     <td>
                                         <div class="btn--container justify-content-center">
                                             <a class="btn btn-sm btn--primary btn-outline-primary action-btn"
-                                                href="{{route('admin.campaign.edit',['item',$campaign['id']])}}" title="{{__('messages.edit')}} {{__('messages.campaign')}}"><i class="tio-edit"></i>
+                                                href="{{route('admin.campaign.edit',['item',$campaign['id']])}}" title="{{translate('messages.edit')}} {{translate('messages.campaign')}}"><i class="tio-edit"></i>
                                             </a>
                                             <a class="btn btn-sm btn--danger btn-outline-danger action-btn" href="javascript:"
-                                                onclick="form_alert('campaign-{{$campaign['id']}}','Want to delete this item ?')" title="{{__('messages.delete')}} {{__('messages.campaign')}}"><i class="tio-delete-outlined"></i>
+                                                onclick="form_alert('campaign-{{$campaign['id']}}','{{translate('messages.Want_to_delete_this_item')}}')" title="{{translate('messages.delete')}} {{translate('messages.campaign')}}"><i class="tio-delete-outlined"></i>
                                             </a>
                                         </div>
                                         <form action="{{route('admin.campaign.delete-item',[$campaign['id']])}}"

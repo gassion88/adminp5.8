@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title','About us')
+@section('title',translate('About us'))
 
 @push('css_or_js')
 
@@ -12,7 +12,7 @@
         <div class="page-header_ pb-4">
             <div class="row align-items-center">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <h1 class="page-header-title">{{__('messages.about_us')}}</h1>
+                    <h1 class="page-header-title">{{translate('messages.about_us')}}</h1>
                 </div>
             </div>
         </div>
@@ -25,7 +25,7 @@
                         <textarea class="ckeditor form-control" name="about_us">{!! $data['value'] !!}</textarea>
                     </div>
                     <div class="btn--container justify-content-end">
-                        <button type="submit" class="btn btn--primary">{{__('messages.submit')}}</button>
+                        <button type="submit" class="btn btn--primary">{{translate('messages.submit')}}</button>
                     </div>
                 </form>
             </div>

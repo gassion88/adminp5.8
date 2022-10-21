@@ -55,7 +55,7 @@ class CouponController extends Controller
             'updated_at' => now()
         ]);
 
-        Toastr::success(trans('messages.coupon_added_successfully'));
+        Toastr::success(translate('messages.coupon_added_successfully'));
         return back();
     }
 
@@ -102,8 +102,8 @@ class CouponController extends Controller
             'updated_at' => now()
         ]);
 
-        Toastr::success(trans('messages.coupon_updated_successfully'));
-        return back();
+        Toastr::success(translate('messages.coupon_updated_successfully'));
+        return redirect()->route('admin.coupon.add-new');
     }
 
     public function status(Request $request)
@@ -111,7 +111,7 @@ class CouponController extends Controller
         $coupon = Coupon::find($request->id);
         $coupon->status = $request->status;
         $coupon->save();
-        Toastr::success(trans('messages.coupon_status_updated'));
+        Toastr::success(translate('messages.coupon_status_updated'));
         return back();
     }
 
@@ -119,7 +119,7 @@ class CouponController extends Controller
     {
         $coupon = Coupon::find($request->id);
         $coupon->delete();
-        Toastr::success(trans('messages.coupon_deleted_successfully'));
+        Toastr::success(translate('messages.coupon_deleted_successfully'));
         return back();
     }
 

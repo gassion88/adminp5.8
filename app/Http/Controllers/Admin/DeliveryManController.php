@@ -83,27 +83,13 @@ class DeliveryManController extends Controller
         else if($tab == 'conversation')
         {
             $user = UserInfo::where(['deliveryman_id' => $id])->first();
-            $delivery_man = DeliveryMan::find($id);
             if($user){
-                $conversations = Conversation::WhereUser($user->id);
-                if($request->query('key')) {
-                    $key = explode(' ', $request->get('key'));
-                    $conversations = $conversations->whereHas('sender',function($query)use($key){
-                        foreach ($key as $value) {
-                            $query->where('f_name', 'like', "%{$value}%")->orWhere('l_name', 'like', "%{$value}%")->orWhere('phone', 'like', "%{$value}%")->orWhere('email', 'like', "%{$value}%");
-                        }
-                    })->orWhereHas('receiver',function($query1)use($key){
-                        foreach ($key as $value) {
-                            $query1->where('f_name', 'like', "%{$value}%")->orWhere('l_name', 'like', "%{$value}%")->orWhere('phone', 'like', "%{$value}%")->orWhere('email', 'like', "%{$value}%");
-                        }
-                    });
-                }
-                $conversations = $conversations->WhereUserType('delivery_man')->paginate(8);
+                $conversations = Conversation::with(['sender', 'receiver', 'last_message'])->WhereUser($user->id)->paginate(8);
             }else{
                 $conversations = [];
             }
 
-            return view('admin-views.delivery-man.view.conversations', compact('conversations','delivery_man','dm'));
+            return view('admin-views.delivery-man.view.conversations', compact('conversations','dm'));
         }
     }
 
@@ -119,9 +105,9 @@ class DeliveryManController extends Controller
             'earning' => 'required',
             'password'=>'required|min:6',
         ], [
-            'f_name.required' => trans('messages.first_name_is_required'),
-            'zone_id.required' => trans('messages.select_a_zone'),
-            'earning.required' => trans('messages.select_dm_type')
+            'f_name.required' => translate('messages.first_name_is_required'),
+            'zone_id.required' => translate('messages.select_a_zone'),
+            'earning.required' => translate('messages.select_dm_type')
         ]);
 
         if ($request->has('image')) {
@@ -156,7 +142,7 @@ class DeliveryManController extends Controller
         $dm->password = bcrypt($request->password);
         $dm->save();
 
-        Toastr::success(trans('messages.deliveryman_added_successfully'));
+        Toastr::success(translate('messages.deliveryman_added_successfully'));
         return redirect('admin/delivery-man/list');
     }
 
@@ -178,8 +164,8 @@ class DeliveryManController extends Controller
                 if(isset($delivery_man->fcm_token))
                 {
                     $data = [
-                        'title' => trans('messages.suspended'),
-                        'description' => trans('messages.your_account_has_been_suspended'),
+                        'title' => translate('messages.suspended'),
+                        'description' => translate('messages.your_account_has_been_suspended'),
                         'order_id' => '',
                         'image' => '',
                         'type'=> 'block'
@@ -198,12 +184,12 @@ class DeliveryManController extends Controller
 
         }
         catch (\Exception $e) {
-            Toastr::warning(trans('messages.push_notification_faild'));
+            Toastr::warning(translate('messages.push_notification_faild'));
         }
 
         $delivery_man->save();
 
-        Toastr::success(trans('messages.deliveryman_status_updated'));
+        Toastr::success(translate('messages.deliveryman_status_updated'));
         return back();
     }
 
@@ -212,7 +198,7 @@ class DeliveryManController extends Controller
         $review = DMReview::find($request->id);
         $review->status = $request->status;
         $review->save();
-        Toastr::success(trans('messages.review_visibility_updated'));
+        Toastr::success(translate('messages.review_visibility_updated'));
         return back();
     }
 
@@ -223,7 +209,7 @@ class DeliveryManController extends Controller
 
         $delivery_man->save();
 
-        Toastr::success(trans('messages.deliveryman_type_updated'));
+        Toastr::success(translate('messages.deliveryman_type_updated'));
         return back();
     }
 
@@ -244,7 +230,7 @@ class DeliveryManController extends Controller
         }
 
 
-        Toastr::success(trans('messages.application_status_updated_successfully'));
+        Toastr::success(translate('messages.application_status_updated_successfully'));
         return back();
     }
 
@@ -258,8 +244,8 @@ class DeliveryManController extends Controller
             'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|unique:delivery_men,phone,'.$id,
             'earning' => 'required',
         ], [
-            'f_name.required' => trans('messages.first_name_is_required'),
-            'earning.required' => trans('messages.select_dm_type')
+            'f_name.required' => translate('messages.first_name_is_required'),
+            'earning.required' => translate('messages.select_dm_type')
         ]);
 
         $delivery_man = DeliveryMan::find($id);
@@ -298,7 +284,7 @@ class DeliveryManController extends Controller
         $delivery_man->earning = $request->earning;
         $delivery_man->password = strlen($request->password)>1?bcrypt($request->password):$delivery_man['password'];
         $delivery_man->save();
-        Toastr::success(trans('messages.deliveryman_updated_successfully'));
+        Toastr::success(translate('messages.deliveryman_updated_successfully'));
         return redirect('admin/delivery-man/list');
     }
 
@@ -314,10 +300,12 @@ class DeliveryManController extends Controller
                 Storage::disk('public')->delete('delivery-man/' . $img);
             }
         }
+        if($delivery_man->userinfo){
 
-        $delivery_man->userinfo->delete();
+            $delivery_man->userinfo->delete();
+        }
         $delivery_man->delete();
-        Toastr::success(trans('messages.deliveryman_deleted_successfully'));
+        Toastr::success(translate('messages.deliveryman_deleted_successfully'));
         return back();
     }
 
@@ -357,50 +345,27 @@ class DeliveryManController extends Controller
 
     }
 
-    public function conversation_list(Request $request, $user_id)
-    {
-        $user = UserInfo::where(['deliveryman_id' => $user_id])->first();
-        $delivery_man = DeliveryMan::find($user_id);
-        if($user){
-            $conversations = Conversation::WhereUser($user->id);
-            if($request->query('key')) {
-                $key = explode(' ', $request->get('key'));
-                $conversations = $conversations->whereHas('sender',function($query)use($key){
-                    foreach ($key as $value) {
-                        $query->where('f_name', 'like', "%{$value}%")->orWhere('l_name', 'like', "%{$value}%")->orWhere('phone', 'like', "%{$value}%")->orWhere('email', 'like', "%{$value}%");
-                    }
-                })->orWhereHas('receiver',function($query1)use($key){
-                    foreach ($key as $value) {
-                        $query1->where('f_name', 'like', "%{$value}%")->orWhere('l_name', 'like', "%{$value}%")->orWhere('phone', 'like', "%{$value}%")->orWhere('email', 'like', "%{$value}%");
-                    }
-                });
-            }
-            $conversations = $conversations->WhereUserType('delivery_man')->paginate(8);
-        }else{
-            $conversations = [];
-        }
-
-        return view('admin-views.delivery-man.view.conversations', compact('conversations','delivery_man'));
-
-    }
     public function get_conversation_list(Request $request)
     {
         $user = UserInfo::where(['deliveryman_id' => $request->user_id])->first();
-        $delivery_man = DeliveryMan::find($request->user_id);
+        $dm = DeliveryMan::find($request->user_id);
         if($user){
-            $conversations = Conversation::WhereUser($user->id);
+            $conversations = Conversation::with(['sender', 'receiver', 'last_message'])->WhereUser($user->id);
             if($request->query('key')) {
                 $key = explode(' ', $request->get('key'));
                 $conversations = $conversations->where(function($qu)use($key){
-
-                    $qu->whereHas('sender',function($query)use($key){
-                        foreach ($key as $value) {
-                            $query->where('f_name', 'like', "%{$value}%")->orWhere('l_name', 'like', "%{$value}%")->orWhere('phone', 'like', "%{$value}%");
-                        }
-                    })->orWhereHas('receiver',function($query)use($key){
-                        foreach ($key as $value) {
-                            $query->where('f_name', 'like', "%{$value}%")->orWhere('l_name', 'like', "%{$value}%")->orWhere('phone', 'like', "%{$value}%");
-                        }
+                    $qu->where(function($q)use($key){
+                        $q->where('sender_type','!=', 'delivery_man')->whereHas('sender',function($query)use($key){
+                            foreach ($key as $value) {
+                                $query->where('f_name', 'like', "%{$value}%")->orWhere('l_name', 'like', "%{$value}%")->orWhere('phone', 'like', "%{$value}%");
+                            }
+                        });
+                    })->orWhere(function($q)use($key){
+                        $q->where('receiver_type','!=', 'delivery_man')->whereHas('receiver',function($query)use($key){
+                            foreach ($key as $value) {
+                                $query->where('f_name', 'like', "%{$value}%")->orWhere('l_name', 'like', "%{$value}%")->orWhere('phone', 'like', "%{$value}%");
+                            }
+                        });
                     });
                 });
             }
@@ -409,7 +374,7 @@ class DeliveryManController extends Controller
             $conversations = [];
         }
 
-        $view = view('admin-views.delivery-man.partials._conversation_list',compact('conversations','delivery_man'))->render();
+        $view = view('admin-views.delivery-man.partials._conversation_list',compact('conversations','dm'))->render();
         return response()->json(['html'=>$view]);
 
     }
@@ -420,7 +385,7 @@ class DeliveryManController extends Controller
         $conversation = Conversation::find($conversation_id);
         $receiver = UserInfo::find($conversation->receiver_id);
         $sender = UserInfo::find($conversation->sender_id);
-        $user = $receiver;
+        $user = UserInfo::find($user_id);
         return response()->json([
             'view' => view('admin-views.delivery-man.partials._conversations', compact('convs', 'user', 'receiver'))->render()
         ]);

@@ -12,10 +12,10 @@
     <td>
         <div class="btn--container">
             <a class="btn btn-sm btn--primary btn-outline-primary action-btn"
-                href="{{route('admin.employee.edit',[$e['id']])}}" title="{{__('messages.edit')}} {{__('messages.Employee')}}"><i class="tio-edit"></i>
+                href="{{route('admin.employee.edit',[$e['id']])}}" title="{{translate('messages.edit')}} {{translate('messages.Employee')}}"><i class="tio-edit"></i>
             </a>
             <a class="btn btn-sm btn--danger btn-outline-danger action-btn" href="javascript:"
-                onclick="form_alert('employee-{{$e['id']}}','{{__('messages.Want_to_delete_this_role')}}')" title="{{__('messages.delete')}} {{__('messages.Employee')}}"><i class="tio-delete-outlined"></i>
+                onclick="form_alert('employee-{{$e['id']}}','{{translate('messages.Want_to_delete_this_role')}}')" title="{{translate('messages.delete')}} {{translate('messages.Employee')}}"><i class="tio-delete-outlined"></i>
             </a>
         </div>
         <form action="{{route('admin.employee.delete',[$e['id']])}}"

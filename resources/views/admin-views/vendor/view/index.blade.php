@@ -17,18 +17,18 @@
             </h1>
             @if($restaurant->vendor->status)
             <a href="{{route('admin.vendor.edit',[$restaurant->id])}}" class="btn btn--primary my-2">
-                <i class="tio-edit mr-2"></i> {{__('messages.edit')}} {{__('messages.restaurant')}}
+                <i class="tio-edit mr-2"></i> {{translate('messages.edit')}} {{translate('messages.restaurant')}}
             </a>
             @else
                 <div>
                     @if(!isset($restaurant->vendor->status))
                     <a class="btn btn--danger text-capitalize my-2"
-                    onclick="request_alert('{{route('admin.vendor.application',[$restaurant['id'],0])}}','{{__('messages.you_want_to_deny_this_application')}}')"
-                        href="javascript:">{{__('messages.deny')}}</a>
+                    onclick="request_alert('{{route('admin.vendor.application',[$restaurant['id'],0])}}','{{translate('messages.you_want_to_deny_this_application')}}')"
+                        href="javascript:">{{translate('messages.deny')}}</a>
                     @endif
                     <a class="btn btn--primary text-capitalize my-2"
-                    onclick="request_alert('{{route('admin.vendor.application',[$restaurant['id'],1])}}','{{__('messages.you_want_to_approve_this_application')}}')"
-                        href="javascript:">{{__('messages.approve')}}</a>
+                    onclick="request_alert('{{route('admin.vendor.application',[$restaurant['id'],1])}}','{{translate('messages.you_want_to_approve_this_application')}}')"
+                        href="javascript:">{{translate('messages.approve')}}</a>
                 </div>
             @endif
         </div>
@@ -38,28 +38,28 @@
             <!-- Nav -->
             <ul class="nav nav-tabs page-header-tabs">
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{route('admin.vendor.view', $restaurant->id)}}">{{__('messages.overview')}}</a>
+                    <a class="nav-link active" href="{{route('admin.vendor.view', $restaurant->id)}}">{{translate('messages.overview')}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'order'])}}"  aria-disabled="true">{{__('messages.orders')}}</a>
+                    <a class="nav-link" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'order'])}}"  aria-disabled="true">{{translate('messages.orders')}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'product'])}}"  aria-disabled="true">{{__('messages.foods')}}</a>
+                    <a class="nav-link" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'product'])}}"  aria-disabled="true">{{translate('messages.foods')}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'reviews'])}}"  aria-disabled="true">{{__('messages.reviews')}}</a>
+                    <a class="nav-link" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'reviews'])}}"  aria-disabled="true">{{translate('messages.reviews')}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'discount'])}}"  aria-disabled="true">{{__('discounts')}}</a>
+                    <a class="nav-link" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'discount'])}}"  aria-disabled="true">{{translate('discounts')}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'transaction'])}}"  aria-disabled="true">{{__('messages.transactions')}}</a>
+                    <a class="nav-link" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'transaction'])}}"  aria-disabled="true">{{translate('messages.transactions')}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'settings'])}}"  aria-disabled="true">{{__('messages.settings')}}</a>
+                    <a class="nav-link" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'settings'])}}"  aria-disabled="true">{{translate('messages.settings')}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'conversations'])}}"  aria-disabled="true">{{__('messages.conversations')}}</a>
+                    <a class="nav-link" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'conversations'])}}"  aria-disabled="true">{{translate('messages.conversations')}}</a>
                 </li>
             </ul>
             <!-- End Nav -->
@@ -75,7 +75,7 @@
             <div class="card bg--1 h-100">
                 <div class="card-body text-center d-flex flex-column justify-content-center align-items-center">
                     <div class="cash--subtitle">
-                        {{__('messages.collected_cash_by_restaurant')}}
+                        {{translate('messages.collected_cash_by_restaurant')}}
                     </div>
                     <div class="d-flex align-items-center justify-content-center mt-3">
                         <img class="cash-icon mr-3" src="{{asset('/public/assets/admin/img/transactions/cash.png')}}" alt="transactions">
@@ -86,7 +86,7 @@
                     </div>
                 </div>
                 <div class="card-footer pt-0 bg-transparent">
-                    <a class="btn btn-- bg--title h--45px w-100" href="{{route('admin.account-transaction.index')}}" title="{{__('messages.goto')}} {{__('messages.account_transaction')}}">{{__('messages.collect_cash_from_restaurant')}}</a>
+                    <a class="btn btn-- bg--title h--45px w-100" href="{{route('admin.account-transaction.index')}}" title="{{translate('messages.goto')}} {{translate('messages.account_transaction')}}">{{translate('messages.collect_cash_from_restaurant')}}</a>
                 </div>
             </div>
         </div>
@@ -97,7 +97,7 @@
                 <div class="col-sm-6">
                     <div class="resturant-card  bg--2">
                         <h4 class="title">{{\App\CentralLogics\Helpers::format_currency($wallet->pending_withdraw)}}</h4>
-                        <span class="subtitle">{{__('messages.pending')}} {{__('messages.withdraw')}}</span>
+                        <span class="subtitle">{{translate('messages.pending')}} {{translate('messages.withdraw')}}</span>
                         <img class="resturant-icon" src="{{asset('/public/assets/admin/img/transactions/pending.png')}}" alt="transactions">
                     </div>
                 </div>
@@ -106,7 +106,7 @@
                 <div class="col-sm-6">
                     <div class="resturant-card  bg--3">
                         <h4 class="title">{{\App\CentralLogics\Helpers::format_currency($wallet->total_withdrawn)}}</h4>
-                        <span class="subtitle">{{__('messages.total')}} {{__('messages.withdrawn')}} {{__('messages.amount')}}</span>
+                        <span class="subtitle">{{translate('messages.total')}} {{translate('messages.withdrawn')}} {{translate('messages.amount')}}</span>
                         <img class="resturant-icon" src="{{asset('/public/assets/admin/img/transactions/withdraw-amount.png')}}" alt="transactions">
                     </div>
                 </div>
@@ -115,7 +115,7 @@
                 <div class="col-sm-6">
                     <div class="resturant-card  bg--5">
                         <h4 class="title">{{\App\CentralLogics\Helpers::format_currency($wallet->balance)}}</h4>
-                        <span class="subtitle">{{__('messages.withdraw_able_balance')}}</span>
+                        <span class="subtitle">{{translate('messages.withdraw_able_balance')}}</span>
                         <img class="resturant-icon" src="{{asset('/public/assets/admin/img/transactions/withdraw-balance.png')}}" alt="transactions">
                     </div>
                 </div>
@@ -124,7 +124,7 @@
                 <div class="col-sm-6">
                     <div class="resturant-card  bg--1">
                         <h4 class="title">{{\App\CentralLogics\Helpers::format_currency($wallet->total_earning)}}</h4>
-                        <span class="subtitle">{{__('messages.total_earning')}}</span>
+                        <span class="subtitle">{{translate('messages.total_earning')}}</span>
                         <img class="resturant-icon" src="{{asset('/public/assets/admin/img/transactions/earning.png')}}" alt="transactions">
                     </div>
                 </div>
@@ -142,7 +142,7 @@
                             <span class="card-header-icon mr-2">
                                 <i class="tio-shop-outlined"></i>
                             </span>
-                            <span class="ml-1">{{__('messages.restaurant')}} {{__('messages.info')}}</span>
+                            <span class="ml-1">{{translate('messages.restaurant')}} {{translate('messages.info')}}</span>
                         </h5>
                     </div>
                     <div class="card-body">
@@ -162,20 +162,20 @@
                                         <li>
                                             <i class="tio-city nav-icon"></i>
                                             <span class="pl-1">
-                                                {{__('messages.address')}} : {{$restaurant->address}}
+                                                {{translate('messages.address')}} : {{$restaurant->address}}
                                             </span>
                                         </li>
 
                                         <li>
                                             <i class="tio-call-talking nav-icon"></i>
                                             <span class="pl-1">
-                                                {{__('messages.phone')}} : {{$restaurant->phone}}
+                                                {{translate('messages.phone')}} : {{$restaurant->phone}}
                                             </span>
                                         </li>
                                         <li>
                                             <i class="tio-email nav-icon"></i>
                                             <span class="pl-1">
-                                                {{__('messages.email')}} : {{$restaurant->email}}
+                                                {{translate('messages.email')}} : {{$restaurant->email}}
                                             </span>
                                         </li>
                                     </ul>
@@ -195,7 +195,7 @@
                             <span class="card-header-icon mr-2">
                                 <i class="tio-user"></i>
                             </span>
-                            <span class="ml-1">{{__('messages.owner')}} {{__('messages.info')}}</span>
+                            <span class="ml-1">{{translate('messages.owner')}} {{translate('messages.info')}}</span>
                         </h5>
                     </div>
                     <div class="card-body d-flex flex-column justify-content-center">
@@ -234,23 +234,23 @@
                             <span class="card-header-icon mr-2">
                                 <i class="tio-museum"></i>
                             </span>
-                            <span class="ml-1">{{__('messages.bank_info')}}</span>
+                            <span class="ml-1">{{translate('messages.bank_info')}}</span>
                         </h5>
                     </div>
                     <div class="card-body d-flex flex-column justify-content-center">
                         <ul class="list-unstyled list-unstyled-py-3 text-dark">
                             @if($restaurant->vendor->bank_name)
                             <li class="pb-1 pt-1">
-                                <strong class="text--title">{{__('messages.bank_name')}}:</strong> {{$restaurant->vendor->bank_name ? $restaurant->vendor->bank_name : 'No Data found'}}
+                                <strong class="text--title">{{translate('messages.bank_name')}}:</strong> {{$restaurant->vendor->bank_name ? $restaurant->vendor->bank_name : 'No Data found'}}
                             </li>
                             <li class="pb-1 pt-1">
-                                <strong class="text--title">{{__('messages.branch')}}  :</strong> {{$restaurant->vendor->branch ? $restaurant->vendor->branch : 'No Data found'}}
+                                <strong class="text--title">{{translate('messages.branch')}}  :</strong> {{$restaurant->vendor->branch ? $restaurant->vendor->branch : 'No Data found'}}
                             </li>
                             <li class="pb-1 pt-1">
-                                <strong class="text--title">{{__('messages.holder_name')}} :</strong> {{$restaurant->vendor->holder_name ? $restaurant->vendor->holder_name : 'No Data found'}}
+                                <strong class="text--title">{{translate('messages.holder_name')}} :</strong> {{$restaurant->vendor->holder_name ? $restaurant->vendor->holder_name : 'No Data found'}}
                             </li>
                             <li class="pb-1 pt-1">
-                                <strong class="text--title">{{__('messages.account_no')}}  :</strong> {{$restaurant->vendor->account_no ? $restaurant->vendor->account_no : 'No Data found'}}
+                                <strong class="text--title">{{translate('messages.account_no')}}  :</strong> {{$restaurant->vendor->account_no ? $restaurant->vendor->account_no : 'No Data found'}}
                             </li>
                             @else
                             <li class="my-auto">
@@ -335,14 +335,14 @@
 
     function request_alert(url, message) {
         Swal.fire({
-            title: "{{__('messages.are_you_sure')}}",
+            title: "{{translate('messages.are_you_sure')}}",
             text: message,
             type: 'warning',
             showCancelButton: true,
             cancelButtonColor: 'default',
             confirmButtonColor: '#FC6A57',
-            cancelButtonText: "{{__('messages.no')}}",
-            confirmButtonText: "{{__('messages.yes')}}",
+            cancelButtonText: "{{translate('messages.no')}}",
+            confirmButtonText: "{{translate('messages.yes')}}",
             reverseButtons: true
         }).then((result) => {
             if (result.value) {

@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title','Add new campaign')
+@section('title',translate('Add new campaign'))
 
 @push('css_or_js')
 
@@ -14,7 +14,7 @@
                 <div class="col-sm mb-2 mb-sm-0">
                     <h1 class="page-header-title">
                         <div class="page-header-icon"><i class="tio-add-circle-outlined"></i></div>
-                        {{__('messages.add')}} {{__('messages.new')}} {{__('messages.campaign')}}
+                        {{translate('messages.add')}} {{translate('messages.new')}} {{translate('messages.campaign')}}
                     </h1>
                 </div>
             </div>
@@ -39,12 +39,12 @@
                         @foreach(json_decode($language) as $lang)
                             <div class="mb-1 {{$lang != $default_lang ? 'd-none':''}} lang_form" id="{{$lang}}-form">
                                 <div class="form-group">
-                                    <label class="input-label" for="{{$lang}}_title">{{__('messages.title')}} ({{strtoupper($lang)}})</label>
-                                    <input type="text" {{$lang == $default_lang? 'required':''}} name="title[]" id="{{$lang}}_title" class="form-control h--45px" placeholder="Ex: {{__('messages.new_campaign')}}" oninvalid="document.getElementById('en-link').click()">
+                                    <label class="input-label" for="{{$lang}}_title">{{translate('messages.title')}} ({{strtoupper($lang)}})</label>
+                                    <input type="text" {{$lang == $default_lang? 'required':''}} name="title[]" id="{{$lang}}_title" class="form-control h--45px" placeholder="{{ translate('messages.Ex :') }} {{translate('messages.new_campaign')}}" oninvalid="document.getElementById('en-link').click()">
                                 </div>
                                 <input type="hidden" name="lang[]" value="{{$lang}}">
                                 <div class="form-group mb-0">
-                                    <label class="input-label" for="exampleFormControlInput1">{{__('messages.short')}} {{__('messages.description')}} ({{strtoupper($lang)}})</label>
+                                    <label class="input-label" for="exampleFormControlInput1">{{translate('messages.short')}} {{translate('messages.description')}} ({{strtoupper($lang)}})</label>
                                     <textarea type="text" name="description[]" class="form-control ckeditor"></textarea>
                                 </div>
                             </div>
@@ -52,12 +52,12 @@
                     @else
                     <div class="mb-1" id="{{$default_lang}}-form">
                         <div class="form-group">
-                            <label class="input-label" for="exampleFormControlInput1">{{__('messages.title')}} ({{translate('en')}})</label>
-                            <input type="text" name="title[]" class="form-control h--45px" placeholder="Ex: {{__('messages.new_food')}}" required>
+                            <label class="input-label" for="exampleFormControlInput1">{{translate('messages.title')}} ({{translate('en')}})</label>
+                            <input type="text" name="title[]" class="form-control h--45px" placeholder="{{ translate('messages.Ex :') }} {{translate('messages.new_food')}}" required>
                         </div>
                         <input type="hidden" name="lang[]" value="en">
                         <div class="form-group mb-0">
-                            <label class="input-label" for="exampleFormControlInput1">{{__('messages.short')}} {{__('messages.description')}}</label>
+                            <label class="input-label" for="exampleFormControlInput1">{{translate('messages.short')}} {{translate('messages.description')}}</label>
                             <textarea type="text" name="description[]" class="form-control ckeditor"></textarea>
                         </div>
                     </div>
@@ -67,24 +67,24 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label class="input-label" for="title">{{__('messages.start')}} {{__('messages.date')}}</label>
+                                        <label class="input-label" for="title">{{translate('messages.start')}} {{translate('messages.date')}}</label>
                                         <input type="date" id="date_from" class="form-control h--45px" required="" name="start_date">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label class="input-label" for="title">{{__('messages.end')}} {{__('messages.date')}}</label>
+                                    <label class="input-label" for="title">{{translate('messages.end')}} {{translate('messages.date')}}</label>
                                     <input type="date" id="date_to" class="form-control h--45px" required="" name="end_date">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label class="input-label text-capitalize" for="title">{{__('messages.daily')}} {{__('messages.start')}} {{__('messages.time')}}</label>
+                                        <label class="input-label text-capitalize" for="title">{{translate('messages.daily')}} {{translate('messages.start')}} {{translate('messages.time')}}</label>
                                         <input type="time" id="start_time" class="form-control h--45px" name="start_time">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label class="input-label text-capitalize" for="title">{{__('messages.daily')}} {{__('messages.end')}} {{__('messages.time')}}</label>
+                                    <label class="input-label text-capitalize" for="title">{{translate('messages.daily')}} {{translate('messages.end')}} {{translate('messages.time')}}</label>
                                     <input type="time" id="end_time" class="form-control h--45px" name="end_time">
                                 </div>
                             </div>
@@ -92,8 +92,8 @@
                         <div class="col-sm-6">
                             <div class="form-group m-0 h-100 d-flex flex-column">
                                 <label class="d-block text-center mb-0">
-                                    {{__('messages.campaign')}} {{__('messages.image')}}
-                                    <small class="text-danger">* ( {{__('messages.ratio')}} 300x100 )</small>
+                                    {{translate('messages.campaign')}} {{translate('messages.image')}}
+                                    <small class="text-danger">* ( {{translate('messages.ratio')}} 300x100 )</small>
                                 </label>
                                 <center class="mt-auto mb-auto">
                                     <img class="initial-12" id="viewer"
@@ -103,7 +103,7 @@
                                     <div class="custom-file">
                                         <input type="file" name="image" id="customFileEg1" class="custom-file-input"
                                             accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" required>
-                                        <label class="custom-file-label" for="customFileEg1">{{__('messages.choose')}} {{__('messages.file')}}</label>
+                                        <label class="custom-file-label" for="customFileEg1">{{translate('messages.choose')}} {{translate('messages.file')}}</label>
                                     </div>
                                 </div>
                             </div>
@@ -111,8 +111,8 @@
                     </div>
 
                     <div class="btn--container justify-content-end">
-                        <button type="reset" id="reset_btn" class="btn btn--reset">{{__('messages.reset')}}</button>
-                        <button type="submit" class="btn btn--primary">{{__('messages.submit')}}</button>
+                        <button type="reset" id="reset_btn" class="btn btn--reset">{{translate('messages.reset')}}</button>
+                        <button type="submit" class="btn btn--primary">{{translate('messages.submit')}}</button>
                     </div>
                 </form>
             </div>
@@ -185,7 +185,7 @@
                             });
                         }
                     } else {
-                        toastr.success('Campaign created successfully!', {
+                        toastr.success('{{ translate('Campaign created successfully!') }}', {
                             CloseButton: true,
                             ProgressBar: true
                         });

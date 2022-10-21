@@ -22,8 +22,13 @@ class UpdateController extends Controller
         Helpers::setEnvironmentValue('BUYER_USERNAME',$request['username']);
         Helpers::setEnvironmentValue('PURCHASE_CODE',$request['purchase_key']);
         Helpers::setEnvironmentValue('APP_MODE','live');
-        Helpers::setEnvironmentValue('SOFTWARE_VERSION','5.8.0');
+        Helpers::setEnvironmentValue('SOFTWARE_VERSION','5.8.1');
         Helpers::setEnvironmentValue('APP_NAME','stackfood'.time());
+
+        $data = Helpers::requestSender();
+        if (!$data['active']) {
+            return redirect(base64_decode('aHR0cHM6Ly82YW10ZWNoLmNvbS9zb2Z0d2FyZS1hY3RpdmF0aW9u'));
+        }
 
         Artisan::call('migrate', ['--force' => true]);
         $previousRouteServiceProvier = base_path('app/Providers/RouteServiceProvider.php');
@@ -97,9 +102,9 @@ class UpdateController extends Controller
         if(is_numeric(env('SOFTWARE_VERSION')) && env('SOFTWARE_VERSION') <= '5.1'){
             ProductLogic::update_food_ratings();
         }
-        
+
         //version 5.8
-        Helpers::insert_business_settings_key('fcm_credentials', 
+        Helpers::insert_business_settings_key('fcm_credentials',
             json_encode([
                 'apiKey'=> '',
                 'authDomain'=> '',

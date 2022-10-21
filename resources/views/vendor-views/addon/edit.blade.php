@@ -10,7 +10,7 @@
     <div class="content container-fluid">
         <!-- Page Header -->
         <div class="page-header">
-            <h1 class="page-header-title"><i class="tio-edit"></i> {{__('messages.addon')}} {{__('messages.update')}}</h1>
+            <h1 class="page-header-title"><i class="tio-edit"></i> {{translate('messages.addon')}} {{translate('messages.update')}}</h1>
         </div>
         <!-- End Page Header -->
         <div class="row gx-2 gx-lg-3">
@@ -48,28 +48,28 @@
                                 }
                             ?>
                             <div class="col-md-6 form-group {{$lang != $default_lang ? 'd-none':''}} lang_form" id="{{$lang}}-form">
-                                <label class="input-label" for="exampleFormControlInput1">{{__('messages.name')}} ({{strtoupper($lang)}})</label>
-                                <input type="text" name="name[]" class="form-control" placeholder="{{__('messages.new_addon')}}" maxlength="191" value="{{$lang==$default_lang?$addon['name']:($translate[$lang]['name']??'')}}" {{$lang == $default_lang? 'required':''}} oninvalid="document.getElementById('en-link').click()">
+                                <label class="input-label" for="exampleFormControlInput1">{{translate('messages.name')}} ({{strtoupper($lang)}})</label>
+                                <input type="text" name="name[]" class="form-control" placeholder="{{translate('messages.new_addon')}}" maxlength="191" value="{{$lang==$default_lang?$addon['name']:($translate[$lang]['name']??'')}}" {{$lang == $default_lang? 'required':''}} oninvalid="document.getElementById('en-link').click()">
                             </div>
                             <input type="hidden" name="lang[]" value="{{$lang}}">
                         @endforeach
                     @else
                         <div class="form-group col-md-6">
-                            <label class="input-label" for="exampleFormControlInput1">{{__('messages.name')}}</label>
-                            <input type="text" name="name" class="form-control" placeholder="{{__('messages.new_addon')}}" value="{{ $attribute['name'] }}" required maxlength="191">
+                            <label class="input-label" for="exampleFormControlInput1">{{translate('messages.name')}}</label>
+                            <input type="text" name="name" class="form-control" placeholder="{{translate('messages.new_addon')}}" value="{{ $attribute['name'] }}" required maxlength="191">
                         </div>
                         <input type="hidden" name="lang[]" value="{{$lang}}">
                     @endif
                         <div class="form-group col-md-6">
-                            <label class="input-label" for="exampleFormControlInput1">{{__('messages.price')}}</label>
+                            <label class="input-label" for="exampleFormControlInput1">{{translate('messages.price')}}</label>
                             <input type="number" min="0" max="999999999999.99" step="0.01" name="price" value="{{$addon['price']}}" class="form-control" placeholder="200" required>
                         </div>
 
-                    
+
                     <div class="col-12">
                         <div class="btn--container justify-content-end">
-                            <button type="reset" class="btn btn--reset">{{__('messages.reset')}}</button>
-                            <button type="submit" class="btn btn--primary">{{__('messages.update')}}</button>
+                            <button type="reset" class="btn btn--reset">{{translate('messages.reset')}}</button>
+                            <button type="submit" class="btn btn--primary">{{translate('messages.update')}}</button>
                         </div>
                     </div>
                 </form>

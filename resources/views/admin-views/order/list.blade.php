@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title','Order List')
+@section('title',translate('Order List'))
 
 @push('css_or_js')
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -15,7 +15,7 @@
                     <img src="{{asset('/public/assets/admin/img/orders.png')}}" alt="public">
                 </div>
                 <span>
-                    {{str_replace('_',' ',$status)}} {{__('messages.orders')}}
+                    {{ translate(str_replace('_',' ',$status))}} {{translate('messages.orders')}}
                 </span>
                 <span class="badge badge-soft-dark ml-2">{{$total}}</span>
             </h1>
@@ -31,7 +31,7 @@
                         <!-- Search -->
                         <div class="input--group input-group input-group-merge input-group-flush">
                             <input id="datatableSearch_" type="search" name="search" class="form-control"
-                                    placeholder="Ex : Search your order..." aria-label="{{__('messages.search')}}" required>
+                                    placeholder="{{ translate('messages.Ex :') }} {{ translate('Search your order...') }}" aria-label="{{translate('messages.search')}}" required>
                             <button type="submit" class="btn btn--secondary"><i class="tio-search"></i></button>
                         </div>
                         <!-- End Search -->
@@ -41,7 +41,7 @@
                         <div class="d-flex align-items-center">
                                 <span class="font-size-sm mr-3">
                                 <span id="datatableCounter">0</span>
-                                {{__('messages.selected')}}
+                                {{translate('messages.selected')}}
                                 </span> --}}
                             {{--<a class="btn btn-sm btn-outline-danger" href="javascript:;">
                                 <i class="tio-delete-outlined"></i> Delete
@@ -57,43 +57,43 @@
                                 "target": "#usersExportDropdown",
                                 "type": "css-animation"
                             }'>
-                            <i class="tio-download-to mr-1"></i> {{__('messages.export')}}
+                            <i class="tio-download-to mr-1"></i> {{translate('messages.export')}}
                         </a>
 
                         <div id="usersExportDropdown"
                                 class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-sm-right">
-                            {{--<span class="dropdown-header">{{__('messages.options')}}</span>
+                            {{--<span class="dropdown-header">{{translate('messages.options')}}</span>
                             <a id="export-copy" class="dropdown-item" href="javascript:;">
                                 <img class="avatar avatar-xss avatar-4by3 mr-2"
                                         src="{{asset('public/assets/admin')}}/svg/illustrations/copy.svg"
                                         alt="Image Description">
-                                {{__('messages.copy')}}
+                                {{translate('messages.copy')}}
                             </a>
                             <a id="export-print" class="dropdown-item" href="javascript:;">
                                 <img class="avatar avatar-xss avatar-4by3 mr-2"
                                         src="{{asset('public/assets/admin')}}/svg/illustrations/print.svg"
                                         alt="Image Description">
-                                {{__('messages.print')}}
+                                {{translate('messages.print')}}
                             </a>
                             <div class="dropdown-divider"></div>--}}
-                            <span class="dropdown-header">{{__('messages.download')}} {{__('messages.options')}}</span>
+                            <span class="dropdown-header">{{translate('messages.download')}} {{translate('messages.options')}}</span>
                             <a id="export-excel" class="dropdown-item" href="javascript:;">
                                 <img class="avatar avatar-xss avatar-4by3 mr-2"
                                         src="{{asset('public/assets/admin')}}/svg/components/excel.svg"
                                         alt="Image Description">
-                                {{__('messages.excel')}}
+                                {{translate('messages.excel')}}
                             </a>
                             <a id="export-csv" class="dropdown-item" href="javascript:;">
                                 <img class="avatar avatar-xss avatar-4by3 mr-2"
                                         src="{{asset('public/assets/admin')}}/svg/components/placeholder-csv-format.svg"
                                         alt="Image Description">
-                                .{{__('messages.csv')}}
+                                .{{translate('messages.csv')}}
                             </a>
                             {{--<a id="export-pdf" class="dropdown-item" href="javascript:;">
                                 <img class="avatar avatar-xss avatar-4by3 mr-2"
                                         src="{{asset('public/assets/admin')}}/svg/components/pdf.svg"
                                         alt="Image Description">
-                                {{__('messages.pdf')}}
+                                {{translate('messages.pdf')}}
                             </a>--}}
                         </div>
                     </div>
@@ -113,7 +113,7 @@
                                 "target": "#showHideDropdown",
                                 "type": "css-animation"
                             }'>
-                            <i class="tio-table mr-1"></i> {{__('messages.columns')}}
+                            <i class="tio-table mr-1"></i> {{translate('messages.columns')}}
                         </a>
 
                         <div id="showHideDropdown"
@@ -121,7 +121,7 @@
                             <div class="card card-sm">
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <span class="mr-2">{{__('messages.order')}}</span>
+                                        <span class="mr-2">{{translate('messages.order')}}</span>
 
                                         <!-- Checkbox Switch -->
                                         <label class="toggle-switch toggle-switch-sm" for="toggleColumn_order">
@@ -135,7 +135,7 @@
                                     </div>
 
                                     <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <span class="mr-2">{{__('messages.date')}}</span>
+                                        <span class="mr-2">{{translate('messages.date')}}</span>
 
                                         <!-- Checkbox Switch -->
                                         <label class="toggle-switch toggle-switch-sm" for="toggleColumn_date">
@@ -149,7 +149,7 @@
                                     </div>
 
                                     <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <span class="mr-2">{{__('messages.customer')}}</span>
+                                        <span class="mr-2">{{translate('messages.customer')}}</span>
 
                                         <!-- Checkbox Switch -->
                                         <label class="toggle-switch toggle-switch-sm"
@@ -163,7 +163,7 @@
                                         <!-- End Checkbox Switch -->
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <span class="mr-2">{{__('messages.restaurant')}}</span>
+                                        <span class="mr-2">{{translate('messages.restaurant')}}</span>
 
                                         <!-- Checkbox Switch -->
                                         <label class="toggle-switch toggle-switch-sm"
@@ -178,7 +178,7 @@
                                     </div>
 
                                     {{--<div class="d-flex justify-content-between align-items-center mb-3">
-                                        <span class="mr-2 text-capitalize">{{__('messages.payment')}} {{__('messages.status')}}</span>
+                                        <span class="mr-2 text-capitalize">{{translate('messages.payment')}} {{translate('messages.status')}}</span>
 
                                         <!-- Checkbox Switch -->
                                         <label class="toggle-switch toggle-switch-sm"
@@ -193,7 +193,7 @@
                                     </div>--}}
 
                                     <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <span class="mr-2">{{__('messages.total')}}</span>
+                                        <span class="mr-2">{{translate('messages.total')}}</span>
 
                                         <!-- Checkbox Switch -->
                                         <label class="toggle-switch toggle-switch-sm" for="toggleColumn_total">
@@ -206,7 +206,7 @@
                                         <!-- End Checkbox Switch -->
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <span class="mr-2">{{__('messages.order')}} {{__('messages.status')}}</span>
+                                        <span class="mr-2">{{translate('messages.order')}} {{translate('messages.status')}}</span>
 
                                         <!-- Checkbox Switch -->
                                         <label class="toggle-switch toggle-switch-sm" for="toggleColumn_order_status">
@@ -220,7 +220,7 @@
                                     </div>
 
                                     {{--<div class="d-flex justify-content-between align-items-center mb-3">
-                                        <span class="mr-2">{{__('messages.order')}} {{__('messages.type')}}</span>
+                                        <span class="mr-2">{{translate('messages.order')}} {{translate('messages.type')}}</span>
 
                                         <!-- Checkbox Switch -->
                                         <label class="toggle-switch toggle-switch-sm"
@@ -235,7 +235,7 @@
                                     </div> --}}
 
                                     <div class="d-flex justify-content-between align-items-center">
-                                        <span class="mr-2">{{__('messages.actions')}}</span>
+                                        <span class="mr-2">{{translate('messages.actions')}}</span>
 
                                         <!-- Checkbox Switch -->
                                         <label class="toggle-switch toggle-switch-sm"
@@ -282,13 +282,13 @@
                         <th class="w-60px">
                             SL
                         </th>
-                        <th class="table-column-pl-0 w-90px">{{__('messages.order')}} ID</th>
-                        <th class="w-140px">{{__('messages.order')}} {{__('messages.date')}}</th>
-                        <th class="w-130px">{{__('messages.customer')}} Info</th>
-                        <th class="w-140px">{{__('messages.restaurant')}}</th>
-                        <th class="w-120px">{{__('messages.total')}} {{__('messages.amount')}}</th>
-                        <th class="text-center w-120px">{{__('messages.order')}} {{__('messages.status')}}</th>
-                        <th class="text-center w-100px">{{__('messages.actions')}}</th>
+                        <th class="table-column-pl-0 w-90px">{{translate('messages.Order ID')}}</th>
+                        <th class="w-140px">{{translate('messages.order')}} {{translate('messages.date')}}</th>
+                        <th class="w-130px">{{translate('messages.customer_information')}}</th>
+                        <th class="w-140px">{{translate('messages.restaurant')}}</th>
+                        <th class="w-120px">{{translate('messages.total')}} {{translate('messages.amount')}}</th>
+                        <th class="text-center w-120px">{{translate('messages.order')}} {{translate('messages.status')}}</th>
+                        <th class="text-center w-100px">{{translate('messages.actions')}}</th>
                     </tr>
                     </thead>
 
@@ -322,13 +322,13 @@
                                        </span>
                                     </a>
                                 @else
-                                    <label class="badge badge-danger">{{__('messages.invalid')}} {{__('messages.customer')}} {{__('messages.data')}}</label>
+                                    <label class="badge badge-danger">{{translate('messages.invalid')}} {{translate('messages.customer')}} {{translate('messages.data')}}</label>
                                 @endif
                             </td>
                             <td>
                                 <label class="m-0">
                                     <a href="{{route('admin.vendor.view', $order->restaurant_id)}}" class="text--title" alt="view restaurant">
-                                        {{Str::limit($order->restaurant?$order->restaurant->name:__('messages.Restaurant deleted!'),20,'...')}}
+                                        {{Str::limit($order->restaurant?$order->restaurant->name:translate('messages.Restaurant deleted!'),20,'...')}}
                                     </a>
                                 </label>
                             </td>
@@ -339,11 +339,11 @@
                                     </div>
                                     @if($order->payment_status=='paid')
                                         <strong class="text-success">
-                                        {{__('messages.paid')}}
+                                        {{translate('messages.paid')}}
                                         </strong>
                                     @else
                                         <strong class="text-danger">
-                                        {{__('messages.unpaid')}}
+                                        {{translate('messages.unpaid')}}
                                         </strong>
                                     @endif
                                 </div>
@@ -351,37 +351,37 @@
                             <td class="text-capitalize text-center">
                                 @if($order['order_status']=='pending')
                                     <span class="badge badge-soft-info mb-1">
-                                      {{__('messages.pending')}}
+                                      {{translate('messages.pending')}}
                                     </span>
                                 @elseif($order['order_status']=='confirmed')
                                     <span class="badge badge-soft-info mb-1">
-                                      {{__('messages.confirmed')}}
+                                      {{translate('messages.confirmed')}}
                                     </span>
                                 @elseif($order['order_status']=='processing')
                                     <span class="badge badge-soft-warning mb-1">
-                                      {{__('messages.processing')}}
+                                      {{translate('messages.processing')}}
                                     </span>
                                 @elseif($order['order_status']=='picked_up')
                                     <span class="badge badge-soft-warning mb-1">
-                                      {{__('messages.out_for_delivery')}}
+                                      {{translate('messages.out_for_delivery')}}
                                     </span>
                                 @elseif($order['order_status']=='delivered')
                                     <span class="badge badge-soft-success mb-1">
-                                      {{__('messages.delivered')}}
+                                      {{translate('messages.delivered')}}
                                     </span>
                                 @elseif($order['order_status']=='failed')
                                     <span class="badge badge-soft-danger mb-1">
-                                      {{__('messages.payment')}}  {{__('messages.failed')}}
+                                      {{translate('messages.payment')}}  {{translate('messages.failed')}}
                                     </span>
                                 @else
                                     <span class="badge badge-soft-danger mb-1">
-                                      {{str_replace('_',' ',$order['order_status'])}}
+                                      {{translate(str_replace('_',' ',$order['order_status']))}}
                                     </span>
                                 @endif
                                 <div class="text-capitalze opacity-7">
                                 @if($order['order_type']=='take_away')
                                     <span>
-                                        {{__('messages.take_away')}}
+                                        {{translate('messages.take_away')}}
                                     </span>
                                 @else
                                     <span>
@@ -430,7 +430,7 @@
         <div id="datatableFilterSidebar" class="hs-unfold-content_ sidebar sidebar-bordered sidebar-box-shadow initial-hidden">
             <div class="card card-lg sidebar-card sidebar-footer-fixed">
                 <div class="card-header">
-                    <h4 class="card-header-title">{{__('messages.order')}} {{__('messages.filter')}}</h4>
+                    <h4 class="card-header-title">{{translate('messages.order')}} {{translate('messages.filter')}}</h4>
 
                     <!-- Toggle Button -->
                     <a class="js-hs-unfold-invoker_ btn btn-icon btn-xs btn-ghost-dark ml-2" href="javascript:;"
@@ -456,7 +456,7 @@
                 <!-- Body -->
                 <form class="card-body sidebar-body sidebar-scrollbar" action="{{route('admin.order.filter')}}" method="POST" id="order_filter_form">
                     @csrf
-                    <small class="text-cap mb-3">{{__('messages.zone')}}</small>
+                    <small class="text-cap mb-3">{{translate('messages.zone')}}</small>
 
                     <div class="mb-2 initial-36">
                         <select name="zone[]" id="zone_ids" class="form-control js-select2-custom" multiple="multiple">
@@ -466,7 +466,7 @@
                         </select>
                     </div>
                     <hr class="my-4">
-                    <small class="text-cap mb-3">{{__('messages.restaurant')}}</small>
+                    <small class="text-cap mb-3">{{translate('messages.restaurant')}}</small>
                     <div class="mb-2 initial-36">
                         <select name="vendor[]" id="vendor_ids" class="form-control js-select2-custom" multiple="multiple">
                         @foreach(\App\Models\Restaurant::whereIn('id', $vendor_ids)->get() as $restaurant)
@@ -477,70 +477,70 @@
 
                     <hr class="my-4">
                     @if($status == 'all')
-                    <small class="text-cap mb-3">{{__('messages.order')}} {{__('messages.status')}}</small>
+                    <small class="text-cap mb-3">{{translate('messages.order')}} {{translate('messages.status')}}</small>
 
                     <!-- Custom Checkbox -->
                     <div class="custom-control custom-radio mb-2">
                         <input type="checkbox" id="orderStatus2" name="orderStatus[]" class="custom-control-input" {{isset($orderstatus)?(in_array('pending', $orderstatus)?'checked':''):''}} value="pending">
-                        <label class="custom-control-label" for="orderStatus2">{{__('messages.pending')}}</label>
+                        <label class="custom-control-label" for="orderStatus2">{{translate('messages.pending')}}</label>
                     </div>
                     <div class="custom-control custom-radio mb-2">
                         <input type="checkbox" id="orderStatus1" name="orderStatus[]" class="custom-control-input" value="confirmed" {{isset($orderstatus)?(in_array('confirmed', $orderstatus)?'checked':''):''}}>
-                        <label class="custom-control-label" for="orderStatus1">{{__('messages.confirmed')}}</label>
+                        <label class="custom-control-label" for="orderStatus1">{{translate('messages.confirmed')}}</label>
                     </div>
                     <div class="custom-control custom-radio mb-2">
                         <input type="checkbox" id="orderStatus3" name="orderStatus[]" class="custom-control-input" value="processing" {{isset($orderstatus)?(in_array('processing', $orderstatus)?'checked':''):''}}>
-                        <label class="custom-control-label" for="orderStatus3">{{__('messages.processing')}}</label>
+                        <label class="custom-control-label" for="orderStatus3">{{translate('messages.processing')}}</label>
                     </div>
                     <div class="custom-control custom-radio mb-2">
                         <input type="checkbox" id="orderStatus4" name="orderStatus[]" class="custom-control-input" value="picked_up" {{isset($orderstatus)?(in_array('picked_up', $orderstatus)?'checked':''):''}}>
-                        <label class="custom-control-label" for="orderStatus4">{{__('messages.out_for_delivery')}}</label>
+                        <label class="custom-control-label" for="orderStatus4">{{translate('messages.out_for_delivery')}}</label>
                     </div>
                     <div class="custom-control custom-radio mb-2">
                         <input type="checkbox" id="orderStatus5" name="orderStatus[]" class="custom-control-input" value="delivered" {{isset($orderstatus)?(in_array('delivered', $orderstatus)?'checked':''):''}}>
-                        <label class="custom-control-label" for="orderStatus5">{{__('messages.delivered')}}</label>
+                        <label class="custom-control-label" for="orderStatus5">{{translate('messages.delivered')}}</label>
                     </div>
                     <div class="custom-control custom-radio mb-2">
                         <input type="checkbox" id="orderStatus6" name="orderStatus[]" class="custom-control-input" value="returned" {{isset($orderstatus)?(in_array('returned', $orderstatus)?'checked':''):''}}>
-                        <label class="custom-control-label" for="orderStatus6">{{__('messages.returned')}}</label>
+                        <label class="custom-control-label" for="orderStatus6">{{translate('messages.returned')}}</label>
                     </div>
                     <div class="custom-control custom-radio mb-2">
                         <input type="checkbox" id="orderStatus7" name="orderStatus[]" class="custom-control-input" value="failed" {{isset($orderstatus)?(in_array('failed', $orderstatus)?'checked':''):''}}>
-                        <label class="custom-control-label" for="orderStatus7">{{__('messages.failed')}}</label>
+                        <label class="custom-control-label" for="orderStatus7">{{translate('messages.failed')}}</label>
                     </div>
                     <div class="custom-control custom-radio mb-2">
                         <input type="checkbox" id="orderStatus8" name="orderStatus[]" class="custom-control-input" value="canceled" {{isset($orderstatus)?(in_array('canceled', $orderstatus)?'checked':''):''}}>
-                        <label class="custom-control-label" for="orderStatus8">{{__('messages.canceled')}}</label>
+                        <label class="custom-control-label" for="orderStatus8">{{translate('messages.canceled')}}</label>
                     </div>
                     <div class="custom-control custom-radio mb-2">
                         <input type="checkbox" id="orderStatus9" name="orderStatus[]" class="custom-control-input" value="refund_requested" {{isset($orderstatus)?(in_array('refund_requested', $orderstatus)?'checked':''):''}}>
-                        <label class="custom-control-label" for="orderStatus9">{{__('messages.refundRequest')}}</label>
+                        <label class="custom-control-label" for="orderStatus9">{{translate('messages.refundRequest')}}</label>
                     </div>
                     <div class="custom-control custom-radio mb-2">
                         <input type="checkbox" id="orderStatus10" name="orderStatus[]" class="custom-control-input" value="refunded" {{isset($orderstatus)?(in_array('refunded', $orderstatus)?'checked':''):''}}>
-                        <label class="custom-control-label" for="orderStatus10">{{__('messages.refunded')}}</label>
+                        <label class="custom-control-label" for="orderStatus10">{{translate('messages.refunded')}}</label>
                     </div>
 
                     <hr class="my-4">
 
                     <div class="custom-control custom-radio mb-2">
                         <input type="checkbox" id="scheduled" name="scheduled" class="custom-control-input" value="1" {{isset($scheduled)?($scheduled==1?'checked':''):''}}>
-                        <label class="custom-control-label text-uppercase" for="scheduled">{{__('messages.scheduled')}}</label>
+                        <label class="custom-control-label text-uppercase" for="scheduled">{{translate('messages.scheduled')}}</label>
                     </div>
                     @endif
                     <hr class="my-4">
-                    <small class="text-cap mb-3">{{__('messages.order')}} {{__('messages.type')}}</small>
+                    <small class="text-cap mb-3">{{translate('messages.order')}} {{translate('messages.type')}}</small>
                     <div class="custom-control custom-radio mb-2">
                         <input type="radio" id="take_away" name="order_type" class="custom-control-input" value="take_away" {{isset($order_type)?($order_type=='take_away'?'checked':''):''}}>
-                        <label class="custom-control-label text-uppercase" for="take_away">{{__('messages.take_away')}}</label>
+                        <label class="custom-control-label text-uppercase" for="take_away">{{translate('messages.take_away')}}</label>
                     </div>
                     <div class="custom-control custom-radio mb-2">
                         <input type="radio" id="delivery" name="order_type" class="custom-control-input" value="delivery" {{isset($order_type)?($order_type=='delivery'?'checked':''):''}}>
-                        <label class="custom-control-label text-uppercase" for="delivery">{{__('messages.delivery')}}</label>
+                        <label class="custom-control-label text-uppercase" for="delivery">{{translate('messages.delivery')}}</label>
                     </div>
                     <hr class="my-4">
 
-                    <small class="text-cap mb-3">{{__('messages.date')}} {{__('messages.between')}}</small>
+                    <small class="text-cap mb-3">{{translate('messages.date')}} {{translate('messages.between')}}</small>
 
                     <div class="row">
                         <div class="col-12">
@@ -672,8 +672,8 @@
                 },
                 language: {
                     zeroRecords: '<div class="text-center p-4">' +
-                        '<img class="mb-3" src="{{asset('public/assets/admin')}}/svg/illustrations/sorry.svg" alt="Image Description" style="width: 7rem;">' +
-                        '<p class="mb-0">No data to show</p>' +
+                        '<img class="mb-3 w-7rem" src="{{asset('public/assets/admin')}}/svg/illustrations/sorry.svg" alt="Image Description">' +
+                        '<p class="mb-0">{{ translate('No data to show') }}</p>' +
                         '</div>'
                 }
             });

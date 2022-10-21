@@ -39,14 +39,6 @@
         .footer-bg {
             background-color: {{ isset($background_Change['footer-bg']) ? $background_Change['footer-bg'] : '#333e4f' }};
         }
-        .owl-theme .owl-controls .owl-buttons,
-        .owl-theme .owl-controls .owl-buttons div {
-            color: #000000;
-            background: none;
-        }
-        .form-group {
-            margin-bottom: 1rem;
-        }
     </style>
     @stack('css_or_js')
 </head>
@@ -75,42 +67,42 @@
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link text-bolder active-nav"
-                            href="{{ route('home') }}">{{ __('messages.home') }}<span
+                            href="{{ route('home') }}">{{ translate('messages.home') }}<span
                                 class="sr-only">(current)</span></a>
                     </li>
                     @if ($landing_page_links['web_app_url_status'])
                     <li class="nav-item">
                         <a class="nav-link"
-                            href="{{ $landing_page_links['web_app_url'] }}">{{ __('messages.browse_web') }}</a>
+                            href="{{ $landing_page_links['web_app_url'] }}">{{ translate('messages.browse_web') }}</a>
                     </li>
                     @endif
                     <li class="nav-item">
                         <a class="nav-link"
-                            href="{{ route('terms-and-conditions') }}">{{ __('messages.terms_and_condition') }}</a>
+                            href="{{ route('terms-and-conditions') }}">{{ translate('messages.terms_and_condition') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('about-us') }}">{{ __('messages.about_us') }}</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link"
-                            href="{{ route('contact-us') }}">{{ __('messages.contact_us') }}</a>
+                        <a class="nav-link" href="{{ route('about-us') }}">{{ translate('messages.about_us') }}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
-                            href="{{ route('privacy-policy') }}">{{ __('messages.privacy_policy') }}</a>
+                            href="{{ route('contact-us') }}">{{ translate('messages.contact_us') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                            href="{{ route('privacy-policy') }}">{{ translate('messages.privacy_policy') }}</a>
                     </li>
                     @if ($toggle_dm_registration || $toggle_restaurant_registration)
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
-                                {{ __('messages.join_us') }}
+                                {{ translate('messages.join_us') }}
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 
                                 @if ($toggle_restaurant_registration)
                                     <li>
                                         <a class="dropdown-item" href="{{ route('restaurant.create') }}">
-                                            {{ __('messages.restaurant_registration') }}
+                                            {{ translate('messages.restaurant_registration') }}
                                         </a>
                                     </li>
                                     @if ($toggle_dm_registration)
@@ -121,7 +113,7 @@
                                 @endif
                                 @if ($toggle_dm_registration)
                                     <li><a class="dropdown-item"
-                                            href="{{ route('deliveryman.create') }}">{{ __('messages.deliveryman_registration') }}</a>
+                                            href="{{ route('deliveryman.create') }}">{{ translate('messages.deliveryman_registration') }}</a>
                                     </li>
                                 @endif
                             </ul>
@@ -141,7 +133,7 @@
                     col-md-3 @endif">
                     <a class="navbar-brand" href="#">
                         @php($logo = \App\CentralLogics\Helpers::get_settings('logo'))
-                        <img style="max-width: 200px; max-height: 60px;" class="img-fluid"
+                        <img class="img-fluid landing--1"
                             onerror="this.src='{{ asset('public/assets/admin/img/160x160/img2.jpg') }}'"
                             src="{{ asset('storage/app/public/business/' . $logo) }}" alt="Image">
                     </a>
@@ -155,27 +147,27 @@
                 col-md-3 @endif footer-col">
 
 
-                    <h5 class="text-white mb-3">{{ __('messages.quick_links') }}</h5>
+                    <h5 class="text-white mb-3">{{ translate('messages.quick_links') }}</h5>
                     <ul class="list-unstyled text-muted">
                         <li>
-                            <a href="{{ route('about-us') }}">{{ __('messages.about_us') }}</a>
+                            <a href="{{ route('about-us') }}">{{ translate('messages.about_us') }}</a>
                         </li>
                         <li>
-                            <a href="{{ route('contact-us') }}">{{ __('messages.contact_us') }}</a>
+                            <a href="{{ route('contact-us') }}">{{ translate('messages.contact_us') }}</a>
                         </li>
                         <li>
-                            <a href="{{ route('privacy-policy') }}">{{ __('messages.privacy_policy') }}</a>
+                            <a href="{{ route('privacy-policy') }}">{{ translate('messages.privacy_policy') }}</a>
                         </li>
 
                         <li>
                             <a
-                                href="{{ route('terms-and-conditions') }}">{{ __('messages.terms_and_condition') }}</a>
+                                href="{{ route('terms-and-conditions') }}">{{ translate('messages.terms_and_condition') }}</a>
                         </li>
                     </ul>
                 </div>
                 @if ($landing_page_links['app_url_android_status'] !== null || $landing_page_links['app_url_ios_status'] !== null)
                     <div class="col-md-3 footer-col">
-                        <h5 class="text-white mb-3">{{ __('messages.download_our_apps') }}</h5>
+                        <h5 class="text-white mb-3">{{ translate('messages.download_our_apps') }}</h5>
                         <div class="footer-mobile-app">
                             @if ($landing_page_links['app_url_android_status'])
                                 <a href="{{ $landing_page_links['app_url_android'] }}">
@@ -197,7 +189,7 @@
                 <div class="@if ($landing_page_links['app_url_android_status'] == null && $landing_page_links['app_url_ios_status'] == null) col-md-4
                 @else
                     col-md-3 @endif footer-col">
-                    <h5 class="text-white mb-2">{{ __('messages.contact_us') }}</h5>
+                    <h5 class="text-white mb-2">{{ translate('messages.contact_us') }}</h5>
                     <ul class="list-unstyled">
                         <li>
                             <a href="#"><i
@@ -222,8 +214,7 @@
                     @php($social_media = \App\Models\SocialMedia::where('status', 1)->get())
                     @if (isset($social_media))
                         @foreach ($social_media as $social)
-                            <a class="social-btn" target="_blank" href="{{ $social->link }}"
-                                style="color: white!important;">
+                            <a class="social-btn text-white" target="_blank" href="{{ $social->link }}">
                                 <i class="fa-brands fa-{{ $social->name }} fa-2x" aria-hidden="true"></i>
                             </a>
                         @endforeach

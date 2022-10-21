@@ -37,7 +37,7 @@ class ProfileController extends Controller
             'email' => 'required|unique:'.$table.',email,'.$seller->id,
             'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:20|unique:'.$table.',phone,'.$seller->id,
         ], [
-            'f_name.required' => trans('messages.first_name_is_required'),
+            'f_name.required' => translate('messages.first_name_is_required'),
         ]);
         $seller = auth('vendor')->check()?auth('vendor')->user():auth('vendor_employee')->user();
         $seller->f_name = $request->f_name;
@@ -49,7 +49,7 @@ class ProfileController extends Controller
         }
         $seller->save();
 
-        Toastr::success(trans('messages.profile_updated_successfully'));
+        Toastr::success(translate('messages.profile_updated_successfully'));
         return back();
     }
 
@@ -63,7 +63,7 @@ class ProfileController extends Controller
         $seller = auth('vendor')->check()?Helpers::get_vendor_data():auth('vendor_employee')->user();
         $seller->password = bcrypt($request['password']);
         $seller->save();
-        Toastr::success(trans('messages.vendor_pasword_updated_successfully'));
+        Toastr::success(translate('messages.vendor_pasword_updated_successfully'));
         return back();
     }
 
@@ -81,7 +81,7 @@ class ProfileController extends Controller
         $bank->holder_name = $request->holder_name;
         $bank->account_no = $request->account_no;
         $bank->save();
-        Toastr::success(trans('messages.bank_info_updated_successfully'));
+        Toastr::success(translate('messages.bank_info_updated_successfully'));
         return redirect()->route('vendor.profile.bankView');
     }
 
@@ -98,7 +98,7 @@ class ProfileController extends Controller
         $data->holder_name = null;
         $data->account_no = null;
         $data->save();
-        Toastr::success(trans('messages.bank_info_updated_successfully'));
+        Toastr::success(translate('messages.bank_info_updated_successfully'));
         return redirect()->route('vendor.profile.bankView');
     }
 

@@ -1,12 +1,12 @@
 @extends('layouts.admin.app')
 
-@section('title', __('messages.food_wise_report'))
+@section('title', translate('messages.food_wise_report'))
 
 @push('css_or_js')
 @endpush
 
 @section('content')
-
+{{-- {{ dd(request()->getQueryString()) }} --}}
     @php
     $from = session('from_date');
     $to = session('to_date');
@@ -16,7 +16,7 @@
         <div class="page-header">
             <div class="row align-items-center">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <h1 class="page-header-title"><i class="tio-filter-list"></i> {{ __('messages.food_wise_report') }}</h1>
+                    <h1 class="page-header-title"><i class="tio-filter-list"></i> {{ translate('messages.food_wise_report') }}</h1>
                 </div>
             </div>
         </div>
@@ -30,13 +30,11 @@
                         <div class="d-flex mb-2 flex-wrap justify-content-between align-items-center">
                             <div class="mx-1 mb-1">
                                 <h4 class="form-label">
-                                    {{ __('messages.show') }}
-                                    {{ __('messages.data') }} by {{ __('messages.date') }}
-                                    {{ __('messages.range') }}
+                                    {{ translate('Show Data by Date range') }}
                                 </h4>
                             </div>
                             <div class="mx-1 mb-1">
-                                <button type="submit" class="btn btn--primary btn-block">{{ __('messages.show') }} {{ __('messages.data') }}</button>
+                                <button type="submit" class="btn btn--primary btn-block">{{ translate('Show Data') }}</button>
                             </div>
                         </div>
                         <div class="row g-2">
@@ -53,12 +51,12 @@
                             </div>
                             <div class="col-sm-6">
                                 <select name="restaurant_id" onchange="set_restaurant_filter('{{ url()->full() }}',this.value)"
-                                    data-placeholder="{{ __('messages.select') }} {{ __('messages.restaurant') }}"
+                                    data-placeholder="{{ translate('messages.select') }} {{ translate('messages.restaurant') }}"
                                     class="js-data-example-ajax form-control h--45px">
                                     @if (isset($restaurant))
                                         <option value="{{ $restaurant->id }}" selected>{{ $restaurant->name }}</option>
                                     @else
-                                        <option value="all" selected>{{ __('messages.all') }} {{ __('messages.restaurants') }}
+                                        <option value="all" selected>{{ translate('messages.all') }} {{ translate('messages.restaurants') }}
                                         </option>
                                     @endif
                                 </select>
@@ -92,15 +90,15 @@
                 <div class="search--button-wrapper">
                 <h3 class="card-title">
                     {{ translate('Food Wise Report Table') }}
-                    <span class="badge badge-soft-dark">{{ $foods ? count($foods) : 0 }}</span>
+                    <span class="badge badge-soft-dark">{{ $foods ? $foods->total() : 0 }}</span>
                 </h3>
                 <form id="search-form">
                     @csrf
                     <!-- Search -->
                     <div class="input--group input-group input-group-merge input-group-flush">
                         <input id="datatableSearch" name="search" type="search" class="form-control"
-                            placeholder="Search by name or restaurant..."
-                            aria-label="{{ __('messages.search_here') }}">
+                            placeholder="{{ translate('Search by name or restaurant...') }}"
+                            aria-label="{{ translate('messages.search_here') }}">
                         <button type="submit" class="btn btn--secondary">
                             <i class="tio-search"></i>
                         </button>
@@ -114,26 +112,26 @@
                             "target": "#usersExportDropdown",
                             "type": "css-animation"
                         }'>
-                        <i class="tio-download-to mr-1"></i> {{__('messages.export')}}
+                        <i class="tio-download-to mr-1"></i> {{translate('messages.export')}}
                     </a>
 
                     <div id="usersExportDropdown"
                             class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-sm-right">
-                        {{--<span class="dropdown-header">{{__('messages.options')}}</span>
+                        {{--<span class="dropdown-header">{{translate('messages.options')}}</span>
                         <a id="export-copy" class="dropdown-item" href="javascript:;">
                             <img class="avatar avatar-xss avatar-4by3 mr-2"
                                     src="{{asset('public/assets/admin')}}/svg/illustrations/copy.svg"
                                     alt="Image Description">
-                            {{__('messages.copy')}}
+                            {{translate('messages.copy')}}
                         </a>
                         <a id="export-print" class="dropdown-item" href="javascript:;">
                             <img class="avatar avatar-xss avatar-4by3 mr-2"
                                     src="{{asset('public/assets/admin')}}/svg/illustrations/print.svg"
                                     alt="Image Description">
-                            {{__('messages.print')}}
+                            {{translate('messages.print')}}
                         </a>
                         <div class="dropdown-divider"></div>--}}
-                        <span class="dropdown-header">{{__('messages.download')}} {{__('messages.options')}}</span>
+                        <span class="dropdown-header">{{translate('messages.download')}} {{translate('messages.options')}}</span>
                         {{-- <form action="{{route('admin.report.food-wise-report-export')}}" method="post">
                             @csrf
                             <input type="hidden" name="type" value="excel">
@@ -141,14 +139,14 @@
                                 <img class="avatar avatar-xss avatar-4by3 mr-2"
                                 src="{{asset('public/assets/admin')}}/svg/components/excel.svg"
                                 alt="Image Description">
-                                {{__('messages.excel')}}
+                                {{translate('messages.excel')}}
                             </button>
                         </form> --}}
-                        <a id="export-excel" class="dropdown-item" href="{{route('admin.report.food-wise-report-export', ['type'=>'excel'])}}">
+                        <a id="export-excel" class="dropdown-item" href="{{route('admin.report.food-wise-report-export',['type'=>'excel',request()->getQueryString()])}}">
                             <img class="avatar avatar-xss avatar-4by3 mr-2"
                                     src="{{asset('public/assets/admin')}}/svg/components/excel.svg"
                                     alt="Image Description">
-                            {{__('messages.excel')}}
+                            {{translate('messages.excel')}}
                         </a>
 {{--
                         <form action="{{route('admin.report.food-wise-report-export')}}" method="post">
@@ -158,20 +156,20 @@
                                 <img class="avatar avatar-xss avatar-4by3 mr-2"
                                 src="{{asset('public/assets/admin')}}/svg/components/placeholder-csv-format.svg"
                                 alt="Image Description">
-                                .{{__('messages.csv')}}
+                                .{{translate('messages.csv')}}
                             </button>
                         </form> --}}
-                        <a id="export-csv" class="dropdown-item" href="{{route('admin.report.food-wise-report-export', ['type'=>'csv'])}}">
+                        <a id="export-csv" class="dropdown-item" href="{{route('admin.report.food-wise-report-export', ['type'=>'csv',request()->getQueryString()])}}">
                             <img class="avatar avatar-xss avatar-4by3 mr-2"
                                     src="{{asset('public/assets/admin')}}/svg/components/placeholder-csv-format.svg"
                                     alt="Image Description">
-                            .{{__('messages.csv')}}
+                            .{{translate('messages.csv')}}
                         </a>
                         {{--<a id="export-pdf" class="dropdown-item" href="javascript:;">
                             <img class="avatar avatar-xss avatar-4by3 mr-2"
                                     src="{{asset('public/assets/admin')}}/svg/components/pdf.svg"
                                     alt="Image Description">
-                            {{__('messages.pdf')}}
+                            {{translate('messages.pdf')}}
                         </a>--}}
                     </div>
                 </div>
@@ -202,11 +200,11 @@
                         }'>
                     <thead class="thead-light">
                         <tr>
-                            <th>SL</th>
-                            <th>{{ __('messages.name') }}</th>
-                            <th>{{ __('messages.restaurant') }}</th>
-                            <th>{{ __('messages.zone') }}</th>
-                            <th>{{ __('messages.order') }} {{ __('messages.count') }}</th>
+                            <th>{{ translate('messages.sl') }}</th>
+                            <th>{{ translate('messages.name') }}</th>
+                            <th>{{ translate('messages.restaurant') }}</th>
+                            <th>{{ translate('messages.zone') }}</th>
+                            <th>{{ translate('messages.order') }} {{ translate('messages.count') }}</th>
                         </tr>
                     </thead>
 
@@ -241,14 +239,14 @@
                                             {{ Str::limit($food->restaurant->name, 25, '...') }}
                                         </a>
                                     @else
-                                        {{ __('messages.restaurant') }} {{ __('messages.deleted') }}
+                                        {{ translate('messages.restaurant') }} {{ translate('messages.deleted') }}
                                     @endif
                                 </td>
                                 <td>
                                     @if ($food->restaurant)
                                             {{ $food->restaurant->zone->name }}
                                     @else
-                                        {{ __('messages.not_found') }}
+                                        {{ translate('messages.not_found') }}
                                     @endif
                                 </td>
                                 <td>

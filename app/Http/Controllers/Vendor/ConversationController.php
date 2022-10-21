@@ -9,10 +9,8 @@ use App\Models\UserInfo;
 use App\Models\Message;
 use App\Models\User;
 use App\Models\DeliveryMan;
-use App\Models\Vendor;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class ConversationController extends Controller
@@ -22,8 +20,7 @@ class ConversationController extends Controller
         $vendor = Helpers::get_vendor_data();
         $vendor = UserInfo::where('vendor_id',$vendor->id)->first();
         if($vendor){
-
-            $conversations = Conversation::with('sender','receiver')->WhereUser($vendor->id);
+            $conversations = Conversation::with(['sender','receiver', 'last_message'])->WhereUser($vendor->id);
             if($request->query('key')) {
                 $key = explode(' ', $request->get('key'));
                 $conversations = $conversations->where(function($qu)use($key){
@@ -193,8 +190,8 @@ class ConversationController extends Controller
             $conversation->save();
             {
                 $data = [
-                    'title' =>trans('messages.message'),
-                    'description' =>trans('messages.message_description'),
+                    'title' =>translate('messages.message'),
+                    'description' =>translate('messages.message_description'),
                     'order_id' => '',
                     'image' => '',
                     'message' => $message,

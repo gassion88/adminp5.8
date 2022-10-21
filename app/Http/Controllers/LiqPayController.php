@@ -276,11 +276,11 @@ class LiqPay
 
 class LiqPayController extends Controller
 {
-    public function payment()
+    public function payment(Request $request)
     {
         try{
             $tran = Str::random(6) . '-' . rand(1, 1000);
-            $order = Order::with(['details'])->where(['id' => session('order_id'), 'user_id'=>session('customer_id')])->first();
+            $order = Order::with(['details'])->where(['id' => $request->order_id, 'user_id'=>$request->customer_id])->first();
             $config = Helpers::get_business_settings('liqpay');
 
             $public_key = $config['public_key'];
@@ -292,22 +292,22 @@ class LiqPayController extends Controller
                 'currency' => Helpers::currency_code(), //USD
                 'description' => 'Transaction ID: ' . $tran,
                 'order_id' => $order->id,
-                'result_url' => route('liqpay-callback'),
-                'server_url' => route('liqpay-callback'),
+                'result_url' => route('liqpay-callback',['order_id'=>$order->id]),
+                'server_url' => route('liqpay-callback',['order_id'=>$order->id]),
                 'version' => '3'
             ));
             return $html;
         }catch(\Exception $ex){
-            Toastr::error(trans('messages.config_your_account',['method'=>trans('messages.liqpay')]));
+            Toastr::error(translate('messages.config_your_account',['method'=>translate('messages.liqpay')]));
             return back();
         }
 
     }
 
-    public function callback(Request $request)
+    public function callback(Request $request,$order_id)
     {
-        $order = Order::with(['details'])->where(['id' => session('order_id'), 'user_id'=>session('customer_id')])->first();
-        $request['order_id'] = session('order_id');
+        $order = Order::with(['details'])->where(['id' => $order_id])->first();
+        $request['order_id'] = $order_id;
         if ($request['status'] == 'success') {
             // $order->transaction_reference = $request->trxID;
             $order->payment_method = 'LiqPay';

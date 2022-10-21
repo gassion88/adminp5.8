@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title', 'Settings')
+@section('title', translate('Settings'))
 
 
 @section('content')
@@ -14,8 +14,8 @@
                             <img src="{{asset('/public/assets/admin/img/business.png')}}" alt="public">
                         </div>
                         <span>
-                            {{ __('messages.business') }}
-                        {{ __('messages.setup') }}
+                            {{ translate('messages.business') }}
+                        {{ translate('messages.setup') }}
                         </span>
                     </h1>
                 </div>
@@ -33,7 +33,7 @@
                                     <i class="tio-settings-outlined"></i>
                                 </span>
                                 <span>
-                                    {{ __('messages.maintenance_mode') }}
+                                    {{ translate('messages.maintenance_mode') }}
                                 </span>
                             </h5>
                             <label class="switch m-0">
@@ -54,7 +54,7 @@
                     @csrf
                     <div class="card mb-3">
                         <div class="card-header">
-                            <h4 class="card-title m-0 d-flex align-items-center"> <span class="card-header-icon mr-2"><i class="tio-user"></i></span> <span>Genaral {{__('messages.info')}}</span></h4>
+                            <h4 class="card-title m-0 d-flex align-items-center"> <span class="card-header-icon mr-2"><i class="tio-user"></i></span> <span>{{translate('messages.general_info')}}</span></h4>
                         </div>
                         <div class="card-body">
                             <!-- Name Email and Phone -->
@@ -62,28 +62,28 @@
                                 <div class="col-md-4">
                                     @php($name = \App\Models\BusinessSetting::where('key', 'business_name')->first())
                                     <div class="form-group">
-                                        <label class="input-label" for="exampleFormControlInput1">{{ __('messages.business') }}
-                                            {{ __('messages.name') }}</label>
+                                        <label class="input-label" for="exampleFormControlInput1">{{ translate('messages.business') }}
+                                            {{ translate('messages.name') }}</label>
                                         <input type="text" name="restaurant_name" value="{{ $name->value ?? '' }}" class="form-control"
-                                            placeholder="Ex: ABC Company" required>
+                                            placeholder="{{ translate('messages.Ex :') }} ABC Company" required>
                                     </div>
                                 </div>
                                 @php($phone = \App\Models\BusinessSetting::where('key', 'phone')->first())
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="input-label"
-                                            for="exampleFormControlInput1">{{ __('messages.phone') }}</label>
+                                            for="exampleFormControlInput1">{{ translate('messages.phone') }}</label>
                                         <input type="text" value="{{ $phone->value ?? '' }}" name="phone"
-                                            class="form-control" placeholder="Ex: +9XXX-XXX-XXXX" required>
+                                            class="form-control" placeholder="{{ translate('messages.Ex :') }} +9XXX-XXX-XXXX" required>
                                     </div>
                                 </div>
                                 @php($email = \App\Models\BusinessSetting::where('key', 'email_address')->first())
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="input-label"
-                                            for="exampleFormControlInput1">{{ __('messages.email') }}</label>
+                                            for="exampleFormControlInput1">{{ translate('messages.email') }}</label>
                                         <input type="email" value="{{ $email->value ?? '' }}" name="email"
-                                            class="form-control" placeholder="Ex: contact@company.com" required>
+                                            class="form-control" placeholder="{{ translate('messages.Ex :') }} contact@company.com" required>
                                     </div>
                                 </div>
                             </div>
@@ -93,15 +93,15 @@
                                     @php($address = \App\Models\BusinessSetting::where('key', 'address')->first())
                                     <div class="form-group">
                                         <label class="input-label"
-                                            for="exampleFormControlInput1">{{ __('messages.address') }}</label>
-                                        <textarea type="text" id="address" name="address" class="form-control" placeholder="Ex: House#94, Road#8, Abc City" rows="1"
+                                            for="exampleFormControlInput1">{{ translate('messages.address') }}</label>
+                                        <textarea type="text" id="address" name="address" class="form-control" placeholder="{{ translate('messages.Ex :') }} House#94, Road#8, Abc City" rows="1"
                                             required>{{ $address->value ?? '' }}</textarea>
                                     </div>
                                     @php($footer_text = \App\Models\BusinessSetting::where('key', 'footer_text')->first())
                                     <div class="form-group">
                                         <label class="input-label"
-                                            for="exampleFormControlInput1">{{ __('messages.footer') }}
-                                            {{ __('messages.text') }}</label>
+                                            for="exampleFormControlInput1">{{ translate('messages.footer') }}
+                                            {{ translate('messages.text') }}</label>
                                         <textarea type="text" value="" name="footer_text" class="form-control" placeholder="" rows="1"
                                             required>{{ $footer_text->value ?? '' }}</textarea>
                                     </div>
@@ -109,29 +109,29 @@
                                     @php($default_location = $default_location->value ? json_decode($default_location->value, true) : 0)
                                     <div class="form-group">
                                         <label class="input-label text-capitalize d-flex alig-items-center"
-                                            for="latitude">{{ __('messages.latitude') }}<span class="input-label-secondary"
-                                                 data-toggle="tooltip" data-placement="right" data-original-title="{{ __('messages.click_on_the_map_select_your_defaul_location') }}"><img
+                                            for="latitude">{{ translate('messages.latitude') }}<span class="input-label-secondary"
+                                                 data-toggle="tooltip" data-placement="right" data-original-title="{{ translate('messages.click_on_the_map_select_your_defaul_location') }}"><img
                                                     src="{{ asset('/public/assets/admin/img/info-circle.svg') }}"
-                                                    alt="{{ __('messages.click_on_the_map_select_your_defaul_location') }}"></span></label>
+                                                    alt="{{ translate('messages.click_on_the_map_select_your_defaul_location') }}"></span></label>
                                         <input type="text" id="latitude" name="latitude" class="form-control d-inline"
-                                            placeholder="Ex : -94.22213"
+                                            placeholder="{{ translate('messages.Ex :') }} -94.22213"
                                             value="{{ $default_location ? $default_location['lat'] : 0 }}" required readonly>
                                     </div>
                                     <div class="form-group mb-0">
                                         <label class="input-label text-capitalize d-flex alig-items-center"
-                                            for="longitude">{{ __('messages.longitude') }}<span class="input-label-secondary"
-                                                 data-toggle="tooltip" data-placement="right" data-original-title="{{ __('messages.click_on_the_map_select_your_defaul_location') }}"><img
+                                            for="longitude">{{ translate('messages.longitude') }}<span class="input-label-secondary"
+                                                 data-toggle="tooltip" data-placement="right" data-original-title="{{ translate('messages.click_on_the_map_select_your_defaul_location') }}"><img
                                                     src="{{ asset('/public/assets/admin/img/info-circle.svg') }}"
-                                                    alt="{{ __('messages.click_on_the_map_select_your_defaul_location') }}"></span></label>
-                                        <input type="text" name="longitude" class="form-control" placeholder="Ex : 103.344322"
+                                                    alt="{{ translate('messages.click_on_the_map_select_your_defaul_location') }}"></span></label>
+                                        <input type="text" name="longitude" class="form-control" placeholder="{{ translate('messages.Ex :') }} 103.344322"
                                             id="longitude" value="{{ $default_location ? $default_location['lng'] : 0 }}"
                                             required readonly>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <input id="pac-input" class="controls rounded overflow-hidden initial-9"
-                                        title="{{ __('messages.search_your_location_here') }}" type="text"
-                                        placeholder="{{ __('messages.search_here') }}" />
+                                        title="{{ translate('messages.search_your_location_here') }}" type="text"
+                                        placeholder="{{ translate('messages.search_here') }}" />
                                     <div id="location_map_canvas"></div>
                                 </div>
                             </div>
@@ -140,7 +140,7 @@
 
                     <div class="card mb-3">
                         <div class="card-header">
-                            <h4 class="card-title m-0 d-flex align-items-center"> <span class="card-header-icon mr-2"><i class="tio-neighborhood"></i></span> <span>{{__('messages.business')}} {{__('messages.info')}}</span></h4>
+                            <h4 class="card-title m-0 d-flex align-items-center"> <span class="card-header-icon mr-2"><i class="tio-neighborhood"></i></span> <span>{{translate('messages.business')}} {{translate('messages.info')}}</span></h4>
                         </div>
                         <div class="card-body pb-0">
                             <div class="row">
@@ -154,12 +154,12 @@
                                                 onerror="this.src='{{ asset('public/assets/admin/img/160x160/img2.jpg') }}'"
                                                 src="{{ asset('storage/app/public/business/' . $logo) }}" alt="logo image" />
                                         </center>
-                                        <label class="input-label mt-2"> {{ __('messages.logo') }} <small class="text-danger">* ( {{ __('messages.ratio') }} 300x100 )</small></label>
+                                        <label class="input-label mt-2"> {{ translate('messages.logo') }} <small class="text-danger">* ( {{ translate('messages.ratio') }} 300x100 )</small></label>
                                         <div class="custom-file mb-3">
                                             <input type="file" name="logo" id="customFileEg1" class="custom-file-input"
                                                 accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
-                                            <label class="custom-file-label" for="customFileEg1">{{ __('messages.choose') }}
-                                                {{ __('messages.file') }}</label>
+                                            <label class="custom-file-label" for="customFileEg1">{{ translate('messages.choose') }}
+                                                {{ translate('messages.file') }}</label>
                                         </div>
                                     </div>
                                 </div>
@@ -172,12 +172,12 @@
                                                 onerror="this.src='{{ asset('public/assets/admin/img/160x160/img2.jpg') }}'"
                                                 src="{{ asset('storage/app/public/business/' . $icon) }}" alt="Fav icon" />
                                         </center>
-                                        <label class="input-label mt-2"> {{ __('messages.Fav Icon') }}<small class="text-danger">* ( {{ __('messages.ratio') }} 150x150 )</small></label>
+                                        <label class="input-label mt-2"> {{ translate('messages.Fav Icon') }}<small class="text-danger">* ( {{ translate('messages.ratio') }} 150x150 )</small></label>
                                         <div class="custom-file mb-3">
                                             <input type="file" name="icon" id="favIconUpload" class="custom-file-input"
                                                 accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
-                                            <label class="custom-file-label" for="favIconUpload">{{ __('messages.choose') }}
-                                                {{ __('messages.file') }}</label>
+                                            <label class="custom-file-label" for="favIconUpload">{{ translate('messages.choose') }}
+                                                {{ translate('messages.file') }}</label>
                                         </div>
                                     </div>
                                 </div>
@@ -186,7 +186,7 @@
                                 <div class="col-md-4 col-sm-6 col-12">
                                     <div class="form-group">
                                         <label class="input-label text-capitalize d-flex alig-items-center"
-                                            for="country">{{ __('messages.country') }}</label>
+                                            for="country">{{ translate('messages.country') }}</label>
                                         <select id="country" name="country" class="form-control  js-select2-custom">
                                             <option value="AF">Afghanistan</option>
                                             <option value="AX">Åland Islands</option>
@@ -444,7 +444,7 @@
                                     @php($currency_code = \App\Models\BusinessSetting::where('key', 'currency')->first())
                                     <div class="form-group">
                                         <label class="input-label"
-                                            for="exampleFormControlInput1">{{ __('messages.currency') }}</label>
+                                            for="exampleFormControlInput1">{{ translate('messages.currency') }}</label>
                                         <select name="currency" class="form-control js-select2-custom">
                                             @foreach (\App\Models\Currency::orderBy('currency_code')->get() as $currency)
                                                 <option value="{{ $currency['currency_code'] }}"
@@ -459,17 +459,17 @@
                                     @php($currency_symbol_position = \App\Models\BusinessSetting::where('key', 'currency_symbol_position')->first())
                                     <div class="form-group">
                                         <label class="input-label text-capitalize d-flex alig-items-center"
-                                            for="currency_symbol_position">{{ __('messages.currency_symbol_positon') }}</label>
+                                            for="currency_symbol_position">{{ translate('messages.currency_symbol_positon') }}</label>
                                         <select name="currency_symbol_position" class="form-control js-select2-custom"
                                             id="currency_symbol_position">
                                             <option value="left"
                                                 {{ $currency_symbol_position ? ($currency_symbol_position->value == 'left' ? 'selected' : '') : '' }}>
-                                                {{ __('messages.left') }}
+                                                {{ translate('messages.left') }}
                                                 ({{ \App\CentralLogics\Helpers::currency_symbol() }}123)
                                             </option>
                                             <option value="right"
                                                 {{ $currency_symbol_position ? ($currency_symbol_position->value == 'right' ? 'selected' : '') : '' }}>
-                                                {{ __('messages.right') }}
+                                                {{ translate('messages.right') }}
                                                 (123{{ \App\CentralLogics\Helpers::currency_symbol() }})
                                             </option>
                                         </select>
@@ -478,10 +478,10 @@
                                 <div class="col-md-4 col-sm-6 col-12">
                                     <div class="form-group language--setup">
                                         <label class="input-label"
-                                            for="exampleFormControlInput1">{{ trans('messages.language') }} </label>
+                                            for="exampleFormControlInput1">{{ translate('messages.language') }} </label>
                                         <select name="language[]" id="language" data-maximum-selection-length="3"
                                             class="form-control js-select2-custom" required multiple=true data-toggle="tooltip"
-                                            title="{{ __('messages.add_language_warrning') }}">
+                                            title="{{ translate('messages.add_language_warrning') }}">
                                             <option value="en">English(default)</option>
                                             <option value="af">Afrikaans</option>
                                             <option value="sq">Albanian - shqip</option>
@@ -632,7 +632,7 @@
                                     @php($tz = $tz ? $tz->value : 0)
                                     <div class="form-group">
                                         <label
-                                            class="input-label text-capitalize d-flex alig-items-center">{{ __('messages.time_zone') }}</label>
+                                            class="input-label text-capitalize d-flex alig-items-center">{{ translate('messages.time_zone') }}</label>
                                         <select name="timezone" class="form-control js-select2-custom">
                                             <option value="UTC" {{ $tz ? ($tz == '' ? 'selected' : '') : '' }}>UTC</option>
                                             <option value="Etc/GMT+12" {{ $tz ? ($tz == 'Etc/GMT+12' ? 'selected' : '') : '' }}>
@@ -902,13 +902,13 @@
                                     @php($tf = $tf ? $tf->value : '24')
                                     <div class="form-group">
                                         <label
-                                            class="input-label text-capitalize d-flex alig-items-center">{{ __('messages.time_format') }}</label>
+                                            class="input-label text-capitalize d-flex alig-items-center">{{ translate('messages.time_format') }}</label>
                                         <select name="time_format" class="form-control">
                                             <option value="12" {{ $tf == '12' ? 'selected' : '' }}>
-                                                {{ __('messages.12_hour') }}
+                                                {{ translate('messages.12_hour') }}
                                             </option>
                                             <option value="24" {{ $tf == '24' ? 'selected' : '' }}>
-                                                {{ __('messages.24_hour') }}
+                                                {{ translate('messages.24_hour') }}
                                             </option>
                                         </select>
                                     </div>
@@ -918,7 +918,7 @@
                                     @php($admin_commission = \App\Models\BusinessSetting::where('key', 'admin_commission')->first())
                                     <div class="form-group">
                                         <label class="input-label text-capitalize d-flex alig-items-center"
-                                            for="admin_commission">Admin Commision</label>
+                                            for="admin_commission">{{ translate('messages.admin_commission') }}</label>
                                         <input type="number" name="admin_commission" class="form-control" id="admin_commission"
                                             value="{{ $admin_commission ? $admin_commission->value : 0 }}" min="0" max="100"
                                             required>
@@ -928,7 +928,7 @@
                                     @php($digit_after_decimal_point = \App\Models\BusinessSetting::where('key', 'digit_after_decimal_point')->first())
                                     <div class="form-group">
                                         <label class="input-label text-capitalize d-flex alig-items-center"
-                                            for="digit_after_decimal_point">{{ __('messages.Digit after decimal point') }}</label>
+                                            for="digit_after_decimal_point">{{ translate('messages.Digit after decimal point') }}</label>
                                         <input type="number" name="digit_after_decimal_point" class="form-control"
                                             id="digit_after_decimal_point"
                                             value="{{ $digit_after_decimal_point ? $digit_after_decimal_point->value : 0 }}"
@@ -951,7 +951,7 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title m-0 d-flex align-items-center"> <span class="card-header-icon mr-2"><i class="tio-settings-outlined"></i></span> <span>{{__('messages.business')}} {{__('messages.setting')}}</span></h4>
+                            <h4 class="card-title m-0 d-flex align-items-center"> <span class="card-header-icon mr-2"><i class="tio-settings-outlined"></i></span> <span>{{translate('messages.business')}} {{translate('messages.setting')}}</span></h4>
                         </div>
                         <div class="card-body">
                             <!-- This is Previous Business Setting Which is Commented -->
@@ -961,9 +961,9 @@
                                     @php($schedule_order = \App\Models\BusinessSetting::where('key', 'schedule_order')->first())
                                     @php($schedule_order = $schedule_order ? $schedule_order->value : 0)
                                     <div class="form-group">
-                                        <label class="input-label d-inline">{{ __('messages.scheduled') }}
-                                            {{ __('messages.orders') }}</label><small class="text-danger">
-                                            <!-- <span class="input-label-secondary" title="{{ __('messages.customer_varification_toggle') }}"><img src="{{ asset('/public/assets/admin/img/info-circle.svg') }}" alt="{{ __('messages.customer_varification_toggle') }}"></span> -->
+                                        <label class="input-label d-inline">{{ translate('messages.scheduled') }}
+                                            {{ translate('messages.orders') }}</label><small class="text-danger">
+                                            <!-- <span class="input-label-secondary" title="{{ translate('messages.customer_varification_toggle') }}"><img src="{{ asset('/public/assets/admin/img/info-circle.svg') }}" alt="{{ translate('messages.customer_varification_toggle') }}"></span> -->
                                             *
                                         </small>
                                         <div class="input-group input-group-md-down-break">
@@ -996,9 +996,9 @@
                                     @php($order_confirmation_model = $order_confirmation_model ? $order_confirmation_model->value : 'deliveryman')
                                     <div class="form-group">
                                         <label
-                                            class="input-label d-inline">{{ __('messages.order_confirmation_model') }}</label><small class="text-danger">
+                                            class="input-label d-inline">{{ translate('messages.order_confirmation_model') }}</label><small class="text-danger">
                                             <span class="input-label-secondary"
-                                                title="{{ __('messages.order_confirmation_model_hint') }}"><img
+                                                title="{{ translate('messages.order_confirmation_model_hint') }}"><img
                                                     src="{{ asset('/public/assets/admin/img/info-circle.svg') }}"></span>
                                             *</small>
                                         <div class="input-group input-group-md-down-break">
@@ -1009,7 +1009,7 @@
                                                         name="order_confirmation_model" id="order_confirmation_model"
                                                         {{ $order_confirmation_model == 'restaurant' ? 'checked' : '' }}>
                                                     <label class="custom-control-label"
-                                                        for="order_confirmation_model">{{ __('messages.restaurant') }}</label>
+                                                        for="order_confirmation_model">{{ translate('messages.restaurant') }}</label>
                                                 </div>
                                             </div>
                                             <!-- End Custom Radio -->
@@ -1021,7 +1021,7 @@
                                                         name="order_confirmation_model" id="order_confirmation_model2"
                                                         {{ $order_confirmation_model == 'deliveryman' ? 'checked' : '' }}>
                                                     <label class="custom-control-label"
-                                                        for="order_confirmation_model2">{{ __('messages.deliveryman') }}</label>
+                                                        for="order_confirmation_model2">{{ translate('messages.deliveryman') }}</label>
                                                 </div>
                                             </div>
                                             <!-- End Custom Radio -->
@@ -1034,7 +1034,7 @@
                                     <div class="form-group">
                                         <label class="input-label d-inline">{{ translate('dm_tips_status') }}</label><small class="text-danger">
                                             <span class="input-label-secondary"
-                                                title="{{ __('messages.dm_tips_model_hint') }}"><img
+                                                title="{{ translate('messages.dm_tips_model_hint') }}"><img
                                                     src="{{ asset('/public/assets/admin/img/info-circle.svg') }}"></span>
                                             *</small>
                                         <div class="input-group input-group-md-down-break">
@@ -1071,8 +1071,8 @@
                                     @php($canceled_by_restaurant = $canceled_by_restaurant ? $canceled_by_restaurant->value : 0)
                                     <div class="form-group">
                                         <label
-                                            class="input-label d-inline">{{ __('messages.restaurant_cancellation_toggle') }}</label><small class="text-danger">
-                                            <!-- <span class="input-label-secondary" title="{{ __('messages.customer_varification_toggle') }}"><img src="{{ asset('/public/assets/admin/img/info-circle.svg') }}" alt="{{ __('messages.customer_varification_toggle') }}"></span> -->
+                                            class="input-label d-inline">{{ translate('messages.restaurant_cancellation_toggle') }}</label><small class="text-danger">
+                                            <!-- <span class="input-label-secondary" title="{{ translate('messages.customer_varification_toggle') }}"><img src="{{ asset('/public/assets/admin/img/info-circle.svg') }}" alt="{{ translate('messages.customer_varification_toggle') }}"></span> -->
                                             *
                                         </small>
                                         <div class="input-group input-group-md-down-break">
@@ -1107,8 +1107,8 @@
                                     @php($canceled_by_deliveryman = $canceled_by_deliveryman ? $canceled_by_deliveryman->value : 0)
                                     <div class="form-group">
                                         <label
-                                            class="input-label d-inline">{{ __('messages.deliveryman_cancellation_toggle') }}</label><small class="text-danger">
-                                            <!-- <span class="input-label-secondary" title="{{ __('messages.customer_varification_toggle') }}"><img src="{{ asset('/public/assets/admin/img/info-circle.svg') }}" alt="{{ __('messages.customer_varification_toggle') }}"></span> -->
+                                            class="input-label d-inline">{{ translate('messages.deliveryman_cancellation_toggle') }}</label><small class="text-danger">
+                                            <!-- <span class="input-label-secondary" title="{{ translate('messages.customer_varification_toggle') }}"><img src="{{ asset('/public/assets/admin/img/info-circle.svg') }}" alt="{{ translate('messages.customer_varification_toggle') }}"></span> -->
                                             *
                                         </small>
                                         <div class="input-group input-group-md-down-break">
@@ -1143,8 +1143,8 @@
                                     @php($show_dm_earning = $show_dm_earning ? $show_dm_earning->value : 0)
                                     <div class="form-group">
                                         <label
-                                            class="input-label d-inline">{{ __('messages.show_earning_for_each_order') }}</label><small class="text-danger">
-                                            <!-- <span class="input-label-secondary" title="{{ __('messages.customer_varification_toggle') }}"><img src="{{ asset('/public/assets/admin/img/info-circle.svg') }}" alt="{{ __('messages.customer_varification_toggle') }}"></span> -->
+                                            class="input-label d-inline">{{ translate('messages.show_earning_for_each_order') }}</label><small class="text-danger">
+                                            <!-- <span class="input-label-secondary" title="{{ translate('messages.customer_varification_toggle') }}"><img src="{{ asset('/public/assets/admin/img/info-circle.svg') }}" alt="{{ translate('messages.customer_varification_toggle') }}"></span> -->
                                             *
                                         </small>
                                         <div class="input-group input-group-md-down-break">
@@ -1180,8 +1180,8 @@
                                     @php($admin_order_notification = \App\Models\BusinessSetting::where('key', 'admin_order_notification')->first())
                                     @php($admin_order_notification = $admin_order_notification ? $admin_order_notification->value : 0)
                                     <div class="form-group">
-                                        <label class="input-label d-inline">{{ __('messages.admin') }}
-                                            {{ __('messages.order') }} {{ __('messages.notification') }}</label><small class="text-danger">*</small>
+                                        <label class="input-label d-inline">{{ translate('messages.admin') }}
+                                            {{ translate('messages.order') }} {{ translate('messages.notification') }}</label><small class="text-danger">*</small>
                                         <div class="input-group input-group-md-down-break">
                                             <!-- Custom Radio -->
                                             <div class="form-control">
@@ -1213,12 +1213,12 @@
                                     @php($ev = \App\Models\BusinessSetting::where('key', 'customer_verification')->first())
                                     @php($ev = $ev ? $ev->value : 0)
                                     <div class="form-group">
-                                        <label class="input-label d-inline">{{ __('messages.customer') }}
-                                            {{ __('messages.verification') }}</label><small class="text-danger"><span
+                                        <label class="input-label d-inline">{{ translate('messages.customer') }}
+                                            {{ translate('messages.verification') }}</label><small class="text-danger"><span
                                                 class="input-label-secondary"
-                                                title="{{ __('messages.customer_varification_toggle') }}"><img
+                                                title="{{ translate('messages.customer_varification_toggle') }}"><img
                                                     src="{{ asset('/public/assets/admin/img/info-circle.svg') }}"
-                                                    alt="{{ __('messages.customer_varification_toggle') }}"></span> *</small>
+                                                    alt="{{ translate('messages.customer_varification_toggle') }}"></span> *</small>
                                         <div class="input-group input-group-md-down-break">
                                             <!-- Custom Radio -->
                                             <div class="form-control">
@@ -1248,11 +1248,11 @@
                                     @php($odc = \App\Models\BusinessSetting::where('key', 'order_delivery_verification')->first())
                                     @php($odc = $odc ? $odc->value : 0)
                                     <div class="form-group">
-                                        <label class="input-label d-inline"> {{ __('messages.order') }}
-                                            {{ __('messages.delivery') }} {{ __('messages.verification') }} </label><small class="text-danger"><span class="input-label-secondary"
-                                                title="{{ __('messages.order_varification_toggle') }}"><img
+                                        <label class="input-label d-inline"> {{ translate('messages.order') }}
+                                            {{ translate('messages.delivery') }} {{ translate('messages.verification') }} </label><small class="text-danger"><span class="input-label-secondary"
+                                                title="{{ translate('messages.order_varification_toggle') }}"><img
                                                     src="{{ asset('/public/assets/admin/img/info-circle.svg') }}"
-                                                    alt="{{ __('messages.order_varification_toggle') }}"></span> *</small>
+                                                    alt="{{ translate('messages.order_varification_toggle') }}"></span> *</small>
                                         <div class="input-group input-group-md-down-break">
                                             <!-- Custom Radio -->
                                             <div class="form-control">
@@ -1284,10 +1284,10 @@
                                     @php($vnv = $vnv ? $vnv->value : 0)
                                     <div class="form-group">
                                         <label
-                                            class="input-label d-inline">{{ __('messages.veg') }}/{{ __('messages.non_veg') }}</label><small class="text-danger"><span class="input-label-secondary"
-                                                title="{{ __('messages.veg_non_veg') }}"><img
+                                            class="input-label d-inline">{{ translate('messages.veg') }}/{{ translate('messages.non_veg') }}</label><small class="text-danger"><span class="input-label-secondary"
+                                                title="{{ translate('messages.veg_non_veg') }}"><img
                                                     src="{{ asset('/public/assets/admin/img/info-circle.svg') }}"
-                                                    alt="{{ __('messages.order_varification_toggle') }}"></span> *</small>
+                                                    alt="{{ translate('messages.order_varification_toggle') }}"></span> *</small>
                                         <div class="input-group input-group-md-down-break">
                                             <!-- Custom Radio -->
                                             <div class="form-control">
@@ -1319,10 +1319,10 @@
                                     @php($restaurant_self_registration = $restaurant_self_registration ? $restaurant_self_registration->value : 0)
                                     <div class="form-group">
                                         <label
-                                            class="input-label d-inline">{{ __('messages.restaurant_self_registration') }}</label><small class="text-danger"><span class="input-label-secondary"
-                                                title="{{ __('messages.restaurant_self_registration') }}"><img
+                                            class="input-label d-inline">{{ translate('messages.restaurant_self_registration') }}</label><small class="text-danger"><span class="input-label-secondary"
+                                                title="{{ translate('messages.restaurant_self_registration') }}"><img
                                                     src="{{ asset('/public/assets/admin/img/info-circle.svg') }}"
-                                                    alt="{{ __('messages.restaurant_self_registration') }}"></span> *</small>
+                                                    alt="{{ translate('messages.restaurant_self_registration') }}"></span> *</small>
                                         <div class="input-group input-group-md-down-break">
                                             <!-- Custom Radio -->
                                             <div class="form-control">
@@ -1356,10 +1356,10 @@
                                     @php($dm_self_registration = $dm_self_registration ? $dm_self_registration->value : 0)
                                     <div class="form-group">
                                         <label
-                                            class="input-label d-inline">{{ __('messages.dm_self_registration') }}</label><small class="text-danger"><span class="input-label-secondary"
-                                                title="{{ __('messages.dm_self_registration') }}"><img
+                                            class="input-label d-inline">{{ translate('messages.dm_self_registration') }}</label><small class="text-danger"><span class="input-label-secondary"
+                                                title="{{ translate('messages.dm_self_registration') }}"><img
                                                     src="{{ asset('/public/assets/admin/img/info-circle.svg') }}"
-                                                    alt="{{ __('messages.dm_self_registration') }}"></span> *</small>
+                                                    alt="{{ translate('messages.dm_self_registration') }}"></span> *</small>
                                         <div class="input-group input-group-md-down-break">
                                             <!-- Custom Radio -->
                                             <div class="form-control">
@@ -1400,8 +1400,8 @@
                                     <div class="form-group">
                                         <label class="toggle-switch toggle-switch-sm d-flex justify-content-between border rounded px-3 px-xl-4 form-control">
                                         <span class="pr-2 d-flex align-items-center">
-                                            <span class="line--limit-1">{{ __('messages.customer') }}
-                                            {{ __('messages.verification') }}</span><span class="input-label-secondary text--title" data-toggle="tooltip" data-placement="right" data-original-title="{{translate('If you turn on this, customers have to verify their phone number through an OTP and you need to set up an SMS gateway before turning on this.')}}">
+                                            <span class="line--limit-1">{{ translate('messages.customer') }}
+                                            {{ translate('messages.verification') }}</span><span class="input-label-secondary text--title" data-toggle="tooltip" data-placement="right" data-original-title="{{translate('If you turn on this, customers have to verify their phone number through an OTP and you need to set up an SMS gateway before turning on this.')}}">
                                             <i class="tio-info-outined"></i>
                                             </span></span>
                                             <input type="checkbox" class="toggle-switch-input" value="1"
@@ -1418,7 +1418,7 @@
                                     <div class="form-group">
                                         <label class="toggle-switch toggle-switch-sm d-flex justify-content-between border rounded px-3 px-xl-4 form-control">
                                         <span class="pr-2 d-flex align-items-center">
-                                            <span class="line--limit-1">{{ __('messages.restaurant_self_registration') }}</span> <span class="input-label-secondary text--title" data-toggle="tooltip" data-placement="right" data-original-title="{{translate('If this field is active, restaurants can register themself using the restaurant app, user app, or website.')}}">
+                                            <span class="line--limit-1">{{ translate('messages.restaurant_self_registration') }}</span> <span class="input-label-secondary text--title" data-toggle="tooltip" data-placement="right" data-original-title="{{translate('If this field is active, restaurants can register themself using the restaurant app, user app, or website.')}}">
                                             <i class="tio-info-outined"></i>
                                             </span></span>
                                             <input type="checkbox" class="toggle-switch-input" value="1"
@@ -1437,7 +1437,7 @@
                                         <label class="toggle-switch toggle-switch-sm d-flex justify-content-between border rounded px-3 px-xl-4 form-control">
                                         <span class="pr-2 d-flex align-items-center">
 
-                                            <span class="line--limit-1">{{ __('messages.dm_self_registration') }}</span><span class="input-label-secondary text--title" data-toggle="tooltip" data-placement="right" data-original-title="{{translate('When this field is active, delivery men can register themself using the delivery man app, user app, or website.')}}">
+                                            <span class="line--limit-1">{{ translate('messages.dm_self_registration') }}</span><span class="input-label-secondary text--title" data-toggle="tooltip" data-placement="right" data-original-title="{{translate('When this field is active, delivery men can register themself using the delivery man app, user app, or website.')}}">
                                             <i class="tio-info-outined"></i>
                                             </span></span>
                                             <input type="checkbox" class="toggle-switch-input" value="1"
@@ -1454,8 +1454,8 @@
                                     @php($admin_order_notification = $admin_order_notification ? $admin_order_notification->value : 0)
                                     <div class="form-group">
                                         <label class="toggle-switch toggle-switch-sm d-flex justify-content-between border rounded px-3 px-xl-4 form-control">
-                                        <span class="pr-2 d-flex align-items-center"><span class="line--limit-1">{{ __('messages.admin') }}
-                                            {{ __('messages.order') }} {{ __('messages.notification') }}</span><span class="input-label-secondary text--title" data-toggle="tooltip" data-placement="right" data-original-title="{{translate('Turning on this, admin will get a popup notification with sound for all orders.')}}">
+                                        <span class="pr-2 d-flex align-items-center"><span class="line--limit-1">{{ translate('messages.admin') }}
+                                            {{ translate('messages.order') }} {{ translate('messages.notification') }}</span><span class="input-label-secondary text--title" data-toggle="tooltip" data-placement="right" data-original-title="{{translate('Turning on this, admin will get a popup notification with sound for all orders.')}}">
                                             <i class="tio-info-outined"></i>
                                             </span></span>
                                             <input type="checkbox" class="toggle-switch-input" value="1"
@@ -1472,8 +1472,8 @@
                                     @php($schedule_order = $schedule_order ? $schedule_order->value : 0)
                                     <div class="form-group">
                                         <label class="toggle-switch toggle-switch-sm d-flex justify-content-between border rounded px-3 px-xl-4 form-control">
-                                        <span class="pr-2 d-flex align-items-center"><span class="line--limit-1">{{ __('messages.scheduled') }}
-                                            {{ __('messages.orders') }}</span><span class="input-label-secondary text--title" data-toggle="tooltip" data-placement="right" data-original-title="{{translate('After activating this field, customers are able to place scheduled orders.')}}">
+                                        <span class="pr-2 d-flex align-items-center"><span class="line--limit-1">{{ translate('messages.scheduled') }}
+                                            {{ translate('messages.orders') }}</span><span class="input-label-secondary text--title" data-toggle="tooltip" data-placement="right" data-original-title="{{translate('After activating this field, customers are able to place scheduled orders.')}}">
                                             <i class="tio-info-outined"></i>
                                             </span></span>
                                             <input type="checkbox" value="1" name="schedule_order" class="toggle-switch-input" {{ $schedule_order == 1 ? 'checked' : '' }}>
@@ -1488,8 +1488,8 @@
                                     @php($odc = $odc ? $odc->value : 0)
                                     <div class="form-group">
                                         <label class="toggle-switch toggle-switch-sm d-flex justify-content-between border rounded px-3 px-xl-4 form-control">
-                                        <span class="pr-2 d-flex align-items-center"><span class="line--limit-1">{{ __('messages.order') }}
-                                            {{ __('messages.delivery') }} {{ __('messages.verification') }}</span><span class="input-label-secondary text--title" data-toggle="tooltip" data-placement="right" data-original-title="{{translate('If this field is active, customers have to provide a 4-digit code to the delivery man to deliver an order successfully. Customers will get this code in order details.')}}">
+                                        <span class="pr-2 d-flex align-items-center"><span class="line--limit-1">{{ translate('messages.order') }}
+                                            {{ translate('messages.delivery') }} {{ translate('messages.verification') }}</span><span class="input-label-secondary text--title" data-toggle="tooltip" data-placement="right" data-original-title="{{translate('If this field is active, customers have to provide a 4-digit code to the delivery man to deliver an order successfully. Customers will get this code in order details.')}}">
                                             <i class="tio-info-outined"></i>
                                             </span></span>
                                             <input type="checkbox" class="toggle-switch-input" value="1" name="odc"
@@ -1522,7 +1522,7 @@
                                     @php($show_dm_earning = $show_dm_earning ? $show_dm_earning->value : 0)
                                     <div class="form-group">
                                         <label class="toggle-switch toggle-switch-sm d-flex justify-content-between border rounded px-3 px-xl-4 form-control">
-                                        <span class="pr-2 d-flex align-items-center"><span class="line--limit-1">{{ __('messages.show_earning_for_each_order') }}
+                                        <span class="pr-2 d-flex align-items-center"><span class="line--limit-1">{{ translate('messages.show_earning_for_each_order') }}
                                             </span>
                                         <span class="input-label-secondary text--title" data-toggle="tooltip" data-placement="right" data-original-title="{{translate('If this field is enabled, the delivery man is able to see the earnings when accepting the order on the order request page.')}}">
                                             <i class="tio-info-outined"></i>
@@ -1556,7 +1556,7 @@
                                     @php($order_confirmation_model = \App\Models\BusinessSetting::where('key', 'order_confirmation_model')->first())
                                     @php($order_confirmation_model = $order_confirmation_model ? $order_confirmation_model->value : 'deliveryman')
                                     <div class="form-group">
-                                        <label class="input-label text-capitalize d-flex alig-items-center"><span class="line--limit-1">{{ __('messages.order_confirmation_model') }}</span> <span class="input-label-secondary text--title" data-toggle="tooltip" data-placement="right" data-original-title="{{translate('The chosen model will confirm the order first. For example, if you choose the delivery confirmation model then the delivery men will get the orders before the restaurants and confirm for delivery and after confirmation by the delivery men, the restaurants will get the order for processing.')}}">
+                                        <label class="input-label text-capitalize d-flex alig-items-center"><span class="line--limit-1">{{ translate('messages.order_confirmation_model') }}</span> <span class="input-label-secondary text--title" data-toggle="tooltip" data-placement="right" data-original-title="{{translate('The chosen model will confirm the order first. For example, if you choose the delivery confirmation model then the delivery men will get the orders before the restaurants and confirm for delivery and after confirmation by the delivery men, the restaurants will get the order for processing.')}}">
                                             <i class="tio-info-outined"></i>
                                             </span></label>
                                         <div class="resturant-type-group border">
@@ -1565,7 +1565,7 @@
                                                 name="order_confirmation_model" id="order_confirmation_model"
                                                 {{ $order_confirmation_model == 'restaurant' ? 'checked' : '' }}>
                                                 <span class="form-check-label">
-                                                    {{ __('messages.restaurant') }}
+                                                    {{ translate('messages.restaurant') }}
                                                 </span>
                                             </label>
                                             <label class="form-check form--check mr-2 mr-md-4">
@@ -1573,7 +1573,7 @@
                                                 name="order_confirmation_model" id="order_confirmation_model2"
                                                 {{ $order_confirmation_model == 'deliveryman' ? 'checked' : '' }}>
                                                 <span class="form-check-label">
-                                                    {{ __('messages.deliveryman') }}
+                                                    {{ translate('messages.deliveryman') }}
                                                 </span>
                                             </label>
                                         </div>
@@ -1643,30 +1643,30 @@
                                     <div class="form-group">
                                         <label class="input-label text-capitalize d-flex alig-items-center"
                                             for="schedule_order_slot_duration">
-                                            <span class="line--limit-1">{{ __('messages.Schedule order slot duration') }}
-                                            {{ __('messages.minute') }}</span><span class="input-label-secondary text--title" data-toggle="tooltip" data-placement="right" data-original-title="{{translate('The schedule order time slot will be managed by this value. For example, If you set 30 minutes in this section then you will see 10.30 to 11 or 11.00 to 11.30 or 11.30 to 12.00 when ordering user apps.')}}">
+                                            <span class="line--limit-1">{{ translate('messages.Schedule order slot duration') }}
+                                            {{ translate('messages.minute') }}</span><span class="input-label-secondary text--title" data-toggle="tooltip" data-placement="right" data-original-title="{{translate('The schedule order time slot will be managed by this value. For example, If you set 30 minutes in this section then you will see 10.30 to 11 or 11.00 to 11.30 or 11.30 to 12.00 when ordering user apps.')}}">
                                             <i class="tio-info-outined"></i>
                                             </span>
                                         </label>
                                         <input type="number" name="schedule_order_slot_duration" class="form-control"
                                             id="schedule_order_slot_duration"
                                             value="{{ $schedule_order_slot_duration ? $schedule_order_slot_duration->value : 0 }}"
-                                            min="0" required placeholder="Ex: ABC Company">
+                                            min="0" required placeholder="{{ translate('messages.Ex :') }} ABC Company">
                                     </div>
                                 </div>
                                 <div class="col-md-4 col-12">
                                     @php($dm_maximum_orders = \App\Models\BusinessSetting::where('key', 'dm_maximum_orders')->first())
                                     <div class="form-group">
                                         <label class="input-label text-capitalize d-flex alig-items-center"
-                                            for="dm_maximum_orders"><span class="line--limit-1">{{ __('messages.dm_maximum_order') }}</span>
+                                            for="dm_maximum_orders"><span class="line--limit-1">{{ translate('messages.dm_maximum_order') }}</span>
 
                                         <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('The given number will be the maximum ongoing orders for a delivery man.') }}"
                                     class="input-label-secondary"><img
                                         src="{{ asset('/public/assets/admin/img/info-circle.svg') }}"
-                                        alt="{{ __('messages.dm_maximum_order_hint') }}"></span>
+                                        alt="{{ translate('messages.dm_maximum_order_hint') }}"></span>
                                         </label>
                                         <input type="number" name="dm_maximum_orders" class="form-control" id="dm_maximum_orders"
-                                            min="1" value="{{ $dm_maximum_orders ? $dm_maximum_orders->value : 1 }}" required placeholder="Ex: +9XXX-XXX-XXXX">
+                                            min="1" value="{{ $dm_maximum_orders ? $dm_maximum_orders->value : 1 }}" required placeholder="{{ translate('messages.Ex :') }} +9XXX-XXX-XXXX">
                                     </div>
                                 </div>
                                 <div class="col-md-4 col-12">
@@ -1674,9 +1674,9 @@
                                     <div class="form-group">
                                         <label class="input-label text-capitalize d-inline-flex alig-items-center"
                                             for="free_delivery_over">
-                                            <span class="line--limit-1">{{ __('messages.free_delivery_over') }} ({{ \App\CentralLogics\Helpers::currency_symbol() }})</span>
+                                            <span class="line--limit-1">{{ translate('messages.free_delivery_over') }} ({{ \App\CentralLogics\Helpers::currency_symbol() }})</span>
 
-                                            <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate(' If the order amount exceeds this amount the delivery fee will be free and the delivery fee will be deducted from the admin’s commission.')}}" class="input-label-secondary"><img src="{{ asset('/public/assets/admin/img/info-circle.svg') }}" alt="{{ __('messages.dm_maximum_order_hint') }}"></span>
+                                            <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate(' If the order amount exceeds this amount the delivery fee will be free and the delivery fee will be deducted from the admin’s commission.')}}" class="input-label-secondary"><img src="{{ asset('/public/assets/admin/img/info-circle.svg') }}" alt="{{ translate('messages.dm_maximum_order_hint') }}"></span>
                                         </label>
                                         <label class="switch ml-3 float-right">
                                             <input type="checkbox" class="status" name="free_delivery_over_status"
@@ -1687,17 +1687,17 @@
                                         <input type="number" name="free_delivery_over" class="form-control"
                                             id="free_delivery_over"
                                             value="{{ $free_delivery_over ? $free_delivery_over->value : 0 }}" min="0"
-                                            step=".01" placeholder="Ex: 100" required {{ isset($free_delivery_over->value) ? '' : 'readonly' }}>
+                                            step=".01" placeholder="{{ translate('messages.Ex :') }} 100" required {{ isset($free_delivery_over->value) ? '' : 'readonly' }}>
                                     </div>
                                 </div>
                                 <div class="col-md-4 col-12">
                                     @php($minimum_shipping_charge = \App\Models\BusinessSetting::where('key', 'minimum_shipping_charge')->first())
                                     <div class="form-group">
                                         <label class="input-label text-capitalize d-flex alig-items-center"
-                                            for="minimum_shipping_charge">{{ __('messages.minimum_shipping_charge') }}</label>
+                                            for="minimum_shipping_charge">{{ translate('messages.minimum_shipping_charge') }}</label>
                                         <input type="number" name="minimum_shipping_charge" class="form-control"
                                             id="minimum_shipping_charge" min="0" step=".01"
-                                            value="{{ $minimum_shipping_charge ? $minimum_shipping_charge->value : 0 }}" placeholder="Ex: 50"
+                                            value="{{ $minimum_shipping_charge ? $minimum_shipping_charge->value : 0 }}" placeholder="{{ translate('messages.Ex :') }} 50"
                                             required>
                                     </div>
                                 </div>
@@ -1705,11 +1705,11 @@
                                     @php($per_km_shipping_charge = \App\Models\BusinessSetting::where('key', 'per_km_shipping_charge')->first())
                                     <div class="form-group">
                                         <label class="input-label text-capitalize d-flex alig-items-center"
-                                            for="per_km_shipping_charge">{{ __('messages.per_km_shipping_charge') }}
+                                            for="per_km_shipping_charge">{{ translate('messages.per_km_shipping_charge') }}
                                         </label>
                                         <input type="number" name="per_km_shipping_charge" class="form-control"
                                             id="per_km_shipping_charge" min="0" step=".01"
-                                            value="{{ $per_km_shipping_charge ? $per_km_shipping_charge->value : 0 }}" placeholder="Ex: 50" required>
+                                            value="{{ $per_km_shipping_charge ? $per_km_shipping_charge->value : 0 }}" placeholder="{{ translate('messages.Ex :') }} 50" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4 col-12">
@@ -1722,7 +1722,7 @@
                                                 {{translate('Delivery Man Maximum Cash in Hand')}} ({{ \App\CentralLogics\Helpers::currency_symbol() }})
                                             </span>
 
-                                            <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('If the cash in hand for a delivery man exceeds this amount the delivery man cannot accept new orders before depositing the amount to admin.')}}" class="input-label-secondary"><img src="{{ asset('/public/assets/admin/img/info-circle.svg') }}" alt="{{ __('messages.dm_maximum_order_hint') }}"></span>
+                                            <span data-toggle="tooltip" data-placement="right" data-original-title="{{translate('If the cash in hand for a delivery man exceeds this amount the delivery man cannot accept new orders before depositing the amount to admin.')}}" class="input-label-secondary"><img src="{{ asset('/public/assets/admin/img/info-circle.svg') }}" alt="{{ translate('messages.dm_maximum_order_hint') }}"></span>
 
                                         </label>
                                         <input type="number" name="dm_max_cash_in_hand" class="form-control"
@@ -1737,9 +1737,9 @@
                             @php($footer_text = \App\Models\BusinessSetting::where('key', 'footer_text')->first())
                             <div class="form-group">
                                 <label class="input-label"
-                                    for="exampleFormControlInput1">{{ __('messages.footer') }}
-                                    {{ __('messages.text') }}</label>
-                                <textarea type="text" value="" name="footer_text" class="form-control" placeholder="Ex: House#94, Road#8, Abc City"
+                                    for="exampleFormControlInput1">{{ translate('messages.footer') }}
+                                    {{ translate('messages.text') }}</label>
+                                <textarea type="text" value="" name="footer_text" class="form-control" placeholder="{{ translate('messages.Ex :') }} House#94, Road#8, Abc City"
                                     required>{{ $footer_text->value ?? '' }}</textarea>
                             </div>
                             --}}
@@ -1748,7 +1748,7 @@
                                 <button type="reset" id="reset_btn" class="btn btn--reset">Reset</button>
                                 <button type="{{ env('APP_MODE') != 'demo' ? 'submit' : 'button' }}"
                                 onclick="{{ env('APP_MODE') != 'demo' ? '' : 'call_demo()' }}"
-                                class="btn btn--primary mb-2"><i class="tio-save-outlined mr-2"></i>{{ trans('messages.save') }} {{__('messages.info')}}</button>
+                                class="btn btn--primary mb-2"><i class="tio-save-outlined mr-2"></i>{{ translate('messages.save') }} {{translate('messages.info')}}</button>
                             </div>
                         </div>
                     </div>

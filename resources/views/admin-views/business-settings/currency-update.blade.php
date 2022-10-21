@@ -26,22 +26,22 @@
 
                     <div class="form-group mb-2">
                         <label class="form-label d-block">Country Name</label>
-                        <input type="text" placeholder="ex : Bangladesh" value="{{$currency['country']}}" class="form-control" name="country">
+                        <input type="text" placeholder="{{ translate('messages.Ex :') }} Bangladesh" value="{{$currency['country']}}" class="form-control" name="country">
                     </div>
 
                     <div class="form-group mb-2">
                         <label class="form-label d-block">Code</label>
-                        <input type="text" placeholder="ex : USD" value="{{$currency['currency_code']}}" class="form-control" name="currency_code">
+                        <input type="text" placeholder="{{ translate('messages.Ex :') }} USD" value="{{$currency['currency_code']}}" class="form-control" name="currency_code">
                     </div>
 
                     <div class="form-group mb-2">
                         <label class="form-label d-block">Symbol</label>
-                        <input type="text" placeholder="ex : $" value="{{$currency['currency_symbol']}}" class="form-control" name="symbol">
+                        <input type="text" placeholder="{{ translate('messages.Ex :') }} $" value="{{$currency['currency_symbol']}}" class="form-control" name="symbol">
                     </div>
 
                     <div class="form-group mb-2">
                         <label class="form-label d-block">Exchange Rate ( 1 USD ) with USD</label>
-                        <input type="number" placeholder="ex : 1" value="{{$currency['exchange_rate']}}" class="form-control" name="exchange_rate">
+                        <input type="number" placeholder="{{ translate('messages.Ex :') }} 1" value="{{$currency['exchange_rate']}}" class="form-control" name="exchange_rate">
                     </div>
 
                     <button type="submit" class="btn btn-primary mb-2">Update</button>

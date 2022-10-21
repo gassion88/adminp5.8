@@ -34,7 +34,7 @@ class EmployeeController extends Controller
         ]);
 
         if ($request->role_id == 1) {
-            Toastr::warning(trans('messages.access_denied'));
+            Toastr::warning(translate('messages.access_denied'));
             return back();
         }
 
@@ -51,7 +51,7 @@ class EmployeeController extends Controller
             'updated_at' => now(),
         ]);
 
-        Toastr::success(trans('messages.employee_added_successfully'));
+        Toastr::success(translate('messages.employee_added_successfully'));
         return redirect()->route('admin.employee.list');
     }
 
@@ -77,11 +77,11 @@ class EmployeeController extends Controller
             'email' => 'required|unique:admins,email,'.$id,
             'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:20|unique:admins,phone,'.$id,
         ], [
-            'f_name.required' => trans('messages.first_name_is_required'),
+            'f_name.required' => translate('messages.first_name_is_required'),
         ]);
 
         if ($request->role_id == 1) {
-            Toastr::warning(trans('messages.access_denied'));
+            Toastr::warning(translate('messages.access_denied'));
             return back();
         }
 
@@ -90,7 +90,7 @@ class EmployeeController extends Controller
             $pass = $e['password'];
         } else {
             if (strlen($request['password']) < 6) {
-                Toastr::warning(trans('messages.password_length_warning',['length'=>'6']));
+                Toastr::warning(translate('messages.password_length_warning',['length'=>'6']));
                 return back();
             }
             $pass = bcrypt($request['password']);
@@ -112,14 +112,14 @@ class EmployeeController extends Controller
             'updated_at' => now(),
         ]);
 
-        Toastr::success(trans('messages.employee_updated_successfully'));
+        Toastr::success(translate('messages.employee_updated_successfully'));
         return redirect()->route('admin.employee.list');
     }
 
     public function distroy($id)
     {
         $role=Admin::zone()->where('role_id', '!=','1')->where(['id'=>$id])->delete();
-        Toastr::info(trans('messages.employee_deleted_successfully'));
+        Toastr::info(translate('messages.employee_deleted_successfully'));
         return back();
     }
 

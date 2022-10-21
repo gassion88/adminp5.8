@@ -21,7 +21,6 @@ Route::group(['namespace' => 'Vendor', 'as' => 'vendor.'], function () {
         Route::get('/get-restaurant-data', 'DashboardController@restaurant_data')->name('get-restaurant-data');
         Route::post('/store-token', 'DashboardController@updateDeviceToken')->name('store.token');
         Route::get('/reviews', 'ReviewController@index')->name('reviews')->middleware('module:reviews');
-        Route::get('/go_del', 'DashboardController@go_del');
 
 
         Route::group(['prefix' => 'pos', 'as' => 'pos.'], function () {
@@ -45,6 +44,7 @@ Route::group(['namespace' => 'Vendor', 'as' => 'vendor.'], function () {
                 Route::post('search', 'POSController@search')->name('search');
                 Route::get('order-details/{id}', 'POSController@order_details')->name('order-details');
                 Route::get('invoice/{id}', 'POSController@generate_invoice');
+                Route::post('customer-store', 'POSController@customer_store')->name('customer-store');
             });
         });
 
@@ -166,7 +166,6 @@ Route::group(['namespace' => 'Vendor', 'as' => 'vendor.'], function () {
             Route::get('edit-order/{order}', 'OrderController@edit')->name('edit');
             Route::get('details/{id}', 'OrderController@details')->name('details');
             Route::get('status', 'OrderController@status')->name('status');
-            Route::get('statuss', 'OrderController@statuss')->name('statuss');
             Route::get('quick-view', 'OrderController@quick_view')->name('quick-view');
             Route::get('quick-view-cart-item', 'OrderController@quick_view_cart_item')->name('quick-view-cart-item');
             Route::get('generate-invoice/{id}', 'OrderController@generate_invoice')->name('generate-invoice');

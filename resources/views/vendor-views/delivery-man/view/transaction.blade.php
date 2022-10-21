@@ -15,10 +15,10 @@
                 <!-- Nav -->
                 <ul class="nav nav-tabs page-header-tabs">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('vendor.delivery-man.preview', ['id'=>$dm->id, 'tab'=> 'info'])}}"  aria-disabled="true">{{__('messages.info')}}</a>
+                        <a class="nav-link" href="{{route('vendor.delivery-man.preview', ['id'=>$dm->id, 'tab'=> 'info'])}}"  aria-disabled="true">{{translate('messages.info')}}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="{{route('vendor.delivery-man.preview', ['id'=>$dm->id, 'tab'=> 'transaction'])}}"  aria-disabled="true">{{__('messages.transaction')}}</a>
+                        <a class="nav-link active" href="{{route('vendor.delivery-man.preview', ['id'=>$dm->id, 'tab'=> 'transaction'])}}"  aria-disabled="true">{{translate('messages.transaction')}}</a>
                     </li>
                 </ul>
                 <!-- End Nav -->
@@ -30,7 +30,7 @@
         <div class="card mb-3 mb-lg-5 mt-2">
             <div class="card-header border-0">
                 <h5 class="qcont pr-3 m-0">
-                    {{ __('messages.order')}} {{ __('messages.transactions')}}
+                    {{ translate('messages.order')}} {{ translate('messages.transactions')}}
                     {{-- <span class="badge badge-soft-secondary">
                         10
                     </span> --}}
@@ -44,14 +44,13 @@
             <div class="card-body px-0 pt-0">
                 <div class="table-responsive">
                     <table id="datatable"
-                        class="table table-borderless table-thead-bordered table-nowrap justify-content-between table-align-middle card-table"
-                        style="width: 100%">
+                        class="table table-borderless table-thead-bordered table-nowrap justify-content-between table-align-middle card-table">
                         <thead class="thead-light">
                             <tr>
-                                <th style="width:5%" class="text-center">SL</th>
-                                <th style="width:30%" class="text-center">{{__('messages.order')}} {{__('messages.id')}}</th>
-                                <th style="width:30%" class="text-center">
-                                    {{__('messages.deliveryman')}} {{__('messages.earned')}}
+                                <th class="text-center w-5p">{{ translate('messages.sl') }}</th>
+                                <th class="text-center w-30p">{{translate('messages.order')}} {{translate('messages.id')}}</th>
+                                <th class="text-center w-30p">
+                                    {{translate('messages.deliveryman')}} {{translate('messages.earned')}}
                                 </th>
                             </tr>
                         </thead>

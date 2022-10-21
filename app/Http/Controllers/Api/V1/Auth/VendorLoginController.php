@@ -40,7 +40,7 @@ class VendorLoginController extends Controller
             {
                 return response()->json([
                     'errors' => [
-                        ['code' => 'auth-002', 'message' => trans('messages.inactive_vendor_warning')]
+                        ['code' => 'auth-002', 'message' => translate('messages.inactive_vendor_warning')]
                     ]
                 ], 403);
             }
@@ -97,7 +97,7 @@ class VendorLoginController extends Controller
             $point = new Point($request->lat, $request->lng);
             $zone = Zone::contains('coordinates', $point)->where('id', $request->zone_id)->first();
             if(!$zone){
-                $validator->getMessageBag()->add('latitude', trans('messages.coordinates_out_of_zone'));
+                $validator->getMessageBag()->add('latitude', translate('messages.coordinates_out_of_zone'));
             }
         }
 
@@ -137,7 +137,7 @@ class VendorLoginController extends Controller
         }catch(\Exception $ex){
             info($ex);
         }
-        
+
         return response()->json(['message'=>translate('messages.application_placed_successfully')],200);
     }
 }

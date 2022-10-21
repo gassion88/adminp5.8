@@ -1,15 +1,14 @@
 <div>
     <div class="table-responsive">
         <table id="datatable"
-            class="table table-hover table-borderless table-thead-bordered table-nowrap table-align-middle card-table text-center"
-            style="width: 100%">
+            class="table table-hover table-borderless table-thead-bordered table-nowrap table-align-middle card-table text-center">
             <thead class="thead-light">
                 <tr>
-                    <th>SL</th>
-                    <th>Withdraw Request Date</th>
-                    <th>{{__('messages.amount')}}</th>
-                    <th>{{__('messages.status')}}</th>
-                    <th>{{__('messages.action')}}</th>
+                    <th>{{translate('messages.sl')}}</th>
+                    <th>{{translate('withdraw_request_date')}}</th>
+                    <th>{{translate('messages.amount')}}</th>
+                    <th>{{translate('messages.status')}}</th>
+                    <th>{{translate('messages.action')}}</th>
                 </tr>
             </thead>
             <tbody>
@@ -21,11 +20,11 @@
                     <td>{{\App\CentralLogics\Helpers::format_currency($wt->amount)}}</td>
                     <td>
                         @if($wt->approved==0)
-                            <label class="badge badge-primary">Pending</label>
+                            <label class="badge badge-primary">{{ translate('Pending') }}</label>
                         @elseif($wt->approved==1)
-                            <label class="badge badge-success">Approved</label>
+                            <label class="badge badge-success">{{ translate('Approved') }}</label>
                         @else
-                            <label class="badge badge-danger">Denied</label>
+                            <label class="badge badge-danger">{{ translate('Denied') }}</label>
                         @endif
                     </td>
                     <td>

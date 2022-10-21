@@ -12,7 +12,7 @@
         <div class="page-header">
             <div class="row align-items-center">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <h1 class="page-header-title"><i class="tio-edit"></i> {{__('messages.update')}} {{__('messages.deliveryman')}}</h1>
+                    <h1 class="page-header-title"><i class="tio-edit"></i> {{translate('messages.update')}} {{translate('messages.deliveryman')}}</h1>
                 </div>
             </div>
         </div>
@@ -35,43 +35,43 @@
                             <div class="row g-3">
                                 <div class="col-sm-6">
                                     <div class="form-group mb-0">
-                                        <label class="form-label" for="exampleFormControlInput1">{{__('messages.first')}} {{__('messages.name')}}</label>
+                                        <label class="form-label" for="exampleFormControlInput1">{{translate('messages.first')}} {{translate('messages.name')}}</label>
                                         <input type="text" value="{{$delivery_man['f_name']}}" name="f_name"
-                                                class="form-control h--45px" placeholder="{{__('messages.first_name')}}"
+                                                class="form-control h--45px" placeholder="{{translate('messages.first_name')}}"
                                                 required>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group mb-0">
-                                        <label class="form-label" for="exampleFormControlInput1">{{__('messages.last')}} {{__('messages.name')}}</label>
+                                        <label class="form-label" for="exampleFormControlInput1">{{translate('messages.last')}} {{translate('messages.name')}}</label>
                                         <input type="text" value="{{$delivery_man['l_name']}}" name="l_name"
-                                                class="form-control h--45px" placeholder="{{__('messages.last_name')}}"
+                                                class="form-control h--45px" placeholder="{{translate('messages.last_name')}}"
                                                 required>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group mb-0">
-                                        <label class="form-label" for="exampleFormControlInput1">{{__('messages.identity')}} {{__('messages.type')}}</label>
+                                        <label class="form-label" for="exampleFormControlInput1">{{translate('messages.identity')}} {{translate('messages.type')}}</label>
                                         <select name="identity_type" class="form-control h--45px">
                                             <option
                                                 value="passport" {{$delivery_man['identity_type']=='passport'?'selected':''}}>
-                                                {{__('messages.passport')}}
+                                                {{translate('messages.passport')}}
                                             </option>
                                             <option
                                                 value="driving_license" {{$delivery_man['identity_type']=='driving_license'?'selected':''}}>
-                                                {{__('messages.driving')}} {{__('messages.license')}}
+                                                {{translate('messages.driving')}} {{translate('messages.license')}}
                                             </option>
-                                            <option value="nid" {{$delivery_man['identity_type']=='nid'?'selected':''}}>{{__('messages.nid')}}
+                                            <option value="nid" {{$delivery_man['identity_type']=='nid'?'selected':''}}>{{translate('messages.nid')}}
                                             </option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group mb-0">
-                                        <label class="form-label" for="exampleFormControlInput1">{{__('messages.identity')}} {{__('messages.number')}}</label>
+                                        <label class="form-label" for="exampleFormControlInput1">{{translate('messages.identity')}} {{translate('messages.number')}}</label>
                                         <input type="text" name="identity_number" value="{{$delivery_man['identity_number']}}"
                                                 class="form-control h--45px"
-                                                placeholder="Ex : DH-23434-LS"
+                                                placeholder="{{ translate('messages.Ex :') }} DH-23434-LS"
                                                 required>
                                     </div>
                                 </div>
@@ -83,14 +83,14 @@
                 <div class="col-lg-6">
                     <div class="card h-100">
                         <div class="card-header">
-                            <h5 class="form-label m-0" for="exampleFormControlInput1">{{__('messages.identity')}} {{__('messages.image')}}
-                                <small class="text-danger">* ( {{__('messages.ratio')}} 190x120 )</small></h5>
+                            <h5 class="form-label m-0" for="exampleFormControlInput1">{{translate('messages.identity')}} {{translate('messages.image')}}
+                                <small class="text-danger">* ( {{translate('messages.ratio')}} 190x120 )</small></h5>
                         </div>
                         <div class="card-body">
                             <div class="row g-2" id="coba">
                                 @foreach(json_decode($delivery_man['identity_image'],true) as $img)
                                     <div class="col-6 col-sm-4 spartan_item_wrapper">
-                                        <img style="width: 100%; vertical-align: middle;height:120px;object-fit:cover" src="{{asset('storage/app/public/delivery-man').'/'.$img}}">
+                                        <img class="initial-77" src="{{asset('storage/app/public/delivery-man').'/'.$img}}">
                                     </div>
                                 @endforeach
                             </div>
@@ -107,14 +107,14 @@
                         </div>
                         <div class="card-body pt-0 d-flex flex-column">
                                 <center class="py-3 my-auto">
-                                    <img style="height: 140px; border-radius: 10px;" id="viewer"
+                                    <img class="initial-78" id="viewer"
                                     onerror="this.src='{{asset('/public/assets/admin/img/100x100/user2.png')}}'"
                                             src="{{asset('storage/app/public/delivery-man').'/'.$delivery_man['image']}}" alt="delivery-man image"/>
                                 </center>
                                 <div class="custom-file mt-0">
                                     <input type="file" name="image" id="customFileEg1" class="custom-file-input"
                                             accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
-                                    <label class="custom-file-label" for="customFileEg1">{{__('messages.choose')}} {{__('messages.file')}}</label>
+                                    <label class="custom-file-label" for="customFileEg1">{{translate('messages.choose')}} {{translate('messages.file')}}</label>
                                 </div>
                         </div>
                     </div>
@@ -133,32 +133,32 @@
                             <div class="row g-2">
                                 <div class="col-md-4 col-12">
                                     <div class="form-group mb-0">
-                                        <label class="form-label" for="exampleFormControlInput1">{{__('messages.phone')}}</label>
+                                        <label class="form-label" for="exampleFormControlInput1">{{translate('messages.phone')}}</label>
                                         <input type="tel" id="phone" name="phone" value="{{$delivery_man['phone']}}" class="form-control h--45px"
-                                                placeholder="Ex : 017********"
+                                                placeholder="{{ translate('messages.Ex :') }} 017********"
                                                 required>
                                     </div>
                                 </div>
 
                                 <div class="col-md-4 col-12">
                                     <div class="form-group mb-0">
-                                        <label class="form-label" for="exampleFormControlInput1">{{__('messages.email')}}</label>
+                                        <label class="form-label" for="exampleFormControlInput1">{{translate('messages.email')}}</label>
                                         <input type="email" value="{{$delivery_man['email']}}" name="email" class="form-control h--45px"
-                                                placeholder="Ex : ex@example.com"
+                                                placeholder="{{ translate('messages.Ex :') }} ex@example.com"
                                                 required>
                                     </div>
                                 </div>
 
                                 <div class="col-md-4 col-12">
                                     <div class="form-group mb-0">
-                                        <label class="form-label" for="exampleFormControlInput1">{{__('messages.password')}}</label>
-                                        <input type="text" name="password" class="form-control h--45px" placeholder="Ex : password">
+                                        <label class="form-label" for="exampleFormControlInput1">{{translate('messages.password')}}</label>
+                                        <input type="text" name="password" class="form-control h--45px" placeholder="{{ translate('messages.Ex :') }} password">
                                     </div>
                                 </div>
                             </div>
                             <div class="btn--container justify-content-end mt-3">
-                                <button type="reset" class="btn btn--reset">{{__('messages.reset')}}</button>
-                                <button type="submit" class="btn btn--primary">{{__('messages.submit')}}</button>
+                                <button type="reset" class="btn btn--reset">{{translate('messages.reset')}}</button>
+                                <button type="submit" class="btn btn--primary">{{translate('messages.submit')}}</button>
                             </div>
                         </div>
                     </div>

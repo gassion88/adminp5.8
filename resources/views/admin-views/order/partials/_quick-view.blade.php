@@ -11,7 +11,7 @@
             <!-- Product gallery-->
             <div class="d-flex align-items-center justify-content-center active h-9rem">
                 <img class="img-responsive initial-33"
-                    src="{{asset('storage/app/public/product')}}/{{$product['image']}}" 
+                    src="{{asset('storage/app/public/product')}}/{{$product['image']}}"
                     onerror="this.src='{{asset('public/assets/admin/img/160x160/img2.jpg')}}'"
                         data-zoom="{{asset('storage/app/public/product')}}/{{$product['image']}}"
                         alt="Product image" width="">
@@ -44,7 +44,7 @@
         </div>
         <div class="row pt-2">
             <div class="col-12">
-                <h2>{{__('messages.description')}}</h2>
+                <h2>{{translate('messages.description')}}</h2>
                 <span class="d-block text-dark">
                     {!! $product->description !!}
                 </span>
@@ -72,18 +72,18 @@
 
                     <!-- Quantity + Add to cart -->
                     <div class="d-flex justify-content-between">
-                        <div class="product-description-label mt-2 text-dark h3">{{__('messages.quantity')}}:</div>
+                        <div class="product-description-label mt-2 text-dark h3">{{translate('messages.quantity')}}:</div>
                         <div class="product-quantity d-flex align-items-center">
                             <div class="input-group input-group--style-2 pr-3 w-160px">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-number p-10 text-dark" type="button"
+                                    <button class="btn btn-number text-dark" type="button"
                                             data-type="minus" data-field="quantity"
                                             disabled="disabled">
                                             <i class="tio-remove  font-weight-bold"></i>
                                     </button>
                                 </span>
                                 <input type="text" name="quantity"
-                                        class="form-control input-number p-10 text-center cart-qty-field"
+                                        class="form-control input-number text-center cart-qty-field"
                                         placeholder="1" value="1" min="1" max="100">
                                 <span class="input-group-btn">
                                     <button class="btn btn-number text-dark" type="button" data-type="plus"
@@ -96,9 +96,9 @@
                     </div>
                     @php($add_ons = json_decode($product->add_ons))
                     @if(count($add_ons)>0)
-                    <div class="h3 p-0 pt-2">{{ __('messages.addon') }}
+                    <div class="h3 p-0 pt-2">{{ translate('messages.addon') }}
                     </div>
-                    
+
                     <div class="d-flex justify-content-left flex-wrap">
                     @foreach (\App\Models\AddOn::whereIn('id', $add_ons)->active()->get() as $key => $add_on)
                         <div class="flex-column pb-2">
@@ -107,7 +107,7 @@
                                     id="addon{{ $key }}" onchange="addon_quantity_input_toggle(event)"
                                     name="addon_id[]" value="{{ $add_on->id }}"
                                     autocomplete="off">
-                            <label class="d-flex align-items-center btn btn-sm check-label mx-1 addon-input" 
+                            <label class="d-flex align-items-center btn btn-sm check-label mx-1 addon-input"
                                 for="addon{{ $key }}">{{ Str::limit($add_on->name, 20, '...') }} <br> {{ \App\CentralLogics\Helpers::format_currency($add_on->price) }}</label>
                             <label class="input-group addon-quantity-input mx-1 shadow bg-white rounded px-1" for="addon{{ $key }}">
                                 <button class="btn btn-sm h-100 text-dark px-0" type="button" onclick="this.parentNode.querySelector('input[type=number]').stepDown(), getVariantPrice()"><i class="tio-remove  font-weight-bold"></i></button>
@@ -122,7 +122,7 @@
                     @endif
                     <div class="row no-gutters d-none mt-2 text-dark" id="chosen_price_div" >
                         <div class="col-2">
-                            <div class="product-description-label">{{__('Total Price')}}:</div>
+                            <div class="product-description-label">{{translate('Total Price')}}:</div>
                         </div>
                         <div class="col-10">
                             <div class="product-price">
@@ -136,7 +136,7 @@
                                 onclick="update_order_item()"
                                 type="button">
                                 <i class="tio-shopping-cart"></i>
-                            {{trans('messages.add_to_cart')}}
+                            {{translate('messages.add_to_cart')}}
                         </button>
                     </div>
                 </form>

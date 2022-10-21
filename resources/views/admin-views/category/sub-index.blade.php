@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title',__('messages.Add new sub category'))
+@section('title',translate('messages.Add new sub category'))
 
 @push('css_or_js')
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -16,7 +16,7 @@
                         <div class="card-header-icon d-inline-flex mr-2 img">
                             <img src="{{asset('public/assets/admin/img/sub-category.png')}}" alt="">
                         </div>
-                        <span>{{__('messages.sub')}} {{__('messages.category')}} {{__('messages.setup')}}</span>
+                        <span>{{translate('messages.sub')}} {{translate('messages.category')}} {{translate('messages.setup')}}</span>
                     </h1>
                 </div>
             </div>
@@ -42,10 +42,10 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="input-label"
-                                    for="parent_id">{{__('messages.main')}} {{__('messages.category')}}
+                                    for="parent_id">{{translate('messages.main')}} {{translate('messages.category')}}
                                     <span class="input-label-secondary">*</span></label>
                                 <select id="parent_id" name="parent_id" class="form-control js-select2-custom" required>
-                                    <option value="" selected disabled>Select Category</option>
+                                    <option value="" selected disabled>{{ translate('Select Category') }}</option>
                                     @foreach(\App\Models\Category::where(['position'=>0])->get() as $cat)
                                         <option value="{{$cat['id']}}" {{isset($category)?($category['parent_id']==$cat['id']?'selected':''):''}} >{{$cat['name']}}</option>
                                     @endforeach
@@ -56,15 +56,15 @@
                         <div class="col-md-6">
                         @foreach(json_decode($language) as $lang)
                                 <div class="form-group {{$lang != $default_lang ? 'd-none':''}} lang_form" id="{{$lang}}-form">
-                                    <label class="input-label" for="exampleFormControlInput1">{{__('messages.name')}} ({{strtoupper($lang)}})</label>
-                                    <input type="text" name="name[]" class="form-control" placeholder="Ex: Sub Category Name" maxlength="191" {{$lang == $default_lang? 'required':''}} oninvalid="document.getElementById('en-link').click()">
+                                    <label class="input-label" for="exampleFormControlInput1">{{translate('messages.name')}} ({{strtoupper($lang)}})</label>
+                                    <input type="text" name="name[]" class="form-control" placeholder="{{ translate('Ex: Sub Category Name') }}" maxlength="191" {{$lang == $default_lang? 'required':''}} oninvalid="document.getElementById('en-link').click()">
                                 </div>
                                 <input type="hidden" name="lang[]" value="{{$lang}}">
                         @endforeach
                     @else
                             <div class="form-group">
-                                <label class="input-label" for="exampleFormControlInput1">{{__('messages.name')}}</label>
-                                <input type="text" name="name" class="form-control" placeholder="Ex: Sub Category Name" value="{{old('name')}}" required maxlength="191">
+                                <label class="input-label" for="exampleFormControlInput1">{{translate('messages.name')}}</label>
+                                <input type="text" name="name" class="form-control" placeholder="{{ translate('Ex: Sub Category Name') }}" value="{{old('name')}}" required maxlength="191">
                             </div>
                             <input type="hidden" name="lang[]" value="{{$lang}}">
                             @endif
@@ -74,7 +74,7 @@
                                 <!-- Static Button -->
                                 <button type="reset" id="reset_btn" class="btn btn--reset">{{translate('reset')}}</button>
                                 <!-- Static Button -->
-                                <button type="submit" class="btn btn--primary">{{isset($category)?__('messages.update'):__('messages.submit')}}</button>
+                                <button type="submit" class="btn btn--primary">{{isset($category)?translate('messages.update'):translate('messages.submit')}}</button>
                             </div>
                         </div>
                     </div>
@@ -84,11 +84,11 @@
         <div class="card mt-2">
             <div class="card-header py-2 border-0">
                 <div class="search--button-wrapper">
-                    <h5 class="card-title">{{__('messages.sub_category')}} {{__('messages.list')}}<span class="badge badge-soft-dark ml-2" id="itemCount">{{$categories->total()}}</span></h5>
+                    <h5 class="card-title">{{translate('messages.sub_category')}} {{translate('messages.list')}}<span class="badge badge-soft-dark ml-2" id="itemCount">{{$categories->total()}}</span></h5>
                     <form id="dataSearch">
                         <!-- Search -->
                         <div class="input--group input-group input-group-merge input-group-flush">
-                            <input id="datatableSearch" name="search" type="search" class="form-control" placeholder="Ex : Sub Categories" aria-label="{{__('messages.search_sub_categories')}}">
+                            <input id="datatableSearch" name="search" type="search" class="form-control" placeholder="{{ translate('Ex : Sub Categories') }}" aria-label="{{translate('messages.search_sub_categories')}}">
                             <input type="hidden" name="sub_category" value="1">
                             <button type="submit" class="btn btn--secondary">
                                 <i class="tio-search"></i>
@@ -111,13 +111,13 @@
                         }'>
                         <thead class="thead-light">
                             <tr>
-                                <th>SL</th>
-                                <th>{{__('messages.id')}}</th>
-                                <th>{{__('messages.main')}} {{__('messages.category')}}</th>
-                                <th>{{__('messages.sub_category')}}</th>
-                                <th><div class="ml-3"> {{__('messages.priority')}}</div></th>
-                                <th class="w-100px">{{__('messages.status')}}</th>
-                                <th class="text-center">{{__('messages.action')}}</th>
+                                <th>{{ translate('messages.sl') }}</th>
+                                <th>{{translate('messages.id')}}</th>
+                                <th>{{translate('messages.main')}} {{translate('messages.category')}}</th>
+                                <th>{{translate('messages.sub_category')}}</th>
+                                <th><div class="ml-3"> {{translate('messages.priority')}}</div></th>
+                                <th class="w-100px">{{translate('messages.status')}}</th>
+                                <th class="text-center">{{translate('messages.action')}}</th>
                             </tr>
                         </thead>
 
@@ -139,9 +139,9 @@
                                 <td>
                                     <form action="{{route('admin.category.priority',$category->id)}}">
                                     <select name="priority" id="priority" onchange="this.form.submit()" class="form-control form--control-select {{$category->priority == 0 ? 'text--title border-dark':''}} {{$category->priority == 1 ? 'text--info border-info':''}} {{$category->priority == 2 ? 'text--success border-success':''}} ">
-                                        <option value="0" {{$category->priority == 0?'selected':''}}>{{__('messages.normal')}}</option>
-                                        <option value="1" {{$category->priority == 1?'selected':''}}>{{__('messages.medium')}}</option>
-                                        <option value="2" {{$category->priority == 2?'selected':''}}>{{__('messages.high')}}</option>
+                                        <option value="0" {{$category->priority == 0?'selected':''}}>{{translate('messages.normal')}}</option>
+                                        <option value="1" {{$category->priority == 1?'selected':''}}>{{translate('messages.medium')}}</option>
+                                        <option value="2" {{$category->priority == 2?'selected':''}}>{{translate('messages.high')}}</option>
                                     </select>
                                     </form>
                                 </td>
@@ -156,10 +156,10 @@
                                 <td>
                                     <div class="btn--container justify-content-center">
                                         <a class="btn btn-sm btn--primary btn-outline-primary action-btn"
-                                            href="{{route('admin.category.edit',[$category['id']])}}" title="{{__('messages.edit')}} {{__('messages.category')}}"><i class="tio-edit"></i>
+                                            href="{{route('admin.category.edit',[$category['id']])}}" title="{{translate('messages.edit')}} {{translate('messages.category')}}"><i class="tio-edit"></i>
                                         </a>
                                         <a class="btn btn-sm btn--danger btn-outline-danger action-btn" href="javascript:"
-                                        onclick="form_alert('category-{{$category['id']}}','Want to delete this category')" title="{{__('messages.delete')}} {{__('messages.category')}}"><i class="tio-delete-outlined"></i>
+                                        onclick="form_alert('category-{{$category['id']}}','{{ translate('Want to delete this category') }}')" title="{{translate('messages.delete')}} {{translate('messages.category')}}"><i class="tio-delete-outlined"></i>
                                         </a>
                                     </div>
                                     <form action="{{route('admin.category.delete',[$category['id']])}}" method="post" id="category-{{$category['id']}}">

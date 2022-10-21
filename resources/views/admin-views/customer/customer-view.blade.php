@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title','Customer Details')
+@section('title',translate('Customer Details'))
 
 @push('css_or_js')
 
@@ -12,21 +12,21 @@
         <div class="d-print-none pb-2">
             <div class="row align-items-center">
                 <div class="col-auto mb-2 mb-sm-0">
-                    <h1 class="page-header-title">{{__('messages.customer')}} {{__('messages.id')}} #{{$customer['id']}}</h1>
+                    <h1 class="page-header-title">{{translate('messages.customer')}} {{translate('messages.id')}} #{{$customer['id']}}</h1>
                     <span class="d-block">
-                        <i class="tio-date-range"></i> {{__('messages.joined_at')}} : {{date('d M Y '.config('timeformat'),strtotime($customer['created_at']))}}
+                        <i class="tio-date-range"></i> {{translate('messages.joined_at')}} : {{date('d M Y '.config('timeformat'),strtotime($customer['created_at']))}}
                     </span>
                 </div>
 
                 <div class="col-auto ml-auto">
                     <a class="btn btn-icon btn-sm btn-soft-secondary rounded-circle mr-1"
                        href="{{route('admin.customer.view',[$customer['id']-1])}}"
-                       data-toggle="tooltip" data-placement="top" title="Previous customer">
+                       data-toggle="tooltip" data-placement="top" title="{{ translate('Previous customer') }}">
                         <i class="tio-arrow-backward"></i>
                     </a>
                     <a class="btn btn-icon btn-sm btn-soft-secondary rounded-circle"
                        href="{{route('admin.customer.view',[$customer['id']+1])}}" data-toggle="tooltip"
-                       data-placement="top" title="Next customer">
+                       data-placement="top" title="{{ translate('Next customer') }}">
                         <i class="tio-arrow-forward"></i>
                     </a>
                 </div>
@@ -38,7 +38,7 @@
             <div class="col-lg-6 col-md-6 col-sm-6">
                 <div class="resturant-card bg--2">
                     <img class="resturant-icon" src="{{asset('/public/assets/admin/img/dashboard/1.png')}}" alt="dashboard">
-                    <div class="for-card-text font-weight-bold  text-uppercase mb-1">{{__('messages.wallet')}} {{__('messages.balance')}}</div>
+                    <div class="for-card-text font-weight-bold  text-uppercase mb-1">{{translate('messages.wallet')}} {{translate('messages.balance')}}</div>
                     <div class="for-card-count">{{$customer->wallet_balance??0}}</div>
                 </div>
             </div>
@@ -47,7 +47,7 @@
             <div class="col-lg-6 col-md-6 col-sm-6">
                 <div class="resturant-card bg--3">
                     <img class="resturant-icon" src="{{asset('/public/assets/admin/img/dashboard/3.png')}}" alt="dashboard">
-                    <div class="for-card-text font-weight-bold  text-uppercase mb-1">{{__('messages.loyalty_point')}} {{__('messages.balance')}}</div>
+                    <div class="for-card-text font-weight-bold  text-uppercase mb-1">{{translate('messages.loyalty_point')}} {{translate('messages.balance')}}</div>
                     <div class="for-card-count">{{$customer->loyalty_point??0}}</div>
                 </div>
             </div>
@@ -57,11 +57,11 @@
             <div class="col-lg-8 mb-3 mb-lg-0">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-header-title">Order List <span class="badge badge-soft-secondary">{{ count($orders) }}</span></h5>
+                        <h5 class="card-header-title">{{ translate('messages.Order List') }} <span class="badge badge-soft-secondary">{{ count($orders) }}</span></h5>
                         <div>
                             <div class="input--group input-group">
                                 <input type="text" id="column1_search" class="form-control form-control-sm"
-                                            placeholder="Ex: Search Here by ID...">
+                                            placeholder="{{ translate('Ex: Search Here by ID...') }}">
                                 <button type="button" class="btn btn--secondary">
                                     <i class="tio-search"></i>
                                 </button>
@@ -79,10 +79,10 @@
                                }'>
                             <thead class="thead-light">
                                 <tr>
-                                    <th>SL</th>
-                                    <th class="text-center w-50p">{{__('messages.order')}} {{__('messages.id')}}</th>
-                                    <th class="w-50p">{{__('messages.total')}} {{__('messages.amount')}}</th>
-                                    <th class="text-center w-100px">{{__('messages.action')}}</th>
+                                    <th>{{ translate('messages.sl') }}</th>
+                                    <th class="text-center w-50p">{{translate('messages.order')}} {{translate('messages.id')}}</th>
+                                    <th class="w-50p text-center">{{translate('messages.total')}} {{translate('messages.amount')}}</th>
+                                    <th class="text-center w-100px">{{translate('messages.action')}}</th>
                                 </tr>
                             </thead>
 
@@ -94,17 +94,17 @@
                                         <a href="{{route('admin.order.details',['id'=>$order['id']])}}">{{$order['id']}}</a>
                                     </td>
                                     <td>
-                                        <div class="text-right">
+                                        <div class="text-center">
                                             {{\App\CentralLogics\Helpers::format_currency($order['order_amount'])}}
                                         </div>
                                     </td>
                                     <td>
                                         <div class="btn--container justify-content-center">
                                         <a class="btn btn-sm btn--warning btn-outline-warning action-btn"
-                                                    href="{{route('admin.order.details',['id'=>$order['id']])}}" title="{{__('messages.view')}}"><i
+                                                    href="{{route('admin.order.details',['id'=>$order['id']])}}" title="{{translate('messages.view')}}"><i
                                                             class="tio-visible-outlined"></i></a>
                                         <a class="btn btn-sm btn--primary btn-outline-primary action-btn" target="_blank"
-                                                    href="{{route('admin.order.generate-invoice',[$order['id']])}}" title="{{__('messages.invoice')}}"><i
+                                                    href="{{route('admin.order.generate-invoice',[$order['id']])}}" title="{{translate('messages.invoice')}}"><i
                                                             class="tio-print"></i> </a>
                                         </div>
                                     </td>
@@ -179,14 +179,14 @@
                                         </li>
                                         <li class="pb-1">
                                             <i class="tio-shopping-basket-outlined mr-2"></i>
-                                            {{$customer->order_count}} {{__('messages.orders')}}
+                                            {{$customer->order_count}} {{translate('messages.orders')}}
                                         </li>
                                     </ul>
                                 </div>
                             </div>
                             <hr>
                             <div class="d-flex justify-content-between align-items-center mb-2">
-                                <h5>{{__('messages.contact')}} {{__('messages.info')}}</h5>
+                                <h5>{{translate('messages.contact')}} {{translate('messages.info')}}</h5>
                             </div>
                             @foreach($customer->addresses as $address)
                                 <ul class="list-unstyled list-unstyled-py-2">

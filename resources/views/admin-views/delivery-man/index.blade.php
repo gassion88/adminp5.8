@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title', 'Add new delivery-man')
+@section('title', translate('messages.add_delivery_man'))
 
 @push('css_or_js')
     <link rel="stylesheet" href="{{asset('/public/assets/admin/css/intlTelInput.css')}}" />
@@ -41,7 +41,7 @@
                                             for="exampleFormControlInput1">{{ translate('messages.first') }}
                                             {{ translate('messages.name') }}</label>
                                         <input type="text" name="f_name" class="form-control h--45px"
-                                            placeholder="Ex: Jhone" required>
+                                            placeholder="{{ translate('Ex: Jhone') }}" required>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
@@ -50,7 +50,7 @@
                                             for="exampleFormControlInput1">{{ translate('messages.last') }}
                                             {{ translate('messages.name') }}</label>
                                         <input type="text" name="l_name" class="form-control h--45px"
-                                            placeholder="Ex: Joe" required>
+                                            placeholder="{{ translate('Ex: Joe') }}" required>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
@@ -58,7 +58,7 @@
                                         <label class="input-label"
                                             for="exampleFormControlInput1">{{ translate('messages.email') }}</label>
                                         <input type="email" name="email" class="form-control h--45px"
-                                            placeholder="Ex : ex@example.com" required>
+                                            placeholder="{{ translate('Ex : ex@example.com') }}" required>
                                     </div>
                                 </div>
 
@@ -68,7 +68,7 @@
                                             for="exampleFormControlInput1">{{ translate('messages.zone') }}</label>
                                         <select name="zone_id" class="form-control h--45px" required
                                             data-placeholder="{{ translate('messages.select') }} {{ translate('messages.zone') }}">
-                                            <option value="" readonly="true" hidden="true">Ex: XYZ Zone</option>
+                                            <option value="" readonly="true" hidden="true">{{ translate('Ex: XYZ Zone') }}</option>
                                             @foreach (\App\Models\Zone::all() as $zone)
                                                 @if (isset(auth('admin')->user()->zone_id))
                                                     @if (auth('admin')->user()->zone_id == $zone->id)
@@ -89,7 +89,7 @@
                                             for="exampleFormControlInput1">{{ translate('messages.deliveryman') }}
                                             {{ translate('messages.type') }}</label>
                                         <select name="earning" class="form-control h--45px">
-                                            <option value="" readonly="true" hidden="true">Select Delivery Man Type</option>
+                                            <option value="" readonly="true" hidden="true">{{ translate('messages.delivery_man_type') }}</option>
                                             <option value="1">{{ translate('messages.freelancer') }}</option>
                                             <option value="0">{{ translate('messages.salary_based') }}</option>
                                         </select>
@@ -99,7 +99,7 @@
                         </div>
                         <div class="col-lg-4">
                             <div class="form-group m-0">
-                                <label class="d-block mb-lg-5 text-center">{{ translate('messages.delivery_man_image') }} <small class="text-danger">* ( {{ translate('messages.ratio') }} 100x100 )</small></label>
+                                <label class="d-block mb-lg-5 text-center">{{ translate('messages.delivery_man_image') }} <small class="text-danger">* ( {{ translate('messages.ratio') }} {{ translate('100x100') }} )</small></label>
                                 <center>
                                     <img class="initial-24" id="viewer"
                                         src="{{ asset('public/assets/admin/img/100x100/user.png') }}"
@@ -136,7 +136,7 @@
                                             for="exampleFormControlInput1">{{ translate('messages.identity') }}
                                             {{ translate('messages.number') }}</label>
                                         <input type="text" name="identity_number" class="form-control h--45px"
-                                            placeholder="Ex : DH-23434-LS" required>
+                                            placeholder="{{ translate('Ex : DH-23434-LS') }}" required>
                                     </div>
                                 </div>
                             </div>
@@ -168,7 +168,7 @@
                             <div class="form-group m-0">
                                 <label class="input-label" for="phone">{{ translate('messages.phone') }}</label>
                                 <div class="input-group">
-                                    <input type="tel" name="phone" id="phone" placeholder="Ex : 017********"
+                                    <input type="tel" name="phone" id="phone" placeholder="{{ translate('Ex : 017********') }}"
                                         class="form-control h--45px" required>
                                 </div>
                             </div>
@@ -177,7 +177,7 @@
                             <div class="form-group m-0">
                                 <label class="input-label"
                                     for="exampleFormControlInput1">{{ translate('messages.password') }}</label>
-                                <input type="text" name="password" class="form-control h--45px" placeholder="Ex: 5+ Character"
+                                <input type="text" name="password" class="form-control h--45px" placeholder="{{ translate('Ex: 5+ Character') }}"
                                     required>
                             </div>
                         </div>
@@ -185,8 +185,8 @@
                         <div class="col-md-4">
                             <div class="form-group m-0">
                                 <label class="input-label"
-                                for="exampleFormControlInput1">Confirm {{ translate('messages.password') }}</label>
-                                <input type="text" name="password" class="form-control h--45px" placeholder="Ex: 5+ Character"
+                                for="exampleFormControlInput1">{{ translate('messages.confirm_password') }}</label>
+                                <input type="text" name="password" class="form-control h--45px" placeholder="{{ translate('Ex: 5+ Character') }}"
                                 required>
                             </div>
                         </div>

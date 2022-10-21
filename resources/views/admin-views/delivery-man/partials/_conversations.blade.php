@@ -19,7 +19,7 @@
     <div class="card-body">
         <div class="scroll-down">
             @foreach($convs as $con)
-                @if($con->sender_id == $receiver->id)
+                @if($con->sender_id == $user->id)
                     <div class="pt1 pb-1">
                         <div class="conv-reply-1">
                             <h6>{{$con->message}}</h6>

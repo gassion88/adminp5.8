@@ -1,10 +1,3 @@
-<style>
-    div.scroll-down {
-        max-height: 300px;
-        overflow-y: scroll;
-    }
-
-</style>
 <div class="card h-100">
     <!-- Header -->
     <div class="card-header">
@@ -26,14 +19,14 @@
     <div class="card-body">
         <div class="scroll-down">
             @foreach($convs as $con)
-                @if($con->sender_id == $receiver->id)
+                @if($con->sender_id == $user->id)
                     <div class="pt1 pb-1">
                         <div class="conv-reply-1">
                             <h6>{{$con->message}}</h6>
                             @if($con->file!=null)
                             @foreach (json_decode($con->file) as $img)
                             <br>
-                                <img style="width:100%"
+                                <img class="w-100"
                                 src="{{asset('storage/app/public/conversation').'/'.$img}}">
                                 @endforeach
                             @endif
@@ -49,7 +42,7 @@
                             @if($con->file!=null)
                             @foreach (json_decode($con->file) as $img)
                             <br>
-                                <img style="width:100%"
+                                <img class="w-100"
                                 src="{{asset('storage/app/public/conversation').'/'.$img}}">
                                 @endforeach
                             @endif
@@ -72,7 +65,7 @@
             <div class="quill-custom_">
                 <textarea class="form-control" name="reply"></textarea>
                 <button type="submit" onclick="replyConvs('{{route('admin.message.store',[$user->id])}}')"
-                        class="btn btn-primary btn--primary con-reply-btn">{{__('messages.send')}} {{__('messages.reply')}}
+                        class="btn btn-primary btn--primary con-reply-btn">{{translate('messages.send')}} {{translate('messages.reply')}}
                 </button>
             </div>
         </form>

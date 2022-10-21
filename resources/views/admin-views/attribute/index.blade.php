@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title',__('messages.attributes'))
+@section('title',translate('messages.attributes'))
 
 @push('css_or_js')
 
@@ -12,7 +12,7 @@
         <div class="page-header">
             <div class="row align-items-center">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <h1 class="page-header-title">{{__('messages.attribute')}} {{__('messages.setup')}}</h1>
+                    <h1 class="page-header-title">{{translate('messages.attribute')}} {{translate('messages.setup')}}</h1>
                 </div>
             </div>
         </div>
@@ -26,14 +26,14 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="form-group">
-                                    <label class="input-label text--black" for="exampleFormControlInput1">{{ translate('Attribute') }} {{__('messages.name')}}</label>
-                                        <input type="text" name="name" class="form-control h--45px" placeholder="Ex: Attribute Name" maxlength="191" required>
+                                    <label class="input-label text--black" for="exampleFormControlInput1">{{ translate('Attribute') }} {{translate('messages.name')}}</label>
+                                        <input type="text" name="name" class="form-control h--45px" placeholder="{{ translate('Ex: Attribute Name') }}" maxlength="191" required>
                                     </div>
                                 </div>
                             </div>
                             <div class="btn--container justify-content-end">
-                                <button type="reset" class="btn btn--reset">{{__('messages.reset')}}</button>
-                                <button type="submit" class="btn btn--primary">{{__('messages.submit')}}</button>
+                                <button type="reset" class="btn btn--reset">{{translate('messages.reset')}}</button>
+                                <button type="submit" class="btn btn--primary">{{translate('messages.submit')}}</button>
                             </div>
                         </form>
                     </div>
@@ -44,13 +44,13 @@
                 <div class="card">
                     <div class="card-header py-2 border-0">
                         <div class="search--button-wrapper">
-                            <h5 class="card-title">{{__('messages.attribute')}} {{__('messages.list')}}<span class="badge badge-soft-dark ml-2" id="itemCount">{{$attributes->total()}}</span></h5>
+                            <h5 class="card-title">{{translate('messages.attribute')}} {{translate('messages.list')}}<span class="badge badge-soft-dark ml-2" id="itemCount">{{$attributes->total()}}</span></h5>
                             <form action="javascript:" id="search-form" >
                                             <!-- Search -->
                                             @csrf
                                 <div class="input--group input-group input-group-merge input-group-flush">
                                     <input id="datatableSearch_" type="search" name="search" class="form-control"
-                                            placeholder="Ex : Search by name... " aria-label="Search" required>
+                                            placeholder="{{ translate('messages.Search_by_name') }}" aria-label="Search" required>
                                     <button type="submit" class="btn btn--secondary">
                                         <i class="tio-search"></i>
                                     </button>
@@ -63,43 +63,43 @@
                                         "target": "#usersExportDropdown",
                                         "type": "css-animation"
                                     }'>
-                                    <i class="tio-download-to mr-1"></i> {{__('messages.export')}}
+                                    <i class="tio-download-to mr-1"></i> {{translate('messages.export')}}
                                 </a>
 
                                 <div id="usersExportDropdown"
                                         class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-sm-right">
-                                    {{--<span class="dropdown-header">{{__('messages.options')}}</span>
+                                    {{--<span class="dropdown-header">{{translate('messages.options')}}</span>
                                     <a id="export-copy" class="dropdown-item" href="javascript:;">
                                         <img class="avatar avatar-xss avatar-4by3 mr-2"
                                                 src="{{asset('public/assets/admin')}}/svg/illustrations/copy.svg"
                                                 alt="Image Description">
-                                        {{__('messages.copy')}}
+                                        {{translate('messages.copy')}}
                                     </a>
                                     <a id="export-print" class="dropdown-item" href="javascript:;">
                                         <img class="avatar avatar-xss avatar-4by3 mr-2"
                                                 src="{{asset('public/assets/admin')}}/svg/illustrations/print.svg"
                                                 alt="Image Description">
-                                        {{__('messages.print')}}
+                                        {{translate('messages.print')}}
                                     </a>
                                     <div class="dropdown-divider"></div>--}}
-                                    <span class="dropdown-header">{{__('messages.download')}} {{__('messages.options')}}</span>
+                                    <span class="dropdown-header">{{translate('messages.download')}} {{translate('messages.options')}}</span>
                                     <a id="export-excel" class="dropdown-item" href="{{route('admin.attribute.export-attributes', ['type'=>'excel'])}}">
                                         <img class="avatar avatar-xss avatar-4by3 mr-2"
                                                 src="{{asset('public/assets/admin')}}/svg/components/excel.svg"
                                                 alt="Image Description">
-                                        {{__('messages.excel')}}
+                                        {{translate('messages.excel')}}
                                     </a>
                                     <a id="export-csv" class="dropdown-item" href="{{route('admin.attribute.export-attributes', ['type'=>'excel'])}}">
                                         <img class="avatar avatar-xss avatar-4by3 mr-2"
                                                 src="{{asset('public/assets/admin')}}/svg/components/placeholder-csv-format.svg"
                                                 alt="Image Description">
-                                        .{{__('messages.csv')}}
+                                        .{{translate('messages.csv')}}
                                     </a>
                                     {{--<a id="export-pdf" class="dropdown-item" href="javascript:;">
                                         <img class="avatar avatar-xss avatar-4by3 mr-2"
                                                 src="{{asset('public/assets/admin')}}/svg/components/pdf.svg"
                                                 alt="Image Description">
-                                        {{__('messages.pdf')}}
+                                        {{translate('messages.pdf')}}
                                     </a>--}}
                                 </div>
                             </div>
@@ -116,9 +116,9 @@
                                }'>
                             <thead class="thead-light">
                             <tr>
-                                <th class="w-20p">SL</th>
-                                <th class="w-50p">{{__('messages.name')}}</th>
-                                <th class="w-20p">{{__('messages.action')}}</th>
+                                <th class="w-20p">{{ translate('messages.sl') }}</th>
+                                <th class="w-50p">{{translate('messages.name')}}</th>
+                                <th class="w-20p">{{translate('messages.action')}}</th>
                             </tr>
 
                             </thead>
@@ -138,9 +138,9 @@
                                     </td>
                                     <td>
                                         <div class="btn--container justify-content-center">
-                                            <a class="btn btn-sm btn--primary btn-outline-primary action-btn" href="{{route('admin.attribute.edit',[$attribute['id']])}}" title="{{__('messages.edit')}}"><i class="tio-edit"></i>
+                                            <a class="btn btn-sm btn--primary btn-outline-primary action-btn" href="{{route('admin.attribute.edit',[$attribute['id']])}}" title="{{translate('messages.edit')}}"><i class="tio-edit"></i>
                                             </a>
-                                            <a class="btn btn-sm btn--danger btn-outline-danger action-btn" href="javascript:" onclick="form_alert('attribute-{{$attribute['id']}}','Want to delete this attribute ?')" title="{{__('messages.delete')}}"><i class="tio-delete-outlined"></i>
+                                            <a class="btn btn-sm btn--danger btn-outline-danger action-btn" href="javascript:" onclick="form_alert('attribute-{{$attribute['id']}}','{{ translate('Want to delete this attribute ?') }}')" title="{{translate('messages.delete')}}"><i class="tio-delete-outlined"></i>
                                             </a>
                                             <form action="{{route('admin.attribute.delete',[$attribute['id']])}}"
                                                     method="post" id="attribute-{{$attribute['id']}}">

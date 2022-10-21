@@ -17,7 +17,8 @@ class SslCommerzPaymentController extends Controller
 {
     public function index(Request $request)
     {
-        $order = Order::with(['details'])->where(['id' => session('order_id')])->first();
+
+        $order = Order::with(['details'])->where(['id' => $request->order_id])->first();
         $tr_ref = Str::random(6) . '-' . rand(1, 1000);
 
         $post_data = array();
@@ -72,11 +73,11 @@ class SslCommerzPaymentController extends Controller
             $sslc = new SslCommerzNotification();
             $payment_options = $sslc->makePayment($post_data, 'hosted');
             if (!is_array($payment_options)) {
-                Toastr::error(trans('messages.your_currency_is_not_supported',['method'=>trans('messages.sslcommerz')]));
+                Toastr::error(translate('messages.your_currency_is_not_supported',['method'=>translate('messages.sslcommerz')]));
                 return back();
             }
         } catch (\Exception $exception) {
-            Toastr::error(trans('messages.misconfiguration_or_data_missing'));
+            Toastr::error(translate('messages.misconfiguration_or_data_missing'));
             return back();
         }
     }

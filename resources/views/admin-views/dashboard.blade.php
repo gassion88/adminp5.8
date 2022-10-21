@@ -2,27 +2,6 @@
 
 @section('title',\App\Models\BusinessSetting::where(['key'=>'business_name'])->first()->value??'Dashboard')
 
-@push('css_or_js')
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <style>
-        .grid-card {
-            border: 2px solid #00000012;
-            border-radius: 10px;
-            padding: 10px;
-        }
-
-        .label_1 {
-            position: absolute;
-            font-size: 10px;
-            background: #865439;
-            color: #ffffff;
-            width: 60px;
-            padding: 2px;
-            font-weight: bold;
-            border-radius: 6px;
-        }
-    </style>
-@endpush
 
 @section('content')
     <div class="content container-fluid">
@@ -31,8 +10,8 @@
         <div class="page-header">
             <div class="d-flex flex-wrap justify-content-between align-items-center">
                 <div class="page--header-title">
-                    <h1 class="page-header-title">{{__('messages.welcome')}}, {{auth('admin')->user()->f_name}}.</h1>
-                    <p class="page-header-text">{{__('messages.welcome_message')}}</p>
+                    <h1 class="page-header-title">{{translate('messages.welcome')}}, {{auth('admin')->user()->f_name}}.</h1>
+                    <p class="page-header-text">{{translate('messages.welcome_message')}}</p>
                 </div>
 
                 <div class="page--header-select">
@@ -104,11 +83,11 @@
                                         onchange="user_overview_stats_update(this.value)">
                                     <option
                                         value="this_month" {{$params['user_overview'] == 'this_month'?'selected':''}}>
-                                        {{__('This month')}}
+                                        {{translate('This month')}}
                                     </option>
                                     <option
                                         value="overall" {{$params['user_overview'] == 'overall'?'selected':''}}>
-                                        {{__('messages.Overall')}}
+                                        {{translate('messages.Overall')}}
                                     </option>
                                 </select>
                             </div>
@@ -121,19 +100,19 @@
                         </div>
                         <div class="d-flex flex-wrap justify-content-center mt-4 pt-xl-5">
                             <div class="chart--label">
-                                <span class="indicator" style="background: #FFC960"></span>
+                                <span class="indicator bg-FFC960"></span>
                                 <span class="info">
-                                    {{__('messages.customer')}}
+                                    {{translate('messages.customer')}}
                                 </span>
                             </div>
                             <div class="chart--label">
-                                <span class="indicator" style="background: #0661CB"></span>
+                                <span class="indicator bg-0661CB"></span>
                                 <span class="info">
-                                    {{__('messages.restaurant')}}
+                                    {{translate('messages.restaurant')}}
                                 </span>
                             </div>
                             <div class="chart--label">
-                                <span class="indicator" style="background: #7ECAFF"></span>
+                                <span class="indicator bg-7ECAFF"></span>
                                 <span class="info">
                                     {{ translate('messages.delivery_man')}}
                                 </span>
@@ -192,8 +171,8 @@
         <div class="page-header">
             <div class="row align-items-center">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <h1 class="page-header-title">{{__('messages.welcome')}}, {{auth('admin')->user()->f_name}}.</h1>
-                    <p class="page-header-text">{{__('messages.employee_welcome_message')}}</p>
+                    <h1 class="page-header-title">{{translate('messages.welcome')}}, {{auth('admin')->user()->f_name}}.</h1>
+                    <p class="page-header-text">{{translate('messages.employee_welcome_message')}}</p>
                 </div>
             </div>
         </div>
@@ -239,8 +218,8 @@
                     hoverOffset: 3
                 }],
                 labels: [
-                    '{{__('messages.customer')}}',
-                    '{{__('messages.restaurant')}}',
+                    '{{translate('messages.customer')}}',
+                    '{{translate('messages.restaurant')}}',
                     '{{ translate('messages.delivery_man')}}'
                 ],
             },

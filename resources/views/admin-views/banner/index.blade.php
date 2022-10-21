@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title','Banner')
+@section('title',translate('Banner'))
 
 
 @section('content')
@@ -9,7 +9,7 @@
         <div class="page-header">
             <div class="row align-items-center">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <h1 class="page-header-title"><i class="tio-add-circle-outlined"></i> {{__('messages.add')}} {{__('messages.new')}} {{__('messages.banner')}}</h1>
+                    <h1 class="page-header-title"><i class="tio-add-circle-outlined"></i> {{translate('messages.add')}} {{translate('messages.new')}} {{translate('messages.banner')}}</h1>
                 </div>
             </div>
         </div>
@@ -23,13 +23,13 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="input-label" for="exampleFormControlInput1">{{__('messages.title')}}</label>
-                                        <input type="text" name="title" class="form-control" placeholder="{{__('messages.new_banner')}}" required>
+                                        <label class="input-label" for="exampleFormControlInput1">{{translate('messages.title')}}</label>
+                                        <input type="text" name="title" class="form-control" placeholder="{{translate('messages.new_banner')}}" required>
                                     </div>
                                     <div class="form-group">
-                                        <label class="input-label" for="title">{{__('messages.zone')}}</label>
+                                        <label class="input-label" for="title">{{translate('messages.zone')}}</label>
                                         <select name="zone_id" id="zone" class="form-control js-select2-custom" onchange="getRequest('{{url('/')}}/admin/food/get-foods?zone_id='+this.value,'choice_item')">
-                                            <option disabled selected value="">---{{__('messages.select')}}---</option>
+                                            <option disabled selected value="">---{{translate('messages.select')}}---</option>
                                             @php($zones=\App\Models\Zone::active()->get())
                                             @foreach($zones as $zone)
                                                 @if(isset(auth('admin')->user()->zone_id))
@@ -43,22 +43,22 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label class="input-label" for="exampleFormControlInput1">{{__('messages.banner')}} {{__('messages.type')}}</label>
+                                        <label class="input-label" for="exampleFormControlInput1">{{translate('messages.banner')}} {{translate('messages.type')}}</label>
                                         <select name="banner_type" id="banner_type" class="form-control" onchange="banner_type_change(this.value)">
-                                            <option value="restaurant_wise">{{__('messages.restaurant')}} {{__('messages.wise')}}</option>
-                                            <option value="item_wise">{{__('messages.food')}} {{__('messages.wise')}}</option>
+                                            <option value="restaurant_wise">{{translate('messages.restaurant')}} {{translate('messages.wise')}}</option>
+                                            <option value="item_wise">{{translate('messages.food')}} {{translate('messages.wise')}}</option>
                                         </select>
                                     </div>
                                     <div class="form-group" id="restaurant_wise">
-                                        <label class="input-label" for="exampleFormControlSelect1">{{__('messages.restaurant')}}<span
+                                        <label class="input-label" for="exampleFormControlSelect1">{{translate('messages.restaurant')}}<span
                                                 class="input-label-secondary"></span></label>
                                         <select name="restaurant_id" class="js-data-example-ajax form-control"  title="Select Restaurant">
                                             <option selected disabled>{{ translate('Select') }}</option>
                                         </select>
                                     </div>
                                     <div class="form-group" id="item_wise">
-                                        <label class="input-label" for="exampleFormControlInput1">{{__('messages.select')}} {{__('messages.food')}}</label>
-                                        <select name="item_id" id="choice_item" class="form-control js-select2-custom" placeholder="{{__('messages.select_food')}}">
+                                        <label class="input-label" for="exampleFormControlInput1">{{translate('messages.select')}} {{translate('messages.food')}}</label>
+                                        <select name="item_id" id="choice_item" class="form-control js-select2-custom" placeholder="{{translate('messages.select_food')}}">
                                             <option selected disabled>{{ translate('Select Restaurant') }}</option>
                                         </select>
                                     </div>
@@ -66,7 +66,7 @@
                                 <div class="col-md-6">
                                     <div class="h-100 d-flex flex-column justify-content-center">
                                         <div class="form-group mt-auto">
-                                            <label class="d-block text-center">{{__('messages.campaign')}} {{__('messages.image')}} <small class="text-danger">* ( {{__('messages.ratio')}} 1000x300 )</small></label>
+                                            <label class="d-block text-center">{{translate('messages.campaign')}} {{translate('messages.image')}} <small class="text-danger">* ( {{translate('messages.ratio')}} 1000x300 )</small></label>
                                         </div>
                                         <div class="form-group mt-auto">
                                             <center>
@@ -78,15 +78,15 @@
                                             <div class="custom-file">
                                                 <input type="file" name="image" id="customFileEg1" class="custom-file-input"
                                                     accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" required>
-                                                <label class="custom-file-label" for="customFileEg1">{{__('messages.choose')}} {{__('messages.file')}}</label>
+                                                <label class="custom-file-label" for="customFileEg1">{{translate('messages.choose')}} {{translate('messages.file')}}</label>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="btn--container justify-content-end">
-                                <button id="reset_btn" type="reset" class="btn btn--reset">{{__('messages.reset')}}</button>
-                                <button type="submit" class="btn btn--primary">{{__('messages.submit')}}</button>
+                                <button id="reset_btn" type="reset" class="btn btn--reset">{{translate('messages.reset')}}</button>
+                                <button type="submit" class="btn btn--primary">{{translate('messages.submit')}}</button>
                             </div>
                         </form>
                     </div>
@@ -97,12 +97,12 @@
             <div class="col-sm-12 col-lg-12 mb-3 mb-lg-2">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-title">{{__('messages.banner')}} {{__('messages.list')}}<span class="badge badge-soft-dark ml-2" id="itemCount">{{$banners->count()}}</span></h5>
+                        <h5 class="card-title">{{translate('messages.banner')}} {{translate('messages.list')}}<span class="badge badge-soft-dark ml-2" id="itemCount">{{$banners->count()}}</span></h5>
                         <form id="search-form">
                             @csrf
                             <!-- Search -->
                             <div class="input--group input-group input-group-merge input-group-flush">
-                                <input id="datatableSearch" type="search" name="search" class="form-control" placeholder="Ex : Search by title ..." aria-label="{{__('messages.search_here')}}">
+                                <input id="datatableSearch" type="search" name="search" class="form-control" placeholder="{{ translate('Ex : Search by title ...') }}" aria-label="{{translate('messages.search_here')}}">
                                 <button type="submit" class="btn btn--secondary">
                                     <i class="tio-search"></i>
                                 </button>
@@ -125,11 +125,11 @@
                                }'>
                             <thead class="thead-light">
                                 <tr>
-                                    <th>SL</th>
-                                    <th>{{__('messages.title')}}</th>
-                                    <th>{{__('messages.type')}}</th>
-                                    <th>{{__('messages.status')}}</th>
-                                    <th class="text-center">{{__('messages.action')}}</th>
+                                    <th>{{ translate('messages.sl') }}</th>
+                                    <th>{{translate('messages.title')}}</th>
+                                    <th>{{translate('messages.type')}}</th>
+                                    <th>{{translate('messages.status')}}</th>
+                                    <th class="text-center">{{translate('messages.action')}}</th>
                                 </tr>
                             </thead>
 
@@ -149,7 +149,7 @@
 
                                     </span>
                                     </td>
-                                    <td>{{__('messages.'.$banner['type'])}}</td>
+                                    <td>{{translate('messages.'.$banner['type'])}}</td>
                                     <td>
                                         <label class="toggle-switch toggle-switch-sm" for="statusCheckbox{{$banner->id}}">
                                             <input type="checkbox" onclick="location.href='{{route('admin.banner.status',[$banner['id'],$banner->status?0:1])}}'" class="toggle-switch-input" id="statusCheckbox{{$banner->id}}" {{$banner->status?'checked':''}}>
@@ -160,9 +160,9 @@
                                     </td>
                                     <td>
                                         <div class="btn--container justify-content-center">
-                                            <a class="btn btn-sm btn--primary btn-outline-primary action-btn" href="{{route('admin.banner.edit',[$banner['id']])}}"title="{{__('messages.edit')}} {{__('messages.banner')}}"><i class="tio-edit"></i>
+                                            <a class="btn btn-sm btn--primary btn-outline-primary action-btn" href="{{route('admin.banner.edit',[$banner['id']])}}"title="{{translate('messages.edit')}} {{translate('messages.banner')}}"><i class="tio-edit"></i>
                                             </a>
-                                            <a class="btn btn-sm btn--danger btn-outline-danger action-btn" href="javascript:" onclick="form_alert('banner-{{$banner['id']}}','Want to delete this banner ?')" title="{{__('messages.delete')}} {{__('messages.banner')}}"><i class="tio-delete-outlined"></i>
+                                            <a class="btn btn-sm btn--danger btn-outline-danger action-btn" href="javascript:" onclick="form_alert('banner-{{$banner['id']}}','{{translate('Want to delete this banner')}}')" title="{{translate('messages.delete')}} {{translate('messages.banner')}}"><i class="tio-delete-outlined"></i>
                                             </a>
                                             <form action="{{route('admin.banner.delete',[$banner['id']])}}"
                                                         method="post" id="banner-{{$banner['id']}}">
@@ -290,8 +290,8 @@
                 },
                 language: {
                     zeroRecords: '<div class="text-center p-4">' +
-                    '<img class="mb-3" src="{{asset('public/assets/admin/svg/illustrations/sorry.svg')}}" alt="Image Description" style="width: 7rem;">' +
-                    '<p class="mb-0">No data to show</p>' +
+                    '<img class="w-7rem mb-3" src="{{asset('public/assets/admin/svg/illustrations/sorry.svg')}}" alt="Image Description">' +
+                    '<p class="mb-0">{{ translate('No data to show') }}</p>' +
                     '</div>'
                 }
             });
@@ -359,7 +359,7 @@
                             });
                         }
                     } else {
-                        toastr.success('Banner uploaded successfully!', {
+                        toastr.success('{{ translate('Banner uploaded successfully!') }}', {
                             CloseButton: true,
                             ProgressBar: true
                         });

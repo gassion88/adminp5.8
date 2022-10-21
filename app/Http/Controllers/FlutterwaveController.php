@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\BusinessSetting;
 use App\CentralLogics\Helpers;
+use Illuminate\Http\Request;
 use KingFlamez\Rave\Facades\Rave as Flutterwave;
 
 class FlutterwaveController extends Controller
@@ -13,12 +14,12 @@ class FlutterwaveController extends Controller
      * Initialize Rave payment process
      * @return void
      */
-    public function initialize()
+    public function initialize(Request $request)
     {
         //This generates a payment reference
         $reference = Flutterwave::generateReference();
-        $order = Order::with(['details'])->where(['id' => session('order_id'), 'user_id'=>session('customer_id')])->first();
-        $user_data = session('data');
+        $order = Order::with(['details','customer'])->where(['id' => $request->order_id, 'user_id'=>$request->customer_id])->first();
+        $user_data = $order->customer;
         // Enter the details of the payment
         $data = [
             'payment_options' => 'card,banktransfer',
@@ -26,11 +27,11 @@ class FlutterwaveController extends Controller
             'email' => $user_data['email'],
             'tx_ref' => $reference,
             'currency' => Helpers::currency_code(),
-            'redirect_url' => route('flutterwave_callback'),
+            'redirect_url' => route('flutterwave_callback',['order_id'=>$order->id]),
             'customer' => [
                 'email' => $user_data['email'],
                 "phone_number" => $user_data['phone'],
-                "name" => $user_data['name']
+                "name" => $user_data['f_name'].''.$user_data['l_name']
             ],
 
             "customizations" => [
@@ -59,17 +60,20 @@ class FlutterwaveController extends Controller
      * Obtain Rave callback information
      * @return void
      */
-    public function callback()
+    public function callback(Request $request, $order_id)
     {
-        
-        $status = request()->status;
-        $order = Order::with(['details'])->where(['id' => session('order_id'), 'user_id'=>session('customer_id')])->first();
-        //if payment is successful
-        if ($status ==  'successful') {
-        
+        $order = Order::with(['details'])->where(['id' => $order_id])->first();
+        //Payment successful response
+        // array (
+        //     'status' => 'completed',
+        //     'tx_ref' => 'flw_166339765163256f133120d',
+        //     'transaction_id' => '716320049',
+        // )
+        if (in_array($request->status, ['successful','completed'])) {
+
             $transactionID = Flutterwave::getTransactionIDFromCallback();
             $data = Flutterwave::verifyTransaction($transactionID);
-            
+
             try {
                 $order->transaction_reference = $transactionID;
                 $order->payment_method = 'flutterwave';
@@ -79,6 +83,7 @@ class FlutterwaveController extends Controller
                 $order->save();
                 Helpers::send_order_notification($order);
             } catch (\Exception $e) {
+                info($e->getMessage());
             }
 
             if ($order->callback != null) {

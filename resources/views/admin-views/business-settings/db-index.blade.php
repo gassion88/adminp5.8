@@ -20,7 +20,7 @@
         </div>
         <!-- End Page Header -->
         <div class="alert alert--danger alert-danger mb-2" role="alert">
-            <span class="alert--icon"><i class="tio-info"></i></span> <strong>NOTE: </strong>{{translate('This_page_contains_sensitive_information.Please_make_sure_before_click_the_button.')}}
+            <span class="alert--icon"><i class="tio-info"></i></span> <strong>{{ translate('messages.note') }}: </strong>{{translate('This_page_contains_sensitive_information.Please_make_sure_before_click_the_button.')}}
         </div>
         <div class="card">
             <div class="card-body pt-2">
@@ -55,7 +55,7 @@
     var restaurant_dependent = ['restaurants','restaurant_schedule', 'discounts'];
     var order_dependent = ['order_delivery_histories','d_m_reviews', 'delivery_histories', 'track_deliverymen', 'order_details', 'reviews'];
     var zone_dependent = ['restaurants','vendors', 'orders'];
-    var user_info_dependent = ['conversations', 'messages'];    
+    var user_info_dependent = ['conversations', 'messages'];
     $(document).ready(function () {
         $('.form-check-input').on('change', function(event){
             if($(this).is(':checked')){
@@ -111,7 +111,7 @@
             $('#'+value).prop('checked', status);
         });
         $('#vendors').prop('checked', status);
-        
+
     }
 
     function checked_orders(status) {

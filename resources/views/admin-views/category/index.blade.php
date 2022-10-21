@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title',__('messages.Add new category'))
+@section('title',translate('messages.Add new category'))
 
 @push('css_or_js')
 
@@ -17,12 +17,12 @@
                             <img src="{{asset('public/assets/admin/img/category.png')}}" alt="">
                         </div>
                         <span>
-                            {{__('Category')}}
+                            {{translate('Category')}}
                         </span>
                     </h2>
                 </div>
                 @if(isset($category))
-                <a href="{{route('admin.category.add')}}" class="btn btn--primary pull-right"><i class="tio-add-circle"></i> {{__('messages.add')}} {{__('messages.new')}} {{__('messages.category')}}</a>
+                <a href="{{route('admin.category.add')}}" class="btn btn--primary pull-right"><i class="tio-add-circle"></i> {{translate('messages.add')}} {{translate('messages.new')}} {{translate('messages.category')}}</a>
                 @endif
             </div>
         </div>
@@ -48,20 +48,20 @@
                     @if ($language)
                         @foreach(json_decode($language) as $lang)
                             <div class="form-group {{$lang != $default_lang ? 'd-none':''}} lang_form" id="{{$lang}}-form">
-                                <label class="input-label" for="exampleFormControlInput1">{{__('messages.name')}} ({{strtoupper($lang)}})</label>
-                                <input id="name" type="text" name="name[]" class="form-control" placeholder="Ex: Category Name" maxlength="191" {{$lang == $default_lang? 'required':''}} oninvalid="document.getElementById('en-link').click()">
+                                <label class="input-label" for="exampleFormControlInput1">{{translate('messages.name')}} ({{strtoupper($lang)}})</label>
+                                <input id="name" type="text" name="name[]" class="form-control" placeholder="{{ translate('Ex: Category Name') }}" maxlength="191" {{$lang == $default_lang? 'required':''}} oninvalid="document.getElementById('en-link').click()">
                             </div>
                             <input type="hidden" name="lang[]" value="{{$lang}}">
                         @endforeach
                     @else
                         <div class="form-group">
-                            <label class="input-label" for="exampleFormControlInput1">{{__('messages.name')}}</label>
-                            <input type="text" name="name" class="form-control" placeholder="Ex: Category Name" value="{{old('name')}}" required maxlength="191">
+                            <label class="input-label" for="exampleFormControlInput1">{{translate('messages.name')}}</label>
+                            <input type="text" name="name" class="form-control" placeholder="{{ translate('Ex: Category Name') }}" value="{{old('name')}}" required maxlength="191">
                         </div>
                         <input type="hidden" name="lang[]" value="{{$lang}}">
                     @endif
                     <!-- <div class="form-group">
-                        <label class="input-label" for="exampleFormControlInput1">{{__('messages.name')}}</label>
+                        <label class="input-label" for="exampleFormControlInput1">{{translate('messages.name')}}</label>
                         <input type="text" name="name" value="{{isset($category)?$category['name']:''}}" class="form-control" placeholder="New Category" required>
                     </div> -->
                     <input name="position" value="0" type="hidden">
@@ -79,11 +79,11 @@
                                 </center>
                             </div>
                             <div class="form-group mt-2">
-                                <label>{{__('messages.image')}}</label><small class="text-danger">* ( {{__('messages.ratio')}} 1:1)</small>
+                                <label>{{translate('messages.image')}}</label><small class="text-danger">* ( {{translate('messages.ratio')}} 1:1)</small>
                                 <div class="custom-file">
                                     <input type="file" name="image" id="customFileEg1" class="custom-file-input"
                                         accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" required>
-                                    <label class="custom-file-label" for="customFileEg1">{{__('messages.choose')}} {{__('messages.file')}}</label>
+                                    <label class="custom-file-label" for="customFileEg1">{{translate('messages.choose')}} {{translate('messages.file')}}</label>
                                 </div>
                             </div>
                         </div>
@@ -93,7 +93,7 @@
                                 <!-- Static Button -->
                                 <button id="reset_btn" type="reset" class="btn btn--reset">{{translate('messages.reset')}}</button>
                                 <!-- Static Button -->
-                                <button type="submit" class="btn btn--primary">{{isset($category)?__('messages.update'):__('messages.submit')}}</button>
+                                <button type="submit" class="btn btn--primary">{{isset($category)?translate('messages.update'):translate('messages.submit')}}</button>
                             </div>
                         </div>
                         </div>
@@ -107,12 +107,12 @@
                 <div class="search--button-wrapper">
                     <h5 class="card-title"><span class="card-header-icon">
                         <i class="tio-category-outlined"></i>
-                    </span> {{__('messages.category')}} {{__('messages.list')}}<span class="badge badge-soft-dark ml-2" id="itemCount">{{$categories->total()}}</span></h5>
+                    </span> {{translate('messages.category')}} {{translate('messages.list')}}<span class="badge badge-soft-dark ml-2" id="itemCount">{{$categories->total()}}</span></h5>
                     <form id="dataSearch">
                         @csrf
                         <!-- Search -->
                         <div class="input--group input-group input-group-merge input-group-flush">
-                            <input type="search" name="search" class="form-control" placeholder="Ex : Categories" aria-label="{{__('messages.search_categories')}}">
+                            <input type="search" name="search" class="form-control" placeholder="{{ translate('Ex : Categories') }}" aria-label="{{translate('messages.search_categories')}}">
                             <button type="submit" class="btn btn--secondary"><i class="tio-search"></i></button>
                         </div>
                         <!-- End Search -->
@@ -124,43 +124,43 @@
                                 "target": "#usersExportDropdown",
                                 "type": "css-animation"
                             }'>
-                            <i class="tio-download-to mr-1"></i> {{__('messages.export')}}
+                            <i class="tio-download-to mr-1"></i> {{translate('messages.export')}}
                         </a>
 
                         <div id="usersExportDropdown"
                                 class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-sm-right">
-                            {{--<span class="dropdown-header">{{__('messages.options')}}</span>
+                            {{--<span class="dropdown-header">{{translate('messages.options')}}</span>
                             <a id="export-copy" class="dropdown-item" href="javascript:;">
                                 <img class="avatar avatar-xss avatar-4by3 mr-2"
                                         src="{{asset('public/assets/admin')}}/svg/illustrations/copy.svg"
                                         alt="Image Description">
-                                {{__('messages.copy')}}
+                                {{translate('messages.copy')}}
                             </a>
                             <a id="export-print" class="dropdown-item" href="javascript:;">
                                 <img class="avatar avatar-xss avatar-4by3 mr-2"
                                         src="{{asset('public/assets/admin')}}/svg/illustrations/print.svg"
                                         alt="Image Description">
-                                {{__('messages.print')}}
+                                {{translate('messages.print')}}
                             </a>
                             <div class="dropdown-divider"></div>--}}
-                            <span class="dropdown-header">{{__('messages.download')}} {{__('messages.options')}}</span>
+                            <span class="dropdown-header">{{translate('messages.download')}} {{translate('messages.options')}}</span>
                             <a target="__blank" id="export-excel" class="dropdown-item" href="{{route('admin.category.export-categories', ['type'=>'excel'])}}">
                                 <img class="avatar avatar-xss avatar-4by3 mr-2"
                                         src="{{asset('public/assets/admin')}}/svg/components/excel.svg"
                                         alt="Image Description">
-                                {{__('messages.excel')}}
+                                {{translate('messages.excel')}}
                             </a>
                             <a target="__blank" id="export-csv" class="dropdown-item" href="{{route('admin.category.export-categories', ['type'=>'csv'])}}">
                                 <img class="avatar avatar-xss avatar-4by3 mr-2"
                                         src="{{asset('public/assets/admin')}}/svg/components/placeholder-csv-format.svg"
                                         alt="Image Description">
-                                .{{__('messages.csv')}}
+                                .{{translate('messages.csv')}}
                             </a>
                             {{--<a id="export-pdf" class="dropdown-item" href="javascript:;">
                                 <img class="avatar avatar-xss avatar-4by3 mr-2"
                                         src="{{asset('public/assets/admin')}}/svg/components/pdf.svg"
                                         alt="Image Description">
-                                {{__('messages.pdf')}}
+                                {{translate('messages.pdf')}}
                             </a>--}}
                         </div>
                     </div>
@@ -176,16 +176,16 @@
                     }'>
                     <thead class="thead-light">
                         <tr>
-                            <th>SL</th>
-                            <th>{{__('messages.id')}}</th>
-                            <th>{{__('messages.name')}}</th>
+                            <th>{{ translate('messages.sl') }}</th>
+                            <th>{{translate('messages.id')}}</th>
+                            <th>{{translate('messages.name')}}</th>
                             <th>
                                 <div class="ml-3">
-                                    {{__('messages.priority')}}
+                                    {{translate('messages.priority')}}
                                 </div>
                             </th>
-                            <th>{{__('messages.status')}}</th>
-                            <th class="text-cetner w-130px">{{__('messages.action')}}</th>
+                            <th>{{translate('messages.status')}}</th>
+                            <th class="text-cetner w-130px">{{translate('messages.action')}}</th>
                         </tr>
                     </thead>
 
@@ -210,9 +210,9 @@
                             <td>
                                 <form action="{{route('admin.category.priority',$category->id)}}">
                                 <select name="priority" id="priority" class=" form-control form--control-select {{$category->priority == 0 ? 'text--title':''}} {{$category->priority == 1 ? 'text--info':''}} {{$category->priority == 2 ? 'text--success':''}} " onchange="this.form.submit()">
-                                    <option class="text--title" value="0" {{$category->priority == 0?'selected':''}}>{{__('messages.normal')}}</option>
-                                    <option class="text--info" value="1" {{$category->priority == 1?'selected':''}}>{{__('messages.medium')}}</option>
-                                    <option class="text--success" value="2" {{$category->priority == 2?'selected':''}}>{{__('messages.high')}}</option>
+                                    <option class="text--title" value="0" {{$category->priority == 0?'selected':''}}>{{translate('messages.normal')}}</option>
+                                    <option class="text--info" value="1" {{$category->priority == 1?'selected':''}}>{{translate('messages.medium')}}</option>
+                                    <option class="text--success" value="2" {{$category->priority == 2?'selected':''}}>{{translate('messages.high')}}</option>
                                 </select>
                                 </form>
                             </td>
@@ -227,10 +227,10 @@
                             <td>
                                 <div class="btn--container">
                                     <a class="btn btn-sm btn--primary btn-outline-primary action-btn"
-                                        href="{{route('admin.category.edit',[$category['id']])}}" title="{{__('messages.edit')}} {{__('messages.category')}}"><i class="tio-edit"></i>
+                                        href="{{route('admin.category.edit',[$category['id']])}}" title="{{translate('messages.edit')}} {{translate('messages.category')}}"><i class="tio-edit"></i>
                                     </a>
                                     <a class="btn btn-sm btn--danger btn-outline-danger action-btn" href="javascript:"
-                                    onclick="form_alert('category-{{$category['id']}}','Want to delete this category')" title="{{__('messages.delete')}} {{__('messages.category')}}"><i class="tio-delete-outlined"></i>
+                                    onclick="form_alert('category-{{$category['id']}}','{{ translate('Want to delete this category') }}')" title="{{translate('messages.delete')}} {{translate('messages.category')}}"><i class="tio-delete-outlined"></i>
                                     </a>
                                 </div>
 

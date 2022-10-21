@@ -104,7 +104,7 @@ class DeliverymanController extends Controller
         $dm->active = $dm->active?0:1;
         $dm->save();
         Helpers::set_time_log($dm->id, date('Y-m-d') , ($dm->active ? now() : null), ($dm->active ? null : now()));
-        return response()->json(['message' => trans('messages.active_status_updated')], 200);
+        return response()->json(['message' => translate('messages.active_status_updated')], 200);
     }
 
     public function get_current_orders(Request $request)
@@ -175,7 +175,7 @@ class DeliverymanController extends Controller
         {
             return response()->json([
                 'errors' => [
-                    ['code' => 'order', 'message' => trans('messages.can_not_accept')]
+                    ['code' => 'order', 'message' => translate('messages.can_not_accept')]
                 ]
             ], 404);
         }
@@ -183,7 +183,7 @@ class DeliverymanController extends Controller
         {
             return response()->json([
                 'errors'=>[
-                    ['code' => 'dm_maximum_order_exceed', 'message'=> trans('messages.dm_maximum_order_exceed_warning')]
+                    ['code' => 'dm_maximum_order_exceed', 'message'=> translate('messages.dm_maximum_order_exceed_warning')]
                 ]
             ], 405);
         }
@@ -215,7 +215,7 @@ class DeliverymanController extends Controller
             if($value)
             {
                 $data = [
-                    'title' =>trans('messages.order_push_title'),
+                    'title' =>translate('messages.order_push_title'),
                     'description' => $value,
                     'order_id' => $order['id'],
                     'image' => '',
@@ -283,7 +283,7 @@ class DeliverymanController extends Controller
         {
             return response()->json([
                 'errors' => [
-                    ['code' => 'order-confirmation-model', 'message' => trans('messages.order_confirmation_warning')]
+                    ['code' => 'order-confirmation-model', 'message' => translate('messages.order_confirmation_warning')]
                 ]
             ], 403);
         }
@@ -292,7 +292,7 @@ class DeliverymanController extends Controller
         {
             return response()->json([
                 'errors' => [
-                    ['code' => 'status', 'message' => trans('messages.you_can_not_cancel_a_order')]
+                    ['code' => 'status', 'message' => translate('messages.you_can_not_cancel_a_order')]
                 ]
             ], 403);
         }
@@ -301,7 +301,7 @@ class DeliverymanController extends Controller
         {
             return response()->json([
                 'errors' => [
-                    ['code' => 'delivery-man', 'message' => trans('messages.order_can_not_cancle_after_confirm')]
+                    ['code' => 'delivery-man', 'message' => translate('messages.order_can_not_cancle_after_confirm')]
                 ]
             ], 403);
         }
@@ -328,7 +328,7 @@ class DeliverymanController extends Controller
                 {
                     return response()->json([
                         'errors' => [
-                            ['code' => 'error', 'message' => trans('messages.faield_to_create_order_transaction')]
+                            ['code' => 'error', 'message' => translate('messages.faield_to_create_order_transaction')]
                         ]
                     ], 406);
                 }
@@ -387,7 +387,7 @@ class DeliverymanController extends Controller
         {
             return response()->json([
                 'errors' => [
-                    ['code' => 'order', 'message' => trans('messages.not_found')]
+                    ['code' => 'order', 'message' => translate('messages.not_found')]
                 ]
             ], 404);
         }
@@ -410,7 +410,7 @@ class DeliverymanController extends Controller
         {
             return response()->json([
                 'errors' => [
-                    ['code' => 'order', 'message' => trans('messages.not_found')]
+                    ['code' => 'order', 'message' => translate('messages.not_found')]
                 ]
             ], 204);
         }
@@ -549,7 +549,7 @@ class DeliverymanController extends Controller
         if($dm->userinfo){
             $dm->userinfo->delete();
         }
-        
+
         $dm->delete();
         return response()->json([]);
     }

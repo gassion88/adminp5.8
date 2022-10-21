@@ -15,7 +15,7 @@
                     <i class="tio-add-circle-outlined"></i>
                 </div>
                 <span>
-                    {{__('messages.add')}} {{__('messages.new')}} {{__('messages.deliveryman')}}
+                    {{translate('messages.add')}} {{translate('messages.new')}} {{translate('messages.deliveryman')}}
                 </span>
             </h2>
         </div>
@@ -37,33 +37,33 @@
                             <div class="row g-2">
                                 <div class="col-md-6 col-12">
                                     <div class="form-group mb-0">
-                                        <label class="form-label" for="exampleFormControlInput1">{{__('messages.first')}} {{__('messages.name')}}</label>
-                                        <input type="text" name="f_name" class="form-control h--45px" placeholder="{{__('messages.first')}} {{__('messages.name')}}"
+                                        <label class="form-label" for="exampleFormControlInput1">{{translate('messages.first')}} {{translate('messages.name')}}</label>
+                                        <input type="text" name="f_name" class="form-control h--45px" placeholder="{{translate('messages.first')}} {{translate('messages.name')}}"
                                                 required>
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-12">
                                     <div class="form-group mb-0">
-                                        <label class="form-label" for="exampleFormControlInput1">{{__('messages.last')}} {{__('messages.name')}}</label>
-                                        <input type="text" name="l_name" class="form-control h--45px" placeholder="{{__('messages.last')}} {{__('messages.name')}}"
+                                        <label class="form-label" for="exampleFormControlInput1">{{translate('messages.last')}} {{translate('messages.name')}}</label>
+                                        <input type="text" name="l_name" class="form-control h--45px" placeholder="{{translate('messages.last')}} {{translate('messages.name')}}"
                                                 required>
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-12">
                                     <div class="form-group mb-0">
-                                        <label class="form-label" for="exampleFormControlInput1">{{__('messages.identity')}} {{__('messages.type')}}</label>
+                                        <label class="form-label" for="exampleFormControlInput1">{{translate('messages.identity')}} {{translate('messages.type')}}</label>
                                         <select name="identity_type" class="form-control h--45px">
-                                            <option value="passport">{{__('messages.passport')}}</option>
-                                            <option value="driving_license">{{__('messages.driving')}} {{__('messages.license')}}</option>
-                                            <option value="nid">{{__('messages.nid')}}</option>
+                                            <option value="passport">{{translate('messages.passport')}}</option>
+                                            <option value="driving_license">{{translate('messages.driving')}} {{translate('messages.license')}}</option>
+                                            <option value="nid">{{translate('messages.nid')}}</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-12">
                                     <div class="form-group mb-0">
-                                        <label class="form-label" for="exampleFormControlInput1">{{__('messages.identity')}} {{__('messages.number')}}</label>
+                                        <label class="form-label" for="exampleFormControlInput1">{{translate('messages.identity')}} {{translate('messages.number')}}</label>
                                         <input type="text" name="identity_number" class="form-control h--45px"
-                                                placeholder="Ex : DH-23434-LS"
+                                                placeholder="{{ translate('messages.Ex :') }} DH-23434-LS"
                                                 required>
                                     </div>
                                 </div>
@@ -74,8 +74,8 @@
                 <div class="col-lg-6">
                     <div class="card h-100">
                         <div class="card-header">
-                            <h5 class="form-label m-0" for="exampleFormControlInput1">{{__('messages.identity')}} {{__('messages.image')}}
-                                <small class="text-danger">* ( {{__('messages.ratio')}} 190x120 )</small></h5>
+                            <h5 class="form-label m-0" for="exampleFormControlInput1">{{translate('messages.identity')}} {{translate('messages.image')}}
+                                <small class="text-danger">* ( {{translate('messages.ratio')}} 190x120 )</small></h5>
                         </div>
                         <div class="card-body">
                             <div class="row gx-2" id="coba"></div>
@@ -86,18 +86,18 @@
                     <div class="card h-100">
                         <div class="card-header py-3">
                             <h5 class="form-label mb-0">
-                                {{__('messages.deliveryman')}} {{__('messages.image')}}
-                                <small class="text-danger">* ( {{__('messages.ratio')}} 1:1 )</small>
+                                {{translate('messages.deliveryman')}} {{translate('messages.image')}}
+                                <small class="text-danger">* ( {{translate('messages.ratio')}} 1:1 )</small>
                             </h5>
                         </div>
                         <div class="card-body pt-0 d-flex flex-column">
                             <center class="py-3 my-auto">
-                                <img style="height: 140px; border-radius: 10px;" id="viewer" src="{{asset('public/assets/admin/img/100x100/user2.png')}}" alt="delivery-man image"/>
+                                <img class="initial-78" id="viewer" src="{{asset('public/assets/admin/img/100x100/user2.png')}}" alt="delivery-man image"/>
                             </center>
                             <div class="custom-file mt-0">
                                 <input type="file" name="image" id="customFileEg1" class="custom-file-input"
                                         accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" required>
-                                <label class="custom-file-label" for="customFileEg1">{{__('messages.choose')}} {{__('messages.file')}}</label>
+                                <label class="custom-file-label" for="customFileEg1">{{translate('messages.choose')}} {{translate('messages.file')}}</label>
                             </div>
 
                         </div>
@@ -109,7 +109,7 @@
                             <h5 class="card-title">
                                 <span class="card-title-icon"><i class="tio-user"></i></span>
                                 <span>
-                                    {{__('messages.account')}} {{__('messages.info')}}
+                                    {{translate('messages.account')}} {{translate('messages.info')}}
                                 </span>
                             </h5>
                         </div>
@@ -117,30 +117,30 @@
                             <div class="row g-2">
                                 <div class="col-md-4 col-sm-6">
                                     <div class="form-group mb-0">
-                                        <label class="form-label" for="phone">{{__('messages.phone')}}</label>
+                                        <label class="form-label" for="phone">{{translate('messages.phone')}}</label>
                                         <div class="input-group">
-                                            <input type="tel" name="phone" id="phone" placeholder="Ex : 017********" class="form-control h--45px" required>
+                                            <input type="tel" name="phone" id="phone" placeholder="{{ translate('messages.Ex :') }} 017********" class="form-control h--45px" required>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4 col-sm-6">
                                     <div class="form-group mb-0">
-                                        <label class="form-label" for="exampleFormControlInput1">{{__('messages.email')}}</label>
-                                        <input type="email" name="email" class="form-control h--45px" placeholder="Ex : ex@example.com"
+                                        <label class="form-label" for="exampleFormControlInput1">{{translate('messages.email')}}</label>
+                                        <input type="email" name="email" class="form-control h--45px" placeholder="{{ translate('messages.Ex :') }} ex@example.com"
                                                 required>
                                     </div>
                                 </div>
                                 <div class="col-md-4 col-sm-6">
                                     <div class="form-group mb-0">
-                                        <label class="form-label" for="exampleFormControlInput1">{{__('messages.password')}}</label>
-                                        <input type="text" name="password" class="form-control h--45px" placeholder="Ex : 7+ Character required"
+                                        <label class="form-label" for="exampleFormControlInput1">{{translate('messages.password')}}</label>
+                                        <input type="text" name="password" class="form-control h--45px" placeholder="{{ translate('messages.Ex :') }} 7+ Character required"
                                             required>
                                     </div>
                                 </div>
                             </div>
                             <div class="btn--container mt-3 justify-content-end">
-                                <button type="reset" class="btn btn--reset">{{__('messages.reset')}}</button>
-                                <button type="submit" class="btn btn--primary">{{__('messages.submit')}}</button>
+                                <button type="reset" class="btn btn--reset">{{translate('messages.reset')}}</button>
+                                <button type="submit" class="btn btn--primary">{{translate('messages.submit')}}</button>
                             </div>
                         </div>
                     </div>

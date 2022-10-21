@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title','Delivery Man Preview')
+@section('title',translate('messages.Delivery Man Preview'))
 
 @push('css_or_js')
 
@@ -20,10 +20,10 @@
                 <!-- Nav -->
                 <ul class="nav nav-tabs page-header-tabs">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('admin.delivery-man.preview', ['id'=>$dm->id, 'tab'=> 'info'])}}"  aria-disabled="true">{{__('messages.info')}}</a>
+                        <a class="nav-link" href="{{route('admin.delivery-man.preview', ['id'=>$dm->id, 'tab'=> 'info'])}}"  aria-disabled="true">{{translate('messages.info')}}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="{{route('admin.delivery-man.preview', ['id'=>$dm->id, 'tab'=> 'transaction'])}}"  aria-disabled="true">{{__('messages.transaction')}}</a>
+                        <a class="nav-link active" href="{{route('admin.delivery-man.preview', ['id'=>$dm->id, 'tab'=> 'transaction'])}}"  aria-disabled="true">{{translate('messages.transaction')}}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('admin.delivery-man.preview', ['id'=>$dm->id, 'tab'=> 'timelog'])}}"  aria-disabled="true">{{translate('messages.timelog')}}</a>
@@ -40,7 +40,7 @@
         <!-- Card -->
         <div class="card mb-3 mb-lg-5 mt-2">
             <div class="card-header flex-wrap border-0">
-                <h5 class="card-header-title">{{ __('messages.order')}} {{ __('messages.transactions')}}</h5>
+                <h5 class="card-header-title">{{ translate('messages.order')}} {{ translate('messages.transactions')}}</h5>
                 <div>
                     <input type="date" class="form-control" onchange="set_filter('{{route('admin.delivery-man.preview',['id'=>$dm->id, 'tab'=> 'transaction'])}}',this.value, 'date')" value="{{$date}}">
                 </div>
@@ -52,10 +52,10 @@
                         class="table table-borderless table-thead-bordered table-nowrap justify-content-between table-align-middle card-table">
                         <thead class="thead-light">
                             <tr>
-                                <th>SL</th>
-                                <th>{{__('messages.order')}} {{__('messages.id')}}</th>
-                                <th>{{__('messages.delivery_fee')}} {{__('messages.earned')}}</th>
-                                <th>{{__('messages.date')}}</th>
+                                <th>{{ translate('messages.sl') }}</th>
+                                <th>{{translate('messages.order')}} {{translate('messages.id')}}</th>
+                                <th>{{translate('messages.delivery_fee')}} {{translate('messages.earned')}}</th>
+                                <th>{{translate('messages.date')}}</th>
                             </tr>
                         </thead>
                         <tbody>

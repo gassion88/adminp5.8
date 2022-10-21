@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title', __('messages.Social Media'))
+@section('title', translate('messages.Social Media'))
 
 @push('css_or_js')
 
@@ -32,31 +32,31 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="name" class="form-label">{{__('messages.name')}}</label>
+                                        <label for="name" class="form-label">{{translate('messages.name')}}</label>
                                         <select class="form-control w-100" name="name" id="name">
-                                            <option>---{{__('messages.select')}} Social Media`---</option>
-                                            <option value="instagram">{{__('messages.Instagram')}}</option>
-                                            <option value="facebook">{{__('messages.Facebook')}}</option>
-                                            <option value="twitter">{{__('messages.Twitter')}}</option>
-                                            <option value="linkedin">{{__('messages.LinkedIn')}}</option>
-                                            <option value="pinterest">{{__('messages.Pinterest')}}</option>
+                                            <option>---{{translate('Select Social Media')}}---</option>
+                                            <option value="instagram">{{translate('messages.Instagram')}}</option>
+                                            <option value="facebook">{{translate('messages.Facebook')}}</option>
+                                            <option value="twitter">{{translate('messages.Twitter')}}</option>
+                                            <option value="linkedin">{{translate('messages.LinkedIn')}}</option>
+                                            <option value="pinterest">{{translate('messages.Pinterest')}}</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <input type="hidden" id="id">
-                                        <label for="link" class="{{Session::get('direction') === "rtl" ? 'mr-1' : ''}}">{{ __('messages.social_media_link')}}</label>
+                                        <label for="link" class="{{Session::get('direction') === "rtl" ? 'mr-1' : ''}}">{{ translate('messages.social_media_link')}}</label>
                                         <input type="text" name="link" class="form-control" id="link"
-                                            placeholder="Ex: facebook.com/your-page-name" required>
+                                            placeholder="{{ translate('messages.Ex :') }} facebook.com/your-page-name" required>
                                     </div>
                                     <input type="hidden" id="id">
                                 </div>
                                 <div class="col-md-12">
                                     <div class="btn--container justify-content-end">
-                                        <button type="reset" class="btn btn--reset text-white">{{ __('messages.reset')}}</button>
-                                        <a id="update" class="btn btn--primary initial-hidden" href="javascript:">{{ __('messages.update')}}</a>
-                                        <button id="add" class="btn btn--primary">{{ __('messages.save')}}</button>
+                                        <button type="reset" class="btn btn--reset text-white">{{ translate('messages.reset')}}</button>
+                                        <a id="update" class="btn btn--primary initial-hidden" href="javascript:">{{ translate('messages.update')}}</a>
+                                        <button id="add" class="btn btn--primary">{{ translate('messages.save')}}</button>
                                     </div>
                                 </div>
                             </div>
@@ -74,12 +74,12 @@
                             <thead class="thead-light">
                             <tr>
                                 <th class="border-0" scope="col">
-                                    <div class="pl-2">SL</div>
+                                    <div class="pl-2">{{ translate('messages.sl') }}</div>
                                 </th>
-                                <th class="border-0" scope="col">{{ __('messages.name')}}</th>
-                                <th class="border-0" scope="col">{{ __('messages.social_media_link')}}</th>
-                                <th class="border-0" scope="col">{{ __('messages.status')}}</th>
-                                <th class="border-0 w-120px text-center" scope="col">{{ __('messages.action')}}</th>
+                                <th class="border-0" scope="col">{{ translate('messages.name')}}</th>
+                                <th class="border-0" scope="col">{{ translate('messages.social_media_link')}}</th>
+                                <th class="border-0" scope="col">{{ translate('messages.status')}}</th>
+                                <th class="border-0 w-120px text-center" scope="col">{{ translate('messages.action')}}</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -139,11 +139,11 @@
             var name = $('#name').val();
             var link = $('#link').val();
             if (name == "") {
-                toastr.error('{{__('messages.Social Name Is Requeired')}}.');
+                toastr.error('{{translate('messages.Social Name Is Requeired')}}.');
                 return false;
             }
             if (link == "") {
-                toastr.error('{{__('messages.Social Link Is Requeired')}}.');
+                toastr.error('{{translate('messages.Social Link Is Requeired')}}.');
                 return false;
             }
             $.ajaxSetup({
@@ -160,9 +160,9 @@
                 },
                 success: function (response) {
                     if (response.error == 1) {
-                        toastr.error('{{__('messages.Social Media Already taken')}}');
+                        toastr.error('{{translate('messages.Social Media Already taken')}}');
                     } else {
-                        toastr.success('{{__('messages.Social Media inserted Successfully')}}.');
+                        toastr.success('{{translate('messages.Social Media inserted Successfully')}}.');
                     }
                     $('#name').val('');
                     $('#link').val('');
@@ -193,7 +193,7 @@
                     $('#name').val('');
                     $('#link').val('');
 
-                    toastr.success('{{__('messages.Social info updated Successfully')}}.');
+                    toastr.success('{{translate('messages.Social info updated Successfully')}}.');
                     $('#update').hide();
                     $('#add').show();
                     fetch_social_media();
@@ -204,7 +204,7 @@
         });
         $(document).on('click', '.delete', function () {
             var id = $(this).attr("id");
-            if (confirm("{{__('messages.Are you sure delete this social media')}}?")) {
+            if (confirm("{{translate('messages.Are you sure delete this social media')}}?")) {
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -216,7 +216,7 @@
                     data: {id: id},
                     success: function (data) {
                         fetch_social_media();
-                        toastr.success('{{__('messages.Social media deleted Successfully')}}.');
+                        toastr.success('{{translate('messages.Social media deleted Successfully')}}.');
                     }
                 });
             }
@@ -263,7 +263,7 @@
                     status: status
                 },
                 success: function () {
-                    toastr.success('{{__('messages.status_updated')}}');
+                    toastr.success('{{translate('messages.status_updated')}}');
                 }
             });
         });

@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title', 'Update product')
+@section('title', translate('Update product'))
 
 @push('css_or_js')
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -14,7 +14,7 @@
         <!-- Page Header -->
         <div class="page-header">
             <h1 class="page-header-title"><i class="tio-edit"></i>
-                {{ __('messages.food') }} {{ __('messages.update') }}
+                {{ translate('messages.food') }} {{ translate('messages.update') }}
             </h1>
         </div>
         <!-- End Page Header -->
@@ -69,11 +69,11 @@
                                                 id="{{ $lang }}-form">
                                                 <div class="form-group">
                                                     <label class="input-label"
-                                                        for="{{ $lang }}_name">{{ __('messages.name') }}
+                                                        for="{{ $lang }}_name">{{ translate('messages.name') }}
                                                         ({{ strtoupper($lang) }})
                                                     </label>
                                                     <input type="text" name="name[]" id="{{ $lang }}_name" class="form-control"
-                                                        placeholder="{{ __('messages.new_food') }}"
+                                                        placeholder="{{ translate('messages.new_food') }}"
                                                         value="{{ $translate[$lang]['name'] ?? $product['name'] }}"
                                                         {{ $lang == $default_lang ? 'required' : '' }}
                                                         oninvalid="document.getElementById('en-link').click()">
@@ -81,8 +81,8 @@
                                                 <input type="hidden" name="lang[]" value="{{ $lang }}">
                                                 <div class="form-group mb-0">
                                                     <label class="input-label"
-                                                        for="exampleFormControlInput1">{{ __('messages.short') }}
-                                                        {{ __('messages.description') }} ({{ strtoupper($lang) }})</label>
+                                                        for="exampleFormControlInput1">{{ translate('messages.short') }}
+                                                        {{ translate('messages.description') }} ({{ strtoupper($lang) }})</label>
                                                     <textarea type="text" name="description[]" class="form-control ckeditor min-height-154px">{!! $translate[$lang]['description'] ?? $product['description'] !!}</textarea>
                                                 </div>
                                             </div>
@@ -90,16 +90,16 @@
                                     @else
                                         <div id="{{ $default_lang }}-form">
                                             <div class="form-group">
-                                                <label class="input-label" for="exampleFormControlInput1">{{ __('messages.name') }}
+                                                <label class="input-label" for="exampleFormControlInput1">{{ translate('messages.name') }}
                                                     (EN)</label>
                                                 <input type="text" name="name[]" class="form-control"
-                                                    placeholder="{{ __('messages.new_food') }}" value="{{ $product['name'] }}"
+                                                    placeholder="{{ translate('messages.new_food') }}" value="{{ $product['name'] }}"
                                                     required>
                                             </div>
                                             <input type="hidden" name="lang[]" value="en">
                                             <div class="form-group mb-0">
-                                                <label class="input-label" for="exampleFormControlInput1">{{ __('messages.short') }}
-                                                    {{ __('messages.description') }}</label>
+                                                <label class="input-label" for="exampleFormControlInput1">{{ translate('messages.short') }}
+                                                    {{ translate('messages.description') }}</label>
                                                 <textarea type="text" name="description[]" class="form-control ckeditor min-height-154px">{!! $product['description'] !!}</textarea>
                                             </div>
                                         </div>
@@ -132,8 +132,8 @@
                                     <div class="custom-file">
                                         <input type="file" name="image" id="customFileEg1" class="custom-file-input"
                                             accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
-                                        <label class="custom-file-label" for="customFileEg1">{{ __('messages.choose') }}
-                                            {{ __('messages.file') }}</label>
+                                        <label class="custom-file-label" for="customFileEg1">{{ translate('messages.choose') }}
+                                            {{ translate('messages.file') }}</label>
                                     </div>
                                 </div>
                             </div>
@@ -153,14 +153,14 @@
                                         <div class="col-sm-6 col-lg-4">
                                             <div class="form-group mb-0">
                                                 <label class="input-label"
-                                                    for="exampleFormControlSelect1">{{ __('messages.restaurant') }}<span
+                                                    for="exampleFormControlSelect1">{{ translate('messages.restaurant') }}<span
                                                         class="input-label-secondary"></span></label>
                                                 <select name="restaurant_id"
-                                                    data-placeholder="{{ __('messages.select') }} {{ __('messages.restaurant') }}"
+                                                    data-placeholder="{{ translate('messages.select') }} {{ translate('messages.restaurant') }}"
                                                     class="js-data-example-ajax form-control"
                                                     onchange="getRestaurantData('{{ url('/') }}/admin/vendor/get-addons?data[]=0&restaurant_id=', this.value,'add_on')"
                                                     title="Select Restaurant" required
-                                                    oninvalid="this.setCustomValidity('{{ __('messages.please_select_restaurant') }}')">
+                                                    oninvalid="this.setCustomValidity('{{ translate('messages.please_select_restaurant') }}')">
                                                     @if (isset($product->restaurant))
                                                         <option value="{{ $product->restaurant_id }}" selected="selected">
                                                             {{ $product->restaurant->name }}</option>
@@ -171,7 +171,7 @@
                                         <div class="col-sm-6 col-lg-4">
                                             <div class="form-group mb-0">
                                                 <label class="input-label"
-                                                    for="exampleFormControlSelect1">{{ __('messages.category') }}<span
+                                                    for="exampleFormControlSelect1">{{ translate('messages.category') }}<span
                                                         class="input-label-secondary">*</span></label>
                                                 <select name="category_id" id="category-id" class="form-control js-select2-custom"
                                                     onchange="getRequest('{{ url('/') }}/admin/food/get-categories?parent_id='+this.value,'sub-categories')">
@@ -186,11 +186,11 @@
                                         <div class="col-sm-6 col-lg-4">
                                             <div class="form-group mb-0">
                                                 <label class="input-label"
-                                                    for="exampleFormControlSelect1">{{ __('messages.sub_category') }}<span
+                                                    for="exampleFormControlSelect1">{{ translate('messages.sub_category') }}<span
                                                         class="input-label-secondary"
-                                                        data-toggle="tooltip" data-placement="right" data-original-title="{{ __('messages.category_required_warning') }}"><img
+                                                        data-toggle="tooltip" data-placement="right" data-original-title="{{ translate('messages.category_required_warning') }}"><img
                                                             src="{{ asset('/public/assets/admin/img/info-circle.svg') }}"
-                                                            alt="{{ __('messages.category_required_warning') }}"></span></label>
+                                                            alt="{{ translate('messages.category_required_warning') }}"></span></label>
                                                 <select name="sub_category_id" id="sub-categories"
                                                     data-id="{{ count($product_category) >= 2 ? $product_category[1]->id : '' }}"
                                                     class="form-control js-select2-custom">
@@ -201,13 +201,13 @@
                                         <div class="col-sm-6 col-lg-4">
                                             <div class="form-group mb-0">
                                                 <label class="input-label"
-                                                    for="exampleFormControlInput1">{{ __('messages.item_type') }}</label>
+                                                    for="exampleFormControlInput1">{{ translate('messages.item_type') }}</label>
                                                 <select name="veg" class="form-control js-select2-custom">
                                                     <option value="0" {{ $product['veg'] == 0 ? 'selected' : '' }}>
-                                                        {{ __('messages.non_veg') }}
+                                                        {{ translate('messages.non_veg') }}
                                                     </option>
                                                     <option value="1" {{ $product['veg'] == 1 ? 'selected' : '' }}>
-                                                        {{ __('messages.veg') }}
+                                                        {{ translate('messages.veg') }}
                                                     </option>
                                                 </select>
                                             </div>
@@ -215,11 +215,11 @@
                                         <div class="col-sm-6 col-lg-4">
                                             <div class="form-group mb-0">
                                                 <label class="input-label"
-                                                    for="exampleFormControlSelect1">{{ __('messages.addon') }}<span
+                                                    for="exampleFormControlSelect1">{{ translate('messages.addon') }}<span
                                                         class="input-label-secondary"
-                                                        data-toggle="tooltip" data-placement="right" data-original-title="{{ __('messages.restaurant_required_warning') }}"><img
+                                                        data-toggle="tooltip" data-placement="right" data-original-title="{{ translate('messages.restaurant_required_warning') }}"><img
                                                             src="{{ asset('/public/assets/admin/img/info-circle.svg') }}"
-                                                            alt="{{ __('messages.restaurant_required_warning') }}"></span></label>
+                                                            alt="{{ translate('messages.restaurant_required_warning') }}"></span></label>
                                                 <select name="addon_ids[]" class="form-control border js-select2-custom" multiple="multiple"
                                                     id="add_on">
                                                 </select>
@@ -242,23 +242,23 @@
                                         <div class="col-sm-6 col-md-4">
                                             <div class="form-group mb-0">
                                                 <label class="input-label"
-                                                    for="exampleFormControlInput1">{{ __('messages.price') }}</label>
+                                                    for="exampleFormControlInput1">{{ translate('messages.price') }}</label>
                                                 <input type="number" value="{{ $product['price'] }}" min="0" max="999999999999.99"
-                                                    name="price" class="form-control" step="0.01" placeholder="Ex : 100" required>
+                                                    name="price" class="form-control" step="0.01" placeholder="{{ translate('messages.Ex :') }} 100" required>
                                             </div>
                                         </div>
                                         <div class="col-sm-6 col-md-4">
                                             <div class="form-group mb-0">
                                                 <label class="input-label"
-                                                    for="exampleFormControlInput1">{{ __('messages.discount') }}
-                                                    {{ __('messages.type') }}</label>
+                                                    for="exampleFormControlInput1">{{ translate('messages.discount') }}
+                                                    {{ translate('messages.type') }}</label>
                                                 <select name="discount_type" class="form-control js-select2-custom">
                                                     <option value="percent"
                                                         {{ $product['discount_type'] == 'percent' ? 'selected' : '' }}>
-                                                        {{ __('messages.percent') }}
+                                                        {{ translate('messages.percent') }}
                                                     </option>
                                                     <option value="amount" {{ $product['discount_type'] == 'amount' ? 'selected' : '' }}>
-                                                        {{ __('messages.amount') }}
+                                                        {{ translate('messages.amount') }}
                                                     </option>
                                                 </select>
                                             </div>
@@ -266,9 +266,9 @@
                                         <div class="col-sm-6 col-md-4">
                                             <div class="form-group mb-0">
                                                 <label class="input-label"
-                                                    for="exampleFormControlInput1">{{ __('messages.discount') }}</label>
+                                                    for="exampleFormControlInput1">{{ translate('messages.discount') }}</label>
                                                 <input type="number" min="0" value="{{ $product['discount'] }}" max="100000"
-                                                    name="discount" class="form-control" placeholder="Ex : 100">
+                                                    name="discount" class="form-control" placeholder="{{ translate('messages.Ex :') }} 100">
                                             </div>
                                         </div>
                                     </div>
@@ -290,7 +290,7 @@
                                         <div class="col-12">
                                             <div class="form-group mb-0">
                                                 <label class="input-label"
-                                                    for="exampleFormControlSelect1">{{ __('messages.attribute') }}<span
+                                                    for="exampleFormControlSelect1">{{ translate('messages.attribute') }}<span
                                                         class="input-label-secondary"></span></label>
                                                 <select name="attribute_id[]" id="choice_attributes" class="form-control border js-select2-custom"
                                                     multiple="multiple">
@@ -343,18 +343,18 @@
                                         <div class="col-sm-6">
                                             <div class="form-group mb-0">
                                                 <label class="input-label"
-                                                    for="exampleFormControlInput1">{{ __('messages.available') }}
-                                                    {{ __('messages.time') }} {{ __('messages.starts') }}</label>
+                                                    for="exampleFormControlInput1">{{ translate('messages.available') }}
+                                                    {{ translate('messages.time') }} {{ translate('messages.starts') }}</label>
                                                 <input type="time" value="{{ $product['available_time_starts'] }}"
                                                     name="available_time_starts" class="form-control" id="available_time_starts"
-                                                    placeholder="Ex : 10:30 am" required>
+                                                    placeholder="{{ translate('messages.Ex :') }} 10:30 am" required>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group mb-0">
                                                 <label class="input-label"
-                                                    for="exampleFormControlInput1">{{ __('messages.available') }}
-                                                    {{ __('messages.time') }} {{ __('messages.ends') }}</label>
+                                                    for="exampleFormControlInput1">{{ translate('messages.available') }}
+                                                    {{ translate('messages.time') }} {{ translate('messages.ends') }}</label>
                                                 <input type="time" value="{{ $product['available_time_ends'] }}"
                                                     name="available_time_ends" class="form-control" id="available_time_ends"
                                                     placeholder="5:45 pm" required>
@@ -366,8 +366,8 @@
                         </div>
                     </div>
                     <div class="btn--container justify-content-end mt-3">
-                        <button type="reset" id="reset_btn" class="btn btn--reset">{{ __('messages.reset') }}</button>
-                        <button type="submit" class="btn btn--primary">{{ __('messages.update') }}</button>
+                        <button type="reset" id="reset_btn" class="btn btn--reset">{{ translate('messages.reset') }}</button>
+                        <button type="submit" class="btn btn--primary">{{ translate('messages.update') }}</button>
                     </div>
                 </form>
             </div>
@@ -563,7 +563,7 @@
                             });
                         }
                     } else {
-                        toastr.success('product updated successfully!', {
+                        toastr.success('{{ translate('product updated successfully!') }}', {
                             CloseButton: true,
                             ProgressBar: true
                         });

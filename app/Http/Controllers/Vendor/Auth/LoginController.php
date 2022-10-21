@@ -44,14 +44,14 @@ class LoginController extends Controller
                         $response = \file_get_contents($url);
                         $response = json_decode($response);
                         if (!$response->success) {
-                            $fail(trans('messages.ReCAPTCHA Failed'));
+                            $fail(translate('messages.ReCAPTCHA Failed'));
                         }
                     },
                 ],
             ]);
         } else if(session('six_captcha') != $request->custome_recaptcha)
         {
-            Toastr::error(trans('messages.ReCAPTCHA Failed'));
+            Toastr::error(translate('messages.ReCAPTCHA Failed'));
             return back();
         }
 
@@ -61,7 +61,7 @@ class LoginController extends Controller
             if($vendor->restaurants[0]->status == 0)
             {
                 return redirect()->back()->withInput($request->only('email', 'remember'))
-            ->withErrors([trans('messages.inactive_vendor_warning')]);
+            ->withErrors([translate('messages.inactive_vendor_warning')]);
             }
         }
         if (auth('vendor')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
@@ -69,7 +69,7 @@ class LoginController extends Controller
         }
 
         return redirect()->back()->withInput($request->only('email', 'remember'))
-            ->withErrors(['Credentials does not match.']);
+            ->withErrors(['credentials_does_not_match']);
     }
 
     public function logout(Request $request)

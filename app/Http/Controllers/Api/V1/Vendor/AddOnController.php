@@ -26,7 +26,7 @@ class AddOnController extends Controller
         {
             return response()->json([
                 'errors'=>[
-                    ['code'=>'unauthorized', 'message'=>trans('messages.permission_denied')]
+                    ['code'=>'unauthorized', 'message'=>translate('messages.permission_denied')]
                 ]
             ],403);
         }
@@ -39,7 +39,7 @@ class AddOnController extends Controller
         $data = $request->translations;
 
         if (count($data) < 1) {
-            $validator->getMessageBag()->add('translations', trans('messages.Name and description in english is required'));
+            $validator->getMessageBag()->add('translations', translate('messages.Name and description in english is required'));
         }
 
         if ($validator->fails() || count($data) < 1 ) {
@@ -65,7 +65,7 @@ class AddOnController extends Controller
             );
         }
 
-        return response()->json(['message' => trans('messages.addon_added_successfully')], 200);
+        return response()->json(['message' => translate('messages.addon_added_successfully')], 200);
     }
 
 
@@ -75,7 +75,7 @@ class AddOnController extends Controller
         {
             return response()->json([
                 'errors'=>[
-                    ['code'=>'unauthorized', 'message'=>trans('messages.permission_denied')]
+                    ['code'=>'unauthorized', 'message'=>translate('messages.permission_denied')]
                 ]
             ],403);
         }
@@ -89,7 +89,7 @@ class AddOnController extends Controller
         $data = $request->translations;
 
         if (count($data) < 1) {
-            $validator->getMessageBag()->add('translations', trans('messages.Name and description in english is required'));
+            $validator->getMessageBag()->add('translations', translate('messages.Name and description in english is required'));
         }
 
         if ($validator->fails() || count($data) < 1 ) {
@@ -111,7 +111,7 @@ class AddOnController extends Controller
             );
         }
 
-        return response()->json(['message' => trans('messages.addon_updated_successfully')], 200);
+        return response()->json(['message' => translate('messages.addon_updated_successfully')], 200);
     }
 
     public function delete(Request $request)
@@ -120,7 +120,7 @@ class AddOnController extends Controller
         {
             return response()->json([
                 'errors'=>[
-                    ['code'=>'unauthorized', 'message'=>trans('messages.permission_denied')]
+                    ['code'=>'unauthorized', 'message'=>translate('messages.permission_denied')]
                 ]
             ],403);
         }
@@ -135,7 +135,7 @@ class AddOnController extends Controller
         $addon->translations()->delete();
         $addon->delete();
 
-        return response()->json(['message' => trans('messages.addon_deleted_successfully')], 200);
+        return response()->json(['message' => translate('messages.addon_deleted_successfully')], 200);
     }
 
     public function status(Request $request)
@@ -144,7 +144,7 @@ class AddOnController extends Controller
         {
             return response()->json([
                 'errors'=>[
-                    ['code'=>'unauthorized', 'message'=>trans('messages.permission_denied')]
+                    ['code'=>'unauthorized', 'message'=>translate('messages.permission_denied')]
                 ]
             ],403);
         }
@@ -161,7 +161,7 @@ class AddOnController extends Controller
         $addon_data->status = $request->status;
         $addon_data->save();
 
-        return response()->json(['message' => trans('messages.addon_status_updated')], 200);
+        return response()->json(['message' => translate('messages.addon_status_updated')], 200);
     }
 
     public function search(Request $request){

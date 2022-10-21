@@ -1,6 +1,6 @@
 @extends('layouts.vendor.app')
 
-@section('title','Food Preview')
+@section('title',translate('Food Preview'))
 
 @push('css_or_js')
 
@@ -13,7 +13,7 @@
             <div class="d-flex flex-wrap justify-content-between align-items-center">
                 <h1 class="page-header-title text-break">{{$product['name']}}</h1>
                 <a href="{{route('vendor.food.edit',[$product['id']])}}" class="btn btn--primary">
-                    <i class="tio-edit"></i> {{__('messages.edit')}} {{ translate('Info') }}
+                    <i class="tio-edit"></i> {{translate('messages.edit')}} {{ translate('Info') }}
                 </a>
             </div>
         </div>
@@ -26,16 +26,16 @@
                 <div class="row align-items-md-center">
                     <div class="col-lg-5 col-md-6 mb-3 mb-md-0">
                         <div class="d-flex flex-wrap align-items-center food--media">
-                            <img class="avatar avatar-xxl avatar-4by3 mr-4"
+                            <img class="avatar avatar-xxl avatar-4by3 mr-4 initial-90"
                                  src="{{asset('storage/app/public/product')}}/{{$product['image']}}"
                                  onerror="this.src='{{asset('public/assets/admin/img/160x160/img2.jpg')}}'"
-                                 alt="Image Description" style="max-width:184px;aspect-ratio:1;height:unset;">
+                                 alt="Image Description">
                             <div class="d-block">
                                 <div class="rating--review">
 
                                     {{--<h4 class="title">{{round($product->avg_rating,1)}}</h4>
 
-                                    <p> {{__('messages.of')}} {{$product->reviews->count()}} {{__('messages.reviews')}}
+                                    <p> {{translate('messages.of')}} {{$product->reviews->count()}} {{translate('messages.reviews')}}
                                         <span class="badge badge-soft-dark badge-pill ml-1"></span>
                                     </p>
 
@@ -141,7 +141,7 @@
                                             @endif
                                     <div class="info">
                                         {{-- <span class="mr-3">of {{ $product->rating ? count(json_decode($product->rating, true)): 0 }} Rating</span> --}}
-                                        <span>{{__('messages.of')}} {{$product->reviews->count()}} {{__('messages.reviews')}}</span>
+                                        <span>{{translate('messages.of')}} {{$product->reviews->count()}} {{translate('messages.reviews')}}</span>
                                     </div>
                                 </div>
                             </div>
@@ -156,7 +156,7 @@
                             <li class="d-flex align-items-center font-size-sm">
                                 @php($five=$product->rating?json_decode($product->rating, true)[5]:0)
                                 <span
-                                    class="progress-name mr-3">5 {{__('messages.star')}}</span>
+                                    class="progress-name mr-3">5 {{translate('messages.star')}}</span>
                                 <div class="progress flex-grow-1">
                                     <div class="progress-bar" role="progressbar"
                                         style="width: {{$total==0?0:($five/$total)*100}}%;"
@@ -170,7 +170,7 @@
                             <!-- Review Ratings -->
                             <li class="d-flex align-items-center font-size-sm">
                                 @php($four=$product->rating?json_decode($product->rating, true)[4]:0)
-                                <span class="progress-name mr-3">4 {{__('messages.star')}}</span>
+                                <span class="progress-name mr-3">4 {{translate('messages.star')}}</span>
                                 <div class="progress flex-grow-1">
                                     <div class="progress-bar" role="progressbar"
                                         style="width: {{$total==0?0:($four/$total)*100}}%;"
@@ -184,7 +184,7 @@
                             <!-- Review Ratings -->
                             <li class="d-flex align-items-center font-size-sm">
                                 @php($three=$product->rating?json_decode($product->rating, true)[3]:0)
-                                <span class="progress-name mr-3">3 {{__('messages.star')}}</span>
+                                <span class="progress-name mr-3">3 {{translate('messages.star')}}</span>
                                 <div class="progress flex-grow-1">
                                     <div class="progress-bar" role="progressbar"
                                         style="width: {{$total==0?0:($three/$total)*100}}%;"
@@ -198,7 +198,7 @@
                             <!-- Review Ratings -->
                             <li class="d-flex align-items-center font-size-sm">
                                 @php($two=$product->rating?json_decode($product->rating, true)[2]:0)
-                                <span class="progress-name mr-3">2 {{__('messages.star')}}</span>
+                                <span class="progress-name mr-3">2 {{translate('messages.star')}}</span>
                                 <div class="progress flex-grow-1">
                                     <div class="progress-bar" role="progressbar"
                                         style="width: {{$total==0?0:($two/$total)*100}}%;"
@@ -212,7 +212,7 @@
                             <!-- Review Ratings -->
                             <li class="d-flex align-items-center font-size-sm">
                                 @php($one=$product->rating?json_decode($product->rating, true)[1]:0)
-                                <span class="progress-name mr-3">1 {{__('messages.star')}}</span>
+                                <span class="progress-name mr-3">1 {{translate('messages.star')}}</span>
                                 <div class="progress flex-grow-1">
                                     <div class="progress-bar" role="progressbar"
                                         style="width: {{$total==0?0:($one/$total)*100}}%;"
@@ -235,19 +235,19 @@
                     <table class="table table-borderless table-thead-bordered table-align-middle">
                         <thead class="thead-light">
                             <tr>
-                                <th class="px-4" style="width:140px"><h4 class="m-0">{{ translate('Short Description') }}</h4></th>
-                                <th class="px-4" style="width:120px"><h4 class="m-0">{{__('messages.price')}}</h4></th>
-                                <th class="px-4" style="width:100px"><h4 class="m-0">{{__('messages.variations')}}</h4></th>
-                                <th class="px-4" style="width:100px"><h4 class="m-0">Addons</h4></th>
+                                <th class="px-4 w-140px"><h4 class="m-0">{{ translate('Short Description') }}</h4></th>
+                                <th class="px-4 w-120px"><h4 class="m-0">{{translate('messages.price')}}</h4></th>
+                                <th class="px-4 w-100px"><h4 class="m-0">{{translate('messages.variations')}}</h4></th>
+                                <th class="px-4 w-100px"><h4 class="m-0">{{ translate('messages.addons') }}</h4></th>
                             </tr>
                             <tbody>
                                 <td class="px-4">
-                                    <p style="max-width:315px">{{$product['description']}}</p>
+                                    <p class="max-315px">{{$product['description']}}</p>
                                 </td>
                                 <td class="px-4">
                                     <span class="d-block mb-1">
                                         <span>
-                                            {{__('messages.price')}} :
+                                            {{translate('messages.price')}} :
                                         </span>
                                         <strong>
                                             {{\App\CentralLogics\Helpers::format_currency($product['price'])}}
@@ -256,7 +256,7 @@
 
                                     <span class="d-block mb-1">
                                         <span>
-                                            {{__('messages.discount')}} :
+                                            {{translate('messages.discount')}} :
                                         </span>
                                         <strong>
                                             {{\App\CentralLogics\Helpers::format_currency(\App\CentralLogics\Helpers::discount_calculate($product,$product['price']))}}
@@ -264,7 +264,7 @@
                                     </span>
                                     <span class="d-block mb-1">
                                         <span>
-                                            {{__('messages.available')}} {{__('messages.time')}} {{__('messages.starts')}} :
+                                            {{translate('messages.available')}} {{translate('messages.time')}} {{translate('messages.starts')}} :
                                         </span>
                                         <strong>
                                             {{date(config('timeformat'), strtotime($product['available_time_starts']))}}
@@ -272,7 +272,7 @@
                                     </span>
                                     <span class="d-block">
                                         <span>
-                                            {{__('messages.available')}} {{__('messages.time')}} {{__('messages.ends')}} :
+                                            {{translate('messages.available')}} {{translate('messages.time')}} {{translate('messages.ends')}} :
                                         </span>
                                         <strong>
                                             {{date(config('timeformat'), strtotime($product['available_time_ends']))}}
@@ -317,7 +317,7 @@
                 <h5 class="card-title">{{ translate('Reviewer Table List') }} <span class="badge badge-soft-dark ml-2" id="itemCount">{{ count($reviews) }}</span></h5>
                 {{-- <form action="javascript:" id="search-form">
                     <div class="input--group input-group">
-                        <input type="search" name="search" class="form-control" placeholder="Ex : Search by Reviewer Name">
+                        <input type="search" name="search" class="form-control" placeholder="{{ translate('messages.Ex :') }} Search by Reviewer Name">
                         <button type="submit" class="btn btn--secondary">
                             <i class="tio-search"></i>
                         </button>
@@ -347,10 +347,10 @@
                    }'>
                     <thead class="thead-light">
                     <tr>
-                        <th style="width:80px" class="text-center">SL</th>
-                        <th>{{__('messages.reviewer')}}</th>
-                        <th>{{__('messages.review')}}</th>
-                        <th>{{__('messages.date')}}</th>
+                        <th class="w-80px text-center">{{ translate('messages.sl') }}</th>
+                        <th>{{translate('messages.reviewer')}}</th>
+                        <th>{{translate('messages.review')}}</th>
+                        <th>{{translate('messages.date')}}</th>
                     </tr>
                     </thead>
 
@@ -378,11 +378,11 @@
                                         </div>
                                     </div>
                                 @else
-                                    {{__('messages.customer_not_found')}}
+                                    {{translate('messages.customer_not_found')}}
                                 @endif
                             </td>
                             <td>
-                                <div class="text-wrap" style="width: 18rem;">
+                                <div class="text-wrap w-18rem">
                                     <label class="rating">
                                         {{$review->rating}} <i class="tio-star"></i>
                                     </label>

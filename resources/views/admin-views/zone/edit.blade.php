@@ -1,10 +1,7 @@
 @extends('layouts.admin.app')
 
-@section('title','Update Branch')
+@section('title',translate('Update Branch'))
 
-@push('css_or_js')
-
-@endpush
 
 @section('content')
 
@@ -13,7 +10,7 @@
         <div class="page-header">
             <div class="row align-items-center">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <h1 class="page-header-title text-capitalize"><i class="tio-edit"></i> {{__('messages.zone')}} {{__('messages.update')}}</h1>
+                    <h1 class="page-header-title text-capitalize"><i class="tio-edit"></i> {{translate('messages.zone')}} {{translate('messages.update')}}</h1>
                 </div>
             </div>
         </div>
@@ -55,13 +52,13 @@
                         <div class="col-md-6 col-xl-7 zone-setup">
                             <div class="form-group mb-3">
                                 <label class="input-label"
-                                       for="exampleFormControlInput1">{{__('messages.zone')}} {{__('messages.name')}}</label>
-                                <input id="zone_name" type="text" name="name" class="form-control" placeholder="{{__('messages.new_zone')}}" value="{{$zone->name}}" required>
+                                       for="exampleFormControlInput1">{{translate('messages.zone')}} {{translate('messages.name')}}</label>
+                                <input id="zone_name" type="text" name="name" class="form-control" placeholder="{{translate('messages.new_zone')}}" value="{{$zone->name}}" required>
                             </div>
-                            <div class="form-group mb-3" style="display: none">
+                            <div class="form-group mb-3 initial-hidden">
                                 <label class="input-label"
                                        for="exampleFormControlInput1">{{translate('messages.Coordinates')}}<span
-                                        class="input-label-secondary" title="{{__('messages.draw_your_zone_on_the_map')}}">{{__('messages.draw_your_zone_on_the_map')}}</span></label>
+                                        class="input-label-secondary" title="{{translate('messages.draw_your_zone_on_the_map')}}">{{translate('messages.draw_your_zone_on_the_map')}}</span></label>
                                        <textarea  type="text" name="coordinates"  id="coordinates" class="form-control">@foreach($zone->coordinates[0] as $key=>$coords)<?php if(count($zone->coordinates[0]) != $key+1) {if($key != 0) echo(','); ?>({{$coords->getLat()}}, {{$coords->getLng()}})<?php } ?>@endforeach
                                 </textarea>
                             </div>
@@ -71,7 +68,7 @@
                                         <label class="input-label">
                                             {{translate('messages.minimum_delivery_charge')}}  ({{\App\CentralLogics\Helpers::currency_symbol()}})
                                         </label>
-                                        <input id="min_delivery_charge" name="minimum_delivery_charge" type="number" class="form-control h--45px" placeholder="Ex: 10" value="{{$zone->minimum_shipping_charge}}" required>
+                                        <input id="min_delivery_charge" name="minimum_delivery_charge" type="number" class="form-control h--45px" placeholder="{{ translate('messages.Ex :') }} 10" value="{{$zone->minimum_shipping_charge}}" required>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
@@ -79,17 +76,17 @@
                                         <label class="input-label">
                                             {{translate('messages.delivery_charge_per_km')}} ({{\App\CentralLogics\Helpers::currency_symbol()}})
                                         </label>
-                                        <input id="delivery_charge_per_km" name="per_km_delivery_charge" type="number" class="form-control h--45px" placeholder="Ex: 10" value="{{$zone->per_km_shipping_charge}}" required>
+                                        <input id="delivery_charge_per_km" name="per_km_delivery_charge" type="number" class="form-control h--45px" placeholder="{{ translate('messages.Ex :') }} 10" value="{{$zone->per_km_shipping_charge}}" required>
                                     </div>
                                 </div>
                             </div>
-                            <div style="height: 300px;overflow: hidden;border-radius:5px">
-                                <input id="pac-input" class="controls rounded" style="height: 3em;width:fit-content;" title="{{__('messages.search_your_location_here')}}" type="text" placeholder="{{__('messages.search_here')}}"/>
-                                <div id="map-canvas" style="height: 100%; margin:0px; padding: 0px;"></div>
+                            <div class="initial-60">
+                                <input id="pac-input" class="controls rounded initial-8" title="{{translate('messages.search_your_location_here')}}" type="text" placeholder="{{translate('messages.search_here')}}"/>
+                                <div id="map-canvas" class="h-100 m-0 p-0"></div>
                             </div>
                             <div class="btn--container mt-3 justify-content-end">
-                                <button id="reset_btn" type="reset" class="btn btn--reset">{{__('messages.reset')}}</button>
-                                <button type="submit" class="btn btn--primary">{{__('messages.update')}}</button>
+                                <button id="reset_btn" type="reset" class="btn btn--reset">{{translate('messages.reset')}}</button>
+                                <button type="submit" class="btn btn--primary">{{translate('messages.update')}}</button>
                             </div>
                         </div>
                     </div>

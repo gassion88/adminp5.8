@@ -5,22 +5,22 @@
             @if($params['zone_id']!='all')
                 @php($zone_name=\App\Models\Zone::where('id',$params['zone_id'])->first()->name)
             @else
-                @php($zone_name='All')
-            @endif
+            @php($zone_name=translate('All'))
+        @endif
             <div class="d-flex flex-wrap justify-content-center align-items-center">
                 <span class="h5 m-0 mr-3 fz--11 d-flex align-items-center mb-2 mb-md-0">
                     <span class="legend-indicator bg-7ECAFF"></span>
-                    {{__('messages.admin_commission')}} : {{\App\CentralLogics\Helpers::format_currency(array_sum($commission))}}
+                    {{translate('messages.admin_commission')}} : {{\App\CentralLogics\Helpers::format_currency(array_sum($commission))}}
                 </span>
                 <span class="h5 m-0 fz--11 d-flex align-items-center mb-2 mb-md-0">
                     <span class="legend-indicator bg-0661CB"></span>
-                    {{__('messages.total_sell')}} : {{\App\CentralLogics\Helpers::format_currency(array_sum($total_sell))}}
+                    {{translate('messages.total_sell')}} : {{\App\CentralLogics\Helpers::format_currency(array_sum($total_sell))}}
                 </span>
 
             </div>
           </div>
           <div class="col-12">
-              <div class="text-right mt--xl--10"><span class="badge badge-soft--info">Zone : {{$zone_name}}</span>
+              <div class="text-right mt--xl--10"><span class="badge badge-soft--info">{{translate('messages.zone')}} : {{$zone_name}}</span>
               </div>
           </div>
     </div>

@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title','Campaign view')
+@section('title',translate('Campaign view'))
 
 @push('css_or_js')
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -24,7 +24,7 @@
                                  alt="Image Description">
                     </div>
                     <div class="col-md-8">
-                        <h4>{{__('messages.short')}} {{__('messages.description')}} : </h4>
+                        <h4>{{translate('messages.short')}} {{translate('messages.description')}} : </h4>
                         <p>{{$campaign->description}}</p>
 
                         <form action="{{route('admin.campaign.addrestaurant',$campaign->id)}}" id="restaurant-add-form" method="POST">
@@ -34,7 +34,7 @@
                                 @php($allrestaurants=App\Models\Restaurant::all())
                                 <div class="flex-grow-1">
                                     <select name="restaurant_id" id="restaurant_id" class="form-control h--45px" required>
-                                        <option value="" selected disabled>Select Restaurant</option>
+                                        <option value="" selected disabled>{{ translate('Select Restaurant') }}</option>
                                         @forelse($allrestaurants as $restaurant)
                                         @if(!in_array($restaurant->id, $restaurant_ids))
                                             <option value="{{$restaurant->id}}" >{{$restaurant->name}}</option>
@@ -45,7 +45,7 @@
                                     </select>
                                 </div>
                                 <div>
-                                    <button type="submit" class="btn btn--primary">{{__('messages.add')}} {{__('messages.restaurant')}}</button>
+                                    <button type="submit" class="btn btn--primary">{{translate('messages.add')}} {{translate('messages.restaurant')}}</button>
                                 </div>
                             </div>
                             <!-- End Search -->
@@ -68,7 +68,7 @@
                             <!-- Search -->
                             <div class="input--group input-group input-group-merge input-group-flush">
                                 <input id="datatableSearch_" type="search" name="search" class="form-control"
-                                        placeholder="{{__('messages.search')}}" aria-label="Search" required>
+                                        placeholder="{{translate('messages.search')}}" aria-label="Search" required>
                                 <button type="submit" class="btn btn--secondary">
                                     <i class="tio-search"></i>
                                 </button>
@@ -86,13 +86,13 @@
                                }'>
                             <thead class="thead-light">
                             <tr>
-                                <th>SL</th>
-                                {{-- <th class="w-15p">{{__('messages.logo')}}</th> --}}
-                                <th class="w-15p">{{__('messages.restaurant')}}</th>
-                                <th>{{__('messages.owner')}}</th>
-                                <th>{{__('messages.email')}}</th>
-                                <th>{{__('messages.phone')}}</th>
-                                <th>{{__('messages.action')}}</th>
+                                <th>{{ translate('messages.sl') }}</th>
+                                {{-- <th class="w-15p">{{translate('messages.logo')}}</th> --}}
+                                <th class="w-15p">{{translate('messages.restaurant')}}</th>
+                                <th>{{translate('messages.owner')}}</th>
+                                <th>{{translate('messages.email')}}</th>
+                                <th>{{translate('messages.phone')}}</th>
+                                <th class="text-center">{{translate('messages.action')}}</th>
                             </tr>
                             </thead>
 
@@ -127,36 +127,36 @@
                                     </span>
                                 </td>
                                 <td>
-                                    {{$dm->zone?$dm->zone->name:__('messages.zone').' '.__('messages.deleted')}}
+                                    {{$dm->zone?$dm->zone->name:translate('messages.zone').' '.translate('messages.deleted')}}
                                     {{--<span class="d-block font-size-sm">{{$banner['image']}}</span>--}}
                                 </td>
                                 <td>
                                     @if(isset($dm->vendor->status))
                                         @if($dm->vendor->status)
                                         <label class="toggle-switch toggle-switch-sm" for="stocksCheckbox{{$dm->id}}">
-                                            <input type="checkbox" onclick="status_change_alert('{{route('admin.vendor.status',[$dm->id,$dm->status?0:1])}}', '{{__('messages.you_want_to_change_this_restaurant_status')}}', event)" class="toggle-switch-input" id="stocksCheckbox{{$dm->id}}" {{$dm->status?'checked':''}}>
+                                            <input type="checkbox" onclick="status_change_alert('{{route('admin.vendor.status',[$dm->id,$dm->status?0:1])}}', '{{translate('messages.you_want_to_change_this_restaurant_status')}}', event)" class="toggle-switch-input" id="stocksCheckbox{{$dm->id}}" {{$dm->status?'checked':''}}>
                                             <span class="toggle-switch-label">
                                                 <span class="toggle-switch-indicator"></span>
                                             </span>
                                         </label>
                                         @else
-                                        <span class="badge badge-soft-danger">{{__('messages.denied')}}</span>
+                                        <span class="badge badge-soft-danger">{{translate('messages.denied')}}</span>
                                         @endif
                                     @else
-                                        <span class="badge badge-soft-danger">{{__('messages.pending')}}</span>
+                                        <span class="badge badge-soft-danger">{{translate('messages.pending')}}</span>
                                     @endif
                                 </td>
                                 <td>
                                     <div class="btn--container justify-content-center">
                                         <a class="btn btn-sm btn--primary btn-outline-primary action-btn"
-                                            href="{{route('admin.vendor.edit',[$dm['id']])}}" title="{{__('messages.edit')}} {{__('messages.restaurant')}}"><i class="tio-edit"></i>
+                                            href="{{route('admin.vendor.edit',[$dm['id']])}}" title="{{translate('messages.edit')}} {{translate('messages.restaurant')}}"><i class="tio-edit"></i>
                                         </a>
                                         <a class="btn btn-sm btn--warning btn-outline-warning action-btn"
-                                            href="{{route('admin.vendor.view',[$dm['id']])}}" title="{{__('messages.view')}} {{__('messages.restaurant')}}"><i class="tio-invisible"></i>
+                                            href="{{route('admin.vendor.view',[$dm['id']])}}" title="{{translate('messages.view')}} {{translate('messages.restaurant')}}"><i class="tio-invisible"></i>
                                         </a>
                                     </div>
                                     {{--<a class="btn btn-sm btn-white" href="javascript:"
-                                    onclick="form_alert('vendor-{{$dm['id']}}','Want to remove this information ?')" title="{{__('messages.delete')}} {{__('messages.restaurant')}}"><i class="tio-delete-outlined text-danger"></i>
+                                    onclick="form_alert('vendor-{{$dm['id']}}','Want to remove this information ?')" title="{{translate('messages.delete')}} {{translate('messages.restaurant')}}"><i class="tio-delete-outlined text-danger"></i>
                                     </a>
                                     <form action="{{route('admin.vendor.delete',[$dm['id']])}}" method="post" id="vendor-{{$dm['id']}}">
                                         @csrf @method('delete')

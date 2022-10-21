@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title','Update delivery-man')
+@section('title',translate('Update delivery-man'))
 
 @push('css_or_js')
     <link rel="stylesheet" href="{{asset('/public/assets/admin/css/intlTelInput.css')}}" />
@@ -15,7 +15,7 @@
                     <img src="{{asset('/public/assets/admin/img/delivery-man.png')}}" alt="public">
                 </div>
                 <span>
-                    {{__('messages.update')}} {{__('messages.deliveryman')}}
+                    {{translate('messages.update')}} {{translate('messages.deliveryman')}}
                 </span>
             </h1>
         </div>
@@ -28,8 +28,8 @@
                     <h5 class="card-title">
                         <span class="card-title-icon"><i class="tio-user"></i></span>
                         <span>
-                            general
-                            {{ __('messages.info') }}
+                            {{ translate('general') }}
+                            {{ translate('messages.info') }}
                         </span>
                     </h5>
                 </div>
@@ -40,40 +40,40 @@
                             <div class="row g-3">
                                 <div class="col-sm-6">
                                     <div class="form-group m-0">
-                                        <label class="input-label" for="exampleFormControlInput1">{{__('messages.first')}} {{__('messages.name')}}</label>
+                                        <label class="input-label" for="exampleFormControlInput1">{{translate('messages.first')}} {{translate('messages.name')}}</label>
                                         <input type="text" value="{{$delivery_man['f_name']}}" name="f_name"
-                                                class="form-control h--45px" placeholder="{{__('messages.first_name')}}"
+                                                class="form-control h--45px" placeholder="{{translate('messages.first_name')}}"
                                                 required>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group m-0">
-                                        <label class="input-label" for="exampleFormControlInput1">{{__('messages.last')}} {{__('messages.name')}}</label>
+                                        <label class="input-label" for="exampleFormControlInput1">{{translate('messages.last')}} {{translate('messages.name')}}</label>
                                         <input type="text" value="{{$delivery_man['l_name']}}" name="l_name"
-                                                class="form-control h--45px" placeholder="{{__('messages.last_name')}}"
+                                                class="form-control h--45px" placeholder="{{translate('messages.last_name')}}"
                                                 required>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group m-0">
-                                        <label class="input-label" for="exampleFormControlInput1">{{__('messages.email')}}</label>
+                                        <label class="input-label" for="exampleFormControlInput1">{{translate('messages.email')}}</label>
                                         <input type="email" value="{{$delivery_man['email']}}" name="email" class="form-control h--45px"
-                                                placeholder="Ex : ex@example.com"
+                                                placeholder="{{ translate('Ex : ex@example.com') }}"
                                                 required>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group m-0">
-                                        <label class="input-label" for="exampleFormControlInput1">{{__('messages.deliveryman')}} {{__('messages.type')}}</label>
+                                        <label class="input-label" for="exampleFormControlInput1">{{translate('messages.deliveryman')}} {{translate('messages.type')}}</label>
                                         <select name="earning" class="form-control h--45px" required>
-                                            <option value="1" {{$delivery_man->earning?'selected':''}}>{{__('messages.freelancer')}}</option>
-                                            <option value="0" {{$delivery_man->earning?'':'selected'}}>{{__('messages.salary_based')}}</option>
+                                            <option value="1" {{$delivery_man->earning?'selected':''}}>{{translate('messages.freelancer')}}</option>
+                                            <option value="0" {{$delivery_man->earning?'':'selected'}}>{{translate('messages.salary_based')}}</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group m-0">
-                                        <label class="input-label" for="exampleFormControlInput1">{{__('messages.zone')}}</label>
+                                        <label class="input-label" for="exampleFormControlInput1">{{translate('messages.zone')}}</label>
                                         <select name="zone_id" class="form-control h--45px">
                                         @foreach(\App\Models\Zone::all() as $zone)
                                             @if(isset(auth('admin')->user()->zone_id))
@@ -91,7 +91,7 @@
                         </div>
                         <div class="col-lg-4">
                             <div class="form-group m-0">
-                                <label class="d-block mb-lg-5 text-center">{{__('messages.deliveryman')}} {{__('messages.image')}} <small class="text-danger">* ( {{__('messages.ratio')}} 1:1 )</small></label>
+                                <label class="d-block mb-lg-5 text-center">{{translate('messages.deliveryman')}} {{translate('messages.image')}} <small class="text-danger">* ( {{translate('messages.ratio')}} 1:1 )</small></label>
                                 <center>
                                     <img class="initial-24" id="viewer"
                                         onerror="this.src='{{asset('public/assets/admin/img/100x100/user.png')}}'"
@@ -100,7 +100,7 @@
                                 <div class="custom-file">
                                     <input type="file" name="image" id="customFileEg1" class="custom-file-input h--45px"
                                             accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
-                                    <label class="custom-file-label" for="customFileEg1">{{__('messages.choose')}} {{__('messages.file')}}</label>
+                                    <label class="custom-file-label" for="customFileEg1">{{translate('messages.choose')}} {{translate('messages.file')}}</label>
                                 </div>
                             </div>
                         </div>
@@ -109,31 +109,31 @@
                             <div class="row g-3">
                                 <div class="col-sm-6 col-lg-12">
                                     <div class="form-group m-0">
-                                        <label class="input-label" for="exampleFormControlInput1">{{__('messages.identity')}} {{__('messages.type')}}</label>
+                                        <label class="input-label" for="exampleFormControlInput1">{{translate('messages.identity')}} {{translate('messages.type')}}</label>
                                         <select name="identity_type" class="form-control h--45px">
                                             <option
                                                 value="passport" {{$delivery_man['identity_type']=='passport'?'selected':''}}>
-                                                {{__('messages.passport')}}
+                                                {{translate('messages.passport')}}
                                             </option>
                                             <option
                                                 value="driving_license" {{$delivery_man['identity_type']=='driving_license'?'selected':''}}>
-                                                {{__('messages.driving')}} {{__('messages.license')}}
+                                                {{translate('messages.driving')}} {{translate('messages.license')}}
                                             </option>
-                                            <option value="nid" {{$delivery_man['identity_type']=='nid'?'selected':''}}>{{__('messages.nid')}}
+                                            <option value="nid" {{$delivery_man['identity_type']=='nid'?'selected':''}}>{{translate('messages.nid')}}
                                             </option>
                                             <option
                                                 value="restaurant_id" {{$delivery_man['identity_type']=='restaurant_id'?'selected':''}}>
-                                                {{__('messages.restaurant')}} {{__('messages.id')}}
+                                                {{translate('messages.restaurant')}} {{translate('messages.id')}}
                                             </option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-lg-12">
                                     <div class="form-group m-0">
-                                        <label class="input-label" for="exampleFormControlInput1">{{__('messages.identity')}} {{__('messages.number')}}</label>
+                                        <label class="input-label" for="exampleFormControlInput1">{{translate('messages.identity')}} {{translate('messages.number')}}</label>
                                         <input type="text" name="identity_number" value="{{$delivery_man['identity_number']}}"
                                                 class="form-control h--45px"
-                                                placeholder="Ex : DH-23434-LS"
+                                                placeholder="{{ translate('messages.Ex :') }} DH-23434-LS"
                                                 required>
                                     </div>
                                 </div>
@@ -141,7 +141,7 @@
                         </div>
                         <div class="col-lg-8">
                             <div class="form-group mb-0">
-                                <label class="input-label" for="exampleFormControlInput1">{{__('messages.identity')}} {{__('messages.image')}}</label>
+                                <label class="input-label" for="exampleFormControlInput1">{{translate('messages.identity')}} {{translate('messages.image')}}</label>
                                 <div>
                                     <div class="row" id="coba"></div>
                                 </div>
@@ -158,30 +158,30 @@
                 <div class="card-header">
                     <h5 class="card-title">
                         <span class="card-header-icon"><i class="tio-user"></i></span>
-                        <span>{{ __('messages.account') }} {{ __('messages.info') }}</span>
+                        <span>{{ translate('messages.account') }} {{ translate('messages.info') }}</span>
                     </h5>
                 </div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-6 col-lg-4">
                             <div class="form-group m-0">
-                                <label class="input-label" for="exampleFormControlInput1">{{__('messages.phone')}}</label>
+                                <label class="input-label" for="exampleFormControlInput1">{{translate('messages.phone')}}</label>
                                 <input type="tel" id="phone" name="phone" value="{{$delivery_man['phone']}}" class="form-control h--45px"
-                                        placeholder="Ex : 017********"
+                                        placeholder="{{ translate('Ex : 017********') }}"
                                         required>
                             </div>
                         </div>
                         <div class="col-sm-6 col-lg-4">
                             <div class="form-group m-0">
-                                <label class="input-label" for="exampleFormControlInput1">{{__('messages.password')}}</label>
-                                <input type="text" name="password" class="form-control h--45px" placeholder="Ex: 5+ Character">
+                                <label class="input-label" for="exampleFormControlInput1">{{translate('messages.password')}}</label>
+                                <input type="text" name="password" class="form-control h--45px" placeholder="{{ translate('Ex: 5+ Character') }}">
                             </div>
                         </div>
                         <!-- Static -->
                         <div class="col-sm-6 col-lg-4">
                             <div class="form-group m-0">
-                                <label class="input-label" for="exampleFormControlInput1">Confirm {{__('messages.password')}}</label>
-                                <input type="text" name="password" class="form-control h--45px" placeholder="Ex: 5+ Character">
+                                <label class="input-label" for="exampleFormControlInput1">{{ translate('messages.confirm_password') }}</label>
+                                <input type="text" name="password" class="form-control h--45px" placeholder="{{ translate('Ex: 5+ Character') }}">
                             </div>
                         </div>
                         <!-- Static -->
@@ -189,8 +189,8 @@
                 </div>
             </div>
             <div class="btn--container mt-4 justify-content-end">
-                <button type="reset" id="reset_btn" class="btn btn--reset">{{ __('messages.reset') }}</button>
-                <button type="submit" class="btn btn--primary">{{ __('messages.submit') }}</button>
+                <button type="reset" id="reset_btn" class="btn btn--reset">{{ translate('messages.reset') }}</button>
+                <button type="submit" class="btn btn--primary">{{ translate('messages.submit') }}</button>
             </div>
         </form>
     </div>
@@ -217,7 +217,7 @@
             readURL(this);
         });
 
-        <?php 
+        <?php
             $country=\App\Models\BusinessSetting::where('key','country')->first();
         ?>
         var phone = $("#phone").intlTelInput({

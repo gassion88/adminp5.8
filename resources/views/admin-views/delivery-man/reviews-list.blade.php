@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title','Review List')
+@section('title',translate('Review List'))
 
 @push('css_or_js')
 
@@ -12,7 +12,7 @@
         <div class="page-header">
             <h1 class="page-header-title">
                 <span class="page-header-icon rating"><i class="tio-star"></i></span>
-                <span>{{__('messages.deliveryman')}} {{__('messages.reviews')}}</span> <span class="badge badge-soft-dark ml-2" id="itemCount">{{$reviews->total()}}</span></h1>
+                <span>{{translate('messages.deliveryman')}} {{translate('messages.reviews')}}</span> <span class="badge badge-soft-dark ml-2" id="itemCount">{{$reviews->total()}}</span></h1>
         </div>
         <!-- End Page Header -->
         <div class="row gx-2 gx-lg-3">
@@ -30,12 +30,12 @@
                                }'>
                             <thead class="thead-light">
                             <tr>
-                                <th>SL</th>
-                                <th class="w-30p">{{__('messages.deliveryman')}}</th>
-                                <th class="w-25p">{{__('messages.customer')}}</th>
-                                <th>{{__('messages.review')}}</th>
-                                <th>{{__('messages.rating')}}</th>
-                                <th>{{__('messages.status')}}</th>
+                                <th>{{ translate('messages.sl') }}</th>
+                                <th class="w-30p">{{translate('messages.deliveryman')}}</th>
+                                <th class="w-25p">{{translate('messages.customer')}}</th>
+                                <th>{{translate('messages.review')}}</th>
+                                <th>{{translate('messages.rating')}}</th>
+                                {{-- <th>{{translate('messages.status')}}</th> --}}
                             </tr>
                             </thead>
 
@@ -68,16 +68,16 @@
                                                 {{$review->rating}} <i class="tio-star"></i>
                                             </label>
                                         </td>
-                                        <td>
+                                        {{-- <td>
                                             <label class="toggle-switch toggle-switch-sm" for="reviewCheckbox{{$review->id}}">
-                                                <input type="checkbox" onclick="status_form_alert('status-{{$review['id']}}','{{$review->status?__('messages.you_want_to_hide_this_review_for_customer'):__('messages.you_want_to_show_this_review_for_customer')}}', event)" class="toggle-switch-input" id="reviewCheckbox{{$review->id}}" {{$review->status?'checked':''}}>
+                                                <input type="checkbox" onclick="status_form_alert('status-{{$review['id']}}','{{$review->status?translate('messages.you_want_to_hide_this_review_for_customer'):translate('messages.you_want_to_show_this_review_for_customer')}}', event)" class="toggle-switch-input" id="reviewCheckbox{{$review->id}}" {{$review->status?'checked':''}}>
                                                 <span class="toggle-switch-label">
                                                     <span class="toggle-switch-indicator"></span>
                                                 </span>
                                             </label>
                                             <form action="{{route('admin.delivery-man.reviews.status',[$review['id'],$review->status?0:1])}}" method="get" id="status-{{$review['id']}}">
                                             </form>
-                                        </td>
+                                        </td> --}}
                                     </tr>
                                 @endif
                             @endforeach
@@ -125,7 +125,7 @@
         function status_form_alert(id, message, e) {
             e.preventDefault();
             Swal.fire({
-                title: '{{__('messages.are_you_sure')}}',
+                title: '{{translate('messages.are_you_sure')}}',
                 text: message,
                 type: 'warning',
                 showCancelButton: true,

@@ -3,7 +3,7 @@
         data-hs-datatables-options='{
         "order": [],
         "orderCellsTop": true,
-        
+
         "entries": "#datatableEntries",
         "isResponsive": false,
         "isShowPaging": false,
@@ -11,17 +11,17 @@
         }'>
     <thead class="thead-light">
     <tr>
-        <th>{{__('messages.#')}}</th>
-        <th>{{__('messages.title')}}</th>
-        <th>{{__('messages.code')}}</th>
-        <th>{{__('messages.min')}} {{__('messages.purchase')}}</th>
-        <th>{{__('messages.max')}} {{__('messages.discount')}}</th>
-        <th>{{__('messages.discount')}}</th>
-        <th>{{__('messages.discount')}} {{__('messages.type')}}</th>
-        <th>{{__('messages.start')}} {{__('messages.date')}}</th>
-        <th>{{__('messages.expire')}} {{__('messages.date')}}</th>
-        <th>{{__('messages.status')}}</th>
-        <th>{{__('messages.action')}}</th>
+        <th>{{translate('messages.#')}}</th>
+        <th>{{translate('messages.title')}}</th>
+        <th>{{translate('messages.code')}}</th>
+        <th>{{translate('messages.min')}} {{translate('messages.purchase')}}</th>
+        <th>{{translate('messages.max')}} {{translate('messages.discount')}}</th>
+        <th>{{translate('messages.discount')}}</th>
+        <th>{{translate('messages.discount')}} {{translate('messages.type')}}</th>
+        <th>{{translate('messages.start')}} {{translate('messages.date')}}</th>
+        <th>{{translate('messages.expire')}} {{translate('messages.date')}}</th>
+        <th>{{translate('messages.status')}}</th>
+        <th>{{translate('messages.action')}}</th>
     </tr>
     </thead>
 
@@ -50,9 +50,9 @@
                 </label>
             </td>
             <td>
-                <a class="btn btn-sm btn-white" href="{{route('admin.coupon.update',[$coupon['id']])}}"title="{{__('messages.edit')}} {{__('messages.coupon')}}"><i class="tio-edit"></i>
+                <a class="btn btn-sm btn-white" href="{{route('admin.coupon.update',[$coupon['id']])}}"title="{{translate('messages.edit')}} {{translate('messages.coupon')}}"><i class="tio-edit"></i>
                 </a>
-                <a class="btn btn-sm btn-white" href="javascript:" onclick="form_alert('coupon-{{$coupon['id']}}','Want to delete this coupon ?')" title="{{__('messages.delete')}} {{__('messages.coupon')}}"><i class="tio-delete-outlined"></i>
+                <a class="btn btn-sm btn-white" href="javascript:" onclick="form_alert('coupon-{{$coupon['id']}}','{{ translate('Want to delete this coupon ?') }}')" title="{{translate('messages.delete')}} {{translate('messages.coupon')}}"><i class="tio-delete-outlined"></i>
                 </a>
                 <form action="{{route('admin.coupon.delete',[$coupon['id']])}}"
                             method="post" id="coupon-{{$coupon['id']}}">
@@ -66,6 +66,6 @@
 <hr>
 <table>
     <tfoot>
-    
+
     </tfoot>
 </table>

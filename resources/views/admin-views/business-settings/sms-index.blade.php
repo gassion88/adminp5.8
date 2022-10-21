@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title','SMS Module Setup')
+@section('title',translate('SMS Module Setup'))
 
 @push('css_or_js')
 
@@ -17,7 +17,7 @@
                             <img src="{{asset('/public/assets/admin/img/sms.png')}}" alt="public">
                         </div>
                         <span>
-                            {{__('messages.sms')}} {{__('messages.gateway')}} {{__('messages.setup')}}
+                            {{translate('messages.sms')}} {{translate('messages.gateway')}} {{translate('messages.setup')}}
                         </span>
                     </h1>
                 </div>
@@ -30,12 +30,12 @@
                 <div class="card h-100">
                     <div class="card-body p-30px">
                         <h5 class="d-flex flex-wrap justify-content-between align-items-center text-uppercase">
-                            <span>{{__('messages.twilio_sms')}}</span>
+                            <span>{{translate('messages.twilio_sms')}}</span>
                             <div class="pl-2">
                                 <img src="{{asset('/public/assets/admin/img/twilio.png')}}" alt="public">
                             </div>
                         </h5>
-                        <span class="badge badge-soft-info mb-3 white--space">NB : #OTP# will be replace with otp</span>
+                        <span class="badge badge-soft-info mb-3 white--space">{{ translate('NB : #OTP# will be replace with otp') }}</span>
                         @php($config=\App\CentralLogics\Helpers::get_business_settings('twilio_sms'))
                         <form action="{{env('APP_MODE')!='demo'?route('admin.business-settings.sms-module-update',['twilio_sms']):'javascript:'}}"
                             method="post">
@@ -44,53 +44,53 @@
                                 <label class="form-check form--check mr-2 mr-md-4">
                                     <input class="form-check-input" type="radio" name="status" value="1" {{isset($config) && $config['status']==1?'checked':''}}>
                                     <span class="form-check-label text--title pl-2">
-                                        {{__('messages.active')}}
+                                        {{translate('messages.active')}}
                                     </span>
                                 </label>
                                 <label class="form-check form--check">
                                     <input class="form-check-input" type="radio" name="status" value="0" {{isset($config) && $config['status']==0?'checked':''}}>
                                     <span class="form-check-label text--title pl-2">
-                                        {{__('messages.inactive')}}
+                                        {{translate('messages.inactive')}}
                                     </span>
                                 </label>
                             </div>
                             <div class="form-group">
                                 <label class="text-capitalize form-label">
-                                    {{__('messages.sid')}}
+                                    {{translate('messages.sid')}}
                                 </label>
                                 <input type="text" class="form-control h--45px text--subbody" name="sid"
-                                       value="{{env('APP_MODE')!='demo'?$config['sid']??"":''}}" placeholder="Ex: ACbf855229b8b2e5d02cad58e116365164">
+                                       value="{{env('APP_MODE')!='demo'?$config['sid']??"":''}}" placeholder="{{ translate('Ex: ACbf855229b8b2e5d02cad58e116365164') }}">
                             </div>
                             <div class="form-group">
                                 <label class="text-capitalize form-label">
-                                    {{__('messages.messaging_service_id')}}
+                                    {{translate('messages.messaging_service_id')}}
                                 </label>
                                 <input type="text" class="form-control h--45px text--subbody" name="messaging_service_id"
-                                       value="{{env('APP_MODE')!='demo'?$config['messaging_service_id']??"":''}}" placeholder="Ex: ACbf855229b8b2e5d02cad58e116365164">
+                                       value="{{env('APP_MODE')!='demo'?$config['messaging_service_id']??"":''}}" placeholder="{{ translate('Ex: ACbf855229b8b2e5d02cad58e116365164') }}">
                             </div>
                             <div class="form-group">
                                 <label class="text-capitalize form-label">
-                                    {{__('messages.token')}}
+                                    {{translate('messages.token')}}
                                 </label>
                                 <input type="text" class="form-control h--45px text--subbody" name="token"
-                                       value="{{env('APP_MODE')!='demo'?$config['token']??"":''}}" placeholder="Ex: ACbf855229b8b2e5d02cad58e116365164">
+                                       value="{{env('APP_MODE')!='demo'?$config['token']??"":''}}" placeholder="{{ translate('Ex: ACbf855229b8b2e5d02cad58e116365164') }}">
                             </div>
 
                             <div class="form-group">
-                                <label class="text-capitalize form-label">{{__('messages.from')}}</label>
+                                <label class="text-capitalize form-label">{{translate('messages.from')}}</label>
                                 <input type="text" class="form-control h--45px text--subbody" name="from"
-                                       value="{{env('APP_MODE')!='demo'?$config['from']??"":''}}" placeholder="Ex: +91-46482373636">
+                                       value="{{env('APP_MODE')!='demo'?$config['from']??"":''}}" placeholder="{{ translate('Ex: +91-46482373636') }}">
                             </div>
 
                             <div class="form-group">
                                 <label class="form-label text-capitalize">
-                                    {{__('messages.otp_template')}}
+                                    {{translate('messages.otp_template')}}
                                 </label>
                                 <input type="text" class="form-control h--45px text--subbody" name="otp_template"
-                                       value="{{env('APP_MODE')!='demo'?$config['otp_template']??"":''}}" placeholder="Ex : Your OTP is #otp#">
+                                       value="{{env('APP_MODE')!='demo'?$config['otp_template']??"":''}}" placeholder="{{ translate('Ex : Your OTP is #otp#') }}">
                             </div>
                             <div class="text-right">
-                                <button type="{{env('APP_MODE')!='demo'?'submit':'button'}}" onclick="{{env('APP_MODE')!='demo'?'':'call_demo()'}}" class="btn btn--primary">{{__('messages.save')}}</button>
+                                <button type="{{env('APP_MODE')!='demo'?'submit':'button'}}" onclick="{{env('APP_MODE')!='demo'?'':'call_demo()'}}" class="btn btn--primary">{{translate('messages.save')}}</button>
                             </div>
                         </form>
                     </div>
@@ -101,12 +101,12 @@
                 <div class="card h-100">
                     <div class="card-body p-30px">
                         <h5 class="d-flex flex-wrap justify-content-between align-items-center text-uppercase">
-                            <span>{{__('messages.nexmo_sms')}}</span>
+                            <span>{{translate('messages.nexmo_sms')}}</span>
                             <div class="pl-2">
                                 <img src="{{asset('/public/assets/admin/img/nexmo.png')}}" alt="public">
                             </div>
                         </h5>
-                        <span class="badge badge-soft-info mb-3 white--space">NB : #OTP# will be replace with otp</span>
+                        <span class="badge badge-soft-info mb-3 white--space">{{ translate('NB : #OTP# will be replace with otp') }}</span>
                         @php($config=\App\CentralLogics\Helpers::get_business_settings('nexmo_sms'))
                         <form action="{{env('APP_MODE')!='demo'?route('admin.business-settings.sms-module-update',['nexmo_sms']):'javascript:'}}"
                               method="post">
@@ -114,41 +114,41 @@
                             <div class="d-flex flex-wrap mb-4">
                                 <label class="form-check form--check mr-2 mr-md-4">
                                     <input class="form-check-input" type="radio" name="status" value="1" {{isset($config) && $config['status']==1?'checked':''}}>
-                                    <span class="form-check-label text--title pl-2">{{__('messages.active')}}</span>
+                                    <span class="form-check-label text--title pl-2">{{translate('messages.active')}}</span>
                                 </label>
                                 <label class="form-check form--check">
                                     <input class="form-check-input" type="radio" name="status" value="0" {{isset($config) && $config['status']==0?'checked':''}}>
-                                    <span class="form-check-label text--title pl-2">{{__('messages.inactive')}} </span>
+                                    <span class="form-check-label text--title pl-2">{{translate('messages.inactive')}} </span>
                                 </label>
                             </div>
 
                             <div class="form-group">
-                                <label class="text-capitalize form-label">{{__('messages.api_key')}}</label>
+                                <label class="text-capitalize form-label">{{translate('messages.api_key')}}</label>
                                 <input type="text" class="form-control h--45px text--subbody" name="api_key"
-                                       value="{{env('APP_MODE')!='demo'?$config['api_key']??"":''}}" placeholder="Ex :5923ec0959">
+                                       value="{{env('APP_MODE')!='demo'?$config['api_key']??"":''}}" placeholder="{{ translate('Ex :5923ec0959') }}">
                             </div>
                             <div class="form-group">
-                                <label class="text-capitalize form-label">{{__('messages.api_secret')}}</label>
+                                <label class="text-capitalize form-label">{{translate('messages.api_secret')}}</label>
                                 <input type="text" class="form-control h--45px text--subbody" name="api_secret"
-                                       value="{{env('APP_MODE')!='demo'?$config['api_secret']??"":''}}" placeholder="Ex : RYysbkdscnUIizx">
+                                       value="{{env('APP_MODE')!='demo'?$config['api_secret']??"":''}}" placeholder="{{ translate('Ex : RYysbkdscnUIizx') }}">
                             </div>
 
                             <div class="form-group">
-                                <label class="text-capitalize form-label">{{__('messages.from')}}</label><br>
+                                <label class="text-capitalize form-label">{{translate('messages.from')}}</label><br>
                                 <input type="text" class="form-control h--45px text--subbody" name="from"
-                                       value="{{env('APP_MODE')!='demo'?$config['from']??"":''}}" placeholder="Ex : +91-37384748392">
+                                       value="{{env('APP_MODE')!='demo'?$config['from']??"":''}}" placeholder="{{ translate('Ex : +91-37384748392') }}">
                             </div>
 
                             <div class="form-group">
-                                <label class="text-capitalize form-label">{{__('messages.otp_template')}}</label><br>
+                                <label class="text-capitalize form-label">{{translate('messages.otp_template')}}</label><br>
                                 <input type="text" class="form-control h--45px text--subbody" name="otp_template"
-                                       value="{{env('APP_MODE')!='demo'?$config['otp_template']??"":''}}" placeholder="Ex : Your OTP is #otp#">
+                                       value="{{env('APP_MODE')!='demo'?$config['otp_template']??"":''}}" placeholder="{{ translate('Ex : Your OTP is #otp#') }}">
                             </div>
                             <div class="text-right">
                                 <button type="{{env('APP_MODE')!='demo'?'submit':'button'}}"
                                 onclick="{{env('APP_MODE')!='demo'?'':'call_demo()'}}"
                                 class="btn btn--primary">
-                                    {{__('messages.save')}}
+                                    {{translate('messages.save')}}
                                 </button>
                             </div>
                         </form>
@@ -160,13 +160,13 @@
                 <div class="card h-100">
                     <div class="card-body p-30px">
                         <h5 class="d-flex flex-wrap justify-content-between align-items-center text-uppercase">
-                            <span>{{__('messages.2factor_sms')}}</span>
+                            <span>{{translate('messages.2factor_sms')}}</span>
                             <div class="pl-2">
                                 <img src="{{asset('/public/assets/admin/img/twilio.png')}}" alt="public">
                             </div>
                         </h5>
-                        <span class="badge badge-soft-info mb-1 white--space">EX of SMS provider's template : your OTP is XXXX here, please check.</span><br>
-                        <span class="badge badge-soft-info mb-3 white--space">NB : XXXX will be replace with otp</span>
+                        <span class="badge badge-soft-info mb-1 white--space">{{ translate('EX of SMS provider`s template : your OTP is XXXX here, please check.') }}</span><br>
+                        <span class="badge badge-soft-info mb-3 white--space">{{ translate('NB : XXXX will be replace with otp') }}</span>
                         @php($config=\App\CentralLogics\Helpers::get_business_settings('2factor_sms'))
                         <form action="{{env('APP_MODE')!='demo'?route('admin.business-settings.sms-module-update',['2factor_sms']):'javascript:'}}"
                               method="post">
@@ -175,23 +175,23 @@
                             <div class="d-flex flex-wrap mb-4">
                                 <label class="form-check form--check mr-2 mr-md-4">
                                     <input class="form-check-input" type="radio" name="status" value="1" {{isset($config) && $config['status']==1?'checked':''}}>
-                                    <label class="form-check-label text--title pl-2">{{__('messages.active')}}</label>
+                                    <label class="form-check-label text--title pl-2">{{translate('messages.active')}}</label>
                                 </label>
                                 <label class="form-check form--check">
                                     <input class="form-check-input" type="radio" name="status" value="0" {{isset($config) && $config['status']==0?'checked':''}} >
-                                    <label class="form-check-label text--title pl-2">{{__('messages.inactive')}} </label>
+                                    <label class="form-check-label text--title pl-2">{{translate('messages.inactive')}} </label>
                                 </label>
                             </div>
                             <div class="form-group">
-                                <label class="text-capitalize form-label">{{__('messages.api_key')}}</label>
+                                <label class="text-capitalize form-label">{{translate('messages.api_key')}}</label>
                                 <input type="text" class="form-control" name="api_key"
-                                       value="{{env('APP_MODE')!='demo'?$config['api_key']??"":''}}" placeholder="Ex :ACbf855229b8b2e5d02cad58e116365164 ">
+                                       value="{{env('APP_MODE')!='demo'?$config['api_key']??"":''}}" placeholder="{{ translate('Ex :ACbf855229b8b2e5d02cad58e116365164 ') }}">
                             </div>
 
                             <div class="text-right">
                                 <button type="{{env('APP_MODE')!='demo'?'submit':'button'}}"
                                     onclick="{{env('APP_MODE')!='demo'?'':'call_demo()'}}"
-                                    class="btn btn--primary">{{__('messages.save')}}
+                                    class="btn btn--primary">{{translate('messages.save')}}
                                 </button>
                             </div>
                         </form>
@@ -203,12 +203,12 @@
                 <div class="card h-100">
                     <div class="card-body p-30px">
                         <h5 class="d-flex flex-wrap justify-content-between align-items-center text-uppercase">
-                            <span>{{__('messages.msg91_sms')}}</span>
+                            <span>{{translate('messages.msg91_sms')}}</span>
                             <div class="pl-2">
                                 <img src="{{asset('/public/assets/admin/img/nexmo.png')}}" alt="public">
                             </div>
                         </h5>
-                        <span class="badge badge-soft-info mb-3 white--space">NB : Keep an OTP variable in your SMS providers OTP Template.</span><br>
+                        <span class="badge badge-soft-info mb-3 white--space">{{ translate('NB : Keep an OTP variable in your SMS providers OTP Template.') }}</span><br>
                         @php($config=\App\CentralLogics\Helpers::get_business_settings('msg91_sms'))
                         <form action="{{env('APP_MODE')!='demo'?route('admin.business-settings.sms-module-update',['msg91_sms']):'javascript:'}}"
                               method="post">
@@ -216,28 +216,28 @@
                             <div class="d-flex flex-wrap mb-4">
                                 <label class="form-check form--check mr-2 mr-md-4">
                                     <input class="form-check-input" type="radio" name="status" value="1" {{isset($config) && $config['status']==1?'checked':''}}>
-                                    <span class="form-check-label text--title pl-2">{{__('messages.active')}}</span>
+                                    <span class="form-check-label text--title pl-2">{{translate('messages.active')}}</span>
                                 </label>
                                 <label class="form-check form--check">
                                     <input class="form-check-input" type="radio" name="status" value="0" {{isset($config) && $config['status']==0?'checked':''}}>
-                                    <span class="form-check-label text--title pl-2">{{__('messages.inactive')}} </span>
+                                    <span class="form-check-label text--title pl-2">{{translate('messages.inactive')}} </span>
                                 </label>
                             </div>
                             <div class="form-group">
-                                <label class="text-capitalize form-label">{{__('messages.template_id')}}</label>
+                                <label class="text-capitalize form-label">{{translate('messages.template_id')}}</label>
                                 <input type="text" class="form-control h--45px text--subbody" name="template_id"
-                                       value="{{env('APP_MODE')!='demo'?$config['template_id']??"":''}}"  placeholder="Ex :ACbf855229b8b2e5d02cad58e116365164 ">
+                                       value="{{env('APP_MODE')!='demo'?$config['template_id']??"":''}}"  placeholder="{{ translate('Ex :ACbf855229b8b2e5d02cad58e116365164 ') }}">
                             </div>
                             <div class="form-group">
-                                <label class="text-capitalize form-label">{{__('messages.authkey')}}</label>
+                                <label class="text-capitalize form-label">{{translate('messages.authkey')}}</label>
                                 <input type="text" class="form-control h--45px text--subbody" name="authkey"
-                                       value="{{env('APP_MODE')!='demo'?$config['authkey']??"":''}}"  placeholder="Ex :ACbf855229b8b2e5d02cad58e116365164 ">
+                                       value="{{env('APP_MODE')!='demo'?$config['authkey']??"":''}}"  placeholder="{{ translate('Ex :ACbf855229b8b2e5d02cad58e116365164 ') }}">
                             </div>
 
                             <div class="text-right">
                                 <button type="{{env('APP_MODE')!='demo'?'submit':'button'}}"
                                     onclick="{{env('APP_MODE')!='demo'?'':'call_demo()'}}"
-                                    class="btn btn--primary">{{__('messages.save')}}</button>
+                                    class="btn btn--primary">{{translate('messages.save')}}</button>
                             </div>
                         </form>
                     </div>

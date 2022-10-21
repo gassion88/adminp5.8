@@ -1,77 +1,17 @@
 @extends('layouts.landing.app')
-@section('title', __('messages.restaurant_registration'))
+@section('title', translate('messages.restaurant_registration'))
 @push('css_or_js')
     <link rel="stylesheet" href="{{ asset('public/assets/admin') }}/css/toastr.css">
-    <style>
-        #map {
-            height: 350px;
-        }
-
-        @media only screen and (max-width: 768px) {
-
-            /* For mobile phones: */
-            #map {
-                height: 200px;
-            }
-        }
-
-        .nav-subtitle {
-            /* margin-left: 13px; */
-            color: #EF7822;
-        }
-
-        .form-container {
-            box-shadow: 4px 4px 10px rgba(65, 83, 179, 0.15);
-            border-radius: 8px;
-            border: 2px solid #b3bac3;
-            padding: 0.625rem;
-        }
-
-        .row-margin-top {
-            margin-top: 20px;
-        }
-
-        .submitBtn {
-            background: #EF7822;
-            text-transform: uppercase;
-            padding: 10px 30px;
-            box-shadow: 3px 3px 8px rgb(65 83 179 / 15%);
-            border-radius: 4px;
-            margin-right: 16px;
-            margin-top: 40px !important;
-            margin-bottom: 20px;
-        }
-
-        .btn-primary:hover {
-            background-color: #EF7833;
-            border-color: #EF7833;
-        }
-
-        .btn-primary {
-            background-color: #EF7822;
-            border-color: #EF7822;
-        }
-
-        .cover-photo {
-            margin-left: 150px;
-        }
-
-        .restaurant-logo {
-            margin-left: 100px;
-            margin-right: 150px;
-        }
-
-    </style>
 @endpush
 @section('content')
-    <section class="m-0">
+    <section class="m-0 landing-inline-1">
         <div class="container">
             <!-- Page Header -->
-            <div class="page-header" style="border-bottom:0;padding-bottom:0;">
+            <div class="page-header border-bottom-0 pb-0">
                 <div class="row align-items-center">
                     <div class="col-sm mb-2 mb-sm-0">
                         <h1 class="page-header-title text-center"><i class="tio-add-circle-outlined"></i>
-                            {{ __('messages.restaurant_application') }}</h1>
+                            {{ translate('messages.restaurant_application') }}</h1>
                     </div>
                 </div>
             </div>
@@ -81,24 +21,24 @@
                     <form class="card-body" action="{{ route('restaurant.store') }}" method="post" enctype="multipart/form-data"
                         class="js-validate">
                         @csrf
-                        <small class="nav-subtitle">{{ __('messages.restaurant') }}
-                            {{ __('messages.info') }}</small>
+                        <small class="nav-subtitle">{{ translate('messages.restaurant') }}
+                            {{ translate('messages.info') }}</small>
                         <br>
                         <div class="row row-margin-top">
                             <div class="col-md-6 col-lg-6 col-sm-12">
                                 <div class="form-group">
-                                    <label class="input-label" for="name">{{ __('messages.restaurant') }}
-                                        {{ __('messages.name') }}</label>
+                                    <label class="input-label" for="name">{{ translate('messages.restaurant') }}
+                                        {{ translate('messages.name') }}</label>
                                     <input type="text" name="name" class="form-control"
-                                        placeholder="{{ __('messages.first') }} {{ __('messages.name') }}"
-                                        value="{{ old('name') }}" required>                                    
+                                        placeholder="{{ translate('messages.first') }} {{ translate('messages.name') }}"
+                                        value="{{ old('name') }}" required>
                                 </div>
                             </div>
                             <div class="col-md-6 col-lg-6 col-sm-12">
                                 <div class="form-group">
-                                    <label class="input-label" for="tax">{{ __('messages.vat/tax') }} (%)</label>
+                                    <label class="input-label" for="tax">{{ translate('messages.vat/tax') }} (%)</label>
                                     <input type="number" name="tax" class="form-control"
-                                        placeholder="{{ __('messages.vat/tax') }}" min="0" step=".01" required
+                                        placeholder="{{ translate('messages.vat/tax') }}" min="0" step=".01" required
                                         value="{{ old('tax') }}">
                                 </div>
                             </div>
@@ -107,27 +47,27 @@
                         <div class="row row-margin-top">
                             <div class="col-md-6 col-lg-6 col-sm-12">
                                 <div class="form-group">
-                                    <label class="input-label" for="address">{{ __('messages.restaurant') }}
-                                        {{ __('messages.address') }}</label>
+                                    <label class="input-label" for="address">{{ translate('messages.restaurant') }}
+                                        {{ translate('messages.address') }}</label>
                                     <textarea type="text" name="address" class="form-control"
-                                        placeholder="{{ __('messages.restaurant') }} {{ __('messages.address') }}"
-                                        required>{{ old('address') }}</textarea>                                    
+                                        placeholder="{{ translate('messages.restaurant') }} {{ translate('messages.address') }}"
+                                        required>{{ old('address') }}</textarea>
                                 </div>
                             </div>
                             <div class="col-md-3 col-lg-3 col-sm-12">
                                 <div class="form-group">
                                     <label class="input-label"
-                                        for="minimum_delivery_time">{{ __('messages.minimum_delivery_time') }}</label>
+                                        for="minimum_delivery_time">{{ translate('messages.minimum_delivery_time') }}</label>
                                     <input type="text" name="minimum_delivery_time" class="form-control" placeholder="30"
-                                        pattern="^[0-9]{2}$" required value="{{ old('minimum_delivery_time') }}">                                    
+                                        pattern="^[0-9]{2}$" required value="{{ old('minimum_delivery_time') }}">
                                 </div>
                             </div>
                             <div class="col-md-3 col-lg-3 col-sm-12">
                                 <div class="form-group">
                                     <label class="input-label"
-                                        for="maximum_delivery_time">{{ __('messages.maximum_delivery_time') }}</label>
+                                        for="maximum_delivery_time">{{ translate('messages.maximum_delivery_time') }}</label>
                                     <input type="text" name="maximum_delivery_time" class="form-control" placeholder="40"
-                                        pattern="[0-9]{2}" required value="{{ old('maximum_delivery_time') }}">                                    
+                                        pattern="[0-9]{2}" required value="{{ old('maximum_delivery_time') }}">
                                 </div>
                             </div>
                         </div>
@@ -135,14 +75,11 @@
                             <div class="col-md-6 col-lg-6 col-sm-12 float-end">
                                 <div class="form-group">
                                     <center>
-                                        <img style="max-width: 100%;border: 1px solid; border-radius: 10px; height:150px;"
-                                            id="coverImageViewer"
-                                            src="{{ asset('public/assets/admin/img/900x400/img1.jpg') }}"
-                                            alt="Product thumbnail" />
+                                        <img class="landing-initial-1" id="coverImageViewer" src="{{ asset('public/assets/admin/img/900x400/img1.jpg') }}" alt="Product thumbnail" />
                                     </center>
-                                    <label for="name" class="pt-2">{{ __('messages.upload') }} {{ __('messages.cover') }}
-                                        {{ __('messages.photo') }} <span
-                                            class="text-danger">({{ __('messages.ratio') }}
+                                    <label for="name" class="pt-2">{{ translate('messages.upload') }} {{ translate('messages.cover') }}
+                                        {{ translate('messages.photo') }} <span
+                                            class="text-danger">({{ translate('messages.ratio') }}
                                             2:1)</span></label>
                                     <div class="custom-file">
                                         <input type="file" name="cover_photo" id="coverImageUpload" class="form-control"
@@ -153,15 +90,12 @@
                             <div class="col-md-6 col-lg-6 col-sm-12">
                                 <div class="form-group">
                                     <center>
-                                        <img style="max-width: 100%;border: 1px solid; border-radius: 10px; height:150px;"
-                                            id="logoImageViewer"
-                                            src="{{ asset('public/assets/admin/img/160x160/img1.jpg') }}"
-                                            alt="Product thumbnail" />
+                                        <img class="landing-initial-1" id="logoImageViewer" src="{{ asset('public/assets/admin/img/160x160/img1.jpg') }}" alt="Product thumbnail" />
                                     </center>
 
-                                    <label class="input-label pt-2">{{ __('messages.restaurant') }}
-                                        {{ __('messages.logo') }}<small style="color: red"> (
-                                            {{ __('messages.ratio') }}
+                                    <label class="input-label pt-2">{{ translate('messages.restaurant') }}
+                                        {{ translate('messages.logo') }}<small class="text-danger"> (
+                                            {{ translate('messages.ratio') }}
                                             1:1
                                             )</small></label>
                                     <div class="custom-file">
@@ -174,14 +108,14 @@
                         <div class="row row-margin-top">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="input-label" for="choice_zones">{{ __('messages.zone') }}<span
-                                            class="input-label-secondary" title="{{ __('messages.select_zone_for_map') }}"><img
+                                    <label class="input-label" for="choice_zones">{{ translate('messages.zone') }}<span
+                                            class="input-label-secondary" title="{{ translate('messages.select_zone_for_map') }}"><img
                                                 src="{{ asset('/public/assets/admin/img/info-circle.svg') }}"
-                                                alt="{{ __('messages.select_zone_for_map') }}"></span></label>
+                                                alt="{{ translate('messages.select_zone_for_map') }}"></span></label>
                                     <select name="zone_id" id="choice_zones" required class="form-control js-select2-custom"
-                                        data-placeholder="{{ __('messages.select') }} {{ __('messages.zone') }}">
-                                        <option value="" selected disabled>{{ __('messages.select') }}
-                                            {{ __('messages.zone') }}</option>
+                                        data-placeholder="{{ translate('messages.select') }} {{ translate('messages.zone') }}">
+                                        <option value="" selected disabled>{{ translate('messages.select') }}
+                                            {{ translate('messages.zone') }}</option>
                                         @foreach (\App\Models\Zone::active()->get() as $zone)
                                             @if (isset(auth('admin')->user()->zone_id))
                                                 @if (auth('admin')->user()->zone_id == $zone->id)
@@ -191,105 +125,105 @@
                                                 <option value="{{ $zone->id }}">{{ $zone->name }}</option>
                                             @endif
                                         @endforeach
-                                    </select>                                    
+                                    </select>
                                 </div>
 
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label class="input-label" for="latitude">{{ __('messages.latitude') }}<span
+                                    <label class="input-label" for="latitude">{{ translate('messages.latitude') }}<span
                                             class="input-label-secondary"
-                                            title="{{ __('messages.restaurant_lat_lng_warning') }}"><img
+                                            title="{{ translate('messages.restaurant_lat_lng_warning') }}"><img
                                                 src="{{ asset('/public/assets/admin/img/info-circle.svg') }}"
-                                                alt="{{ __('messages.restaurant_lat_lng_warning') }}"></span></label>
+                                                alt="{{ translate('messages.restaurant_lat_lng_warning') }}"></span></label>
                                     <input type="text" id="latitude" name="latitude" class="form-control"
-                                        placeholder="Ex : -94.22213" value="{{ old('latitude') }}" required readonly>                                    
+                                        placeholder="{{ translate('messages.Ex :') }} -94.22213" value="{{ old('latitude') }}" required readonly>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label class="input-label" for="longitude">{{ __('messages.longitude') }}<span
+                                    <label class="input-label" for="longitude">{{ translate('messages.longitude') }}<span
                                             class="input-label-secondary"
-                                            title="{{ __('messages.restaurant_lat_lng_warning') }}"><img
+                                            title="{{ translate('messages.restaurant_lat_lng_warning') }}"><img
                                                 src="{{ asset('/public/assets/admin/img/info-circle.svg') }}"
-                                                alt="{{ __('messages.restaurant_lat_lng_warning') }}"></span></label>
-                                    <input type="text" name="longitude" class="form-control" placeholder="Ex : 103.344322"
-                                        id="longitude" value="{{ old('longitude') }}" required readonly>                                    
+                                                alt="{{ translate('messages.restaurant_lat_lng_warning') }}"></span></label>
+                                    <input type="text" name="longitude" class="form-control" placeholder="{{ translate('messages.Ex :') }} 103.344322"
+                                        id="longitude" value="{{ old('longitude') }}" required readonly>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-12 col-lg-12 col-sm-12 mt-4">
-                            <input id="pac-input" class="controls rounded" style="height: 3em;width:fit-content;" title="{{__('messages.search_your_location_here')}}" type="text" placeholder="{{__('messages.search_here')}}"/>
+                            <input id="pac-input" class="controls rounded landing-initial-2" title="{{translate('messages.search_your_location_here')}}" type="text" placeholder="{{translate('messages.search_here')}}"/>
                             <div id="map"></div>
                         </div>
                         <br>
-                        <small class="nav-subtitle">{{ __('messages.owner') }}
-                            {{ __('messages.info') }}</small>
+                        <small class="nav-subtitle">{{ translate('messages.owner') }}
+                            {{ translate('messages.info') }}</small>
                         <div class="row row-margin-top">
                             <div class="col-md-4 col-lg-4 col-sm-12">
                                 <div class="form-group">
-                                    <label class="input-label" for="f_name">{{ __('messages.first') }}
-                                        {{ __('messages.name') }}</label>
+                                    <label class="input-label" for="f_name">{{ translate('messages.first') }}
+                                        {{ translate('messages.name') }}</label>
                                     <input type="text" name="f_name" class="form-control"
-                                        placeholder="{{ __('messages.first') }} {{ __('messages.name') }}"
+                                        placeholder="{{ translate('messages.first') }} {{ translate('messages.name') }}"
                                         value="{{ old('f_name') }}" required>
                                 </div>
                             </div>
                             <div class="col-md-4 col-lg-4 col-sm-12">
                                 <div class="form-group">
-                                    <label class="input-label" for="l_name">{{ __('messages.last') }}
-                                        {{ __('messages.name') }}</label>
+                                    <label class="input-label" for="l_name">{{ translate('messages.last') }}
+                                        {{ translate('messages.name') }}</label>
                                     <input type="text" name="l_name" class="form-control"
-                                        placeholder="{{ __('messages.last') }} {{ __('messages.name') }}"
-                                        value="{{ old('l_name') }}" required>                                    
+                                        placeholder="{{ translate('messages.last') }} {{ translate('messages.name') }}"
+                                        value="{{ old('l_name') }}" required>
                                 </div>
                             </div>
                             <div class="col-md-4 col-lg-4 col-sm-12">
                                 <div class="form-group">
-                                    <label class="input-label" for="phone">{{ __('messages.phone') }}</label>
-                                    <input type="text" name="phone" class="form-control" placeholder="Ex : 017********"
-                                        value="{{ old('phone') }}" required>                                    
+                                    <label class="input-label" for="phone">{{ translate('messages.phone') }}</label>
+                                    <input type="text" name="phone" class="form-control" placeholder="{{ translate('messages.Ex :') }} 017********"
+                                        value="{{ old('phone') }}" required>
                                 </div>
 
 
                             </div>
                         </div>
                         <br>
-                        <small class="nav-subtitle">{{ __('messages.login') }}
-                            {{ __('messages.info') }}</small>
+                        <small class="nav-subtitle">{{ translate('messages.login') }}
+                            {{ translate('messages.info') }}</small>
                         <div class="row mt-3">
                             <div class="col-md-4 col-sm-12 col-lg-4">
                                 <div class="form-group">
-                                    <label class="input-label" for="email">{{ __('messages.email') }}</label>
-                                    <input type="email" name="email" class="form-control" placeholder="Ex : ex@example.com"
-                                        value="{{ old('email') }}" required>                                    
+                                    <label class="input-label" for="email">{{ translate('messages.email') }}</label>
+                                    <input type="email" name="email" class="form-control" placeholder="{{ translate('messages.Ex :') }} ex@example.com"
+                                        value="{{ old('email') }}" required>
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-12 col-lg-4">
                                 <div class="form-group">
                                     <label class="input-label"
-                                        for="exampleInputPassword">{{ __('messages.password') }}</label>
+                                        for="exampleInputPassword">{{ translate('messages.password') }}</label>
                                     <input type="password" name="password"
-                                        placeholder="{{ __('messages.password_length_placeholder', ['length' => '6+']) }}"
+                                        placeholder="{{ translate('messages.password_length_placeholder', ['length' => '6+']) }}"
                                         class="form-control form-control-user" minlength="6" id="exampleInputPassword" required
-                                        value="{{ old('password') }}">                                    
+                                        value="{{ old('password') }}">
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-12 col-lg-4">
                                 <div class="form-group">
                                     <label class="input-label"
-                                        for="signupSrConfirmPassword">{{ __('messages.confirm_password') }}</label>
+                                        for="signupSrConfirmPassword">{{ translate('messages.confirm_password') }}</label>
                                     <input type="password" name="confirm-password" class="form-control form-control-user"
                                         minlength="6" id="exampleRepeatPassword"
-                                        placeholder="{{ __('messages.password_length_placeholder', ['length' => '6+']) }}"
+                                        placeholder="{{ translate('messages.password_length_placeholder', ['length' => '6+']) }}"
                                         required value="{{ old('confirm-password') }}">
-                                    <div class="pass invalid-feedback">{{ __('messages.password_not_matched') }}</div>                                    
+                                    <div class="pass invalid-feedback">{{ translate('messages.password_not_matched') }}</div>
                                 </div>
 
                             </div>
                         </div>
                         <button type="submit"
-                            class="btn btn-primary float-right submitBtn">{{ __('messages.submit') }}</button>
+                            class="btn btn-primary float-right submitBtn">{{ translate('messages.submit') }}</button>
                     </form>
                 </div>
             </div>
@@ -367,13 +301,13 @@
 
                     },
                     onExtensionErr: function(index, file) {
-                        toastr.error('{{ __('messages.please_only_input_png_or_jpg_type_file') }}', {
+                        toastr.error('{{ translate('messages.please_only_input_png_or_jpg_type_file') }}', {
                             CloseButton: true,
                             ProgressBar: true
                         });
                     },
                     onSizeErr: function(index, file) {
-                        toastr.error('{{ __('messages.file_size_too_big') }}', {
+                        toastr.error('{{ translate('messages.file_size_too_big') }}', {
                             CloseButton: true,
                             ProgressBar: true
                         });

@@ -1,6 +1,6 @@
 @extends('layouts.vendor.app')
 
-@section('title','Review List')
+@section('title',translate('Review List'))
 
 @push('css_or_js')
 
@@ -17,7 +17,7 @@
                             <img src="{{asset('/public/assets/admin/img/resturant-panel/page-title/review.png')}}" alt="public">
                         </div>
                         <span>
-                            {{__('messages.customers')}} {{__('messages.reviews')}}
+                            {{translate('messages.customers')}} {{translate('messages.reviews')}}
                         </span>
                     </h2>
                 </div>
@@ -31,7 +31,7 @@
                 <div class="search--button-wrapper justify-content-end">
                     <form action="javascript:" id="search-form" class="my-2 vendor--search">
                         <div class="input--group input-group">
-                            <input type="search" name="search" id="column1_search" class="form-control" placeholder="Ex : Search by food name, name or phone..." required>
+                            <input type="search" name="search" id="column1_search" class="form-control" placeholder="{{ translate('messages.Ex :') }} {{ translate('Search by food name, name or phone...') }}" required>
                             <button type="submit" class="btn btn--secondary"><i class="tio-search"></i></button>
                         </div>
                     </form>
@@ -50,11 +50,11 @@
                         }'>
                     <thead class="thead-light">
                     <tr>
-                        <th>SL</th>
-                        <th>{{__('messages.food')}}</th>
-                        <th>{{__('messages.reviewer')}}</th>
-                        <th>{{__('messages.review')}}</th>
-                        <th>{{__('messages.date')}}</th>
+                        <th>{{ translate('messages.sl') }}</th>
+                        <th>{{translate('messages.food')}}</th>
+                        <th>{{translate('messages.reviewer')}}</th>
+                        <th>{{translate('messages.review')}}</th>
+                        <th>{{translate('messages.date')}}</th>
                     </tr>
                     </thead>
 
@@ -77,7 +77,7 @@
                                     </div>
                                 </div>
                                 @else
-                                    {{__('messages.Food deleted!')}}
+                                    {{translate('messages.Food deleted!')}}
                                 @endif
                             </td>
                             <td>
@@ -89,11 +89,11 @@
                                     <span class="d-block font-size-sm text-body">{{Str::limit($review->customer->phone)}}</span>
                                 </div>
                                 @else
-                                {{__('messages.customer_not_found')}}
+                                {{translate('messages.customer_not_found')}}
                                 @endif
                             </td>
                             <td>
-                                <div class="text-wrap" style="width: 18rem;">
+                                <div class="text-wrap w-18rem">
                                     <label class="rating">
                                         <i class="tio-star"></i>
                                         <span>{{$review->rating}}</span>

@@ -1,5 +1,5 @@
 @extends('layouts.vendor.app')
-@section('title',__('messages.Bank Info View'))
+@section('title',translate('messages.Bank Info View'))
 @push('css_or_js')
     <!-- Custom styles for this page -->
     <link href="{{asset('public/assets/back-end')}}/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -34,8 +34,8 @@
                 <div class="card">
                     <div class="card-header flex-wrap justify-content-end p-2 px-xl-4">
                         @if($data->holder_name)
-                            <button class="btn btn--primary m-1 m-sm-2" type="button" data-toggle="modal" data-target="#update-modal"><i class="tio-edit"></i> {{__('messages.update')}}</button>
-                            <a class="btn btn--danger m-1 m-sm-2" href="javascript:void(0)" onclick="form_alert('del','Delete Bank Info ?')"><i class="tio-delete-outlined"></i> {{__('messages.delete')}}</a>
+                            <button class="btn btn--primary m-1 m-sm-2" type="button" data-toggle="modal" data-target="#update-modal"><i class="tio-edit"></i> {{translate('messages.update')}}</button>
+                            <a class="btn btn--danger m-1 m-sm-2" href="javascript:void(0)" onclick="form_alert('del','{{ translate('Delete Bank Info ?') }}')"><i class="tio-delete-outlined"></i> {{translate('messages.delete')}}</a>
                             <form action="{{ route('vendor.profile.bank_delete') }}" id="del" method="post">
                                 @csrf @method('post')
                             </form>
@@ -50,7 +50,7 @@
                                     <div class="bank--card__header border-bottom">
                                         <div class="title">
                                             @if($data->holder_name)
-                                                {{__('messages.holder_name')}} : {{$data->holder_name}}
+                                                {{translate('messages.holder_name')}} : {{$data->holder_name}}
                                             @else
                                                 {{ translate('Please Add Bank Information') }}
                                             @endif
@@ -61,7 +61,7 @@
                                         <ul>
                                             <li>
                                                 <h5>
-                                                    {{__('messages.bank_name')}} :
+                                                    {{translate('messages.bank_name')}} :
                                                 </h5>
                                                 <div class="info">
                                                     {{$data->bank_name ? $data->bank_name : '...'}}
@@ -69,7 +69,7 @@
                                             </li>
                                             <li>
                                                 <h5>
-                                                    {{__('messages.branch')}} :
+                                                    {{translate('messages.branch')}} :
                                                 </h5>
                                                 <div class="info">
                                                     {{$data->branch ? $data->branch : '...'}}
@@ -77,7 +77,7 @@
                                             </li>
                                             <li>
                                                 <h5>
-                                                    {{__('messages.account_no')}} :
+                                                    {{translate('messages.account_no')}} :
                                                 </h5>
                                                 <div class="info">
                                                     {{$data->account_no ? $data->account_no : '...'}}
@@ -113,13 +113,13 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label class="form-label" for="name">{{__('messages.bank_name')}} <span class="text-danger">*</span></label>
+                                    <label class="form-label" for="name">{{translate('messages.bank_name')}} <span class="text-danger">*</span></label>
                                     <input type="text" name="bank_name" value="{{$data->bank_name}}"
                                             class="form-control h--45px" id="name"
                                             required maxlength="191">
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label" for="name">{{__('messages.branch')}} {{__('messages.name')}}<span class="text-danger">*</span></label>
+                                    <label class="form-label" for="name">{{translate('messages.branch')}} {{translate('messages.name')}}<span class="text-danger">*</span></label>
                                     <input type="text" name="branch" value="{{$data->branch}}" class="form-control h--45px"
                                             id="name"
                                             required maxlength="191">
@@ -130,13 +130,13 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label class="form-label" for="account_no">{{__('messages.holder_name')}} <span class="text-danger">*</span></label>
+                                    <label class="form-label" for="account_no">{{translate('messages.holder_name')}} <span class="text-danger">*</span></label>
                                     <input type="text" name="holder_name" value="{{$data->holder_name}}"
                                             class="form-control h--45px" id="account_no"
                                             required maxlength="191">
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label" for="account_no">{{__('messages.account_no')}}<span class="text-danger">*</span></label>
+                                    <label class="form-label" for="account_no">{{translate('messages.account_no')}}<span class="text-danger">*</span></label>
                                     <input type="text" name="account_no" value="{{$data->account_no}}"
                                             class="form-control h--45px" id="account_no"
                                             required maxlength="191">
@@ -147,11 +147,11 @@
                         </div>
 
                         <div class="btn--container justify-content-end">
-                            <button class="btn btn--reset" type="reset">{{__('messages.reset')}}</button>
+                            <button class="btn btn--reset" type="reset">{{translate('messages.reset')}}</button>
                             @if($data->holder_name)
-                                <button type="submit" class="btn btn--primary">{{__('messages.update')}}</button>
+                                <button type="submit" class="btn btn--primary">{{translate('messages.update')}}</button>
                             @else
-                                <button type="submit" class="btn btn--primary">{{__('messages.submit')}}</button>
+                                <button type="submit" class="btn btn--primary">{{translate('messages.submit')}}</button>
                             @endif
                         </div>
 

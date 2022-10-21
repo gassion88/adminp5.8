@@ -38,7 +38,7 @@ class PaypalPaymentController extends Controller
 
     public function payWithpaypal(Request $request)
     {
-        $order = Order::with(['details'])->where(['id' => session('order_id')])->first();
+        $order = Order::with(['details'])->where(['id' => $request->order_id])->first();
         $tr_ref = Str::random(6) . '-' . rand(1, 1000);
 
         $payer = new Payer();
@@ -100,11 +100,11 @@ class PaypalPaymentController extends Controller
             }
 
         } catch (\Exception $ex) {
-            Toastr::error(trans('messages.your_currency_is_not_supported',['method'=>trans('messages.paypal')]));
+            Toastr::error(translate('messages.your_currency_is_not_supported',['method'=>translate('messages.paypal')]));
             return back();
         }
 
-        Session::put('error', trans('messages.config_your_account',['method'=>trans('messages.paypal')]));
+        Session::put('error', translate('messages.config_your_account',['method'=>translate('messages.paypal')]));
         return back();
     }
 
@@ -112,7 +112,7 @@ class PaypalPaymentController extends Controller
     {
         $payment_id = Session::get('paypal_payment_id');
         if (empty($request['PayerID']) || empty($request['token'])) {
-            Session::put('error', trans('messages.payment_failed'));
+            Session::put('error', translate('messages.payment_failed'));
             return Redirect::back();
         }
 

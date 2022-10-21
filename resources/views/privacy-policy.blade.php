@@ -6,11 +6,11 @@
     <main>
         <div class="main-body-div">
             <!-- Top Start -->
-            <section class="top-start" style="min-height: 100px">
+            <section class="top-start min-h-100px">
                 <div class="container">
                     <div class="row">
                         <div class="col-12 mt-2 text-center">
-                            <h1>{{__('messages.privacy_policy')}}</h1>
+                            <h1>{{translate('messages.privacy_policy')}}</h1>
                         </div>
                         <div class="col-12">
                             {!! $data !!}

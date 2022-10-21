@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title','Food Bulk Import')
+@section('title',translate('Food Bulk Import'))
 
 @push('css_or_js')
 
@@ -14,7 +14,7 @@
                 <div class="card-header-icon d-inline-flex mr-2 img">
                     <img src="{{asset('/public/assets/admin/img/export.png')}}" alt="">
                 </div>
-                {{__('messages.foods')}} {{__('messages.bulk_import')}}
+                {{translate('messages.foods')}} {{translate('messages.bulk_import')}}
             </h1>
         </div>
         <!-- Content Row -->
@@ -47,21 +47,21 @@
                     </div>
                 </div>
                 <div class="jumbotron pt-1 pb-4 mb-0 bg-white">
-                    <h3>Instructions : </h3>
-                    <p>1. Download the format file and fill it with proper data.</p>
+                    <h3>{{ translate('Instructions') }} : </h3>
+                    <p>{{ translate('1. Download the format file and fill it with proper data.') }}</p>
 
-                    <p><p>2. You can download the example file to understand how the data must be filled.</p>
+                    <p><p>{{ translate('2. You can download the example file to understand how the data must be filled.') }}</p>
 
-                    <p>3. Once you have downloaded and filled the format file, upload it in the form below and
-                        submit.</p>
+                    <p>{{ translate('3. Once you have downloaded and filled the format file, upload it in the form below and
+                        submit.') }}</p>
 
-                    <p>4. After uploading foods you need to edit them and set image and variations.</p>
+                    <p>{{ translate('4. After uploading foods you need to edit them and set image and variations.') }}</p>
 
-                    <p>5. You can get restaurant id from their list, please input the right ids.</p>
+                    <p>{{ translate('5. You can get restaurant id from their list, please input the right ids.') }}</p>
 
-                    <p>6. You can upload your product images in product folder from gallery, and copy image`s path.</p>
+                    <p>{{ translate('6. You can upload your product images in product folder from gallery, and copy image`s path.') }}</p>
 
-                    <p>7. For veg food enter '1' and for non-veg enter '0' on veg field.</p>
+                    <p>{{ translate('7. For veg food enter 1 and for non-veg enter 0 on veg field.') }}</p>
 
                 </div>
                 <div class="text-center pb-4">

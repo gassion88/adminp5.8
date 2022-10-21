@@ -26,15 +26,6 @@
     <link rel="stylesheet" href="{{asset('public/assets/admin')}}/css/theme.minc619.css?v=1.0">
     <link rel="stylesheet" href="{{asset('public/assets/admin')}}/css/style.css">
 
-    <style>
-        .stripe-button-el {
-            display: none !important;
-        }
-
-        .razorpay-payment-button {
-            display: none !important;
-        }
-    </style>
     <script
         src="{{asset('public/assets/admin')}}/vendor/hs-navbar-vertical-aside/hs-navbar-vertical-aside-mini-cache.js"></script>
     <link rel="stylesheet" href="{{asset('public/assets/admin')}}/css/toastr.css">
@@ -60,10 +51,10 @@
 
                     @php($config=\App\CentralLogics\Helpers::get_business_settings('ssl_commerz_payment'))
                     @if($config['status'])
-                        <div class="col-md-6 mb-4" style="cursor: pointer">
+                        <div class="col-md-6 mb-4 cursor-pointer">
                             <div class="card" onclick="$('#ssl-form').submit()">
-                                <div class="card-body pt-2" style="height: 70px">
-                                    <form action="{{ url('/pay-ssl') }}" method="POST" class="needs-validation" id="ssl-form">
+                                <div class="card-body pt-2 h-70px">
+                                    <form action="{{ route('pay-ssl',request()->getQueryString()) }}" method="POST" class="needs-validation" id="ssl-form">
                                         <input type="hidden" value="{{ csrf_token() }}" name="_token"/>
                                         <button class="btn btn-block click-if-alone" type="submit">
                                             <img width="100"
@@ -77,9 +68,9 @@
 
                     @php($config=\App\CentralLogics\Helpers::get_business_settings('razor_pay'))
                     @if($config['status'])
-                        <div class="col-md-6 mb-4" style="cursor: pointer">
+                        <div class="col-md-6 mb-4 cursor-pointer">
                             <div class="card">
-                                <div class="card-body pt-1" style="height: 70px">
+                                <div class="card-body pt-1 h-70px">
                                     @php($config=\App\CentralLogics\Helpers::get_business_settings('razor_pay'))
                                     @php($order=\App\Models\Order::find(session('order_id')))
                                     <form action="{!!route('payment-razor',['order_id'=>$order['id']])!!}" method="POST">
@@ -111,11 +102,11 @@
 
                     @php($config=\App\CentralLogics\Helpers::get_business_settings('paypal'))
                     @if($config['status'])
-                        <div class="col-md-6 mb-4" style="cursor: pointer">
+                        <div class="col-md-6 mb-4 cursor-pointer">
                             <div class="card">
-                                <div class="card-body pb-0 pt-1" style="height: 70px">
+                                <div class="card-body pb-0 pt-1 h-70px">
                                     <form class="needs-validation" method="POST" id="payment-form"
-                                          action="{{route('pay-paypal')}}">
+                                          action="{{route('pay-paypal',request()->getQueryString())}}">
                                         {{ csrf_field() }}
                                         <button class="btn btn-block click-if-alone" type="submit">
                                             <img width="100"
@@ -130,9 +121,9 @@
 
                     @php($config=\App\CentralLogics\Helpers::get_business_settings('stripe'))
                     @if($config['status'])
-                        <div class="col-md-6 mb-4" style="cursor: pointer">
+                        <div class="col-md-6 mb-4 cursor-pointer">
                             <div class="card">
-                                <div class="card-body py-0" style="height: 70px">
+                                <div class="card-body py-0 h-70px">
                                     @php($config=\App\CentralLogics\Helpers::get_business_settings('stripe'))
                                     <button class="btn btn-block click-if-alone" type="button" id="checkout-button">
                                         <img width="100" src="{{asset('public/assets/admin/img/stripe.png')}}"/>
@@ -143,7 +134,7 @@
                                         var stripe = Stripe('{{$config['published_key']}}');
                                         var checkoutButton = document.getElementById("checkout-button");
                                         checkoutButton.addEventListener("click", function () {
-                                            fetch("{{route('pay-stripe')}}", {
+                                            fetch("{{route('pay-stripe',['order_id'=>$order->id])}}", {
                                                 method: "GET",
                                             }).then(function (response) {
                                                 console.log(response)
@@ -168,9 +159,9 @@
 
                     @php($config=\App\CentralLogics\Helpers::get_business_settings('paystack'))
                     @if($config['status'])
-                        <div class="col-md-6 mb-4" style="cursor: pointer">
+                        <div class="col-md-6 mb-4 cursor-pointer">
                             <div class="card">
-                                <div class="card-body py-0" style="height: 70px">
+                                <div class="card-body py-0 h-70px">
                                     @php($config=\App\CentralLogics\Helpers::get_business_settings('paystack'))
                                     @php($order=\App\Models\Order::find(session('order_id')))
                                     <form method="POST" action="{{ route('paystack-pay') }}" accept-charset="UTF-8"
@@ -192,7 +183,7 @@
                                                 <input type="hidden" name="reference"
                                                        value="{{ Paystack::genTranxRef() }}"> {{-- required --}}
                                                 <p>
-                                                    <button class="paystack-payment-button" style="display: none"
+                                                    <button class="paystack-payment-button initial-hidden"
                                                             type="submit"
                                                             value="Pay Now!"></button>
                                                 </p>
@@ -211,9 +202,9 @@
 
                     @php($config=\App\CentralLogics\Helpers::get_business_settings('senang_pay'))
                     @if($config['status'])
-                        <div class="col-md-6 mb-4" style="cursor: pointer">
+                        <div class="col-md-6 mb-4 cursor-pointer">
                             <div class="card">
-                                <div class="card-body pt-1" style="height: 70px">
+                                <div class="card-body pt-1 h-70px">
                                     @php($config=\App\CentralLogics\Helpers::get_business_settings('senang_pay'))
                                     @php($user=\App\Models\User::where(['id'=>$order['user_id']])->first())
                                     @php($secretkey = $config['secret_key'])
@@ -250,10 +241,10 @@
 
                     @php($config=\App\CentralLogics\Helpers::get_business_settings('flutterwave'))
                     @if($config['status'])
-                        <div class="col-md-6 mb-4" style="cursor: pointer">
+                        <div class="col-md-6 mb-4 cursor-pointer">
                             <div class="card">
-                                <div class="card-body pt-2" style="height: 70px">
-                                    <form method="POST" action="{{ route('flutterwave_pay') }}">
+                                <div class="card-body pt-2 h-70px">
+                                    <form method="POST" action="{{ route('flutterwave_pay',request()->getQueryString()) }}">
                                         {{ csrf_field() }}
 
                                         <button class="btn btn-block click-if-alone" type="submit">
@@ -268,10 +259,10 @@
 
                     @php($config=\App\CentralLogics\Helpers::get_business_settings('mercadopago'))
                     @if($config['status'])
-                        <div class="col-md-6 mb-4" style="cursor: pointer">
+                        <div class="col-md-6 mb-4 cursor-pointer">
                             <div class="card">
-                                <div class="card-body pt-2" style="height: 70px">
-                                    <a class="btn btn-block click-if-alone" href="{{route('mercadopago.index')}}">
+                                <div class="card-body pt-2 h-70px">
+                                    <a class="btn btn-block click-if-alone" href="{{route('mercadopago.index',request()->getQueryString())}}">
                                         <img width="150"
                                                 src="{{asset('public/assets/admin/img/MercadoPago_(Horizontal).svg')}}"/>
                                     </a>
@@ -283,9 +274,9 @@
 
                     @php($config=\App\CentralLogics\Helpers::get_business_settings('paymob_accept'))
                     @if($config['status'])
-                        <div class="col-md-6 mb-4" style="cursor: pointer">
+                        <div class="col-md-6 mb-4 cursor-pointer">
                             <div class="card">
-                                <div class="card-body" style="height: 100px">
+                                <div class="card-body h-100px">
                                     <form class="needs-validation" method="POST" id="payment-form-paymob"
                                         action="{{route('paymob-credit')}}">
                                         {{ csrf_field() }}
@@ -301,9 +292,9 @@
 
                     @php($config=\App\CentralLogics\Helpers::get_business_settings('bkash'))
                     @if(isset($config)  && $config['status'])
-                        <div class="col-md-6 mb-4" style="cursor: pointer">
+                        <div class="col-md-6 mb-4 cursor-pointer">
                             <div class="card">
-                                <div class="card-body" style="height: 100px">
+                                <div class="card-body h-100px">
                                     <button class="btn btn-block click-if-alone" id="bKash_button" onclick="BkashPayment()">
                                         <img width="100" src="{{asset('public/assets/admin/img/bkash.png')}}"/>
                                     </button>
@@ -314,10 +305,10 @@
 
                     @php($config=\App\CentralLogics\Helpers::get_business_settings('paytabs'))
                     @if(isset($config)  && $config['status'])
-                        <div class="col-md-6 mb-4" style="cursor: pointer">
+                        <div class="col-md-6 mb-4 cursor-pointer">
                             <div class="card">
-                                <div class="card-body" style="height: 100px">
-                                    <button class="btn btn-block click-if-alone" onclick="location.href='{{route('paytabs-payment')}}'" style="margin-top: -11px">
+                                <div class="card-body h-100px">
+                                    <button class="btn btn-block click-if-alone mt-n-11px" onclick="location.href='{{route('paytabs-payment')}}'">
                                         <img width="150" src="{{asset('public/assets/admin/img/paytabs.png')}}"/>
                                     </button>
                                 </div>
@@ -327,12 +318,11 @@
 
                     @php($config=\App\CentralLogics\Helpers::get_business_settings('paytm'))
                     @if(isset($config) && $config['status'])
-                        <div class="col-md-6 mb-4" style="cursor: pointer">
+                        <div class="col-md-6 mb-4 cursor-pointer">
                             <div class="card">
-                                <div class="card-body" style="height: 100px">
-                                    <a class="btn btn-block click-if-alone" href="{{route('paytm-payment')}}">
-                                        <img style="max-width: 150px; margin-top: -10px"
-                                            src="{{asset('public/assets/admin/img/paytm.png')}}"/>
+                                <div class="card-body h-100px">
+                                    <a class="btn btn-block click-if-alone" href="{{route('paytm-payment',request()->getQueryString())}}">
+                                        <img class="initial-70" src="{{asset('public/assets/admin/img/paytm.png')}}"/>
                                     </a>
                                 </div>
                             </div>
@@ -341,12 +331,11 @@
 
                     @php($config=\App\CentralLogics\Helpers::get_business_settings('liqpay'))
                     @if(isset($config) && $config['status'])
-                        <div class="col-md-6 mb-4" style="cursor: pointer">
+                        <div class="col-md-6 mb-4 cursor-pointer">
                             <div class="card">
-                                <div class="card-body" style="height: 100px">
-                                    <a class="btn btn-block click-if-alone" href="{{route('liqpay-payment')}}">
-                                        <img style="max-width: 150px; margin-top: 0px"
-                                            src="{{asset('public/assets/admin/img/liqpay4.png')}}"/>
+                                <div class="card-body h-100px">
+                                    <a class="btn btn-block click-if-alone" href="{{route('liqpay-payment',request()->getQueryString())}}">
+                                        <img class="initial-70 mt-0" src="{{asset('public/assets/admin/img/liqpay4.png')}}"/>
                                     </a>
                                 </div>
                             </div>

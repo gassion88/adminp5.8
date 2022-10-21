@@ -2,10 +2,10 @@
     <table class="table table--vertical-middle">
         <thead class="thead-light border-0 ">
             <tr>
-                <th class="py-2" scope="col">{{ __('Item') }}</th>
-                <th class="py-2" scope="col" class="text-center">{{ __('Qty') }}</th>
-                <th class="py-2 text-center" scope="col" class="text-right">{{ __('Price') }}</th>
-                <th class="py-2 text-center" scope="col">{{ __('Delete') }}</th>
+                <th class="py-2" scope="col">{{ translate('Item') }}</th>
+                <th class="py-2" scope="col" class="text-center">{{ translate('Qty') }}</th>
+                <th class="py-2 text-center" scope="col" class="text-right">{{ translate('Price') }}</th>
+                <th class="py-2 text-center" scope="col">{{ translate('Delete') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -87,20 +87,20 @@ $total = $total + $delivery_fee;
 <div class="box p-3">
     <dl class="row">
 
-        <dt class="col-6">{{ __('messages.addon') }}:</dt>
+        <dt class="col-6">{{ translate('messages.addon') }}:</dt>
         <dd class="col-6 text-right">{{ \App\CentralLogics\Helpers::format_currency($addon_price) }}</dd>
 
-        <dt class="col-6">{{ __('messages.subtotal') }}:</dt>
+        <dt class="col-6">{{ translate('messages.subtotal') }}:</dt>
         <dd class="col-6 text-right">{{ \App\CentralLogics\Helpers::format_currency($subtotal + $addon_price) }}</dd>
 
-        <dt class="col-6">{{ __('messages.discount') }} :</dt>
+        <dt class="col-6">{{ translate('messages.discount') }} :</dt>
         <dd class="col-6 text-right">-{{ \App\CentralLogics\Helpers::format_currency(round($discount_on_product, 2)) }}</dd>
 
-        <dt class="col-6">{{ __('messages.delivery_fee') }} :</dt>
+        <dt class="col-6">{{ translate('messages.delivery_fee') }} :</dt>
         <dd class="col-6 text-right" id="delivery_price">
             {{ \App\CentralLogics\Helpers::format_currency($delivery_fee, 2) }}</dd>
 
-        <dt class="col-6">Tax : </dt>
+        <dt class="col-6">{{ translate('messages.tax') }} : </dt>
         <dd class="col-6 text-right">
             {{ \App\CentralLogics\Helpers::format_currency(round($total_tax_amount, 2)) }}
         </dd>
@@ -162,7 +162,7 @@ $total = $total + $delivery_fee;
     <!-- Static Data -->
     <div class="row button--bottom-fixed g-1 bg-white">
         <div class="col-sm-6">
-            <button type="submit" class="btn  btn--primary btn-sm btn-block">Place {{ __('messages.order') }} </button>
+            <button type="submit" class="btn  btn--primary btn-sm btn-block">{{ translate('messages.place_order') }} </button>
         </div>
         <div class="col-sm-6">
             <a href="#" class="btn btn--reset btn-sm btn-block" onclick="emptyCart()">{{  translate('Clear Cart') }}</a>
@@ -175,7 +175,7 @@ $total = $total + $delivery_fee;
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header border-bottom py-3 bg-light">
-                <h5 class="modal-title">{{ __('messages.update_discount') }}</h5>
+                <h5 class="modal-title">{{ translate('messages.update_discount') }}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -184,23 +184,23 @@ $total = $total + $delivery_fee;
                 <form action="{{ route('admin.pos.discount') }}" method="post" class="row">
                     @csrf
                     <div class="form-group col-sm-6">
-                        <label for="">{{ __('messages.type') }}</label>
+                        <label for="">{{ translate('messages.type') }}</label>
                         <select name="type" class="form-control" id="discount_input_type"
                             onchange="document.getElementById('discount_input').max=(this.value=='percent'?100:1000000000);">
                             <option value="amount" {{ $discount_type == 'amount' ? 'selected' : '' }}>
-                                {{ __('messages.amount') }}({{ \App\CentralLogics\Helpers::currency_symbol() }})
+                                {{ translate('messages.amount') }}({{ \App\CentralLogics\Helpers::currency_symbol() }})
                             </option>
                             <option value="percent" {{ $discount_type == 'percent' ? 'selected' : '' }}>
-                                {{ __('messages.percent') }}(%)</option>
+                                {{ translate('messages.percent') }}(%)</option>
                         </select>
                     </div>
                     <div class="form-group col-sm-6">
-                        <label for="">{{ __('messages.discount') }}</label>
+                        <label for="">{{ translate('messages.discount') }}</label>
                         <input type="number" class="form-control" name="discount" min="0" id="discount_input"
                             value="{{ $discount }}" max="{{ $discount_type == 'percent' ? 100 : 1000000000 }}">
                     </div>
                     <div class="form-group col-sm-12 text-right mb-0">
-                        <button class="btn btn-sm btn--primary" type="submit">{{ __('messages.submit') }}</button>
+                        <button class="btn btn-sm btn--primary" type="submit">{{ translate('messages.submit') }}</button>
                     </div>
                 </form>
             </div>
@@ -212,7 +212,7 @@ $total = $total + $delivery_fee;
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header border-bottom py-3 bg-light">
-                <h5 class="modal-title">{{ __('Update tax') }}</h5>
+                <h5 class="modal-title">{{ translate('Update tax') }}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -222,12 +222,12 @@ $total = $total + $delivery_fee;
                     id="order_submit_form">
                     @csrf
                     <div class="form-group col-12">
-                        <label for="">{{ __('messages.tax') }}(%)</label>
+                        <label for="">{{ translate('messages.tax') }}(%)</label>
                         <input type="number" class="form-control" name="tax" min="0">
                     </div>
 
                     <div class="form-group col-sm-12 text-right mb-0">
-                        <button class="btn btn-sm btn--primary" type="submit">{{ __('messages.submit') }}</button>
+                        <button class="btn btn-sm btn--primary" type="submit">{{ translate('messages.submit') }}</button>
                     </div>
                 </form>
             </div>
@@ -262,29 +262,29 @@ $total = $total + $delivery_fee;
                                 for="">{{ translate('messages.contact_person_name') }}<span
                                             class="input-label-secondary text-danger">*</span></label>
                             <input type="text" class="form-control" name="contact_person_name"
-                                value="{{ $old ? $old['contact_person_name'] : '' }}" placeholder="Ex: Jhone">
+                                value="{{ $old ? $old['contact_person_name'] : '' }}" placeholder="{{ translate('messages.Ex :') }} Jhone">
                         </div>
                         <div class="col-md-6">
                             <label class="input-label"
                                 for="">{{ translate('Contact Number') }}<span
                                             class="input-label-secondary text-danger">*</span></label>
                             <input type="tel" class="form-control" name="contact_person_number"
-                                value="{{ $old ? $old['contact_person_number'] : '' }}"  placeholder="Ex: +3264124565">
+                                value="{{ $old ? $old['contact_person_number'] : '' }}"  placeholder="{{ translate('messages.Ex :') }} +3264124565">
                         </div>
                         <div class="col-md-4">
                             <label class="input-label" for="">{{ translate('messages.Road') }}<span
                                             class="input-label-secondary text-danger">*</span></label>
-                            <input type="text" class="form-control" name="road" value="{{ $old ? $old['road'] : '' }}"  placeholder="Ex: 4th">
+                            <input type="text" class="form-control" name="road" value="{{ $old ? $old['road'] : '' }}"  placeholder="{{ translate('messages.Ex :') }} 4th">
                         </div>
                         <div class="col-md-4">
                             <label class="input-label" for="">{{ translate('messages.House') }}<span
                                             class="input-label-secondary text-danger">*</span></label>
-                            <input type="text" class="form-control" name="house" value="{{ $old ? $old['house'] : '' }}" placeholder="Ex: 45/C">
+                            <input type="text" class="form-control" name="house" value="{{ $old ? $old['house'] : '' }}" placeholder="{{ translate('messages.Ex :') }} 45/C">
                         </div>
                         <div class="col-md-4">
                             <label class="input-label" for="">{{ translate('messages.Floor') }}<span
                                             class="input-label-secondary text-danger">*</span></label>
-                            <input type="text" class="form-control" name="floor" value="{{ $old ? $old['floor'] : '' }}"  placeholder="Ex: 1A">
+                            <input type="text" class="form-control" name="floor" value="{{ $old ? $old['floor'] : '' }}"  placeholder="{{ translate('messages.Ex :') }} 1A">
                         </div>
                         <div class="col-md-6">
                             <label class="input-label" for="">{{ translate('messages.longitude') }}<span
@@ -300,7 +300,7 @@ $total = $total + $delivery_fee;
                         </div>
                         <div class="col-md-12">
                             <label class="input-label" for="">{{ translate('messages.address') }}</label>
-                            <textarea name="address" class="form-control" cols="30" rows="3" placeholder="Ex: address">{{ $old ? $old['address'] : '' }}</textarea>
+                            <textarea name="address" class="form-control" cols="30" rows="3" placeholder="{{ translate('messages.Ex :') }} address">{{ $old ? $old['address'] : '' }}</textarea>
                         </div>
                         <div class="col-12">
                             <div class="d-flex justify-content-between">

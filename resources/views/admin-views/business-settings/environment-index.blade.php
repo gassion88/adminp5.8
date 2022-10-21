@@ -33,7 +33,7 @@
                                        for="exampleFormControlInput1">{{translate('APP_NAME')}}</label>
                                 <input type="text" value="{{ env('APP_NAME') }}"
                                        name="app_name" class="form-control"
-                                       placeholder="Ex : EFood" required disabled>
+                                       placeholder="{{ translate('messages.Ex :') }} EFood" required disabled>
                             </div>
                         </div>
                         <div class="col-md-4 col-12">
@@ -70,7 +70,7 @@
                                        for="exampleFormControlInput1">{{translate('APP_URL')}}</label>
                                 <input type="text" value="{{ env('APP_URL') }}"
                                        name="app_url" class="form-control"
-                                       placeholder="Ex : http://localhost" required disabled>
+                                       placeholder="{{ translate('messages.Ex :') }} http://localhost" required disabled>
                             </div>
                         </div>
                     </div>
@@ -82,7 +82,7 @@
                                        for="exampleFormControlInput1">{{translate('DB_CONNECTION')}}</label>
                                 <input type="text" value="{{ env('APP_MODE') != 'demo' ? env('DB_CONNECTION') : '---' }}"
                                        name="db_connection" class="form-control"
-                                       placeholder="Ex : mysql" required disabled>
+                                       placeholder="{{ translate('messages.Ex :') }} mysql" required disabled>
                             </div>
                         </div>
                         <div class="col-md-4 col-12">
@@ -91,7 +91,7 @@
                                        for="exampleFormControlInput1">{{translate('DB_HOST')}}</label>
                                 <input type="text" value="{{ env('APP_MODE') != 'demo' ? env('DB_HOST') : '---' }}"
                                        name="db_host" class="form-control"
-                                       placeholder="Ex : http://localhost/" required disabled>
+                                       placeholder="{{ translate('messages.Ex :') }} http://localhost/" required disabled>
                             </div>
                         </div>
                         <div class="col-md-4 col-12">
@@ -100,7 +100,7 @@
                                        for="exampleFormControlInput1">{{translate('DB_PORT')}}</label>
                                 <input type="text" value="{{ env('APP_MODE') != 'demo' ? env('DB_PORT') : '---' }}"
                                        name="db_port" class="form-control"
-                                       placeholder="Ex : 3306" required disabled>
+                                       placeholder="{{ translate('messages.Ex :') }} 3306" required disabled>
                             </div>
                         </div>
                         <div class="col-md-4 col-12">
@@ -109,7 +109,7 @@
                                        for="exampleFormControlInput1">{{translate('DB_DATABASE')}}</label>
                                 <input type="text" value="{{ env('APP_MODE') != 'demo' ? env('DB_DATABASE') : '---' }}"
                                        name="db_database" class="form-control"
-                                       placeholder="Ex : demo_db" required disabled>
+                                       placeholder="{{ translate('messages.Ex :') }} demo_db" required disabled>
                             </div>
                         </div>
                         <div class="col-md-4 col-12">
@@ -118,7 +118,7 @@
                                        for="exampleFormControlInput1">{{translate('DB_USERNAME')}}</label>
                                 <input type="text" value="{{ env('APP_MODE') != 'demo' ? env('DB_USERNAME') : '---' }}"
                                        name="db_username" class="form-control"
-                                       placeholder="Ex : root" required disabled>
+                                       placeholder="{{ translate('messages.Ex :') }} root" required disabled>
                             </div>
                         </div>
                         <div class="col-md-4 col-12">
@@ -127,7 +127,7 @@
                                        for="exampleFormControlInput1">{{translate('DB_PASSWORD')}}</label>
                                 <input type="text" value="{{ env('APP_MODE') != 'demo' ? env('DB_PASSWORD') : '---' }}"
                                        name="db_password" class="form-control"
-                                       placeholder="Ex : password" disabled>
+                                       placeholder="{{ translate('messages.Ex :') }} password" disabled>
                             </div>
                         </div>
                     </div>

@@ -323,6 +323,7 @@ class POSController extends Controller
 
     public function place_order(Request $request)
     {
+
         if(!$request->user_id){
             Toastr::error(translate('messages.no_customer_selected'));
             return back();
@@ -332,7 +333,7 @@ class POSController extends Controller
             return back();
         }
         if ($request->session()->has('cart')) {
-            if (count($request->session()->get('cart')) < 1) {
+            if (count($request->session()->get('cart')) < 2) {
                 Toastr::error(translate('messages.cart_empty_warning'));
                 return back();
             }

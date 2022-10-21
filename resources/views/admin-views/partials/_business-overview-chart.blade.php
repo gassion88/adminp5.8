@@ -2,9 +2,9 @@
 @if($params['zone_id']!='all')
     @php($zone_name=\App\Models\Zone::where('id',$params['zone_id'])->first()->name)
 @else
-    @php($zone_name='All')
+@php($zone_name = translate('All'))
 @endif
-<label class="badge badge-soft-info">Zone : {{$zone_name}}</label>
+<label class="badge badge-soft-info">{{ translate('messages.zone') }} : {{ $zone_name }}</label>
 
 <div class="chartjs-custom mx-auto">
     <canvas id="business-overview" class="mt-2"></canvas>

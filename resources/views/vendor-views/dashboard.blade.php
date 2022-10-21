@@ -1,6 +1,6 @@
 @extends('layouts.vendor.app')
 
-@section('title',__('messages.dashboard'))
+@section('title',translate('messages.dashboard'))
 
 
 @section('content')
@@ -14,11 +14,11 @@
                         <img src="{{asset('/public/assets/admin/img/resturant-panel/page-title/dashboard.png')}}" alt="public">
                     </div>
                     <span>
-                        {{__('messages.dashboard')}}
+                        {{translate('messages.dashboard')}}
                     </span>
                 </h1>
                 <span class="my-2 text--title d-block">
-                    {{__('messages.followup')}}
+                    {{translate('messages.followup')}}
                     <i class="tio-restaurant fz-30px"></i>
                 </span>
             </div>
@@ -31,15 +31,13 @@
                     <span class="card-header-icon">
                         <i class="tio-chart-bar-4"></i>
                     </span>
-                    {{__('messages.dashboard_order_statistics')}}
+                    {{translate('messages.dashboard_order_statistics')}}
                 </h4>
                 <div>
-                <a class="btn btn-sm btn--primary w-100 mb-3" onclick="get_delivery_man('https://hvarna.ru/vendor-panel/go_del?&number=')"
-                 href="javascript:">Вызвать курьера</a>
                     <select class="custom-select my-1" name="statistics_type" onchange="order_stats_update(this.value)">
                         <option
                             value="overall" {{$params['statistics_type'] == 'overall'?'selected':''}}>
-                            {{__('messages.Overall Statistics')}}
+                            {{translate('messages.Overall Statistics')}}
                         </option>
                         <option
                             value="today" {{$params['statistics_type'] == 'today'?'selected':''}}>
@@ -66,17 +64,17 @@
                     <div class="card-header flex-wrap justify-content-evenly justify-content-lg-between border-0">
                         <h4 class="card-title my-2 my-md-0">
                             <i class="tio-chart-bar-4"></i>
-                            {{__('messages.yearly_statistics')}}
+                            {{translate('messages.yearly_statistics')}}
                         </h4>
                         <div class="d-flex flex-wrap my-2 my-md-0 justify-content-center align-items-center">
                             @php($amount=array_sum($earning))
                             <span class="h5 m-0 mr-3 fz--11 d-flex align-items-center mb-2 mb-md-0">
-                                <span class="legend-indicator bg-primary" style="background-color: #7ECAFF!important;"></span>
-                                {{__('messages.commission_given')}} : {{\App\CentralLogics\Helpers::format_currency(array_sum($commission))}}
+                                <span class="legend-indicator bg-7ECAFF"></span>
+                                {{translate('messages.commission_given')}} : {{\App\CentralLogics\Helpers::format_currency(array_sum($commission))}}
                             </span>
                             <span class="h5 m-0 fz--11 d-flex align-items-center mb-2 mb-md-0">
-                                <span class="legend-indicator bg-primary" style="background-color: #0661CB!important;"></span>
-                                {{__('messages.total_earning')}} : {{\App\CentralLogics\Helpers::format_currency(array_sum($earning))}}
+                                <span class="legend-indicator bg-0661CB"></span>
+                                {{translate('messages.total_earning')}} : {{\App\CentralLogics\Helpers::format_currency(array_sum($earning))}}
                             </span>
                         </div>
                     </div>
@@ -89,8 +87,7 @@
                               {{ \App\CentralLogics\Helpers::currency_symbol() }}({{translate('messages.currency')}})
                             </div>
                             <div class="chartjs-custom w-75 flex-grow-1">
-                                <canvas id="updatingData" style="height: 20rem;"
-                                            data-hs-chartjs-options='{
+                                <canvas id="updatingData" class="h-20rem" data-hs-chartjs-options='{
                                     "type": "bar",
                                     "data": {
                                     "labels": ["Jan","Feb","Mar","April","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
@@ -184,8 +181,8 @@
         <div class="page-header">
             <div class="row align-items-center">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <h1 class="page-header-title">{{__('messages.welcome')}}, {{auth('vendor_employee')->user()->f_name}}.</h1>
-                    <p class="page-header-text">{{__('messages.employee_welcome_message')}}</p>
+                    <h1 class="page-header-title">{{translate('messages.welcome')}}, {{auth('vendor_employee')->user()->f_name}}.</h1>
+                    <p class="page-header-text">{{translate('messages.employee_welcome_message')}}</p>
                 </div>
             </div>
         </div>
@@ -216,30 +213,6 @@
     </script>
 
     <script>
-        function get_delivery_man(route){
-            Swal.fire({
-                    //text: message,
-                    title: 'Введите номер телефона клиента',
-                    type: 'warning',
-                    showCancelButton: true,
-                    cancelButtonColor: 'default',
-                    confirmButtonColor: '#FC6A57',
-                    cancelButtonText: 'Отмена',
-                    confirmButtonText: 'Вызвать курьера',
-                    inputPlaceholder: "Номер мобильного телефона",
-                    input: 'text',
-                    inputValidator: (value) => {
-                    if (!value) {
-                    return 'Вы не указали номер мобильного телефона клиента!'
-                    }
-                },
-                    preConfirm: (number) => {
-                        location.href = route + number;
-                    },
-                    allowOutsideClick: () => !Swal.isLoading()
-                })
-        }
-
         function order_stats_update(type) {
             $.ajaxSetup({
                 headers: {

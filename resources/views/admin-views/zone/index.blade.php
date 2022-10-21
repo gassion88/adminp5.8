@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title','Add new zone')
+@section('title',translate('Add new zone'))
 
 @push('css_or_js')
 
@@ -13,7 +13,7 @@
             <div class="row align-items-center">
                 <div class="col-sm mb-2 mb-sm-0">
                     <h1 class="page-header-title">
-                        <i class="tio-free-transform"></i>{{__('messages.zone')}} {{__('messages.setup')}}
+                        <i class="tio-free-transform"></i>{{translate('messages.zone')}} {{translate('messages.setup')}}
                     </h1>
                 </div>
             </div>
@@ -57,12 +57,12 @@
                             <div class="pl-xl-5 pl-xxl-0">
                                 <div class="form-group mb-3">
                                     <label class="input-label"
-                                        for="exampleFormControlInput1">{{__('messages.zone')}} {{__('messages.name')}}</label>
-                                    <input id="name" type="text" name="name" class="form-control h--45px" placeholder="Ex: abc area" value="{{old('name')}}" required>
+                                        for="exampleFormControlInput1">{{translate('messages.zone')}} {{translate('messages.name')}}</label>
+                                    <input id="name" type="text" name="name" class="form-control h--45px" placeholder="{{ translate('messages.Ex :') }} {{ translate('abc area') }}" value="{{old('name')}}" required>
                                 </div>
-                                <div class="form-group mb-3" style="display: none">
+                                <div class="form-group mb-3 initial-hidden">
                                     <label class="input-label"
-                                        for="exampleFormControlInput1">{{translate('messages.Coordinates')}}<span class="input-label-secondary" title="{{__('messages.draw_your_zone_on_the_map')}}">{{__('messages.draw_your_zone_on_the_map')}}</span></label>
+                                        for="exampleFormControlInput1">{{translate('messages.Coordinates')}}<span class="input-label-secondary" title="{{translate('messages.draw_your_zone_on_the_map')}}">{{translate('messages.draw_your_zone_on_the_map')}}</span></label>
                                         <textarea type="text" rows="8" name="coordinates"  id="coordinates" class="form-control" readonly></textarea>
                                 </div>
                                 <div class="row">
@@ -71,7 +71,7 @@
                                             <label class="input-label">
                                                 {{translate('messages.minimum_delivery_charge')}}  ({{\App\CentralLogics\Helpers::currency_symbol()}})
                                             </label>
-                                            <input id="minimum_delivery_charge" name="minimum_delivery_charge" type="number" class="form-control h--45px" placeholder="Ex: 10" required>
+                                            <input id="minimum_delivery_charge" name="minimum_delivery_charge" type="number" class="form-control h--45px" placeholder="{{ translate('messages.Ex :') }} 10" required>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
@@ -79,17 +79,17 @@
                                             <label class="input-label">
                                                 {{translate('messages.delivery_charge_per_km')}} ({{\App\CentralLogics\Helpers::currency_symbol()}})
                                             </label>
-                                            <input id="delivery_charge_per_km" name="per_km_delivery_charge" type="number" class="form-control h--45px" placeholder="Ex: 10" required>
+                                            <input id="delivery_charge_per_km" name="per_km_delivery_charge" type="number" class="form-control h--45px" placeholder="{{ translate('messages.Ex :') }} 10" required>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="map-warper overflow-hidden" style="border-radius: 5px;">
-                                    <input id="pac-input" class="controls rounded" style="height: 3em;width:fit-content;" title="{{__('messages.search_your_location_here')}}" type="text" placeholder="{{__('messages.search_here')}}"/>
-                                    <div id="map-canvas" style="height: 100%; margin:0px; padding: 0px;"></div>
+                                <div class="map-warper overflow-hidden rounded">
+                                    <input id="pac-input" class="controls rounded initial-8" title="{{translate('messages.search_your_location_here')}}" type="text" placeholder="{{translate('messages.search_here')}}"/>
+                                    <div id="map-canvas" class="h-100 m-0 p-0"></div>
                                 </div>
                                 <div class="btn--container mt-3 justify-content-end">
-                                    <button id="reset_btn" type="button" class="btn btn--reset">{{__('messages.reset')}}</button>
-                                    <button type="submit" class="btn btn--primary">{{__('messages.submit')}}</button>
+                                    <button id="reset_btn" type="button" class="btn btn--reset">{{translate('messages.reset')}}</button>
+                                    <button type="submit" class="btn btn--primary">{{translate('messages.submit')}}</button>
                                 </div>
                             </div>
                         </div>
@@ -101,13 +101,13 @@
                 <div class="card">
                     <div class="card-header py-2 flex-wrap border-0 align-items-center">
                         <div class="search--button-wrapper">
-                            <h5 class="card-title">{{__('messages.zone')}} {{__('messages.list')}}<span class="badge badge-soft-dark ml-2" id="itemCount">{{$zones->total()}}</span></h5>
+                            <h5 class="card-title">{{translate('messages.zone')}} {{translate('messages.list')}}<span class="badge badge-soft-dark ml-2" id="itemCount">{{$zones->total()}}</span></h5>
                             <form action="javascript:" id="search-form" class="my-2 mr-sm-2 mr-xl-4 ml-sm-auto flex-grow-1 flex-grow-sm-0">
                                             <!-- Search -->
                                 @csrf
                                 <div class="input--group input-group input-group-merge input-group-flush">
                                     <input id="datatableSearch_" type="search" name="search" class="form-control"
-                                            placeholder="Ex: {{__('messages.search')}} by Name" aria-label="{{__('messages.search')}}" required>
+                                            placeholder="{{ translate('messages.Search_by_name') }}" aria-label="{{translate('messages.search')}}" required>
                                     <button type="submit" class="btn btn--secondary">
                                         <i class="tio-search"></i>
                                     </button>
@@ -121,26 +121,26 @@
                                      "target": "#usersExportDropdown",
                                      "type": "css-animation"
                                    }'>
-                                    <i class="tio-download-to mr-1"></i> {{__('messages.export')}}
+                                    <i class="tio-download-to mr-1"></i> {{translate('messages.export')}}
                                 </a>
 
                                 <div id="usersExportDropdown"
                                      class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-sm-right">
-                                    {{--<span class="dropdown-header">{{__('messages.options')}}</span>
+                                    {{--<span class="dropdown-header">{{translate('messages.options')}}</span>
                                     <a id="export-copy" class="dropdown-item" href="javascript:;">
                                         <img class="avatar avatar-xss avatar-4by3 mr-2"
                                              src="{{asset('public/assets/admin')}}/svg/illustrations/copy.svg"
                                              alt="Image Description">
-                                        {{__('messages.copy')}}
+                                        {{translate('messages.copy')}}
                                     </a>
                                     <a id="export-print" class="dropdown-item" href="javascript:;">
                                         <img class="avatar avatar-xss avatar-4by3 mr-2"
                                              src="{{asset('public/assets/admin')}}/svg/illustrations/print.svg"
                                              alt="Image Description">
-                                        {{__('messages.print')}}
+                                        {{translate('messages.print')}}
                                     </a>
                                     <div class="dropdown-divider"></div>--}}
-                                    <span class="dropdown-header">{{__('messages.download')}} {{__('messages.options')}}</span>
+                                    <span class="dropdown-header">{{translate('messages.download')}} {{translate('messages.options')}}</span>
 {{--                                     <form action="{{route('admin.zone.export-zones')}}" method="post">
                                         @csrf
                                         <input type="hidden" name="type" value="excel">
@@ -148,26 +148,26 @@
                                             <img class="avatar avatar-xss avatar-4by3 mr-2"
                                             src="{{asset('public/assets/admin')}}/svg/components/excel.svg"
                                             alt="Image Description">
-                                            {{__('messages.excel')}}
+                                            {{translate('messages.excel')}}
                                         </button>
                                     </form> --}}
                                     <a target="__blank" id="export-excel" class="dropdown-item" href="{{route('admin.zone.export-zones', ['type'=>'excel'])}}">
                                         <img class="avatar avatar-xss avatar-4by3 mr-2"
                                         src="{{asset('public/assets/admin')}}/svg/components/excel.svg"
                                         alt="Image Description">
-                                        {{__('messages.excel')}}
+                                        {{translate('messages.excel')}}
                                     </a>
                                     <a target="__blank" id="export-csv" class="dropdown-item" href="{{route('admin.zone.export-zones', ['type'=>'csv'])}}">
                                         <img class="avatar avatar-xss avatar-4by3 mr-2"
                                              src="{{asset('public/assets/admin')}}/svg/components/placeholder-csv-format.svg"
                                              alt="Image Description">
-                                        .{{__('messages.csv')}}
+                                        .{{translate('messages.csv')}}
                                     </a>
                                     {{--<a id="export-pdf" class="dropdown-item" href="javascript:;">
                                         <img class="avatar avatar-xss avatar-4by3 mr-2"
                                              src="{{asset('public/assets/admin')}}/svg/components/pdf.svg"
                                              alt="Image Description">
-                                        {{__('messages.pdf')}}
+                                        {{translate('messages.pdf')}}
                                     </a>--}}
                                 </div>
                             </div>
@@ -186,12 +186,12 @@
                             <thead class="thead-light">
                             <tr>
                                 <th>{{translate('messages.sl')}}</th>
-                                <th class="text-center">{{__('messages.zone')}} {{__('messages.id')}}</th>
-                                <th class="pl-5">{{__('messages.name')}}</th>
-                                <th class="text-center">{{__('messages.restaurants')}}</th>
-                                <th class="text-center">{{__('messages.deliverymen')}}</th>
-                                <th >{{__('messages.status')}}</th>
-                                <th style="width:40px">{{__('messages.action')}}</th>
+                                <th class="text-center">{{translate('messages.zone')}} {{translate('messages.id')}}</th>
+                                <th class="pl-5">{{translate('messages.name')}}</th>
+                                <th class="text-center">{{translate('messages.restaurants')}}</th>
+                                <th class="text-center">{{translate('messages.deliverymen')}}</th>
+                                <th >{{translate('messages.status')}}</th>
+                                <th class="w-40px">{{translate('messages.action')}}</th>
                             </tr>
                             </thead>
 
@@ -221,7 +221,7 @@
                                     </td>
                                     <td>
                                         <label class="toggle-switch toggle-switch-sm" for="stocksCheckbox{{$zone->id}}">
-                                            <input type="checkbox" onclick="status_form_alert('status-{{$zone['id']}}','All the restaurants & delivery men under this zone will not be shown in the website or app', event)" class="toggle-switch-input" id="stocksCheckbox{{$zone->id}}" {{$zone->status?'checked':''}}>
+                                            <input type="checkbox" onclick="status_form_alert('status-{{$zone['id']}}','{{ translate('All the restaurants & delivery men under this zone will not be shown in the website or app') }}', event)" class="toggle-switch-input" id="stocksCheckbox{{$zone->id}}" {{$zone->status?'checked':''}}>
                                             <span class="toggle-switch-label">
                                                 <span class="toggle-switch-indicator"></span>
                                             </span>
@@ -232,10 +232,10 @@
                                     <td>
                                         <div class="pl-1">
                                             <a class="btn btn-sm btn--primary btn-outline-primary action-btn"
-                                                href="{{route('admin.zone.edit',[$zone['id']])}}" title="{{__('messages.edit')}} {{__('messages.zone')}}"><i class="tio-edit"></i>
+                                                href="{{route('admin.zone.edit',[$zone['id']])}}" title="{{translate('messages.edit')}} {{translate('messages.zone')}}"><i class="tio-edit"></i>
                                             </a>
                                             {{--<a class="btn btn-sm btn-white" href="javascript:"
-                                            onclick="form_alert('zone-{{$zone['id']}}','Want to delete this zone ?')" title="{{__('messages.delete')}} {{__('messages.zone')}}"><i class="tio-delete-outlined"></i>
+                                            onclick="form_alert('zone-{{$zone['id']}}','Want to delete this zone ?')" title="{{translate('messages.delete')}} {{translate('messages.zone')}}"><i class="tio-delete-outlined"></i>
                                             </a>
                                             <form action="{{route('admin.zone.delete',[$zone['id']])}}" method="post" id="zone-{{$zone['id']}}">
                                                 @csrf @method('delete')

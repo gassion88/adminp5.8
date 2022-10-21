@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title',$restaurant->name."'s Foods")
+@section('title',$restaurant->name."'s".translate('messages.review'))
 
 @push('css_or_js')
     <!-- Custom styles for this page -->
@@ -19,13 +19,13 @@
         </div>
         <!-- Nav Scroller -->
         <div class="js-nav-scroller hs-nav-scroller-horizontal">
-            <span class="hs-nav-scroller-arrow-prev" style="display: none;">
+            <span class="hs-nav-scroller-arrow-prev initial-hidden">
                 <a class="hs-nav-scroller-arrow-link" href="javascript:;">
                     <i class="tio-chevron-left"></i>
                 </a>
             </span>
 
-            <span class="hs-nav-scroller-arrow-next" style="display: none;">
+            <span class="hs-nav-scroller-arrow-next initial-hidden">
                 <a class="hs-nav-scroller-arrow-link" href="javascript:;">
                     <i class="tio-chevron-right"></i>
                 </a>
@@ -34,28 +34,28 @@
             <!-- Nav -->
             <ul class="nav nav-tabs page-header-tabs">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('admin.vendor.view', $restaurant->id)}}">{{__('messages.overview')}}</a>
+                    <a class="nav-link" href="{{route('admin.vendor.view', $restaurant->id)}}">{{translate('messages.overview')}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'order'])}}"  aria-disabled="true">{{__('messages.orders')}}</a>
+                    <a class="nav-link" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'order'])}}"  aria-disabled="true">{{translate('messages.orders')}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'product'])}}"  aria-disabled="true">{{__('messages.foods')}}</a>
+                    <a class="nav-link" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'product'])}}"  aria-disabled="true">{{translate('messages.foods')}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'reviews'])}}"  aria-disabled="true">{{__('messages.reviews')}}</a>
+                    <a class="nav-link active" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'reviews'])}}"  aria-disabled="true">{{translate('messages.reviews')}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'discount'])}}"  aria-disabled="true">{{__('discounts')}}</a>
+                    <a class="nav-link" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'discount'])}}"  aria-disabled="true">{{translate('discounts')}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'transaction'])}}"  aria-disabled="true">{{__('messages.transactions')}}</a>
+                    <a class="nav-link" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'transaction'])}}"  aria-disabled="true">{{translate('messages.transactions')}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'settings'])}}"  aria-disabled="true">{{__('messages.settings')}}</a>
+                    <a class="nav-link" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'settings'])}}"  aria-disabled="true">{{translate('messages.settings')}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'conversations'])}}"  aria-disabled="true">{{__('messages.conversations')}}</a>
+                    <a class="nav-link" href="{{route('admin.vendor.view', ['restaurant'=>$restaurant->id, 'tab'=> 'conversations'])}}"  aria-disabled="true">{{translate('messages.conversations')}}</a>
                 </li>
             </ul>
             <!-- End Nav -->
@@ -276,12 +276,12 @@
                         }'>
                     <thead class="thead-light">
                         <tr>
-                            <th class="text-center" style="max-width:90px">{{translate('messages.sl')}}</th>
-                            <th>{{__('messages.food')}}</th>
+                            <th class="text-center max-90px">{{translate('messages.sl')}}</th>
+                            <th>{{translate('messages.food')}}</th>
                             <th class="pl-4">{{translate('messages.reviewer_info')}}</th>
-                            <th>{{__('messages.review')}}</th>
-                            <th>{{__('messages.date')}}</th>
-                            <th style="width:100px" class="text-center">{{translate('messages.status')}}</th>
+                            <th>{{translate('messages.review')}}</th>
+                            <th>{{translate('messages.date')}}</th>
+                            <th class="text-center w-100px">{{translate('messages.status')}}</th>
                         </tr>
                     </thead>
 
@@ -307,7 +307,7 @@
                                     </div>
                                 </a>
                             @else
-                                {{__('messages.Food deleted!')}}
+                                {{translate('messages.Food deleted!')}}
                             @endif
                             </td>
                             <td>
@@ -322,11 +322,11 @@
                                     </div>
                                 </a>
                                 @else
-                                    {{__('messages.customer_not_found')}}
+                                    {{translate('messages.customer_not_found')}}
                                 @endif
                             </td>
                             <td>
-                                <div class="text-wrap" style="width: 18rem;">
+                                <div class="text-wrap w-18rem">
                                     <span class="d-block rating">
                                         {{$review->rating}} <i class="tio-star"></i>
                                     </span>
@@ -340,7 +340,7 @@
                             </td>
                             <td>
                                 <label class="toggle-switch toggle-switch-sm" for="reviewCheckbox{{$review->id}}">
-                                    <input type="checkbox" onclick="status_form_alert('status-{{$review['id']}}','{{$review->status?__('messages.you_want_to_hide_this_review_for_customer'):__('messages.you_want_to_show_this_review_for_customer')}}', event)" class="toggle-switch-input" id="reviewCheckbox{{$review->id}}" {{$review->status?'checked':''}}>
+                                    <input type="checkbox" onclick="status_form_alert('status-{{$review['id']}}','{{$review->status?translate('messages.you_want_to_hide_this_review_for_customer'):translate('messages.you_want_to_show_this_review_for_customer')}}', event)" class="toggle-switch-input" id="reviewCheckbox{{$review->id}}" {{$review->status?'checked':''}}>
                                     <span class="toggle-switch-label">
                                         <span class="toggle-switch-indicator"></span>
                                     </span>
@@ -444,7 +444,7 @@
         function status_form_alert(id, message, e) {
             e.preventDefault();
             Swal.fire({
-                title: '{{__('messages.are_you_sure')}}',
+                title: '{{translate('messages.are_you_sure')}}',
                 text: message,
                 type: 'warning',
                 showCancelButton: true,
