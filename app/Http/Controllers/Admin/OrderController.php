@@ -263,7 +263,13 @@ class OrderController extends Controller
                 $deliveryMen = DeliveryMan::where('restaurant_id', $order->restaurant_id)->available()->active()->get();
             } else {
                 if($order->restaurant !== null){
-                    $deliveryMen = DeliveryMan::where('zone_id', $order->restaurant->zone_id)->available()->active()->get();
+                    $deliveryMen = DeliveryMan::where('zone_id', $order->restaurant->zone_id)->where('status', 1)->available()->active()->orderBy('updated_at','asc')->get();
+                    $deliveryAllMen = DeliveryMan::where('zone_id', $order->restaurant->zone_id)->where('status', 1)->active()->get();
+                    $deliver = array();
+                    for ($i = 0; $i <= count($deliveryAllMen)-1; $i++) {
+                        array_push($deliver, Order::where('delivery_man_id', $deliveryAllMen[$i]['id'])->latest()->first());
+                        $deliver[$i]['day_count'] = count(Order::where('delivery_man_id', $deliveryAllMen[$i]['id'])->whereDate('delivered', \Carbon\Carbon::today())->get());
+                    }
                 } else{
                     $deliveryMen = DeliveryMan::where('zone_id', '=', NULL )->active()->get();
                 }
@@ -299,8 +305,9 @@ class OrderController extends Controller
             }
 
             $deliveryMen = Helpers::deliverymen_list_formatting($deliveryMen);
+            //$deliveryAllMen = Helpers::deliverymen_list_formatting($deliveryAllMen);
 
-            return view('admin-views.order.order-view', compact('order', 'deliveryMen', 'categories', 'products', 'category', 'keyword', 'editing'));
+            return view('admin-views.order.order-view', compact('order', 'deliveryMen', 'categories', 'products', 'category', 'keyword', 'editing', 'deliveryAllMen', 'deliver'));
         } else {
             Toastr::info(translate('messages.no_more_orders'));
             return back();
@@ -366,7 +373,7 @@ class OrderController extends Controller
             if ($order->delivery_man) {
                 $dm = $order->delivery_man;
                 $dm->increment('order_count');
-                $dm->current_orders = $dm->current_orders > 1 ? $dm->current_orders - 1 : 0;
+                $dm->current_orders = $dm->current_orders > 1 ?  0 : 0;
                 $dm->save();
             }
             $order->details->each(function ($item, $key) {
@@ -396,7 +403,7 @@ class OrderController extends Controller
 
             if ($order->delivery_man) {
                 $dm = $order->delivery_man;
-                $dm->current_orders = $dm->current_orders > 1 ? $dm->current_orders - 1 : 0;
+                $dm->current_orders = $dm->current_orders > 1 ? 0 : 0;
                 $dm->save();
             }
         } else if ($request->order_status == 'canceled') {
@@ -406,7 +413,7 @@ class OrderController extends Controller
             }
             if ($order->delivery_man) {
                 $dm = $order->delivery_man;
-                $dm->current_orders = $dm->current_orders > 1 ? $dm->current_orders - 1 : 0;
+                $dm->current_orders = $dm->current_orders > 1 ?  0 : 0;
                 $dm->save();
             }
         }
@@ -431,6 +438,11 @@ class OrderController extends Controller
             return response()->json(['message' => translate('messages.deliveryman') . ' ' . translate('messages.not_found')], 404);
         }
         $order = Order::Notpos()->find($order_id);
+        if ($order->delivery_man) {
+            $dm = $order->delivery_man;
+            $dm->current_orders = 0;
+            $dm->save();
+        }
 
         $deliveryman = DeliveryMan::where('id', $delivery_man_id)->available()->active()->first();
         if ($order->delivery_man_id == $delivery_man_id) {
