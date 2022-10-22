@@ -4,7 +4,7 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
 @extends('layouts.vendor.app')
 
 @section('title', translate('messages.Order Details'))
-
+@php($add = json_decode($order->delivery_address, true))
 @section('content')
     <?php $campaign_order = isset($order->details[0]->campaign) ? true : false; ?>
     <div class="content container-fluid item-box-page">
@@ -137,13 +137,20 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                                         </strong>
                                     @endif
                                 </h6>
+                                @if ( isset($add['number']) )
+                                <h6>
+                                    <span>Номер клиента :</span>
+                                        <strong class="text-success">
+                                            {{ $add['number'] }}
+                                        </strong>
+                                </h6>
+                                @endif
                             </div>
                         </div>
                     </div>
                     <!-- End Header -->
 
                     <!-- Body -->
-                    @php($add = json_decode($order->delivery_address, true))
                     @if ( !isset($add['number']) )
                     <div class="card-body p-0">
                         <?php

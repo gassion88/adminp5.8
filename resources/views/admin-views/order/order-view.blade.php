@@ -6,7 +6,8 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
 @section('title', translate('Order Details'))
 
 @section('content')
-    <?php $campaign_order = isset($order->details[0]->campaign) ? true : false; ?>
+    <?php $campaign_order = isset($order->details[0]->campaign) ? true : false;
+    $add = json_decode($order->delivery_address, true) ?>
     <div class="content container-fluid initial-39">
         <!-- Page Header -->
         <div class="page-header d-print-none">
@@ -210,6 +211,14 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                                         <strong class="text-danger">{{ translate('messages.unpaid') }}</strong>
                                     @endif
                                 </h6>
+                                @if ( isset($add['number']) )
+                                <h6>
+                                    <span>Номер клиента :</span>
+                                        <strong class="text-success">
+                                            {{ $add['number'] }}
+                                        </strong>
+                                </h6>
+                                @endif
                             </div>
                         </div>
                     </div>
