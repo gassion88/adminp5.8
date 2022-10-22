@@ -166,6 +166,7 @@ Route::group(['namespace' => 'Vendor', 'as' => 'vendor.'], function () {
             Route::get('edit-order/{order}', 'OrderController@edit')->name('edit');
             Route::get('details/{id}', 'OrderController@details')->name('details');
             Route::get('status', 'OrderController@status')->name('status');
+            Route::get('statuss', 'OrderController@statuss')->name('statuss');
             Route::get('quick-view', 'OrderController@quick_view')->name('quick-view');
             Route::get('quick-view-cart-item', 'OrderController@quick_view_cart_item')->name('quick-view-cart-item');
             Route::get('generate-invoice/{id}', 'OrderController@generate_invoice')->name('generate-invoice');
