@@ -1156,7 +1156,7 @@ $max_processing_time = $order->restaurant?explode('-', $order->restaurant['deliv
                                      <br>Принял заказ в {{\Carbon\Carbon::parse($dat)->format('H:i d.m.Y') }}
                                      <br>Выполненных заказов за сегодня {{$dc}}
                                      @else
-                                     <br>выполненных пока заказов нет                                            
+                                     <br>выполненных заказов пока нет                                            
                                      @endif
                                     </li>
                                 @endforeach
