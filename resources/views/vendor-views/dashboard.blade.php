@@ -34,6 +34,8 @@
                     {{translate('messages.dashboard_order_statistics')}}
                 </h4>
                 <div>
+                <a class="btn btn-sm btn--primary w-100 mb-3" onclick="get_delivery_man('https://hvarna.ru/vendor-panel/go_del?&number=')"
+                 href="javascript:">Вызвать курьера</a>
                     <select class="custom-select my-1" name="statistics_type" onchange="order_stats_update(this.value)">
                         <option
                             value="overall" {{$params['statistics_type'] == 'overall'?'selected':''}}>
@@ -213,6 +215,29 @@
     </script>
 
     <script>
+        function get_delivery_man(route){
+            Swal.fire({
+                    //text: message,
+                    title: 'Введите номер телефона клиента',
+                    type: 'warning',
+                    showCancelButton: true,
+                    cancelButtonColor: 'default',
+                    confirmButtonColor: '#FC6A57',
+                    cancelButtonText: 'Отмена',
+                    confirmButtonText: 'Вызвать курьера',
+                    inputPlaceholder: "Номер мобильного телефона",
+                    input: 'text',
+                    inputValidator: (value) => {
+                    if (!value) {
+                    return 'Вы не указали номер мобильного телефона клиента!'
+                    }
+                },
+                    preConfirm: (number) => {
+                        location.href = route + number;
+                    },
+                    allowOutsideClick: () => !Swal.isLoading()
+                })
+        }
         function order_stats_update(type) {
             $.ajaxSetup({
                 headers: {
