@@ -297,23 +297,45 @@
         location.href = '{{url('/')}}/vendor-panel/message/list';
     }
 
-    function route_alert(route, message) {
-        Swal.fire({
-            title: '{{ translate('messages.Are you sure ?') }}',
-            text: message,
-            type: 'warning',
-            showCancelButton: true,
-            cancelButtonColor: 'default',
-            confirmButtonColor: '#FC6A57',
-            cancelButtonText: '{{ translate('messages.No') }}',
-            confirmButtonText: '{{ translate('messages.Yes') }}',
-            reverseButtons: true
-        }).then((result) => {
-            if (result.value) {
-                location.href = route;
+    function route_alert(route, message, title = "{{ __('messages.are_you_sure') }}", processing = false) {
+            if (processing) {
+                Swal.fire({
+                    title: title,
+                    type: 'warning',
+                    showCancelButton: true,
+                    cancelButtonColor: 'default',
+                    confirmButtonColor: '#FC6A57',
+                    cancelButtonText: '{{ translate('Cancel') }}',
+                    confirmButtonText: '{{ translate('Submit') }}',
+                    inputPlaceholder: "{{ translate('Enter processing time') }}",
+                    input: 'text',
+                    html: message + '<br/>' + '<label>{{ translate('Enter Processing time in minutes') }}</label>',
+                    inputValue: processing,
+                    preConfirm: (processing_time) => {
+                        location.href = route + '&processing_time=' + processing_time;
+                    },
+                    allowOutsideClick: () => !Swal.isLoading()
+                })
+            } else {
+                Swal.fire({
+                    title: title,
+                    text: message,
+                    type: 'warning',
+                    showCancelButton: true,
+                    cancelButtonColor: 'default',
+                    confirmButtonColor: '#FC6A57',
+                    cancelButtonText: '{{ translate('No') }}',
+                    confirmButtonText: '{{ translate('Yes') }}',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.value) {
+                        location.href = route;
+                    }
+                })
+
             }
-        })
-    }
+
+        }
 
     function form_alert(id, message) {
         Swal.fire({
