@@ -277,7 +277,12 @@
                                             {{$order->customer['f_name'].' '.$order->customer['l_name']}}
                                        </span>
                                        <span class="d-block">
+                                       @php($add = json_decode($order->delivery_address, true))
+                                       @if(isset($add['number']))                                     
+                                           {{'+'.$add['number']}}
+                                       @else
                                             {{$order->customer['phone']}}
+                                       @endif
                                        </span>
                                     </a>
                                 @else
