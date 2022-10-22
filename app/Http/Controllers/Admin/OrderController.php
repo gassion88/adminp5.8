@@ -431,6 +431,22 @@ class OrderController extends Controller
         Toastr::success(translate('messages.order') . translate('messages.status_updated'));
         return back();
     }
+    public function dell_delivery_man($order_id)
+    {
+        $order = Order::Notpos()->find($order_id);
+        $deliveryman = DeliveryMan::where('id', $order["delivery_man_id"])->get();
+
+            $dm = $order->delivery_man;
+            $dm->current_orders = 0;
+            $dm->save();
+
+            $order->delivery_man_id = null;
+            $order->save();
+
+            return back();
+        
+        
+    }
 
     public function add_delivery_man($order_id, $delivery_man_id)
     {
