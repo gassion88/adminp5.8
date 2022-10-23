@@ -58,12 +58,14 @@
                     <span class="d-block mb-1 pb-1">
                         <strong>{{translate('messages.address')}} :</strong> {{$shop->address}}
                     </span>
+                    <!--
                     <span class="d-block mb-1 pb-1">
                         <strong>{{translate('messages.admin_commission')}} :</strong> {{(isset($shop->comission)?$shop->comission:\App\Models\BusinessSetting::where('key','admin_commission')->first()->value)}}%
-                    </span>
+                    </span>                   
                     <span class="d-block mb-1 pb-1">
                         <strong>{{translate('messages.vat/tax')}} :</strong> {{$shop->tax}}%
                     </span>
+                    -->
                 </div>
             </div>
         </div>
