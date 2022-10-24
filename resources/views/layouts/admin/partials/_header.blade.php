@@ -76,7 +76,10 @@ use App\Models\Order;
                             <a class="js-hs-unfold-invoker btn btn-icon btn-soft-secondary rounded-circle"
                                href="{{route('admin.order.list',['status'=>'pending'])}}">
                                 <i class="tio-shopping-cart-outlined"></i>
+                                @php($pending=\App\Models\Order::where(['order_status'=>'pending'])->Notpos()->OrderScheduledIn(30)->count())
+                                @if($pending!=0)
                                 <span class="btn-status btn-sm-status btn-status-danger"></span>
+                                @endif
                             </a>
                         </div>
                         <!-- End Notification -->

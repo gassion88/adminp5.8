@@ -38,7 +38,7 @@
                             <a class="js-hs-unfold-invoker btn btn-icon btn-soft-secondary rounded-circle"
                                href="{{route('vendor.message.list')}}">
                                 <i class="tio-messages-outlined"></i>
-                                @php($message=\App\Models\Conversation::whereUser(\App\CentralLogics\Helpers::get_loggedin_user()->id)->where('unread_message_count','>','0')->count())
+                                @php($message=\App\Models\Conversation::where(['receiver_id'=>\App\CentralLogics\Helpers::get_restaurant_id()+1,'receiver_type'=> 'vendor', 'unread_message_count' => !0])->count())
                                 @if($message!=0)
                                     <span class="btn-status btn-sm-status btn-status-danger"></span>
                                 @endif
@@ -52,7 +52,10 @@
                             <a class="js-hs-unfold-invoker btn btn-icon navbar--cart btn-soft-secondary rounded-circle"
                                href="{{route('vendor.order.list',['status'=>'pending'])}}">
                                 <i class="tio-shopping-basket-outlined"></i>
-                                {{--<span class="btn-status btn-sm-status btn-status-danger"></span>--}}
+                                @php($pending=\App\Models\Order::where(['order_status'=>'pending','restaurant_id'=>\App\CentralLogics\Helpers::get_restaurant_id()])->Notpos()->OrderScheduledIn(30)->count())
+                                @if($pending!=0)
+                                <span class="btn-status btn-sm-status btn-status-danger"></span>
+                                @endif
                             </a>
                         </div>
                         <!-- End Notification -->
