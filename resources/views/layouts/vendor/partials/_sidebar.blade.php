@@ -206,7 +206,7 @@
                                     </span>
                                 </a>
                             </li>
-                            <li class="nav-item {{Request::is('vendor-panel/order/list/refunded')?'active':''}}">
+                            <!--<li class="nav-item {{Request::is('vendor-panel/order/list/refunded')?'active':''}}">
                                 <a class="nav-link " href="{{route('vendor.order.list',['refunded'])}}"  title="{{translate('Refunded')}}">
                                     <span class="tio-circle nav-indicator-icon"></span>
                                     <span class="text-truncate sidebar--badge-container">
@@ -239,7 +239,7 @@
                                         </span>
                                     </span>
                                 </a>
-                            </li>
+                            </li>-->
                         </ul>
                     </li>
                     <!-- End Order -->
@@ -300,7 +300,7 @@
                                     <span class="text-truncate">{{translate('messages.list')}}</span>
                                 </a>
                             </li>
-                            @if(\App\CentralLogics\Helpers::get_restaurant_data()->food_section)
+                           <!-- @if(\App\CentralLogics\Helpers::get_restaurant_data()->food_section)
                             <li class="nav-item {{Request::is('vendor-panel/food/bulk-import')?'active':''}}">
                                 <a class="nav-link " href="{{route('vendor.food.bulk-import')}}"
                                      title="{{translate('Bulk Import')}}">
@@ -314,7 +314,7 @@
                                     <span class="tio-circle nav-indicator-icon"></span>
                                     <span class="text-truncate text-capitalize">{{translate('messages.bulk_export')}}</span>
                                 </a>
-                            </li>
+                            </li>-->
                             @endif
                         </ul>
                     </li>
