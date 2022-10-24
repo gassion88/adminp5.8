@@ -73,7 +73,7 @@
                                 <label class="form-check-label qcont" for="addon">{{translate('messages.addon')}}</label>
                             </div>
                         </div>
-                        <div class="check-item">
+                        <!--<div class="check-item">
                             <div class="form-group form-check form--check">
                                 <input type="checkbox" name="modules[]" value="wallet" class="form-check-input"
                                     id="wallet" {{in_array('wallet',(array)json_decode($role['modules']))?'checked':''}}>
@@ -86,7 +86,7 @@
                                     id="bank_info" {{in_array('bank_info',(array)json_decode($role['modules']))?'checked':''}}>
                                 <label class="form-check-label qcont" for="bank_info">{{translate('messages.bank_info')}}</label>
                             </div>
-                        </div>
+                        </div>-->
                         <div class="check-item">
                             <div class="form-group form-check form--check">
                                 <input type="checkbox" name="modules[]" value="employee" class="form-check-input"
@@ -108,7 +108,7 @@
                                 <label class="form-check-label input-label qcont" for="chat">{{ translate('messages.chat')}}</label>
                             </div>
                         </div>
-                        <div class="check-item">
+                        <!--<div class="check-item">
                             <div class="form-group form-check form--check">
                                 <input type="checkbox" name="modules[]" value="custom_role" class="form-check-input"
                                     id="custom_role" {{in_array('custom_role',(array)json_decode($role['modules']))?'checked':''}}>
@@ -122,7 +122,7 @@
                                     id="campaign" {{in_array('campaign',(array)json_decode($role['modules']))?'checked':''}}>
                                 <label class="form-check-label qcont" for="campaign">{{translate('messages.campaign')}}</label>
                             </div>
-                        </div>
+                        </div>-->
 
                         <div class="check-item">
                             <div class="form-group form-check form--check">
@@ -132,13 +132,13 @@
                             </div>
                         </div>
 
-                        <div class="check-item">
+                        <!--<div class="check-item">
                             <div class="form-group form-check form--check">
                                 <input type="checkbox" name="modules[]" value="pos" class="form-check-input"
                                     id="pos" {{in_array('pos',(array)json_decode($role['modules']))?'checked':''}}>
                                 <label class="form-check-label qcont" for="pos">{{translate('messages.pos')}}</label>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                     <div class="btn--container mt-4 justify-content-end">
                         <button type="reset" class="btn btn--reset">{{translate('messages.reset')}}</button>

@@ -5,7 +5,7 @@
 
 @section('content')
     <div class="content container-fluid">
-        @if(auth('vendor')->check())
+        @if(auth('vendor')->check() || auth('vendor_employee')->check())
         <!-- Page Header -->
         <div class="page-header">
             <div class="d-flex flex-wrap justify-content-between align-items-center">

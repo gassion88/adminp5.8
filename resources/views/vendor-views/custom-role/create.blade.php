@@ -78,7 +78,7 @@
                                         <label class="form-check-label input-label qcont" for="addon">{{translate('messages.addon')}}</label>
                                     </div>
                                 </div>
-                                <div class="check-item">
+                                <!--<div class="check-item">
                                     <div class="form-group form-check form--check">
                                         <input type="checkbox" name="modules[]" value="wallet" class="form-check-input"
                                             id="wallet">
@@ -91,7 +91,7 @@
                                             id="bank_info">
                                         <label class="form-check-label input-label qcont" for="bank_info">{{translate('messages.bank_info')}}</label>
                                     </div>
-                                </div>
+                                </div>-->
                                 <div class="check-item">
                                     <div class="form-group form-check form--check">
                                         <input type="checkbox" name="modules[]" value="employee" class="form-check-input"
@@ -113,7 +113,7 @@
                                         <label class="form-check-label input-label qcont" for="chat">{{ translate('messages.chat')}}</label>
                                     </div>
                                 </div>
-                                <div class="check-item">
+                                <!--<div class="check-item">
                                     <div class="form-group form-check form--check">
                                         <input type="checkbox" name="modules[]" value="custom_role" class="form-check-input"
                                             id="custom_role">
@@ -126,7 +126,7 @@
                                             id="campaign">
                                         <label class="form-check-label input-label qcont" for="campaign">{{translate('messages.campaign')}}</label>
                                     </div>
-                                </div>
+                                </div>-->
                                 <div class="check-item">
                                     <div class="form-group form-check form--check">
                                         <input type="checkbox" name="modules[]" value="reviews" class="form-check-input"
@@ -134,13 +134,13 @@
                                         <label class="form-check-label input-label qcont" for="reviews">{{translate('messages.reviews')}}</label>
                                     </div>
                                 </div>
-                                <div class="check-item">
+                               <!-- <div class="check-item">
                                     <div class="form-group form-check form--check">
                                         <input type="checkbox" name="modules[]" value="pos" class="form-check-input"
                                             id="pos">
                                         <label class="form-check-label input-label qcont" for="pos">{{translate('messages.pos')}}</label>
                                     </div>
-                                </div>
+                                </div>-->
                             </div>
                             <div class="btn--container mt-4 justify-content-end">
                                 <button type="reset" class="btn btn--reset">{{translate('messages.reset')}}</button>
