@@ -5,6 +5,7 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
 
 @section('title', translate('messages.Order Details'))
 @php($add = json_decode($order->delivery_address, true))
+
 @section('content')
     <?php $campaign_order = isset($order->details[0]->campaign) ? true : false; ?>
     <div class="content container-fluid item-box-page">
@@ -151,7 +152,9 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                     <!-- End Header -->
 
                     <!-- Body -->
+                    
                     @if ( !isset($add['number']) )
+                    
                     <div class="card-body p-0">
                         <?php
                         $total_addon_price = 0;
