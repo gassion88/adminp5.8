@@ -55,9 +55,9 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                                         {{ translate('messages.edited') }}
                                     </span>
                                 @endif
-                                <a class="btn btn--primary m-2 print--btn d-sm-none ml-auto" href="{{ route('vendor.order.generate-invoice', [$order['id']]) }}">
+                               <!-- <a class="btn btn--primary m-2 print--btn d-sm-none ml-auto" href="{{ route('vendor.order.generate-invoice', [$order['id']]) }}">
                                     <i class="tio-print mr-1"></i>
-                                </a>
+                                </a>-->
                             </h1>
                             <span class="mt-2 d-block">
                                 <i class="tio-date-range"></i>
@@ -82,11 +82,11 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                             @endif
                         </div>
                         <div class="order-invoice-right">
-                            <div class="d-none d-sm-flex flex-wrap ml-auto align-items-center justify-content-end m-n-5rem">
+                           <!-- <div class="d-none d-sm-flex flex-wrap ml-auto align-items-center justify-content-end m-n-5rem">
                                 <a class="btn btn--primary m-2 print--btn" href="{{ route('vendor.order.generate-invoice', [$order['id']]) }}">
                                     <i class="tio-print mr-1"></i> {{ translate('messages.print') }} {{ translate('messages.invoice') }}
                                 </a>
-                            </div>
+                            </div>-->
                             <div class="text-right mt-3 order-invoice-right-contents text-capitalize">
                                 <h6>
                                     <span>{{ translate('Status') }} :</span>
