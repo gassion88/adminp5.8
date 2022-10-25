@@ -52,13 +52,13 @@
 
                 <!-- Export Button -->
                 <div class="hs-unfold ml-3">
-                    <a class="js-hs-unfold-invoker btn btn-sm btn-white dropdown-toggle btn export-btn btn-outline-primary btn--primary font--sm" href="javascript:;"
+                   <!-- <a class="js-hs-unfold-invoker btn btn-sm btn-white dropdown-toggle btn export-btn btn-outline-primary btn--primary font--sm" href="javascript:;"
                         data-hs-unfold-options='{
                             "target": "#usersExportDropdown",
                             "type": "css-animation"
                         }'>
                         <i class="tio-download-to mr-1"></i> {{translate('messages.export')}}
-                    </a>
+                    </a>-->
 
                     <div id="usersExportDropdown"
                             class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-sm-right">
