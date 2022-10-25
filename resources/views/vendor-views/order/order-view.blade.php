@@ -116,17 +116,18 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                                         </span>
                                     @endif
                                 </h6>
-                                <h6>
+                                @if ( !isset($add['number']) )
+                               <!-- <h6>
                                     <span>
                                     {{ translate('messages.payment') }} {{ translate('messages.method') }} :</span>
                                     <strong>
                                     {{ translate(str_replace('_', ' ', $order['payment_method'])) }}</strong>
-                                </h6>
+                                </h6>-->
                                 <h6>
                                     <span>{{ translate('Order Type') }} :</span>
                                     <strong class="text--title">{{ translate(str_replace('_', ' ', $order['order_type'])) }}</strong>
                                 </h6>
-                                <h6>
+                                <!--<h6>
                                     <span>{{ translate('Payment Status') }} :</span>
                                     @if ($order['payment_status'] == 'paid')
                                         <strong class="text-success">
@@ -137,7 +138,8 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                                             {{ translate('messages.unpaid') }}
                                         </strong>
                                     @endif
-                                </h6>
+                                </h6>-->
+                                @endif
                                 @if ( isset($add['number']) )
                                 <h6>
                                     <span>Номер клиента :</span>
@@ -328,7 +330,7 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                                         <dd class="col-sm-6">
                                             - {{ \App\CentralLogics\Helpers::format_currency($restaurant_discount_amount) }}
                                         </dd>
-                                        <dt class="col-sm-6">{{ translate('messages.coupon') }}
+                                        <!--<dt class="col-sm-6">{{ translate('messages.coupon') }}
                                             {{ translate('messages.discount') }}:
                                         </dt>
                                         <dd class="col-sm-6">
@@ -343,7 +345,7 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                                             @php($dm_tips = $order['dm_tips'])
                                             + {{ \App\CentralLogics\Helpers::format_currency($dm_tips) }}
 
-                                        </dd>
+                                        </dd>-->
                                         <dt class="col-sm-6">{{ translate('messages.delivery') }}
                                             {{ translate('messages.fee') }}:
                                         </dt>
