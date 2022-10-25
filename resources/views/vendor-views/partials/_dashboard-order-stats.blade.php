@@ -52,7 +52,7 @@
             </a>
         </div>
 
-        <div class="col-sm-6 col-lg-3">
+       <!-- <div class="col-sm-6 col-lg-3">
             <a href="{{route('vendor.order.list',['refunded'])}}" class="order--card h-100">
                 <div class="d-flex justify-content-between align-items-center">
                     <h6 class="card-subtitle d-flex justify-content-between m-0 align-items-center">
@@ -76,7 +76,7 @@
                         class="card-title h3">{{$data['scheduled']}}</span>
                 </div>
             </a>
-        </div>
+        </div>-->
 
         <div class="col-sm-6 col-lg-3">
             <a href="{{route('vendor.order.list',['all'])}}" class="order--card h-100">
