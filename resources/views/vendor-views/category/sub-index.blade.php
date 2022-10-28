@@ -23,7 +23,7 @@
                         @csrf
                         <!-- Search -->
                         <div class="input-group input--group">
-                            <input id="datatableSearch" name="search" type="search" class="form-control" placeholder="{{ translate('Ex : Search by sub categories...') }}" aria-label="{{translate('messages.search_sub_categories')}}">
+                            <input id="datatableSearch" name="search" type="search" class="form-control" placeholder="Поиск по названию" aria-label="{{translate('messages.search_sub_categories')}}">
                             <button class="btn btn--secondary" type="submit">
                                 <i class="tio-search"></i>
                             </button>

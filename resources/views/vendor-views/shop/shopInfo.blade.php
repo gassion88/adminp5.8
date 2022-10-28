@@ -11,12 +11,12 @@
                         <img src="{{asset('/public/assets/admin/img/resturant-panel/page-title/resturant.png')}}" alt="public">
                     </div>
                     <span>
-                        {{translate('messages.my_shop')}} {{translate('messages.info')}}
+                        {{translate('messages.my_shop')}}
                     </span>
                 </div>
             </h2>
             <div class="my-2">
-                <a class="btn btn--primary" href="{{route('vendor.shop.edit')}}"><i class="tio-edit"></i> {{translate('Edit Restaurant Info')}}</a>
+                <a class="btn btn--primary" href="{{route('vendor.shop.edit')}}"><i class="tio-edit"></i> Изменить</a>
             </div>
         </div>
     </div>

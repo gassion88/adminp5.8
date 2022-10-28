@@ -11,7 +11,7 @@
     <div class="content container-fluid">
         <!-- Page Header -->
         <div class="page-header">
-            <h1 class="page-header-title"><i class="tio-add-circle-outlined"></i> {{translate('messages.add')}} {{translate('messages.new')}} {{translate('messages.food')}}</h1>
+            <h1 class="page-header-title"><i class="tio-add-circle-outlined"></i> {{translate('messages.add')}} новое блюдо</h1>
         </div>
         <!-- End Page Header -->
         <form action="javascript:" method="post" id="food_form"
@@ -21,7 +21,7 @@
             @php($language = $language->value ?? null)
             @php($default_lang = 'bn')
             <div class="row g-2">
-            @if($language)
+           <!-- @if($language)
                 @php($default_lang = json_decode($language)[0])
                 <div class="col-lg-12">
                     <ul class="nav nav-tabs mb-4 border-0">
@@ -32,7 +32,7 @@
                         @endforeach
                     </ul>
                 </div>
-            @endif
+            @endif-->
 
             <div class="col-lg-6">
                 <div class="card">
@@ -41,7 +41,7 @@
                             <span class="card-header-icon">
                                 <i class="tio-fastfood"></i>
                             </span>
-                            <span>{{ translate('Food Info') }}</span>
+                            <span>Описание</span>
                         </h5>
                     </div>
                     <div class="card-body">
@@ -49,13 +49,13 @@
                             @foreach(json_decode($language) as $lang)
                                 <div class="{{$lang != $default_lang ? 'd-none':''}} lang_form" id="{{$lang}}-form">
                                     <div class="form-group mb-0">
-                                        <label class="form-label" for="{{$lang}}_name">{{translate('messages.name')}} ({{strtoupper($lang)}})</label>
-                                        <input type="text" {{$lang == $default_lang? 'required':''}} name="name[]" id="{{$lang}}_name" class="form-control h--45px" placeholder="{{translate('Ex : New Food')}}" oninvalid="document.getElementById('en-link').click()">
+                                        <label class="form-label" for="{{$lang}}_name">{{translate('messages.name')}}</label>
+                                        <input type="text" {{$lang == $default_lang? 'required':''}} name="name[]" id="{{$lang}}_name" class="form-control h--45px"  oninvalid="document.getElementById('en-link').click()">
                                     </div>
                                     <input type="hidden" name="lang[]" value="{{$lang}}">
                                     <div class="form-group pt-4 mb-0">
-                                        <label class="form-label" for="exampleFormControlInput1">{{translate('messages.short')}} {{translate('messages.description')}} ({{strtoupper($lang)}})</label>
-                                        <textarea type="text" name="description[]" class="form-control ckeditor min-height-154px" placeholder="{{ translate('Ex : Description') }}"></textarea>
+                                        <label class="form-label" for="exampleFormControlInput1">{{translate('messages.description')}}</label>
+                                        <textarea type="text" name="description[]" class="form-control ckeditor min-height-154px" ></textarea>
                                     </div>
                                 </div>
                             @endforeach
@@ -81,7 +81,7 @@
                     <div class="card-header">
                         <h5 class="card-title">
                             <span class="card-header-icon"><i class="tio-image"></i></span>
-                            <span>{{ translate('Food Image') }} <small class="text-danger">({{ translate('messages.Ratio 200x200') }})</small></span>
+                            <span>Изображение <small class="text-danger">200x200</small></span>
                         </h5>
                     </div>
                     <div class="card-body d-flex flex-column">
@@ -91,7 +91,7 @@
                         </center>
 
                         <div class="custom-file mt-3">
-                            <input type="file" name="image" id="customFileEg1" class="custom-file-input"
+                            <input  type="file" name="image" id="customFileEg1" class="custom-file-input"
                                     accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
                             <label class="custom-file-label" for="customFileEg1">{{translate('messages.choose')}} {{translate('messages.file')}}</label>
                         </div>
@@ -105,7 +105,7 @@
                             <span class="card-header-icon">
                                 <i class="tio-dashboard-outlined"></i>
                             </span>
-                            <span> {{ translate('Food Details') }}</span>
+                            <span> Детали</span>
                         </h5>
                     </div>
                     <div class="card-body">
@@ -117,7 +117,7 @@
                                             class="input-label-secondary">*</span></label>
                                     <select name="category_id" id="category_id" class="form-control h--45px js-select2-custom"
                                             onchange="getRequest('{{url('/')}}/vendor-panel/food/get-categories?parent_id='+this.value,'sub-categories')">
-                                        <option value="" selected disabled>---{{translate('messages.Select Category')}}---</option>
+                                        <option value="" selected disabled>---Категория---</option>
                                         @foreach($categories as $category)
                                             <option value="{{$category['id']}}">{{$category['name']}}</option>
                                         @endforeach
@@ -131,11 +131,11 @@
                                     <select name="sub_category_id" id="sub-categories"
                                             class="form-control h--45px js-select2-custom"
                                             onchange="getRequest('{{url('/')}}/vendor-panel/food/get-categories?parent_id='+this.value,'sub-sub-categories')">
-                                                <option value="" selected disabled>---{{translate('messages.Select Sub Category')}}---</option>
+                                                <option value="" selected disabled>---Подкатегория---</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-4 col-sm-6">
+                           <!-- <div class="col-md-4 col-sm-6">
                                 <div class="form-group mb-0">
                                     <label class="form-label" for="exampleFormControlInput1">{{translate('messages.item_type')}}</label>
                                     <select name="veg" id="veg" class="form-control h--45px js-select2-custom" required>
@@ -144,7 +144,7 @@
                                         <option value="1">{{translate('messages.veg')}}</option>
                                     </select>
                                 </div>
-                            </div>
+                            </div>-->
                             <div class="col-md-4 col-sm-6">
                                 <div class="form-group mb-0">
                                     <label class="form-label" for="exampleFormControlInput1">{{ translate('messages.addons') }}</label>
@@ -165,7 +165,7 @@
                     <div class="card-header">
                         <h5 class="card-title">
                             <span class="card-header-icon"><i class="tio-dollar-outlined"></i></span>
-                            <span>{{ translate('Amount') }}</span>
+                            <span>Цена</span>
                         </h5>
                     </div>
                     <div class="card-body">
@@ -177,7 +177,7 @@
                                             placeholder="{{ translate('Ex : 100') }}" required>
                                 </div>
                             </div>
-                            <div class="col-md-4 col-sm-6">
+                            <!--<div class="col-md-4 col-sm-6">
                                 <div class="form-group mb-0">
                                     <label class="form-label" for="exampleFormControlInput1">{{translate('messages.discount')}} {{translate('messages.type')}}</label>
                                     <select name="discount_type" class="form-control h--45px js-select2-custom">
@@ -192,7 +192,7 @@
                                     <input type="number" min="0" max="100000" value="0" name="discount" class="form-control h--45px"
                                             placeholder="{{ translate('Ex : 100') }}" >
                                 </div>
-                            </div>
+                            </div>-->
                         </div>
                     </div>
                 </div>
@@ -205,7 +205,7 @@
                             <span class="card-header-icon">
                                 <i class="tio-canvas-text"></i>
                             </span>
-                            <span>{{ translate('Add Attribute') }}</span>
+                            <span>Атрибуты</span>
                         </h5>
                     </div>
                     <div class="card-body pb-0">
@@ -238,14 +238,14 @@
                         <div class="row g-2">
                             <div class="col-6">
                                 <div class="form-group mb-0">
-                                    <label class="form-label" for="exampleFormControlInput1">{{translate('messages.available')}} {{translate('messages.time')}} {{translate('messages.starts')}}</label>
+                                    <label class="form-label" for="exampleFormControlInput1">Доступное время</label>
                                     <input type="time" name="available_time_starts" class="form-control h--45px"
                                             placeholder="{{ translate('Ex : 10:30 am') }}" required>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-group mb-0">
-                                    <label class="form-label" for="exampleFormControlInput1">{{translate('messages.available')}} {{translate('messages.time')}} {{translate('messages.ends')}}</label>
+                                    <label class="form-label" for="exampleFormControlInput1"></label>
                                     <input type="time" name="available_time_ends" class="form-control h--45px"  placeholder="{{ translate('5:45 pm') }}"
                                             required>
                                 </div>

@@ -77,7 +77,7 @@
                 </div>
                 <button type="submit"
                  {{-- onclick="replyConvs('{{route('vendor.message.store',['user_id'=>$user->id,'user_type'=>$user_type])}}')" --}}
-                        class="btn btn-primary btn--primary con-reply-btn">{{translate('messages.send')}}
+                        class="btn btn-primary btn--primary con-reply-btn"><i class="tio-send nav-icon"></i>
                 </button>
             </div>
         </form>

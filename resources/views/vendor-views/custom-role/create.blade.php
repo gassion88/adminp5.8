@@ -16,7 +16,7 @@
                         <img src="{{asset('/public/assets/admin/img/resturant-panel/page-title/employee-role.png')}}" alt="public">
                     </div>
                     <span>
-                        {{ translate('Employee Role') }}
+                        Должность сотрудника
                     </span>
                 </h2>
             </div>
@@ -29,12 +29,12 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="card-title my-1">
+                <h5 class="card-title my-1">
                         <span class="card-header-icon">
                             <i class="tio-document-text-outlined"></i>
                         </span>
                         <span>
-                            {{translate('messages.role_form')}}
+                            Добавить должность
                         </span>
                     </h5>
                 </div>
@@ -45,7 +45,7 @@
                             <div class="form-group">
                                 <label class="form-label" for="name">{{translate('messages.role_name')}}</label>
                                 <input type="text" name="name" class="form-control" id="name" aria-describedby="emailHelp"
-                                    placeholder="{{ translate('messages.Ex :') }} {{ translate('Store') }}" required>
+                                    placeholder="" required>
                             </div>
 
                             <h5 class="form-label">{{translate('messages.module_permission')}} : </h5>
@@ -68,7 +68,7 @@
                                     <div class="form-group form-check form--check">
                                         <input type="checkbox" name="modules[]" value="restaurant_setup" class="form-check-input"
                                             id="restaurant_setup">
-                                        <label class="form-check-label input-label qcont" for="restaurant_setup">{{translate('messages.restaurant')}} {{translate('messages.setup')}}</label>
+                                        <label class="form-check-label input-label qcont" for="restaurant_setup">Настройки ресторана</label>
                                     </div>
                                 </div>
                                 <div class="check-item">
@@ -158,12 +158,12 @@
             <div class="card">
                 <div class="card-header border-0 py-2">
                     <div class="search--button-wrapper">
-                        <h5 class="card-title">{{translate('messages.roles_table')}}<span class="badge badge-soft-dark ml-2" id="itemCount">{{$rl->total()}}</span></h5>
+                        <h5 class="card-title">Добавленные должности<span class="badge badge-soft-dark ml-2" id="itemCount">{{$rl->total()}}</span></h5>
                         <form action="javascript:" id="search-form">
                             @csrf
                             <!-- Search -->
                             <div class="input-group input--group">
-                                <input id="datatableSearch_" type="search" name="search" class="form-control" placeholder="{{ translate('messages.Ex :') }}  {{ translate('Search by Role Name') }}" aria-label="{{translate('messages.search')}}">
+                                <input id="datatableSearch_" type="search" name="search" class="form-control" placeholder="" aria-label="{{translate('messages.search')}}">
                                 <button type="submit" class="btn btn--secondary">
                                     <i class="tio-search"></i>
                                 </button>
@@ -185,10 +185,10 @@
                                 <tr>
                                     <th class="w-70px">{{ translate('messages.sl') }}</th>
                                     <th class="w-100px">{{translate('messages.role_name')}}</th>
-                                    <th class="w-200px">{{translate('messages.modules')}}</th>
+                                    <th class="w-200px">Разрешения</th>
                                     <th class="w-80px">{{translate('messages.created_at')}}</th>
                                     {{--<th class="w-80px">{{translate('messages.status')}}</th>--}}
-                                    <th scope="col" class="w-80px text-center">{{translate('messages.action')}}</th>
+                                    <th scope="col" class="w-80px text-center"></th>
                                 </tr>
                             </thead>
                             <tbody  id="set-rows">

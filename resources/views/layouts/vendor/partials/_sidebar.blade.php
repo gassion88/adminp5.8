@@ -103,7 +103,7 @@
 
                     @if(\App\CentralLogics\Helpers::employee_module_permission_check('order'))
                     <li class="nav-item">
-                        <small class="nav-subtitle" title="{{translate('messages.order')}} {{translate('messages.section')}}">{{translate('messages.order')}} {{translate('messages.management')}}</small>
+                        <small class="nav-subtitle" title="{{translate('messages.order')}} {{translate('messages.section')}}">Управления заказами</small>
                         <small class="tio-more-horizontal nav-subtitle-replacer"></small>
                     </li>
 
@@ -246,7 +246,7 @@
                     @endif
                     <li class="nav-item">
                         <small
-                            class="nav-subtitle">{{translate('messages.food')}} {{translate('messages.management')}}</small>
+                            class="nav-subtitle">Управление едой</small>
                         <small class="tio-more-horizontal nav-subtitle-replacer"></small>
                     </li>
                     <!-- End AddOn -->
@@ -291,13 +291,13 @@
                                      title="{{translate('Add New Food')}}">
                                     <span class="tio-circle nav-indicator-icon"></span>
                                     <span
-                                        class="text-truncate">{{translate('messages.add')}} {{translate('messages.new')}}</span>
+                                        class="text-truncate">{{translate('messages.add')}}</span>
                                 </a>
                             </li>
                             <li class="nav-item {{Request::is('vendor-panel/food/list')?'active':''}}">
                                 <a class="nav-link " href="{{route('vendor.food.list')}}"  title="{{translate('Food List')}}">
                                     <span class="tio-circle nav-indicator-icon"></span>
-                                    <span class="text-truncate">{{translate('messages.list')}}</span>
+                                    <span class="text-truncate">Вся еда</span>
                                 </a>
                             </li>
                            <!-- @if(\App\CentralLogics\Helpers::get_restaurant_data()->food_section)
@@ -382,7 +382,7 @@
                     <!-- Business Section-->
                     <li class="nav-item">
                         <small class="nav-subtitle"
-                                title="{{translate('messages.business')}} {{translate('messages.section')}}">{{translate('messages.business')}} {{translate('messages.management')}}</small>
+                                title="{{translate('messages.business')}} {{translate('messages.section')}}">Управление рестораном</small>
                         <small class="tio-more-horizontal nav-subtitle-replacer"></small>
                     </li>
 
@@ -392,7 +392,7 @@
                         >
                             <span class="tio-settings nav-icon"></span>
                             <span
-                                class="text-truncate">{{translate('messages.restaurant')}} {{translate('messages.config')}}</span>
+                                class="text-truncate">{{translate('messages.restaurant_config')}}</span>
                         </a>
                     </li>
                     @endif
@@ -469,7 +469,7 @@
 
                     <!-- Employee-->
                     <li class="nav-item">
-                        <small class="nav-subtitle" title="{{translate('messages.employee')}} {{translate('messages.section')}}">{{translate('messages.employee')}} {{translate('messages.section')}}</small>
+                        <small class="nav-subtitle" title="{{translate('messages.employee')}} {{translate('messages.section')}}">Управление сотрудниками</small>
                         <small class="tio-more-horizontal nav-subtitle-replacer"></small>
                     </li>
 
@@ -479,7 +479,7 @@
                         title="{{translate('messages.employee')}} {{translate('messages.Role')}}">
                             <i class="tio-incognito nav-icon"></i>
                             <span
-                                class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">{{translate('messages.employee')}} {{translate('messages.Role')}}</span>
+                                class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Настройка сотрудников</span>
                         </a>
                     </li>
                     @endif
@@ -496,13 +496,13 @@
                             <li class="nav-item {{Request::is('vendor-panel/employee/add-new')?'active':''}}">
                                 <a class="nav-link " href="{{route('vendor.employee.add-new')}}" title="{{translate('messages.add')}} {{translate('messages.new')}} {{translate('messages.Employee')}}">
                                     <span class="tio-circle nav-indicator-icon"></span>
-                                    <span class="text-truncate">{{translate('messages.add')}} {{translate('messages.new')}} {{translate('messages.employee')}}</span>
+                                    <span class="text-truncate">Добавить</span>
                                 </a>
                             </li>
                             <li class="nav-item {{Request::is('vendor-panel/employee/list')?'active':''}}">
                                 <a class="nav-link " href="{{route('vendor.employee.list')}}" title="{{translate('messages.Employee')}} {{translate('messages.list')}}">
                                     <span class="tio-circle nav-indicator-icon"></span>
-                                    <span class="text-truncate">{{translate('messages.list')}}</span>
+                                    <span class="text-truncate">Все</span>
                                 </a>
                             </li>
 

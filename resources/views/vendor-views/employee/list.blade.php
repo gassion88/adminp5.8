@@ -17,7 +17,7 @@
                         <img src="{{asset('/public/assets/admin/img/resturant-panel/page-title/employee-role.png')}}" alt="public">
                     </div>
                     <span>
-                        {{translate('messages.Employee')}} {{translate('messages.list')}}<span class="badge badge-soft-dark ml-2" id="itemCount">{{$em->total()}}</span>
+                        {{translate('messages.Employee')}}<span class="badge badge-soft-dark ml-2" id="itemCount">{{$em->total()}}</span>
                     </span>
                 </h2>
             </div>
@@ -25,7 +25,7 @@
                 <a href="{{route('vendor.employee.add-new')}}" class="btn btn--primary  float-right">
                     <i class="tio-add-circle"></i>
                     <span class="text">
-                        {{translate('Add New Employee')}}
+                        Добавить сотрудника
                     </span>
                 </a>
             </div>
@@ -42,7 +42,7 @@
                     @csrf
                     <!-- Search -->
                     <div class="input-group input--group">
-                        <input id="datatableSearch_" type="search" name="search" class="form-control" placeholder="{{ translate('Ex : Search by Employee Name, Email or Phone No') }}" aria-label="Search">
+                        <input id="datatableSearch_" type="search" name="search" class="form-control" placeholder="" aria-label="Search">
                         <button type="submit" class="btn btn--secondary">
                             <i class="tio-search"></i>
                         </button>

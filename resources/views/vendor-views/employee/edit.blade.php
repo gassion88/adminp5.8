@@ -11,7 +11,7 @@
                 <img src="{{asset('/public/assets/admin/img/resturant-panel/page-title/employee-role.png')}}" alt="public">
             </div>
             <span>
-                {{translate('messages.Employee')}} {{translate('messages.update')}}
+                Изменить сотрудника
             </span>
         </h2>
     </div>
@@ -25,7 +25,7 @@
                     <i class="tio-user"></i>
                 </span>
                 <span>
-                    {{ translate('General Information') }}
+                    Личные данные
                 </span>
             </h5>
         </div>
@@ -36,19 +36,19 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="form-label" for="f_name">{{translate('messages.first')}} {{translate('messages.name')}}</label>
+                            <label class="form-label" for="f_name">Имя</label>
                             <input type="text" name="f_name" value="{{$e['f_name']}}" class="form-control h--45px" id="f_name"
-                                    placeholder="{{translate('messages.first_name')}}" required>
+                                    placeholder="" required>
                         </div>
                         <div class="form-group">
-                            <label class="form-label" for="l_name">{{translate('messages.last')}} {{translate('messages.name')}}</label>
+                            <label class="form-label" for="l_name">Фамилия</label>
                             <input type="text" name="l_name" value="{{$e['l_name']}}" class="form-control h--45px" id="l_name"
-                                    placeholder="{{translate('messages.last_name')}}">
+                                    placeholder="">
                         </div>
                         <div class="form-group">
                             <label class="form-label" for="phone">{{translate('messages.phone')}}</label>
                             <input type="tel" value="{{$e['phone']}}" required name="phone" class="form-control h--45px" id="phone"
-                                    placeholder="{{ translate('Ex : +88017********') }}">
+                                    placeholder="">
                         </div>
 
                         <div class="form-group mb-md-0">
@@ -94,7 +94,7 @@
                                 <i class="tio-user"></i>
                             </span>
                             <span>
-                                {{translate('messages.account')}} {{translate('messages.info')}}
+                                Данные для входа
                             </span>
                         </h5>
                     </div>
@@ -102,17 +102,17 @@
                         <div class="row gy-2">
                             <div class="col-md-4">
                                 <label class="form-label" for="email">{{translate('messages.email')}}</label>
-                                <input type="email" value="{{$e['email']}}" name="email" class="form-control h--45px" id="email" placeholder="{{ translate('messages.Ex :') }} ex@gmail.com">
+                                <input type="email" value="{{$e['email']}}" name="email" class="form-control h--45px" id="email" placeholder="">
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label" for="password">{{translate('messages.password')}}<small> ( {{translate('messages.enter_if_you_want_to_change')}} )</small></label>
-                                <input type="text" name="password" class="form-control h--45px" id="password" placeholder="{{translate('messages.password_length_placeholder',['length'=>'8+'])}}">
+                                <label class="form-label" for="password">{{translate('messages.password')}}<small> ( Введите если хотите изменить )</small></label>
+                                <input type="text" name="password" class="form-control h--45px" id="password" placeholder="">
                             </div>
                             <div class="col-md-4">
                                 <label class="form-label" for="confirm-password">
                                     {{translate('messages.confirm_password')}}
                                 </label>
-                                <input type="text" name="confirm-password" class="form-control h--45px" id="confirm-password" placeholder="{{ translate('Ex : Confirm Password') }}">
+                                <input type="text" name="confirm-password" class="form-control h--45px" id="confirm-password" placeholder="">
                             </div>
                         </div>
                     </div>

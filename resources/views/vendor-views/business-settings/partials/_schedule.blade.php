@@ -16,7 +16,7 @@ foreach ($restaurant->schedules as $schedule)
                                 <i class="tio-time"></i>
                             </span>
                             <span class="info">
-                                <span>{{ translate('Opening Time') }}</span>
+                                <span>Время открытия</span>
                                 {{date(config('timeformat'), strtotime($day['start_time']))}}
                             </span>
                         </span>
@@ -25,7 +25,7 @@ foreach ($restaurant->schedules as $schedule)
                                 <i class="tio-time"></i>
                             </span>
                             <span class="info">
-                                <span>{{ translate('Closing Time') }}</span>
+                                <span>Время закрытия</span>
                                 {{date(config('timeformat'), strtotime($day['end_time']))}}
                             </span>
                         </span>
@@ -49,7 +49,7 @@ foreach ($restaurant->schedules as $schedule)
                                 <i class="tio-time"></i>
                             </span>
                             <span class="info">
-                                <span>{{ translate('Opening Time') }}</span>
+                                <span>Время открытия</span>
                                 {{date(config('timeformat'), strtotime($day['start_time']))}}
                             </span>
                         </span>
@@ -58,7 +58,7 @@ foreach ($restaurant->schedules as $schedule)
                                 <i class="tio-time"></i>
                             </span>
                             <span class="info">
-                                <span>{{ translate('Closing Time') }}</span>
+                                <span>Время закрытия</span>
                                 {{date(config('timeformat'), strtotime($day['end_time']))}}
                             </span>
                         </span>
@@ -82,7 +82,7 @@ foreach ($restaurant->schedules as $schedule)
                                 <i class="tio-time"></i>
                             </span>
                             <span class="info">
-                                <span>{{ translate('Opening Time') }}</span>
+                                <span>Время открытия</span>
                                 {{date(config('timeformat'), strtotime($day['start_time']))}}
                             </span>
                         </span>
@@ -91,7 +91,7 @@ foreach ($restaurant->schedules as $schedule)
                                 <i class="tio-time"></i>
                             </span>
                             <span class="info">
-                                <span>{{ translate('Closing Time') }}</span>
+                                <span>Время закрытия</span>
                                 {{date(config('timeformat'), strtotime($day['end_time']))}}
                             </span>
                         </span>
@@ -115,7 +115,7 @@ foreach ($restaurant->schedules as $schedule)
                                 <i class="tio-time"></i>
                             </span>
                             <span class="info">
-                                <span>{{ translate('Opening Time') }}</span>
+                                <span>Время открытия</span>
                                 {{date(config('timeformat'), strtotime($day['start_time']))}}
                             </span>
                         </span>
@@ -124,7 +124,7 @@ foreach ($restaurant->schedules as $schedule)
                                 <i class="tio-time"></i>
                             </span>
                             <span class="info">
-                                <span>{{ translate('Closing Time') }}</span>
+                                <span>Время закрытия</span>
                                 {{date(config('timeformat'), strtotime($day['end_time']))}}
                             </span>
                         </span>
@@ -148,7 +148,7 @@ foreach ($restaurant->schedules as $schedule)
                                 <i class="tio-time"></i>
                             </span>
                             <span class="info">
-                                <span>{{ translate('Opening Time') }}</span>
+                                <span>Время открытия</span>
                                 {{date(config('timeformat'), strtotime($day['start_time']))}}
                             </span>
                         </span>
@@ -157,7 +157,7 @@ foreach ($restaurant->schedules as $schedule)
                                 <i class="tio-time"></i>
                             </span>
                             <span class="info">
-                                <span>{{ translate('Closing Time') }}</span>
+                                <span>Время закрытия</span>
                                 {{date(config('timeformat'), strtotime($day['end_time']))}}
                             </span>
                         </span>
@@ -181,7 +181,7 @@ foreach ($restaurant->schedules as $schedule)
                                 <i class="tio-time"></i>
                             </span>
                             <span class="info">
-                                <span>{{ translate('Opening Time') }}</span>
+                                <span>Время открытия</span>
                                 {{date(config('timeformat'), strtotime($day['start_time']))}}
                             </span>
                         </span>
@@ -190,7 +190,7 @@ foreach ($restaurant->schedules as $schedule)
                                 <i class="tio-time"></i>
                             </span>
                             <span class="info">
-                                <span>{{ translate('Closing Time') }}</span>
+                                <span>Время закрытия</span>
                                 {{date(config('timeformat'), strtotime($day['end_time']))}}
                             </span>
                         </span>
@@ -214,7 +214,7 @@ foreach ($restaurant->schedules as $schedule)
                                 <i class="tio-time"></i>
                             </span>
                             <span class="info">
-                                <span>{{ translate('Opening Time') }}</span>
+                                <span>Время открытия</span>
                                 {{date(config('timeformat'), strtotime($day['start_time']))}}
                             </span>
                         </span>
@@ -223,7 +223,7 @@ foreach ($restaurant->schedules as $schedule)
                                 <i class="tio-time"></i>
                             </span>
                             <span class="info">
-                                <span>{{ translate('Closing Time') }}</span>
+                                <span>Время закрытия</span>
                                 {{date(config('timeformat'), strtotime($day['end_time']))}}
                             </span>
                         </span>

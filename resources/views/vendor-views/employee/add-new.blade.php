@@ -10,7 +10,7 @@
                 <img src="{{asset('/public/assets/admin/img/resturant-panel/page-title/employee-role.png')}}" alt="public">
             </div>
             <span>
-                {{translate('Add New Employee')}}
+                Добавить нового сотрудника
             </span>
         </h2>
     </div>
@@ -26,7 +26,7 @@
                         <i class="tio-user"></i>
                     </span>
                     <span>
-                        {{ translate('General Information') }}
+                        Личные данные
                     </span>
                 </h5>
             </div>
@@ -34,24 +34,24 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="form-label" for="fname">{{translate('messages.first')}} {{translate('messages.name')}}</label>
+                            <label class="form-label" for="fname">Имя</label>
                             <input type="text" name="f_name" class="form-control h--45px" id="fname"
-                                    placeholder="{{ translate('Ex : Sakeef Ameer') }}" value="{{old('f_name')}}" required>
+                                    placeholder="" value="{{old('f_name')}}" required>
                         </div>
                         <div class="form-group">
-                            <label class="form-label" for="lname">{{translate('messages.last')}} {{translate('messages.name')}}</label>
+                            <label class="form-label" for="lname">Фамилия</label>
                             <input type="text" name="l_name" class="form-control h--45px" id="lname" value="{{old('l_name')}}"
-                                    placeholder="{{ translate('Ex : Prodhan') }}" value="{{old('name')}}">
+                                    placeholder="" value="{{old('name')}}">
                         </div>
                         <div class="form-group">
                             <label class="form-label" for="phone">{{translate('messages.phone')}}</label>
                             <input type="tel" name="phone" value="{{old('phone')}}" class="form-control h--45px" id="phone"
-                                    placeholder="{{ translate('Ex : +88017********') }}" required>
+                                    placeholder="" required>
                         </div>
                         <div class="form-group mb-md-0">
                             <label class="form-label" for="role_id">{{translate('messages.Role')}}</label>
                             <select class="form-control h--45px custom-select2 w-100" name="role_id" required>
-                                <option value="" selected disabled>{{translate('messages.select')}} {{translate('messages.Role')}}</option>
+                                <option value="" selected disabled></option>
                                 @foreach($rls as $r)
                                     <option value="{{$r->id}}">{{$r->name}}</option>
                                 @endforeach
@@ -90,7 +90,7 @@
                                 <i class="tio-user"></i>
                             </span>
                             <span>
-                                {{translate('messages.account')}} {{translate('messages.info')}}
+                                Данные для входа
                             </span>
                         </h5>
                     </div>
@@ -99,17 +99,17 @@
                             <div class="col-md-4">
                                 <label class="form-label" for="email">{{translate('messages.email')}}</label>
                                 <input type="email" name="email" value="{{old('email')}}" class="form-control" id="email"
-                                        placeholder="{{ translate('Ex : ex@gmail.com') }}" required>
+                                        placeholder="" required>
                             </div>
                             <div class="col-md-4">
                                 <label class="form-label" for="password">{{translate('messages.password')}}</label>
                                 <input type="text" name="password" class="form-control" id="password" value="{{old('password')}}"
-                                        placeholder="{{translate('messages.password_length_placeholder',['length'=>'8+'])}}" required>
+                                        placeholder="" required>
                             </div>
                             <div class="col-md-4">
                                 <label class="form-label" for="confirm-password">{{translate('messages.confirm_password')}}</label>
                                 <input type="text" name="confirm-password" class="form-control" id="password" value="{{old('confirm-password')}}"
-                                        placeholder="{{translate('messages.password_length_placeholder',['length'=>'8+'])}}" required>
+                                        placeholder="" required>
                             </div>
                         </div>
                     </div>

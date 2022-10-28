@@ -16,7 +16,7 @@
                             <img src="{{asset('/public/assets/admin/img/resturant-panel/page-title/category.png')}}" alt="public">
                         </div>
                         <span>
-                            {{translate('messages.category')}} {{translate('messages.list')}}
+                            Все категории
                             <span class="badge badge-soft-dark ml-2" id="itemCount">{{$categories->total()}}</span>
                         </span>
                     </h2>
@@ -24,7 +24,7 @@
                         @csrf
                         <!-- Search -->
                         <div class="input-group input--group">
-                            <input type="search" name="search" class="form-control" placeholder="{{ translate('Ex : Search by category name...') }}" aria-label="{{translate('messages.search_categories')}}">
+                            <input type="search" name="search" class="form-control" placeholder="Поиск по названию" aria-label="{{translate('messages.search_categories')}}">
                             <button type="submit" class="btn btn--secondary">
                                 <i class="tio-search"></i>
                             </button>
@@ -47,8 +47,8 @@
                         <thead class="thead-light">
                             <tr>
                                 <th class="text-center w-33p">{{ translate('messages.sl') }}</th>
-                                <th class="text-center w-33p">{{ translate('messages.Category') }} {{translate('messages.id')}}</th>
-                                <th class="text-center w-33p">{{ translate('messages.Category') }} {{translate('messages.name')}}</th>
+                                <th class="text-center w-33p">{{translate('messages.id')}}</th>
+                                <th class="text-center w-33p">{{translate('messages.name')}}</th>
                             </tr>
                         </thead>
 

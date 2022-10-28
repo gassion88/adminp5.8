@@ -17,7 +17,7 @@
                             <img src="{{asset('/public/assets/admin/img/resturant-panel/page-title/review.png')}}" alt="public">
                         </div>
                         <span>
-                            {{translate('messages.customers')}} {{translate('messages.reviews')}}
+                             {{translate('messages.reviews')}}
                         </span>
                     </h2>
                 </div>
@@ -31,7 +31,7 @@
                 <div class="search--button-wrapper justify-content-end">
                     <form action="javascript:" id="search-form" class="my-2 vendor--search">
                         <div class="input--group input-group">
-                            <input type="search" name="search" id="column1_search" class="form-control" placeholder="{{ translate('messages.Ex :') }} {{ translate('Search by food name, name or phone...') }}" required>
+                            <input type="search" name="search" id="column1_search" class="form-control" placeholder="Поиск по телефону" required>
                             <button type="submit" class="btn btn--secondary"><i class="tio-search"></i></button>
                         </div>
                     </form>

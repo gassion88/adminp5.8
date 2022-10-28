@@ -9,7 +9,7 @@
     <!-- Page Header -->
      <div class="page-header">
         <div class="row align-items-center">
-            <div class="col-sm mb-2 mb-sm-0">
+            <!--<div class="col-sm mb-2 mb-sm-0">
                 <h2 class="page-header-title text-capitalize">
                     <div class="card-header-icon d-inline-flex mr-2 img">
                         <img src="{{asset('/public/assets/admin/img/resturant-panel/page-title/employee-role.png')}}" alt="public">
@@ -18,7 +18,7 @@
                         {{translate('messages.custom_role')}}
                     </span>
                 </h2>
-            </div>
+            </div>-->
         </div>
     </div>
     <!-- End Page Header -->
@@ -30,7 +30,7 @@
                     <i class="tio-document-text-outlined"></i>
                 </span>
                 <span>
-                    {{translate('messages.role_form')}}
+                    Изменить должность
                 </span>
             </h5>
         </div>
@@ -63,7 +63,7 @@
                             <div class="form-group form-check form--check">
                                 <input type="checkbox" name="modules[]" value="restaurant_setup" class="form-check-input"
                                     id="restaurant_setup" {{in_array('restaurant_setup',(array)json_decode($role['modules']))?'checked':''}}>
-                                <label class="form-check-label qcont" for="restaurant_setup">{{translate('messages.business')}} {{translate('messages.setup')}}</label>
+                                <label class="form-check-label qcont" for="restaurant_setup">Управление рестораном</label>
                             </div>
                         </div>
                         <div class="check-item">

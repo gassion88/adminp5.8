@@ -7,7 +7,7 @@
     <div class="content container-fluid">
         <!-- Page Header -->
         <div class="page-header">
-            <h1 class="page-header-title">{{ translate('messages.conversation') }} {{ translate('messages.list') }}</h1>
+            <h1 class="page-header-title">{{ translate('messages.conversation') }}</h1>
         </div>
         <!-- End Page Header -->
 
@@ -35,7 +35,7 @@
             </div>
             <div class="col-lg-8 col-nd-6" id="view-conversation">
                 <center class="mt-3">
-                    <h4 class="color-8a8a8a">{{ translate('messages.view') }} {{ translate('messages.conversation') }}
+                    <h4 class="color-8a8a8a">
                     </h4>
                 </center>
                 {{-- view here --}}

@@ -11,7 +11,7 @@
         <!-- Page Header -->
         <div class="page-header">
             <div class="mb-2 mb-sm-0">
-                <h1 class="page-header-title"><i class="tio-filter-list"></i> {{translate('messages.food')}} {{translate('messages.list')}}<span class="badge badge-soft-dark ml-2" id="itemCount">{{$foods->total()}}</span></h1>
+                <h1 class="page-header-title"><i class="tio-filter-list"></i> Вся еда<span class="badge badge-soft-dark ml-2" id="itemCount">{{$foods->total()}}</span></h1>
             </div>
             <div class="my-2">
                 <div class="row g-2 align-items-center justify-content-end">
@@ -28,7 +28,7 @@
                     @endif
                     <div class="col-auto">
                         <a href="{{route('vendor.food.add-new')}}" class="btn max-sm-12 btn--primary w-100"><i
-                                    class="tio-add-circle"></i> {{translate('messages.add')}} {{translate('messages.new')}} {{translate('messages.food')}}</a>
+                                    class="tio-add-circle"></i> {{translate('messages.add')}}</a>
                     </div>
 
                 </div>
@@ -44,7 +44,7 @@
                         @csrf
                         <!-- Search -->
                         <div class="input-group input--group">
-                            <input id="datatableSearch" type="search" name="search" class="form-control" placeholder="{{ translate('messages.Ex : Search Food Name') }}">
+                            <input id="datatableSearch" type="search" name="search" class="form-control" placeholder="Название">
                             <button type="submit" class="btn btn--secondary">
                                 <i class="tio-search"></i>
                             </button>
@@ -55,9 +55,9 @@
                     <div class="hs-unfold initial-89">
                         <select name="category_id" id="category" onchange="set_filter('{{url()->full()}}',this.value, 'category_id')" data-placeholder="{{translate('messages.select_category')}}" class="js-data-example-ajax form-control">
                             @if($category)
-                                <option value="{{$category->id}}" selected>{{$category->name}} ({{$category->position == 0?translate('messages.main'):translate('messages.sub')}})</option>
+                                <option value="{{$category->id}}" selected>{{$category->name}} </option>
                             @else
-                                <option value="all" selected>{{translate('messages.all_categories')}}</option>
+                                <option value="all" selected>Все категории</option>
                             @endif
                         </select>
                     </div>
@@ -70,7 +70,7 @@
                             "target": "#showHideDropdown",
                             "type": "css-animation"
                             }'>
-                            <i class="tio-table mr-1"></i> {{ translate('Columns') }}
+                            <i class="tio-table mr-1"></i> Вид
                         </a>
 
                         <div id="showHideDropdown" class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-right dropdown-card">
@@ -88,7 +88,7 @@
                                     <!-- End Checkbox Switch -->
                                     </div>--}}
                                     <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <span class="mr-2">{{ translate('Name') }}</span>
+                                        <span class="mr-2">Название</span>
                                         <!-- Checkbox Switch -->
                                         <label class="toggle-switch toggle-switch-sm" for="toggleColumn_name">
                                             <input type="checkbox" class="toggle-switch-input" id="toggleColumn_name" checked>
@@ -100,7 +100,7 @@
                                     </div>
 
                                     <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <span class="mr-2">{{ translate('Type') }}</span>
+                                        <span class="mr-2">Категории</span>
 
                                         <!-- Checkbox Switch -->
                                         <label class="toggle-switch toggle-switch-sm" for="toggleColumn_type">
@@ -113,7 +113,7 @@
                                     </div>
 
                                     <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <span class="mr-2">{{ translate('Status') }}</span>
+                                        <span class="mr-2">Статус</span>
 
                                         <!-- Checkbox Switch -->
                                         <label class="toggle-switch toggle-switch-sm" for="toggleColumn_status">
@@ -125,7 +125,7 @@
                                         <!-- End Checkbox Switch -->
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <span class="mr-2">{{ translate('Price') }}</span>
+                                        <span class="mr-2">Цена</span>
 
                                         <!-- Checkbox Switch -->
                                         <label class="toggle-switch toggle-switch-sm" for="toggleColumn_price">
@@ -136,18 +136,18 @@
                                         </label>
                                         <!-- End Checkbox Switch -->
                                     </div>
-                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <!-- <div class="d-flex justify-content-between align-items-center mb-3">
                                         <span class="mr-2">{{ translate('Action') }}</span>
 
-                                        <!-- Checkbox Switch -->
+                                        Checkbox Switch
                                         <label class="toggle-switch toggle-switch-sm" for="toggleColumn_action">
                                             <input type="checkbox" class="toggle-switch-input" id="toggleColumn_action" checked>
                                             <span class="toggle-switch-label">
                                             <span class="toggle-switch-indicator"></span>
                                             </span>
                                         </label>
-                                        <!-- End Checkbox Switch -->
-                                    </div>
+                                         End Checkbox Switch 
+                                    </div>-->
                             </div>
                             </div>
                         </div>
@@ -183,7 +183,7 @@
                         <th class="w-20p">{{translate('messages.category')}}</th>
                         <th class="text-center">{{translate('messages.price')}}</th>
                         <th class="text-center">{{translate('messages.status')}}</th>
-                        <th class="text-center">{{translate('messages.action')}}</th>
+                        <!--<th class="text-center">{{translate('messages.action')}}</th>-->
                     </tr>
                     </thead>
 

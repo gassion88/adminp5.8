@@ -15,7 +15,7 @@
                     <img src="{{asset('/public/assets/admin/img/resturant-panel/page-title/resturant.png')}}" alt="public">
                 </div>
                 <span>
-                    {{translate('Restaurant Setup')}}
+                    Настройки ресторана
                 </span>
             </h2>
         </div>
@@ -197,7 +197,7 @@
             <div class="card-header">
                 <h5 class="card-title">
                     <i class="tio-date-range"></i>
-                    {{ translate('Opening and closing schedules') }}
+                    Графики открытия и закрытия
                 </h5>
             </div>
             <div class="card-body" id="schedule">
@@ -222,11 +222,11 @@
                         @csrf
                         <input type="hidden" name="day" id="day_id_input">
                         <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">{{translate('messages.Start time')}}:</label>
+                            <label for="recipient-name" class="col-form-label">Открытие:</label>
                             <input type="time" class="form-control" name="start_time" required>
                         </div>
                         <div class="form-group">
-                            <label for="message-text" class="col-form-label">{{translate('messages.End time')}}:</label>
+                            <label for="message-text" class="col-form-label">Закрытие:</label>
                             <input type="time" class="form-control" name="end_time" required>
                         </div>
                         <div class="btn--container justify-content-end">
@@ -362,7 +362,7 @@
             var day_name = button.data('day');
             var day_id = button.data('dayid');
             var modal = $(this);
-            modal.find('.modal-title').text('{{translate('messages.Create Schedule For ')}} ' + day_name);
+            modal.find('.modal-title').text( day_name);
             modal.find('.modal-body input[name=day]').val(day_id);
         })
 

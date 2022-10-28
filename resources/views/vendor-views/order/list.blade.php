@@ -57,7 +57,7 @@
                         <!-- Search -->
                         <div class="input-group input--group">
                             <input id="datatableSearch_" type="search" name="search" class="form-control"
-                                    placeholder="{{ translate('Ex : Search by Order Id') }}" aria-label="{{translate('messages.search')}}" required>
+                                    placeholder="Поиск по id" aria-label="{{translate('messages.search')}}" required>
                             <button type="submit" class="btn btn--secondary">
                                 <i class="tio-search"></i>
                             </button>
@@ -124,7 +124,7 @@
                                     "target": "#showHideDropdown",
                                     "type": "css-animation"
                                 }'>
-                                <i class="tio-table mr-1"></i> {{translate('messages.column')}} <span
+                                <i class="tio-table mr-1"></i> Вид <span
                                     class="badge badge-soft-dark rounded-circle ml-1"></span>
                             </a>
 
@@ -180,7 +180,7 @@
 
 
                                         <div class="d-flex justify-content-between align-items-center mb-3">
-                                            <span class="mr-2">{{translate('messages.total')}}</span>
+                                            <span class="mr-2">Стоимость</span>
 
                                             <!-- Checkbox Switch -->
                                             <label class="toggle-switch toggle-switch-sm" for="toggleColumn_total">
@@ -193,7 +193,7 @@
                                             <!-- End Checkbox Switch -->
                                         </div>
                                         <div class="d-flex justify-content-between align-items-center mb-3">
-                                            <span class="mr-2">{{translate('messages.order')}} {{translate('messages.status')}}</span>
+                                            <span class="mr-2">Статус заказа</span>
 
                                             <!-- Checkbox Switch -->
                                             <label class="toggle-switch toggle-switch-sm" for="toggleColumn_order_status">
@@ -205,10 +205,10 @@
                                             </label>
                                             <!-- End Checkbox Switch -->
                                         </div>
-                                        <div class="d-flex justify-content-between align-items-center">
+                                        <!--<div class="d-flex justify-content-between align-items-center">
                                             <span class="mr-2">{{translate('messages.actions')}}</span>
 
-                                            <!-- Checkbox Switch -->
+                                             Checkbox Switch
                                             <label class="toggle-switch toggle-switch-sm"
                                                     for="toggleColumn_actions">
                                                 <input type="checkbox" class="toggle-switch-input"
@@ -217,8 +217,8 @@
                                                 <span class="toggle-switch-indicator"></span>
                                                 </span>
                                             </label>
-                                            <!-- End Checkbox Switch -->
-                                        </div>
+                                            End Checkbox Switch 
+                                        </div>-->
                                     </div>
                                 </div>
                             </div>
@@ -244,11 +244,11 @@
                             {{ translate('messages.sl') }}
                         </th>
                         <th class="w-90px table-column-pl-0">{{translate('messages.Order ID')}}</th>
-                        <th class="w-140px">{{translate('messages.order')}} {{translate('messages.date')}}</th>
-                        <th class="w-140px">{{translate('messages.customer_information')}}</th>
-                        <th class="w-100px">{{translate('messages.total')}} {{translate('messages.amount')}}</th>
-                        <th class="w-100px text-center">{{translate('messages.order')}} {{translate('messages.status')}}</th>
-                        <th class="w-100px text-center">{{translate('messages.actions')}}</th>
+                        <th class="w-140px">Время заказа</th>
+                        <th class="w-140px">Клиент</th>
+                        <th class="w-100px">Стоимость</th>
+                        <th class="w-100px text-center">Статус и тип заказа</th>
+                        <th class="w-100px text-center"></th>
                     </tr>
                     </thead>
 
@@ -297,7 +297,7 @@
                                     <div>
                                         {{\App\CentralLogics\Helpers::format_currency($order['order_amount'])}}
                                     </div>
-                                    @if($order->payment_status=='paid')
+                                   <!-- @if($order->payment_status=='paid')
                                     <strong class="text-success">
                                         {{translate('messages.paid')}}
                                     </strong>
@@ -305,7 +305,7 @@
                                         <strong class="text-danger">
                                             {{translate('messages.unpaid')}}
                                         </strong>
-                                    @endif
+                                    @endif-->
                                 </div>
 
                             </td>
@@ -316,7 +316,7 @@
                                     </span>
                                 @elseif($order['order_status']=='confirmed')
                                     <span class="badge badge-soft-info mb-1">
-                                      {{translate('messages.confirmed')}}
+                                      Подтверждённый
                                     </span>
                                 @elseif($order['order_status']=='processing')
                                     <span class="badge badge-soft-warning mb-1">

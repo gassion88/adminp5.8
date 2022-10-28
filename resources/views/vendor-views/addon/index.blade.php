@@ -22,7 +22,7 @@
                     @php($default_lang = 'en')
                     @if($language)
                         @php($default_lang = json_decode($language)[0])
-                        <div class="col-12">
+                       <!-- <div class="col-12">
                             <ul class="nav nav-tabs mb-4">
                                 @foreach(json_decode($language) as $lang)
                                     <li class="nav-item">
@@ -30,11 +30,11 @@
                                     </li>
                                 @endforeach
                             </ul>
-                        </div>
+                        </div>-->
                         @foreach(json_decode($language) as $lang)
                             <div class="form-group col-md-6 {{$lang != $default_lang ? 'd-none':''}} lang_form" id="{{$lang}}-form">
-                                <label class="form-label" for="exampleFormControlInput1">{{translate('messages.name')}} ({{strtoupper($lang)}})</label>
-                                <input type="text" name="name[]" class="form-control h--45px" placeholder="{{translate('Ex : New Addon ')}}" maxlength="191" {{$lang == $default_lang? 'required':''}} oninvalid="document.getElementById('en-link').click()">
+                                <label class="form-label" for="exampleFormControlInput1">{{translate('messages.name')}} </label>
+                                <input type="text" name="name[]" class="form-control h--45px" placeholder="" maxlength="191" {{$lang == $default_lang? 'required':''}} oninvalid="document.getElementById('en-link').click()">
                             </div>
                             <input type="hidden" name="lang[]" value="{{$lang}}">
                         @endforeach
@@ -48,7 +48,7 @@
 
                     <div class="form-group col-md-6">
                         <label class="form-label" for="exampleFormControlInput1">{{translate('messages.price')}}</label>
-                        <input type="number" min="0" max="999999999999.99" name="price" step="0.01" class="form-control h--45px" placeholder="{{ translate('Ex : 100.00') }}" value="{{old('price')}}" required>
+                        <input type="number" min="0" max="999999999999.99" name="price" step="0.01" class="form-control h--45px" placeholder="" value="{{old('price')}}" required>
                     </div>
                     <div class="col-12">
                         <div class="btn--container justify-content-end">
@@ -64,11 +64,11 @@
             <div class="card-header py-2 border-0">
                 <div class="search--button-wrapper">
                     <h5 class="card-title">
-                        {{translate('messages.addon')}} {{translate('messages.list')}}<span class="badge badge-soft-dark ml-2" id="itemCount">{{$addons->total()}}</span>
+                        Все Аддоны<span class="badge badge-soft-dark ml-2" id="itemCount">{{$addons->total()}}</span>
                     </h5>
                     <div id="search-form">
                         <div class="input-group input--group">
-                            <input type="text" id="column1_search" class="form-control" placeholder="{{ translate('Ex : Search by Addon Name or Restaurant Name') }}">
+                            <input type="text" id="column1_search" class="form-control" placeholder="">
                             <button type="button" class="btn btn--secondary">
                                 <i class="tio-search"></i>
                             </button>
@@ -90,7 +90,7 @@
                         <th class="w-100px">{{translate('messages.sl')}}</th>
                         <th class="w-30p">{{translate('messages.name')}}</th>
                         <th class="w-25p">{{translate('messages.price')}}</th>
-                        <th class="text-center w-100px">{{translate('messages.action')}}</th>
+                        <!--<th class="text-center w-100px">{{translate('messages.action')}}</th>-->
                     </tr>
                     </thead>
 
