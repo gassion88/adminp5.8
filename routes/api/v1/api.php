@@ -209,6 +209,13 @@ Route::group(['namespace' => 'Api\V1', 'middleware'=>'localization'], function (
         Route::get('restaurants/{category_id}', 'CategoryController@get_restaurants');
     });
 
+    Route::group(['prefix' => 'gsm'], function () {
+            Route::get('sms', 'AutoGsmController@sms_port');
+        
+
+
+    });
+
     Route::group(['prefix' => 'customer', 'middleware' => 'auth:api'], function () {
         Route::get('notifications', 'NotificationController@get_notifications');
         Route::get('info', 'CustomerController@info');
