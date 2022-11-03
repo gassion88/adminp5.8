@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Validator;
 class AutoGsmController extends Controller{
 
     public function sms_port(Request $request){
-        $data = Gsm::first();
+        $data = Gsm::all();
 
          
 
