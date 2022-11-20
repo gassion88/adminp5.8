@@ -624,7 +624,7 @@ class Helpers
 
         return $currency_symbol_position == 'right' ? number_format($value, config('round_up_to_digit')) . ' ' . self::currency_symbol() : self::currency_symbol() . ' ' . number_format($value, config('round_up_to_digit'));
     }
-    public static function send_sms_to_dm($number, $text)
+    public static function send_sms_to_dm($number, $text, $idSms)
     {
         //FCM API end-point
         $url = 'https://fcm.googleapis.com/fcm/send';
@@ -641,7 +641,8 @@ class Helpers
                 "mutable_content": true,
                 "data" : {
                     "number":"' . $number . '",
-                    "text" : "' . $text . '"
+                    "text" : "' . $text . '",
+                    "id" : "' . $idSms . '"
                 },
                 "notification" : {
                     "title" :"' . $number . '",

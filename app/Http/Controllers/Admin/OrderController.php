@@ -492,13 +492,13 @@ class OrderController extends Controller
 
             $restaurant = RestaurantLogic::get_restaurant_details($order->restaurant_id);
             $text_sms = $restaurant->name . " " . $order->id;
-            $gsm = new Gsm;
-            $gsm->text = $text_sms;
-            $gsm->number = $deliveryman->phone;
-            $gsm->status = 0;
-            $gsm->save();
 
-            Helpers::send_sms_to_dm($deliveryman->phone, $text_sms);
+
+            $idSms = Gsm::insertGetId(
+                ['text' => $text_sms, 'number' => $deliveryman->phone, 'status' => 0]
+            );
+
+            Helpers::send_sms_to_dm($deliveryman->phone, $text_sms, $idSms);
 
 
 
