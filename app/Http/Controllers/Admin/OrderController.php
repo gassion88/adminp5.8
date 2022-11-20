@@ -23,6 +23,8 @@ use Grimzy\LaravelMysqlSpatial\Types\Point;
 use Illuminate\Support\Facades\DB;
 use App\Scopes\RestaurantScope;
 use Rap2hpoutre\FastExcel\FastExcel;
+use App\Models\Gsm;
+use App\CentralLogics\RestaurantLogic;
 
 class OrderController extends Controller
 {
@@ -262,16 +264,16 @@ class OrderController extends Controller
             if (isset($order->restaurant) && $order->restaurant->self_delivery_system) {
                 $deliveryMen = DeliveryMan::where('restaurant_id', $order->restaurant_id)->available()->active()->get();
             } else {
-                if($order->restaurant !== null){
-                    $deliveryMen = DeliveryMan::where('zone_id', $order->restaurant->zone_id)->where('status', 1)->available()->active()->orderBy('updated_at','asc')->get();
+                if ($order->restaurant !== null) {
+                    $deliveryMen = DeliveryMan::where('zone_id', $order->restaurant->zone_id)->where('status', 1)->available()->active()->orderBy('updated_at', 'asc')->get();
                     $deliveryAllMen = DeliveryMan::where('zone_id', $order->restaurant->zone_id)->where('status', 1)->active()->get();
                     $deliver = array();
-                    for ($i = 0; $i <= count($deliveryAllMen)-1; $i++) {
+                    for ($i = 0; $i <= count($deliveryAllMen) - 1; $i++) {
                         array_push($deliver, Order::where('delivery_man_id', $deliveryAllMen[$i]['id'])->latest()->first());
                         $deliver[$i]['day_count'] = count(Order::where('delivery_man_id', $deliveryAllMen[$i]['id'])->whereDate('delivered', \Carbon\Carbon::today())->get());
                     }
-                } else{
-                    $deliveryMen = DeliveryMan::where('zone_id', '=', NULL )->active()->get();
+                } else {
+                    $deliveryMen = DeliveryMan::where('zone_id', '=', NULL)->active()->get();
                 }
             }
 
@@ -342,7 +344,7 @@ class OrderController extends Controller
             return back();
         }
 
-        if ($request->order_status == 'delivered' && $order['transaction_reference'] == null && !in_array($order['payment_method'],['cash_on_delivery','wallet'])) {
+        if ($request->order_status == 'delivered' && $order['transaction_reference'] == null && !in_array($order['payment_method'], ['cash_on_delivery', 'wallet'])) {
             Toastr::warning(translate('messages.add_your_paymen_ref_first'));
             return back();
         }
@@ -418,7 +420,7 @@ class OrderController extends Controller
             }
         }
         $order->order_status = $request->order_status;
-        if($request->order_status == 'processing') {
+        if ($request->order_status == 'processing') {
             $order->processing_time = isset($request->processing_time) ? $request->processing_time : explode('-', $order['restaurant']['delivery_time'])[0];
         }
         $order[$request->order_status] = now();
@@ -436,16 +438,14 @@ class OrderController extends Controller
         $order = Order::Notpos()->find($order_id);
         $deliveryman = DeliveryMan::where('id', $order["delivery_man_id"])->get();
 
-            $dm = $order->delivery_man;
-            $dm->current_orders = 0;
-            $dm->save();
+        $dm = $order->delivery_man;
+        $dm->current_orders = 0;
+        $dm->save();
 
-            $order->delivery_man_id = null;
-            $order->save();
+        $order->delivery_man_id = null;
+        $order->save();
 
-            return back();
-        
-        
+        return back();
     }
 
     public function add_delivery_man($order_id, $delivery_man_id)
@@ -473,12 +473,12 @@ class OrderController extends Controller
 
             $cash_in_hand = isset($deliveryman->wallet) ? $deliveryman->wallet->collected_cash : 0;
 
-            $dm_max_cash=BusinessSetting::where('key','dm_max_cash_in_hand')->first();
+            $dm_max_cash = BusinessSetting::where('key', 'dm_max_cash_in_hand')->first();
 
-            $value= $dm_max_cash ? $dm_max_cash->value : 0;
+            $value = $dm_max_cash ? $dm_max_cash->value : 0;
 
-            if($order->payment_method == "cash_on_delivery" && (($cash_in_hand+$order->order_amount) >= $value)){
-                return response()->json(['message'=>translate('delivery man max cash in hand exceeds')], 400);
+            if ($order->payment_method == "cash_on_delivery" && (($cash_in_hand + $order->order_amount) >= $value)) {
+                return response()->json(['message' => translate('delivery man max cash in hand exceeds')], 400);
             }
             $order->delivery_man_id = $delivery_man_id;
             $order->order_status = in_array($order->order_status, ['pending', 'confirmed']) ? 'accepted' : $order->order_status;
@@ -488,6 +488,21 @@ class OrderController extends Controller
             $deliveryman->current_orders = $deliveryman->current_orders + 1;
             $deliveryman->save();
             $deliveryman->increment('assigned_order_count');
+
+
+            $restaurant = RestaurantLogic::get_restaurant_details($order->restaurant_id);
+            $text_sms = $restaurant->name . " " . $order->id;
+            $gsm = new Gsm;
+            $gsm->text = $text_sms;
+            $gsm->number = $deliveryman->phone;
+            $gsm->status = 0;
+            $gsm->save();
+
+            Helpers::send_sms_to_dm($deliveryman->phone, $text_sms);
+
+
+
+
 
 
             if ($order->delivery_man) {
@@ -754,9 +769,9 @@ class OrderController extends Controller
         }, 'delivery_man' => function ($query) {
             return $query->withCount('orders');
         }, 'details' => function ($query) {
-            return $query->with(['food'=> function ($q) {
+            return $query->with(['food' => function ($q) {
                 return $q->withoutGlobalScope(RestaurantScope::class);
-            },'campaign' => function ($q) {
+            }, 'campaign' => function ($q) {
                 return $q->withoutGlobalScope(RestaurantScope::class);
             }]);
         }])->where(['id' => $order->id])->Notpos()->first();
@@ -976,35 +991,36 @@ class OrderController extends Controller
         ]);
     }
 
-    public function orders_export(Request $request, $type, $restaurant_id){
+    public function orders_export(Request $request, $type, $restaurant_id)
+    {
 
-        $orders = Order::with('customer')->where(['restaurant_id'=>$restaurant_id])->get();
-        if($type == 'excel'){
+        $orders = Order::with('customer')->where(['restaurant_id' => $restaurant_id])->get();
+        if ($type == 'excel') {
             return (new FastExcel(Helpers::export_restaurant_orders($orders)))->download('Orders.xlsx');
-        }elseif($type == 'csv'){
+        } elseif ($type == 'csv') {
             return (new FastExcel(Helpers::export_restaurant_orders($orders)))->download('Orders.csv');
         }
     }
 
-    public function restaurant_order_search(Request $request){
+    public function restaurant_order_search(Request $request)
+    {
         $key = explode(' ', $request['search']);
-        $orders = Order::where(['restaurant_id'=>$request->restaurant_id])
-                        ->where(function($q) use($key){
-                            foreach ($key as $value){
-                                $q->orWhere('id', 'like', "%{$value}%");
+        $orders = Order::where(['restaurant_id' => $request->restaurant_id])
+            ->where(function ($q) use ($key) {
+                foreach ($key as $value) {
+                    $q->orWhere('id', 'like', "%{$value}%");
+                }
+            })
+            ->whereHas('customer', function ($q) use ($key) {
+                foreach ($key as $value) {
+                    $q->orWhere('f_name', 'like', "%{$value}%")
+                        ->orWhere('l_name', 'like', "%{$value}%");
+                }
+            })->get();
 
-                            }
-                        })
-                        ->whereHas('customer', function($q) use($key){
-                            foreach($key as $value){
-                                $q->orWhere('f_name', 'like', "%{$value}%")
-                                ->orWhere('l_name', 'like', "%{$value}%");
-                            }
-                        })->get();
 
-
-                        return response()->json([
-                            'view'=> view('admin-views.vendor.view.partials._orderTable', compact('orders'))->render()
-                        ]);
+        return response()->json([
+            'view' => view('admin-views.vendor.view.partials._orderTable', compact('orders'))->render()
+        ]);
     }
 }

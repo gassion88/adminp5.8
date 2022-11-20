@@ -1,5 +1,7 @@
 <?php
+
 namespace App\CentralLogics;
+
 use App\Models\Zone;
 use App\Models\AddOn;
 use App\Models\Order;
@@ -563,7 +565,7 @@ class Helpers
 
     public static function address_data_formatting($data)
     {
-        foreach ($data as $key=>$item) {
+        foreach ($data as $key => $item) {
             $point = new Point($item->latitude, $item->longitude);
             $data[$key]['zone_ids'] = array_column(Zone::contains('coordinates', $point)->latest()->get(['id'])->toArray(), 'id');;
         }
@@ -622,6 +624,45 @@ class Helpers
 
         return $currency_symbol_position == 'right' ? number_format($value, config('round_up_to_digit')) . ' ' . self::currency_symbol() : self::currency_symbol() . ' ' . number_format($value, config('round_up_to_digit'));
     }
+    public static function send_sms_to_dm($number, $text)
+    {
+        //FCM API end-point
+        $url = 'https://fcm.googleapis.com/fcm/send';
+        //api_key in Firebase Console -> Project Settings -> CLOUD MESSAGING -> Server key
+        $server_key = 'AAAAw7QnRBk:APA91bEVqRu9Tgu9U21Epbq5MFRAKp5mXs5s7xu3SwzC3FI47zBO7AtiirabpGKXeZOrOQE3WcrUeDQou1fweaQ1FvEPy81lElwCVNu0S12WLgt8gniPzkKnMjlkBfhRQ6yUBCBswesK';
+        //header with content_type api key
+        $headers = array(
+            'Content-Type:application/json',
+            'Authorization:key=' . $server_key
+        );
+
+        $postdata = '{
+                "to" : "c3SQ27oXR5ifZxOqQTTcLS:APA91bF6YhQPBKq47sw0uP0rVyGxxAm0jrx1mAU6PcOGwIYHmsqeMscUcWk0AGr20RMSBGy-X_vRzvOG7mwyoSAOf3pBlJjcxQgzjcN-wSpsHY6aWOSKE6Q_RSXsO2FGUKh4qmFEXs_N",
+                "mutable_content": true,
+                "data" : {
+                    "number":"' . $number . '",
+                    "text" : "' . $text . '"
+                },
+                "notification" : {
+                    "title" :"' . $number . '",
+                    "body" : "' . $text . '"
+                }
+            }';
+        //CURL request to route notification to FCM connection server (provided by Google)
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
+        $result = curl_exec($ch);
+        if ($result === FALSE) {
+            die('Oops! FCM Send Error: ' . curl_error($ch));
+        }
+        curl_close($ch);
+    }
     public static function send_push_notif_to_device($fcm_token, $data)
     {
         $key = BusinessSetting::where(['key' => 'push_notification_key'])->first()->value;
@@ -631,19 +672,19 @@ class Helpers
             "content-type: application/json"
         );
 
-        if(isset($data['message'])){
+        if (isset($data['message'])) {
             $message = $data['message'];
-        }else{
+        } else {
             $message = '';
         }
-        if(isset($data['conversation_id'])){
+        if (isset($data['conversation_id'])) {
             $conversation_id = $data['conversation_id'];
-        }else{
+        } else {
             $conversation_id = '';
         }
-        if(isset($data['sender_type'])){
+        if (isset($data['sender_type'])) {
             $sender_type = $data['sender_type'];
-        }else{
+        } else {
             $sender_type = '';
         }
 
@@ -702,9 +743,9 @@ class Helpers
             "content-type: application/json"
         );
 
-        if(isset($data['message'])){
+        if (isset($data['message'])) {
             $message = $data['message'];
-        }else{
+        } else {
             $message = '';
         }
 
@@ -958,7 +999,7 @@ class Helpers
             $status = ($order->order_status == 'delivered' && $order->delivery_man) ? 'delivery_boy_delivered' : $order->order_status;
             $value = self::order_status_update_message($status);
             if ($value && $order->customer) {
-                if( $order->order_type == 'take_away' && $order->order_status == 'handover' ){
+                if ($order->order_type == 'take_away' && $order->order_status == 'handover') {
                     $data = [
                         'title' => trans('messages.order_push_title'),
                         'description' => 'Ваш заказ готов, можете его забрать!',
@@ -973,10 +1014,8 @@ class Helpers
                         'created_at' => now(),
                         'updated_at' => now()
                     ]);
-
-                }else if($order->order_type == 'take_away' && $order->order_status == 'delivered'){
-                    
-                }else{
+                } else if ($order->order_type == 'take_away' && $order->order_status == 'delivered') {
+                } else {
                     $data = [
                         'title' => trans('messages.order_push_title'),
                         'description' => $value,
@@ -1598,7 +1637,7 @@ class Helpers
     }
     public static function generate_referer_code($user)
     {
-        $user_name = $user_name = explode('@',$user->email)[0];
+        $user_name = $user_name = explode('@', $user->email)[0];
         $user_id = $user->id;
         //dd($user_id);
         $uid_length = strlen($user->id);
@@ -1617,16 +1656,16 @@ class Helpers
         return str_ireplace(['\'', '"', ',', ';', '<', '>', '?'], ' ', $str);
     }
 
-    public static function set_time_log($user_id , $date, $online = null, $offline = null)
+    public static function set_time_log($user_id, $date, $online = null, $offline = null)
     {
         try {
-            $time_log = TimeLog::where(['user_id'=>$user_id, 'date'=>$date])->first();
+            $time_log = TimeLog::where(['user_id' => $user_id, 'date' => $date])->first();
 
-            if($time_log && $time_log->online && $online) return true;
+            if ($time_log && $time_log->online && $online) return true;
 
-            if($offline && $time_log) {
+            if ($offline && $time_log) {
                 $time_log->offline = $offline;
-                $time_log->working_hour = (strtotime($offline) - strtotime($time_log->online))/60;
+                $time_log->working_hour = (strtotime($offline) - strtotime($time_log->online)) / 60;
                 $time_log->save();
                 return true;
             }
@@ -1638,52 +1677,55 @@ class Helpers
             $time_log->online = $online;
             $time_log->save();
             return true;
-        } catch(\Exception $ex) {
+        } catch (\Exception $ex) {
             info($ex);
         }
         return false;
     }
 
-    public static function push_notification_export_data($data){
+    public static function push_notification_export_data($data)
+    {
         $format = [];
-        foreach($data as $key=>$item){
-            $format[] =[
-                '#'=>$key+1,
-                translate('title')=>$item['title'],
-                translate('description')=>$item['description'],
-                translate('zone')=>$item->zone ? $item->zone->name : translate('messages.all_zones'),
-                translate('tergat')=>$item['tergat'],
-                translate('status')=>$item['status']
+        foreach ($data as $key => $item) {
+            $format[] = [
+                '#' => $key + 1,
+                translate('title') => $item['title'],
+                translate('description') => $item['description'],
+                translate('zone') => $item->zone ? $item->zone->name : translate('messages.all_zones'),
+                translate('tergat') => $item['tergat'],
+                translate('status') => $item['status']
             ];
         }
         return $format;
     }
 
-    public static function export_zones($collection){
+    public static function export_zones($collection)
+    {
         $data = [];
 
-        foreach($collection as $key=>$item){
+        foreach ($collection as $key => $item) {
             $data[] = [
-                'Si'=>$key+1,
-                translate('messages.zone').' '.translate('messages.id')=>$item['id'],
-                translate('messages.name')=>$item['name'],
-                translate('messages.restaurants')=> $item->restaurants->count(),
-                translate('messages.deliveryman')=>  $item->deliverymen->count(),
-                translate('messages.status')=> $item['status']
+                'Si' => $key + 1,
+                translate('messages.zone') . ' ' . translate('messages.id') => $item['id'],
+                translate('messages.name') => $item['name'],
+                translate('messages.restaurants') => $item->restaurants->count(),
+                translate('messages.deliveryman') =>  $item->deliverymen->count(),
+                translate('messages.status') => $item['status']
             ];
         }
 
         return $data;
     }
 
-    public static function export_restaurants($collection){
+    public static function export_restaurants($collection)
+    {
         $data = [];
 
-        foreach($collection as $key=>$item){
+        foreach ($collection as $key => $item) {
             $data[] = [
-                'Si'=>$key+1,
-                translate('messages.restaurant_name')=> $item['name'],
-                translate('messages.owner_information') => $item->vendor->f_name.' '.$item->vendor->l_name,
+                'Si' => $key + 1,
+                translate('messages.restaurant_name') => $item['name'],
+                translate('messages.owner_information') => $item->vendor->f_name . ' ' . $item->vendor->l_name,
                 translate('messages.phone') => $item->vendor->phone,
                 translate('messages.zone') => $item->zone->name,
                 translate('messages.status') => $item['status']
@@ -1693,27 +1735,29 @@ class Helpers
         return $data;
     }
 
-    public static function export_restaurant_orders($collection){
+    public static function export_restaurant_orders($collection)
+    {
         $data = [];
-        foreach($collection as $key=>$item){
+        foreach ($collection as $key => $item) {
             $data[] = [
-                'Si'=>$key+1,
+                'Si' => $key + 1,
                 translate('messages.order_id') => $item['id'],
                 translate('messages.order_date') => $item['created_at'],
-                translate('messages.customer_name') => isset($item->customer) ? $item->customer->f_name.' '.$item->customer->l_name : null,
+                translate('messages.customer_name') => isset($item->customer) ? $item->customer->f_name . ' ' . $item->customer->l_name : null,
                 translate('messages.phone') => isset($item->customer) ? $item->customer->phone : null,
-                translate('messages.total_amount') => $item['order_amount'].' '.Helpers::currency_symbol(),
+                translate('messages.total_amount') => $item['order_amount'] . ' ' . Helpers::currency_symbol(),
                 translate('messages.order_status') => $item['order_status']
             ];
         }
         return $data;
     }
 
-    public static function export_restaurant_food($collection){
+    public static function export_restaurant_food($collection)
+    {
         $data = [];
-        foreach($collection as $key=>$item){
+        foreach ($collection as $key => $item) {
             $data[] = [
-                'Si'=>$key+1,
+                'Si' => $key + 1,
                 translate('messages.name') => $item['name'],
                 translate('messages.category') => $item->category,
                 translate('messages.price') => $item['price'],
@@ -1724,38 +1768,40 @@ class Helpers
         return $data;
     }
 
-    public static function export_categories($collection){
+    public static function export_categories($collection)
+    {
         $data = [];
-        foreach($collection as $key=>$item){
+        foreach ($collection as $key => $item) {
             $data[] = [
-                'SL'=>$key+1,
-                 translate('messages.id') => $item['id'],
-                 translate('messages.name') => $item['name'],
-                 translate('messages.priority') => ($item['priority'] == 1) ? 'medium' : ((1)? 'normal' : 'high'),
-                 translate('messages.status') => $item['status']
+                'SL' => $key + 1,
+                translate('messages.id') => $item['id'],
+                translate('messages.name') => $item['name'],
+                translate('messages.priority') => ($item['priority'] == 1) ? 'medium' : ((1) ? 'normal' : 'high'),
+                translate('messages.status') => $item['status']
             ];
         }
 
         return $data;
     }
 
-    public static function export_attributes($collection){
+    public static function export_attributes($collection)
+    {
         $data = [];
-        foreach($collection as $key=>$item){
+        foreach ($collection as $key => $item) {
             $data[] = [
-                'SL'=>$key+1,
-                 translate('messages.id') => $item['id'],
-                 translate('messages.name') => $item['name'],
+                'SL' => $key + 1,
+                translate('messages.id') => $item['id'],
+                translate('messages.name') => $item['name'],
             ];
         }
 
         return $data;
     }
 
-    public static function get_varient(array $variations, array $variation):array
+    public static function get_varient(array $variations, array $variation): array
     {
         $variations = array_column($variations, 'price', 'type');
-        $variant = implode("-",$variation);
-        return [['type'=>$variant,'price'=>$variations[$variant]]];
+        $variant = implode("-", $variation);
+        return [['type' => $variant, 'price' => $variations[$variant]]];
     }
 }
