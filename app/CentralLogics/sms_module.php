@@ -12,31 +12,35 @@ class SMS_module
 {
     public static function send($receiver, $otp)
     {
-        $config = self::get_settings('twilio_sms');
-        if (isset($config) && $config['status'] == 1) {
-            $response = self::twilio($receiver, $otp);
-            return $response;
-        }
+        $curl = curl_init();
 
-        $config = self::get_settings('nexmo_sms');
-        if (isset($config) && $config['status'] == 1) {
-            $response = self::nexmo($receiver, $otp);
-            return $response;
+        curl_setopt_array($curl, array(
+          CURLOPT_URL => "https://api.ultramsg.com/instance24125/messages/chat",
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_ENCODING => "",
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 30,
+          CURLOPT_SSL_VERIFYHOST => 0,
+          CURLOPT_SSL_VERIFYPEER => 0,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => "POST",
+          CURLOPT_POSTFIELDS => "token=28f74im7scnz2rxj&to='.$receiver.'&body=Ваш код $otp &priority=1&referenceId=",
+          CURLOPT_HTTPHEADER => array(
+            "content-type: application/x-www-form-urlencoded"
+          ),
+        ));
+        
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+        
+        curl_close($curl);
+        
+        if ($err) {
+          echo "cURL Error #:" . $err;
+        } else {
+        $response = 'success';
+        return $response;
         }
-
-        $config = self::get_settings('2factor_sms');
-        if (isset($config) && $config['status'] == 1) {
-            $response = self::two_factor($receiver, $otp);
-            return $response;
-        }
-
-        $config = self::get_settings('msg91_sms');
-        if (isset($config) && $config['status'] == 1) {
-            $response = self::msg_91($receiver, $otp);
-            return $response;
-        }
-
-        return 'not_found';
     }
 
     public static function twilio($receiver, $otp)
