@@ -92,7 +92,7 @@
                                 <canvas id="updatingData" class="h-20rem" data-hs-chartjs-options='{
                                     "type": "bar",
                                     "data": {
-                                    "labels": ["Jan","Feb","Mar","April","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+                                    "labels": ["Январь","Февраль","Март","Апрель","Май","Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь"],
                                     "datasets": [{
                                         "data": [{{$earning[1]}},{{$earning[2]}},{{$earning[3]}},{{$earning[4]}},{{$earning[5]}},{{$earning[6]}},{{$earning[7]}},{{$earning[8]}},{{$earning[9]}},{{$earning[10]}},{{$earning[11]}},{{$earning[12]}}],
                                         "backgroundColor": "#7ECAFF",
