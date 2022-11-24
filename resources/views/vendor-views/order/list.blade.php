@@ -263,7 +263,7 @@
                             </td>
                             <td>
                                 <span class="d-block">
-                                    {{date('d M Y',strtotime($order['created_at']))}}
+                                    {{date('d n Y',strtotime($order['created_at']))}}
                                 </span>
                                 <span class="d-block text-uppercase">
                                     {{date(config('timeformat'),strtotime($order['created_at']))}}
