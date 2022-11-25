@@ -70,10 +70,10 @@
                         </h4>
                         <div class="d-flex flex-wrap my-2 my-md-0 justify-content-center align-items-center">
                             @php($amount=array_sum($earning))
-                            <span class="h5 m-0 mr-3 fz--11 d-flex align-items-center mb-2 mb-md-0">
+                            <!--<span class="h5 m-0 mr-3 fz--11 d-flex align-items-center mb-2 mb-md-0">
                                 <span class="legend-indicator bg-7ECAFF"></span>
                                 {{translate('messages.commission_given')}} : {{\App\CentralLogics\Helpers::format_currency(array_sum($commission))}}
-                            </span>
+                            </span>-->
                             <span class="h5 m-0 fz--11 d-flex align-items-center mb-2 mb-md-0">
                                 <span class="legend-indicator bg-0661CB"></span>
                                 {{translate('messages.total_earning')}} : {{\App\CentralLogics\Helpers::format_currency(array_sum($earning))}}
@@ -85,9 +85,9 @@
 
                         <!-- Bar Chart -->
                         <div class="d-flex align-items-center">
-                            <div class="chart--extension">
+                            <!--<div class="chart--extension">
                               {{ \App\CentralLogics\Helpers::currency_symbol() }}({{translate('messages.currency')}})
-                            </div>
+                            </div>-->
                             <div class="chartjs-custom w-75 flex-grow-1">
                                 <canvas id="updatingData" class="h-20rem" data-hs-chartjs-options='{
                                     "type": "bar",
