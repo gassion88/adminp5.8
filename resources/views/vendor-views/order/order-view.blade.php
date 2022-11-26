@@ -22,12 +22,12 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                 <div class="d-flex ml-auto">
                     <a class="btn btn-icon btn-sm btn-soft-primary rounded-circle mr-1"
                         href="{{ route('vendor.order.details', [$order['id'] - 1]) }}" data-toggle="tooltip"
-                        data-placement="top" title="{{ translate('Previous order') }}">
+                        data-placement="top" title="Предыдущий заказ">
                         <i class="tio-chevron-left m-0"></i>
                     </a>
                     <a class="btn btn-icon btn-sm btn-soft-primary rounded-circle"
                         href="{{ route('vendor.order.details', [$order['id'] + 1]) }}" data-toggle="tooltip"
-                        data-placement="top" title="{{ translate('Next order') }}">
+                        data-placement="top" title="Следующий заказ">
                         <i class="tio-chevron-right m-0"></i>
                     </a>
                 </div>
@@ -61,7 +61,7 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                             </h1>
                             <span class="mt-2 d-block">
                                 <i class="tio-date-range"></i>
-                                {{ date('d M Y ' . config('timeformat'), strtotime($order['created_at'])) }}
+                                {{ date('d n Y ' . config('timeformat'), strtotime($order['created_at'])) }}
                             </span>
                             @if ($order->schedule_at && $order->scheduled)
                                 <span class="text-capitalize d-block mt-1">
@@ -89,7 +89,7 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                             </div>-->
                             <div class="text-right mt-3 order-invoice-right-contents text-capitalize">
                                 <h6>
-                                    <span>{{ translate('Status') }} :</span>
+                                    <span>Статус :</span>
                                     @if ($order['order_status'] == 'pending')
                                         <span class="badge badge-soft-info ml-2 ml-sm-3">
                                             {{ translate('messages.pending') }}
@@ -124,7 +124,7 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                                     {{ translate(str_replace('_', ' ', $order['payment_method'])) }}</strong>
                                 </h6>-->
                                 <h6>
-                                    <span>{{ translate('Order Type') }} :</span>
+                                    <span>Тип :</span>
                                     <strong class="text--title">{{ translate(str_replace('_', ' ', $order['order_type'])) }}</strong>
                                 </h6>
                                 <!--<h6>
@@ -169,9 +169,9 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                             <table class="table table-borderless table-thead-bordered table-nowrap card-table dataTable no-footer mb-0">
                                 <thead class="thead-light">
                                     <tr>
-                                        <th>{{ translate('Item Details') }}</th>
-                                        <th>{{ translate('Addons') }}</th>
-                                        <th class="text-right">{{ translate('Price') }}</th>
+                                        <th>Детали</th>
+                                        <th>Аддоны</th>
+                                        <th class="text-right">Цена</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -311,11 +311,11 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                             <div class="row justify-content-md-end mb-3">
                                 <div class="col-md-9 col-lg-8">
                                     <dl class="row text-sm-right">
-                                        <dt class="col-sm-6">{{ translate('messages.items') }} {{ translate('messages.price') }}:
+                                        <dt class="col-sm-6">{{ translate('messages.price') }} блюд:
                                         </dt>
                                         <dd class="col-sm-6">
                                             {{ \App\CentralLogics\Helpers::format_currency($product_price) }}</dd>
-                                        <dt class="col-sm-6">{{ translate('messages.addon') }} {{ translate('messages.cost') }}:
+                                        <dt class="col-sm-6">Цена аддонов:
                                         </dt>
                                         <dd class="col-sm-6">
                                             {{ \App\CentralLogics\Helpers::format_currency($total_addon_price) }}
@@ -347,7 +347,7 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
 
                                         </dd>-->
                                         <dt class="col-sm-6">{{ translate('messages.delivery') }}
-                                            {{ translate('messages.fee') }}:
+                                        :
                                         </dt>
                                         <dd class="col-sm-6">
                                             @php($del_c = $order['delivery_charge'])
@@ -379,7 +379,7 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                 <div class="card mb-2">
                     <!-- Header -->
                     <div class="card-header border-0 py-0">
-                        <h4 class="card-header-title border-bottom py-3 m-0  w-100 text-center">{{ translate('Order Setup') }}</h4>
+                        <h4 class="card-header-title border-bottom py-3 m-0  w-100 text-center">Изменить статус заказа</h4>
                     </div>
                     <!-- End Header -->
 
@@ -461,12 +461,13 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                         <!-- End Unfold -->
                         @if ($order['order_type'] != 'take_away')
                             @if ($order->delivery_man)
+                            </br>
                                 <h5 class="card-title mb-3">
                                     <span class="card-header-icon">
                                         <i class="tio-user"></i>
                                     </span>
                                     <span>
-                                        {{ translate('Delivery Man Information') }}
+                                        Курьер назначен
                                     </span>
                                 </h5>
                                 <div class="media align-items-center deco-none customer--information-single" href="javascript:">
@@ -503,26 +504,11 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                                 @if ($order['order_type'] != 'take_away')
                                     <hr>
                                     @php($address = $order->dm_last_location)
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <h5>{{ translate('messages.last') }} {{ translate('messages.location') }}</h5>
-                                    </div>
-                                    @if (isset($address))
-                                        <span class="d-block">
-                                            <a target="_blank"
-                                                href="http://maps.google.com/maps?z=12&t=m&q=loc:{{ $address['latitude'] }}+{{ $address['longitude'] }}">
-                                                <i class="tio-poi"></i> {{ $address['location'] }}<br>
-                                            </a>
-                                        </span>
-                                    @else
-                                        <span class="d-block text-lowercase qcont">
-                                            {{ translate('messages.location') . ' ' . translate('messages.not_found') }}
-                                        </span>
-                                    @endif
                                 @endif
                             @else
                                 <div class="py-3 w-100 text-center mt-3">
                                     <span class="d-block text-capitalize qcont">
-                                        <i class="tio-security-warning"></i> {{ translate('messages.deliveryman') . ' ' . translate('messages.not_found') }}
+                                        <i class="tio-security-warning"></i> Курьер пока не назначен
                                     </span>
                                 </div>
                             @endif
@@ -538,7 +524,7 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                                 <i class="tio-user"></i>
                             </span>
                             <span>
-                                {{ translate('messages.customer') }} {{ translate('messages.info') }}
+                                {{ translate('messages.customer') }}
                             </span>
                         </h5>
                         @if ($order->customer)
@@ -557,7 +543,7 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                                         <strong class="text--title font-semibold">
                                         {{ $order->customer->orders_count }}
                                         </strong>
-                                        {{ translate('Orders') }}
+                                        Заказов
                                     </span>
                                     <span class="d-block">
                                         <a class="text--title font-semibold" href="tel:{{ $order->customer['phone'] }}">
@@ -588,7 +574,7 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                                         <i class="tio-user"></i>
                                     </span>
                                     <span>
-                                        {{ translate('messages.delivery') }} {{ translate('messages.info') }}
+                                        Информация о доставке
                                     </span>
                                 </h5>
                                 {{-- @if (isset($address))
@@ -598,17 +584,17 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                             </div>
                             @if (isset($address))
                             <span class="delivery--information-single mt-3">
-                                <span class="name">{{ translate('messages.name') }}:</span>
+                                <span class="name">Имя:</span>
                                 <span class="info">{{ $address['contact_person_name'] }}</span>
-                                <span class="name">{{ translate('messages.contact') }}:</span>
+                                <span class="name">Телефон:</span>
                                 <a class="info" href="tel:{{ $address['contact_person_number'] }}">
                                     {{ $address['contact_person_number'] }}
                                 </a>
-                                <span class="name">{{ translate('Road') }}:</span>
+                                <span class="name">Улица:</span>
                                 <span class="info">{{ isset($address['road']) ? $address['road'] : '' }}</span>
-                                <span class="name">{{ translate('House') }}:</span>
+                                <span class="name">Дом:</span>
                                 <span class="info">{{ isset($address['house']) ? $address['house'] : '' }}</span>
-                                <span class="name">{{ translate('Floor') }}:</span>
+                                <span class="name">Квартира:</span>
                                 <span class="info">{{ isset($address['floor']) ? $address['floor'] : '' }}</span>
                                 <span class="mt-2 d-flex w-100">
                                     <span><i class="tio-poi text--title"></i></span>
