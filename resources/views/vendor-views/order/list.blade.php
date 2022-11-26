@@ -241,7 +241,6 @@
                     <thead class="thead-light">
                     <tr>
                         <th class="w-60px">
-                            {{ translate('messages.sl') }}
                         </th>
                         <th class="w-90px table-column-pl-0">{{translate('messages.Order ID')}}</th>
                         <th class="w-140px">Время заказа</th>

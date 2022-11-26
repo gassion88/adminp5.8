@@ -45,7 +45,7 @@
                         }'>
                         <thead class="thead-light">
                             <tr>
-                                <th class="w-100px text-center">{{ translate('messages.sl') }}</th>
+                                <th class="w-100px text-center"></th>
                                 <th class="w-30p text-center">{{translate('messages.id')}}</th>
                                 <th class="w-30p">{{translate('messages.category')}}</th>
                                 <th class="w-30p">{{translate('messages.sub_category')}}</th>
@@ -55,7 +55,7 @@
                         <tbody id="set-rows">
                         @foreach($categories as $key=>$category)
                             <tr>
-                                <td class="text-center">{{$key+$categories->firstItem()}}</td>
+                                <td class="text-center"></td>
                                 <td class="text-center">{{$category->id}}</td>
                                 <td>
                                     <span class="d-block font-size-sm text-body">
