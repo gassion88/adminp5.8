@@ -67,14 +67,13 @@
                             <div class="card h-100">
                                 <div class="card-body d-flex flex-column">
                                     <h5 class="form-label text-center mb-3">
-                                        {{translate('messages.employee_image')}}
+                                        Фото сотрудника
                                     </h5>
                                     <center class="my-auto">
                                         <img class="initial-78" id="viewer"
                                         onerror="this.src='{{asset('public/assets/front-end/img/image-place-holder.png')}}'"
                                         src="{{asset('storage/app/public/vendor')}}/{{$e['image']}}" alt="Employee thumbnail"/>
                                     </center>
-                                    <label class="form-label mt-3">{{ translate('Employee image size max 2 MB') }} <span class="text-danger">*</span></label>
                                     <div class="custom-file">
                                         <input type="file" name="image" id="customFileUpload" class="custom-file-input"
                                             accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">

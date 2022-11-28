@@ -63,15 +63,14 @@
                             <div class="card h-100">
                                 <div class="card-body d-flex flex-column">
                                     <h5 class="form-label text-center mb-3" for="customFileUpload">
-                                        {{translate('messages.employee_image')}}
-                                        <span class="text-danger">{{ translate('Ratio (1:1)') }}</span>
+                                        Фото сотрудника
+                                    
                                     </h5>
                                     <center class="my-auto">
                                         <img class="initial-78" id="viewer"
                                             src="{{asset('public\assets\admin\img\400x400\img2.jpg')}}" alt="Employee thumbnail"/>
                                     </center>
                                     <div class="form-group mb-0 mt-3">
-                                        <label class="form-label">{{ translate('Employee image size max 2 MB') }} <span class="text-danger">*</span></label>
                                         <div class="custom-file">
                                             <input type="file" name="image" id="customFileUpload" class="custom-file-input"
                                                 accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" value="{{old('image')}}" required>
