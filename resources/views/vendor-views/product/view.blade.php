@@ -13,7 +13,7 @@
             <div class="d-flex flex-wrap justify-content-between align-items-center">
                 <h1 class="page-header-title text-break">{{$product['name']}}</h1>
                 <a href="{{route('vendor.food.edit',[$product['id']])}}" class="btn btn--primary">
-                    <i class="tio-edit"></i> {{translate('messages.edit')}} {{ translate('Info') }}
+                    <i class="tio-edit"></i> Изменить
                 </a>
             </div>
         </div>
@@ -264,7 +264,7 @@
                                     </span>
                                     <span class="d-block mb-1">
                                         <span>
-                                            {{translate('messages.available')}} {{translate('messages.time')}} {{translate('messages.starts')}} :
+                                            Доступно с :
                                         </span>
                                         <strong>
                                             {{date(config('timeformat'), strtotime($product['available_time_starts']))}}
@@ -272,7 +272,7 @@
                                     </span>
                                     <span class="d-block">
                                         <span>
-                                            {{translate('messages.available')}} {{translate('messages.time')}} {{translate('messages.ends')}} :
+                                            Доступно до :
                                         </span>
                                         <strong>
                                             {{date(config('timeformat'), strtotime($product['available_time_ends']))}}
