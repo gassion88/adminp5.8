@@ -596,22 +596,6 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                                 <span class="info">{{ isset($address['house']) ? $address['house'] : '' }}</span>
                                 <span class="name">Квартира:</span>
                                 <span class="info">{{ isset($address['floor']) ? $address['floor'] : '' }}</span>
-                                <span class="mt-2 d-flex w-100">
-                                    <span><i class="tio-poi text--title"></i></span>
-                                    @if ($order['order_type'] != 'take_away' && isset($address['address']))
-                                        @if (isset($address['latitude']) && isset($address['longitude']))
-                                            <a target="_blank"
-                                            class="info pl-2"
-                                                href="http://maps.google.com/maps?z=12&t=m&q=loc:{{ $address['latitude'] }}+{{ $address['longitude'] }}">
-                                                {{ $address['address'] }}
-                                            </a>
-                                        @else
-                                            <span class="info pl-2">
-                                                {{ $address['address'] }}
-                                            </span>
-                                        @endif
-                                    @endif
-                                </span>
                             </span>
                             @endif
                         </div>
