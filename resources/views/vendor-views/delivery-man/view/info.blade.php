@@ -359,7 +359,7 @@
                                 @endforeach
                             </td>--}}
                             <td>
-                                {{date('d M Y '. config('timeformat'),strtotime($review['created_at']))}}
+                                {{date('d n Y '. config('timeformat'),strtotime($review['created_at']))}}
                             </td>
                         </tr>
                     @endforeach

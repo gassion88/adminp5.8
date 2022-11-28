@@ -199,11 +199,38 @@
                                     <td class="text-capitalize">
                                         @if($r['modules']!=null)
                                             @foreach((array)json_decode($r['modules']) as $key=>$m)
-                                               {{str_replace('_',' ',$m)}},
+                                               <?
+                                               switch ($m) {
+                                                case 'food':
+                                                    echo "Еда,";
+                                                    break;
+                                                case 'order':
+                                                    echo "Заказы,";
+                                                    break;
+                                                case 'restaurant_setup':
+                                                    echo "Настройки ресторана,";
+                                                    break;
+                                                case 'addon':
+                                                    echo "Аддоны,";
+                                                    break;
+                                                case 'employee':
+                                                    echo "Сотрудники,";
+                                                    break;
+                                                case 'my_shop':
+                                                    echo "Мой ресторан,";
+                                                    break;
+                                                case 'chat':
+                                                    echo "Сообщения,";
+                                                    break;
+                                                case 'reviews':
+                                                        echo "Отзывы,";
+                                                        break;
+                                            }
+                                               ?>
                                             @endforeach
                                         @endif
                                     </td>
-                                    <td>{{date('d-M-y',strtotime($r['created_at']))}}</td>
+                                    <td>{{date('d-n-y',strtotime($r['created_at']))}}</td>
                                     {{--<td>
                                         {{$r->status?'Active':'Inactive'}}
                                     </td>--}}

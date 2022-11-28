@@ -117,7 +117,7 @@ return [
     'starts_with' => ':attribute должен начинаться с одного из следующих: :values.',
     'string' => ':attribute должен быть строкой.',
     'timezone' => ':attribute должен быть допустимой зоной.',
-    'unique' => 'Атрибут : уже занят.',
+    'unique' => ':attribute уже занят.',
     'uploaded' => 'Не удалось загрузить :attribute.',
     'url' => 'Недопустимый формат :attribute.',
     'uuid' => ':attribute должен быть допустимым UUID.',

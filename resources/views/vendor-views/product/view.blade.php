@@ -394,7 +394,7 @@
                             </td>
                             <td>
                                 <strong class="d-block font-semibold">
-                                    {{date('d M Y ',strtotime($review['created_at']))}}
+                                    {{date('d n Y ',strtotime($review['created_at']))}}
                                 </strong>
                                 <strong class="d-block font-semibold">
                                     {{date(config('timeformat'),strtotime($review['created_at']))}}

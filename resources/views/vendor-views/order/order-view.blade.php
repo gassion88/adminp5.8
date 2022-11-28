@@ -66,7 +66,7 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                             @if ($order->schedule_at && $order->scheduled)
                                 <span class="text-capitalize d-block mt-1">
                                     {{ translate('messages.scheduled_at') }}
-                                    : <label  class="fz-10px badge badge-soft-primary">{{ date('d M Y ' . config('timeformat'), strtotime($order['schedule_at'])) }}</label>
+                                    : <label  class="fz-10px badge badge-soft-primary">{{ date('d n Y ' . config('timeformat'), strtotime($order['schedule_at'])) }}</label>
                                 </span>
                             @endif
                             @if ($campaign_order)
