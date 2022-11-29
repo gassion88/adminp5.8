@@ -246,7 +246,7 @@ class OrderController extends Controller
             Toastr::warning(translate('messages.push_notification_faild'));
         }
 
-        Toastr::success(translate('messages.order').' '.translate('messages.status_updated'));
+        Toastr::success(translate('messages.status_updated'));
         return back();
     }
     public function statuss(Request $request)
@@ -348,7 +348,7 @@ class OrderController extends Controller
             Toastr::warning(trans('messages.push_notification_faild'));
         }
 
-        Toastr::success(trans('messages.order') . trans('messages.status_updated'));
+        Toastr::success(translate('messages.status_updated'));
         return back();
     }
 

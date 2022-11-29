@@ -1,5 +1,5 @@
 @extends('layouts.vendor.app')
-@section('title',translate('Edit Role'))
+@section('title','Изменить Должность')
 @push('css_or_js')
 
 @endpush

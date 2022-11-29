@@ -392,7 +392,7 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                         <div class="order-btn-wraper">
                             @if ($order['order_status'] == 'pending')
                                 <a class="btn w-100 mb-3 btn-sm btn--primary"
-                                    onclick="order_status_change_alert('{{ route('vendor.order.status', ['id' => $order['id'], 'order_status' => 'confirmed']) }}','{{ translate('Change status to confirmed ?') }}')"
+                                    onclick="order_status_change_alert('{{ route('vendor.order.status', ['id' => $order['id'], 'order_status' => 'confirmed']) }}','{{ translate('Изменить статус на подтверждено?') }}')"
                                     href="javascript:">
                                     {{ translate('Confirm Order') }}
                                 </a>
@@ -403,15 +403,15 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                                 @endif
                             @elseif ($order['order_status'] == 'confirmed' || $order['order_status'] == 'accepted')
                                 <a class="btn btn-sm btn--primary w-100 mb-3"
-                                    onclick="order_status_change_alert('{{ route('vendor.order.status', ['id' => $order['id'], 'order_status' => 'processing']) }}','{{ translate('Change status to cooking ?') }}', verification = false, {{ $max_processing_time }})"
+                                    onclick="order_status_change_alert('{{ route('vendor.order.status', ['id' => $order['id'], 'order_status' => 'processing']) }}','{{ translate('Изменить статус на готовку?') }}', verification = false, {{ $max_processing_time }})"
                                     href="javascript:">{{ translate('messages.Proceed_for_cooking') }}</a>
                             @elseif ($order['order_status'] == 'processing')
                                 <a class="btn btn-sm btn--primary w-100 mb-3"
-                                    onclick="order_status_change_alert('{{ route('vendor.order.status', ['id' => $order['id'], 'order_status' => 'handover']) }}','{{ translate('Change status to ready for handover ?') }}')"
+                                    onclick="order_status_change_alert('{{ route('vendor.order.status', ['id' => $order['id'], 'order_status' => 'handover']) }}','{{ translate('Изменить статус на ждёт курьера ?') }}')"
                                     href="javascript:">{{ translate('messages.make_ready_for_handover') }}</a>
                             @elseif ($order['order_status'] == 'handover' && ($order['order_type'] == 'take_away' || \App\CentralLogics\Helpers::get_restaurant_data()->self_delivery_system))
                                 <a class="btn btn-sm btn--primary w-100 mb-3"
-                                    onclick="order_status_change_alert('{{ route('vendor.order.status', ['id' => $order['id'], 'order_status' => 'delivered']) }}','{{ translate('Change status to delivered (payment status will be paid if not) ?') }}', {{ $order_delivery_verification ? 'true' : 'false' }})"
+                                    onclick="order_status_change_alert('{{ route('vendor.order.status', ['id' => $order['id'], 'order_status' => 'delivered']) }}','{{ translate('Изменить статус на доставлено ?') }}', {{ $order_delivery_verification ? 'true' : 'false' }})"
                                     href="javascript:">{{ translate('messages.maek_delivered') }}</a>
                             @endif
                         </div>
@@ -430,28 +430,28 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                                                 @php($order_delivery_verification = (bool) \App\Models\BusinessSetting::where(['key' => 'order_delivery_verification'])->first()->value)
                                                 <div class="dropdown-menu text-capitalize" aria-labelledby="dropdownMenuButton">
                                                     <a class="dropdown-item {{ $order['order_status'] == 'pending' ? 'active' : '' }}"
-                                                        onclick="route_alert('{{ route('vendor.order.statuss', ['id' => $order['id'], 'order_status' => 'pending']) }}','Change status to pending ?')"
+                                                        onclick="route_alert('{{ route('vendor.order.statuss', ['id' => $order['id'], 'order_status' => 'pending']) }}','Изменить статус на ожидание?')"
                                                         href="javascript:">{{ __('messages.pending') }}</a>
                                                     <a class="dropdown-item {{ $order['order_status'] == 'confirmed' ? 'active' : '' }}"
-                                                        onclick="route_alert('{{ route('vendor.order.statuss', ['id' => $order['id'], 'order_status' => 'confirmed']) }}','Change status to confirmed ?')"
+                                                        onclick="route_alert('{{ route('vendor.order.statuss', ['id' => $order['id'], 'order_status' => 'confirmed']) }}','Изменить статус на подтверждено?')"
                                                         href="javascript:">{{ __('messages.confirmed') }}</a>
 
                                                     <a class="dropdown-item {{ $order['order_status'] == 'processing' ? 'active' : '' }}"
-                                                        onclick="route_alert('{{ route('vendor.order.statuss', ['id' => $order['id'], 'order_status' => 'processing']) }}', 'Change status to processing ?','Are you sure?', '{{ $max_processing_time }}')"
+                                                        onclick="route_alert('{{ route('vendor.order.statuss', ['id' => $order['id'], 'order_status' => 'processing']) }}', 'Изменить статус на готовка?','Вы уверены?', '{{ $max_processing_time }}')"
                                                         href="javascript:">
                                                         {{ __('messages.processing') }}</a>
 
                                                     <a class="dropdown-item {{ $order['order_status'] == 'handover' ? 'active' : '' }}"
-                                                        onclick="route_alert('{{ route('vendor.order.statuss', ['id' => $order['id'], 'order_status' => 'handover']) }}','Change status to handover ?')"
+                                                        onclick="route_alert('{{ route('vendor.order.statuss', ['id' => $order['id'], 'order_status' => 'handover']) }}','Изменить статус на ждёт курьера?')"
                                                         href="javascript:">{{ __('messages.handover') }}</a>
                                                     <a class="dropdown-item {{ $order['order_status'] == 'picked_up' ? 'active' : '' }}"
-                                                        onclick="route_alert('{{ route('vendor.order.statuss', ['id' => $order['id'], 'order_status' => 'picked_up']) }}','Change status to out for delivery ?')"
+                                                        onclick="route_alert('{{ route('vendor.order.statuss', ['id' => $order['id'], 'order_status' => 'picked_up']) }}','Изменить статус на «На доставке»?')"
                                                         href="javascript:">{{ __('messages.out_for_delivery') }}</a>
                                                     <a class="dropdown-item {{ $order['order_status'] == 'delivered' ? 'active' : '' }}"
-                                                        onclick="route_alert('{{ route('vendor.order.statuss', ['id' => $order['id'], 'order_status' => 'delivered']) }}','Change status to delivered (payment status will be paid if not)?')"
+                                                        onclick="route_alert('{{ route('vendor.order.statuss', ['id' => $order['id'], 'order_status' => 'delivered']) }}','Изменить статус на доставлено ?')"
                                                         href="javascript:">{{ __('messages.delivered') }}</a>
                                                     <a class="dropdown-item {{ $order['order_status'] == 'canceled' ? 'active' : '' }}"
-                                                        onclick="route_alert('{{ route('vendor.order.statuss', ['id' => $order['id'], 'order_status' => 'canceled']) }}','Change status to canceled ?')"
+                                                        onclick="route_alert('{{ route('vendor.order.statuss', ['id' => $order['id'], 'order_status' => 'canceled']) }}','Изменить статус на отменено?')"
                                                         href="javascript:">{{ __('messages.canceled') }}</a>
                                                 </div>
                                             </div>
