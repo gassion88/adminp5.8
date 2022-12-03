@@ -109,7 +109,7 @@ return [
     'prohibited_unless' => 'Поле :attribute запрещено, если только :other не находится в :values.',
     'same' => ':attribute и :other должны совпадать.',
     'size' => [
-        'numeric' => 'Атрибут : должен быть :size.',
+        'numeric' => ':attribute должен быть :size.',
         'file' => ':attribute должен быть :size килобайт.',
         'string' => ':attribute должен состоять из символов :size.',
         'array' => ':attribute должен содержать элементы :size.',

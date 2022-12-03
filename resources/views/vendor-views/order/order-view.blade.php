@@ -125,7 +125,13 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
                                 </h6>-->
                                 <h6>
                                     <span>Тип :</span>
-                                    <strong class="text--title">{{ translate(str_replace('_', ' ', $order['order_type'])) }}</strong>
+                                    <strong class="text--title">
+                                    @if ($order['order_type'] == 'take_away')
+                                    на вынос
+                                    @else
+                                    {{ translate(str_replace('_', ' ', $order['order_type'])) }}
+                                    @endif
+                                    </strong>
                                 </h6>
                                 <!--<h6>
                                     <span>{{ translate('Payment Status') }} :</span>

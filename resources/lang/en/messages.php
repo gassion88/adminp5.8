@@ -720,7 +720,7 @@
   'role_updated_successfully' => 'Роль успешно обновлена!',
   'role_deleted_successfully' => 'Роль успешно удалена!',
   'sine_in' => 'Войти',
-  'take_away' => 'Навынос',
+  'take_away' => 'На вынос',
   'added_successfully' => ' Сохранено',
   'updated_successfully' => ' Успешно Обновлено!',
   'successfully_removed' => 'Удалено из избранных',
