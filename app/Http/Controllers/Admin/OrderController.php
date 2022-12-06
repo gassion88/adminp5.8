@@ -38,7 +38,7 @@ class OrderController extends Controller
             $request = json_decode(session('order_filter'));
         }
 
-        Order::where(['checked' => 0])->update(['checked' => 1]);
+        //Order::where(['checked' => 0])->update(['checked' => 1]);
 
         $orders = Order::with(['customer', 'restaurant'])
             ->when(isset($request->zone), function ($query) use ($request) {
