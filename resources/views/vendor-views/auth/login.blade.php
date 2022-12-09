@@ -47,7 +47,7 @@
                 </a>
                 <div class="text-center">
                     <div class="auth-header mb-5">
-                        <h2 class="signin-txt">{{translate('messages.restaurant')}} {{translate('messages.sign_in')}}</h2>
+                        <h2 class="signin-txt">Вход в ресторан</h2>
                         <p class="text-capitalize">{{translate('messages.want_to_login_as_admin')}}
                             <a href="{{route('admin.auth.login')}}" class="text-yellow">
                                 {{translate('login_here')}}
@@ -138,7 +138,7 @@
 
 
                     <div class="toggle-login">
-                        {{ translate('Login as Restaurant Employee') }}?  <span class="toggle-login-btn text-yellow" data-type="emloyee" target-login="{{translate('messages.restaurant')}} {{translate('employee')}} {{translate('messages.sign_in')}}">{{ translate('messages.login_here') }}</span>
+                        {{ translate('Login as Restaurant Employee') }}?  <span class="toggle-login-btn text-yellow" data-type="emloyee" target-login="Войти как сотрудник">{{ translate('messages.login_here') }}</span>
                     </div>
 
 
@@ -224,7 +224,7 @@
                     <button type="submit" class="btn btn-lg btn-block btn-primary">{{translate('messages.sine_in')}}</button>
 
                     <div class="toggle-login">
-                        {{ translate('Login as Restaurant Owner?') }}  <span class="toggle-login-btn text-yellow" data-type="restaurant" target-login="{{translate('messages.restaurant')}} {{translate('owner')}} {{translate('messages.sign_in')}}">{{ translate('messages.login_here') }}</span>
+                        {{ translate('Login as Restaurant Owner?') }}  <span class="toggle-login-btn text-yellow" data-type="restaurant" target-login="Войти как владелец">{{ translate('messages.login_here') }}</span>
                     </div>
 
                 </form>
@@ -308,7 +308,7 @@
         $('#vendor_login_form').show();
         $('.auth-wrapper-body-inner ').hide();
         $('.auth-wrapper-body').addClass('auth-form-appear');
-        $('.signin-txt').text("{{translate('messages.restaurant')}} {{translate('owner')}} {{translate('messages.sign_in')}}")
+        $('.signin-txt').text("Войти как владелец")
     });
     $('#employee_sign_in').on('click', function(){
         $('.auto-fill-data-copy').hide();
@@ -316,7 +316,7 @@
         $('#employee_login_form').show();
         $('.auth-wrapper-body-inner ').hide();
         $('.auth-wrapper-body').addClass('auth-form-appear');
-        $('.signin-txt').text("{{translate('messages.restaurant')}} {{translate('employee')}} {{translate('messages.sign_in')}}")
+        $('.signin-txt').text("Войти как сотрудник")
     });
 
     $('.toggle-login-btn').on('click', function(){
