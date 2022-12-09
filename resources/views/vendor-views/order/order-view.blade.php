@@ -198,11 +198,12 @@ $max_processing_time = explode('-', $order['restaurant']['delivery_time'])[0];
 
                                                                     @if (count(json_decode($detail['variation'], true)) > 0)
                                                                         @foreach (json_decode($detail['variation'], true)[0] as $key1 => $variation)
+                                                                        @if($key1 !=  'price')
                                                                             <span class="font-size-sm text-body text-capitalize">
-                                                                                <span>{{ $key1 }} : </span>
                                                                                 <span
                                                                                     class="font-weight-bold">{{ Str::limit($variation, 20, '...') }}</span>
                                                                             </span>
+                                                                        @endif
                                                                         @endforeach
                                                                     @endif
 
