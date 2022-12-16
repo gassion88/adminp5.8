@@ -293,7 +293,7 @@ class OrderController extends Controller
             if ($order->delivery_man) {
                 $dm = $order->delivery_man;
                 $dm->increment('order_count');
-                $dm->current_orders = $dm->current_orders > 1 ? $dm->current_orders - 1 : 0;
+                $dm->current_orders = 0;
                 $dm->save();
             }
             $order->details->each(function ($item, $key) {
@@ -333,7 +333,7 @@ class OrderController extends Controller
             }
             if ($order->delivery_man) {
                 $dm = $order->delivery_man;
-                $dm->current_orders = $dm->current_orders > 1 ? $dm->current_orders - 1 : 0;
+                $dm->current_orders =  0;
                 $dm->save();
             }
         }
