@@ -34,7 +34,7 @@
                         </div>
                     </div>
                     <div class="pl-1">
-                        <small>{{date('d M Y',strtotime($con->created_at))}} {{date(config('timeformat'),strtotime($con->created_at))}}</small>
+                        <small>{{date('d n Y',strtotime($con->created_at))}} {{date(config('timeformat'),strtotime($con->created_at))}}</small>
                     </div>
                 @else
                     <div class="pt-1 pb-1">
