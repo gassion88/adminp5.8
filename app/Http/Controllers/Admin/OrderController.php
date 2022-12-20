@@ -55,11 +55,17 @@ class OrderController extends Controller
             ->when($status == 'pending', function ($query) {
                 return $query->Pending();
             })
+            ->when($status == 'not_assigned', function () {
+                return \App\Models\Order::where('order_status', 'handover')->where('delivery_man_id', NULL)->where('order_type', 'delivery');
+            })
+            ->when($status == 'handover', function () {
+                return \App\Models\Order::where('order_status', 'handover');
+            })        
             ->when($status == 'accepted', function ($query) {
                 return $query->AccepteByDeliveryman();
             })
             ->when($status == 'processing', function ($query) {
-                return $query->Preparing();
+                return \App\Models\Order::where('order_status', 'processing');
             })
             ->when($status == 'food_on_the_way', function ($query) {
                 return $query->FoodOnTheWay();

@@ -35,23 +35,23 @@
         </div>
     </div>
     <div class="col-xl-3 col-sm-6">
-        <div class="resturant-card dashboard--card bg--3 cursor-pointer" onclick="location.href='{{route('admin.order.list',['canceled'])}}'">
-            <h4 class="title">{{$data['canceled']}}</h4>
-            <span class="subtitle">{{translate('messages.canceled')}} {{translate('messages.orders')}}</span>
+        <div class="resturant-card dashboard--card bg--3 cursor-pointer" onclick="location.href='{{route('admin.order.list',['not_assigned'])}}'">
+            <h4 class="title">{{\App\Models\Order::where('order_status', 'handover')->where('delivery_man_id', NULL)->where('order_type', 'delivery')->count()}}</h4>
+            <span class="subtitle">Не назначенные</span>
             <img class="resturant-icon" src="{{asset('/public/assets/admin/img/dashboard/2.png')}}" alt="dashboard">
         </div>
     </div>
     <div class="col-xl-3 col-sm-6">
-        <div class="resturant-card dashboard--card bg--5 cursor-pointer" onclick="location.href='{{route('admin.order.list',['refunded'])}}'">
-            <h4 class="title">{{$data['refunded']}}</h4>
-            <span class="subtitle">{{translate('messages.refunded')}} {{translate('messages.orders')}}</span>
+        <div class="resturant-card dashboard--card bg--5 cursor-pointer" onclick="location.href='{{route('admin.order.list',['processing'])}}'">
+            <h4 class="title">{{\App\Models\Order::where('order_status', 'processing')->count()}}</h4>
+            <span class="subtitle">Готовка</span>
             <img class="resturant-icon" src="{{asset('/public/assets/admin/img/dashboard/3.png')}}" alt="dashboard">
         </div>
     </div>
     <div class="col-xl-3 col-sm-6">
-        <div class="resturant-card dashboard--card bg--14 cursor-pointer" onclick="location.href='{{route('admin.order.list',['failed'])}}'">
-            <h4 class="title">{{$data['refund_requested']}}</h4>
-            <span class="subtitle">{{translate('messages.payment')}} {{translate('messages.failed')}} {{translate('messages.orders')}}</span>
+        <div class="resturant-card dashboard--card bg--14 cursor-pointer" onclick="location.href='{{route('admin.order.list',['accepted'])}}'">
+            <h4 class="title">{{$data['picked_up']}}</h4>
+            <span class="subtitle">На доставке</span>
             <img class="resturant-icon" src="{{asset('/public/assets/admin/img/dashboard/4.png')}}" alt="dashboard">
         </div>
     </div>
