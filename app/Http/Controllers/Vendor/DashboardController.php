@@ -36,6 +36,7 @@ class DashboardController extends Controller
                 'restaurant_id'=> Helpers::get_restaurant_id(),
                 'restaurant_discount_amount' => 0.00,
                 'zone_id'=> 1,
+                'schedule_at'=>now(),
                 'pending' => now(),
                 'created_at' => now(),
                 'updated_at' => now()
