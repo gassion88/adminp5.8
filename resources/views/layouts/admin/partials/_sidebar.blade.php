@@ -222,7 +222,7 @@
                                         <span class="text-truncate sidebar--badge-container">
                                             {{ translate('messages.processing') }}
                                             <span class="badge badge-soft-warning badge-pill ml-1">
-                                                {{ \App\Models\Order::Preparing()->OrderScheduledIn(30)->count() }}
+                                                {{ \App\Models\Order::where('order_status', 'processing')->count() }}
                                             </span>
                                         </span>
                                     </a>
