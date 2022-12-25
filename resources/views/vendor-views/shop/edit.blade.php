@@ -37,20 +37,20 @@
                             <div class="row gy-3 gx-2">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="name" class="form-label">{{translate('messages.restaurant')}} {{translate('messages.name')}} <span class="text-danger">*</span></label>
-                                        <input type="text" name="name" value="{{$shop->name}}" placeholder="{{ translate('Ex : Restaurant Name') }}" class="form-control h--45px" id="name"
+                                        <label for="name" class="form-label">{{translate('messages.name')}} <span class="text-danger">*</span></label>
+                                        <input type="text" name="name" value="{{$shop->name}}" placeholder="" class="form-control h--45px" id="name"
                                                 required>
                                     </div>
                                     <div class="form-group mb-0 pt-lg-1">
-                                        <label for="contact" class="form-label">{{translate('messages.contact')}} {{translate('messages.number')}}<span class="text-danger">*</span></label>
-                                        <input type="tel" name="contact" value="{{$shop->phone}}" placeholder="{{ translate('Ex : +880 123456789') }}" class="form-control h--45px" id="contact"
+                                        <label for="contact" class="form-label">Номер телефона<span class="text-danger">*</span></label>
+                                        <input type="tel" name="contact" value="{{$shop->phone}}" placeholder="" class="form-control h--45px" id="contact"
                                                 required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group mb-0">
                                         <label for="address" class="form-label">{{translate('messages.address')}}<span class="text-danger">*</span></label>
-                                        <textarea type="text" rows="4" name="address" value="" placeholder="{{ translate('Ex : House-45, Road-08, Sector-12, Mirupara, Test City') }}" class="form-control min-height-149px" id="address" required>{{$shop->address}}</textarea>
+                                        <textarea type="text" rows="4" name="address" value="" placeholder="" class="form-control min-height-149px" id="address" required>{{$shop->address}}</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -82,7 +82,7 @@
                     <div class="card h-100">
                         <div class="card-header">
                             <h5 class="card-title font-regular">
-                                {{translate('messages.upload')}} {{translate('messages.cover')}} {{translate('messages.photo')}} <span class="text-danger">({{translate('messages.ratio')}} : 1100x320)</span>
+                            Загрузить обложку <span class="text-danger">({{translate('messages.ratio')}} : 1100x320)</span>
                             </h5>
                         </div>
                         <div class="card-body">
