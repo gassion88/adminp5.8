@@ -1,6 +1,6 @@
 @extends('layouts.vendor.app')
 
-@section('title','Update Food')
+@section('title','Изменить блюдо')
 
 @push('css_or_js')
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -138,7 +138,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-sm-6 col-md-4">
+                            <!--<div class="col-sm-6 col-md-4">
                                 <div class="form-group mb-0">
                                     <label class="form-label" for="exampleFormControlSelect1">{{translate('messages.sub_category')}}<span
                                             class="form-label-secondary"></span></label>
@@ -159,6 +159,7 @@
                                     </select>
                                 </div>
                             </div>
+                            -->
                         </div>
                     </div>
                 </div>

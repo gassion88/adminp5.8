@@ -1865,7 +1865,7 @@ the restaurant web panel/ app won t get the access for managing foods.
   'Want to delete this category' => 'Want to delete this category',
   'Customer Details' => 'Customer Details',
   'Ex: Search Here by ID...' => 'Ex: Search Here by ID...',
-  'Food Preview' => 'Food Preview',
+  'Food Preview' => 'Информация о блюде',
   'Excellent' => 'Excellent',
   'Good' => 'Good',
   'Average' => 'Average',
