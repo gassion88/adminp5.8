@@ -124,7 +124,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-4 col-sm-6">
+                            <!--<div class="col-md-4 col-sm-6">
                                 <div class="form-group mb-0">
                                     <label class="form-label" for="exampleFormControlSelect1">{{translate('messages.sub_category')}}<span
                                             class="input-label-secondary"></span></label>
@@ -135,7 +135,7 @@
                                     </select>
                                 </div>
                             </div>
-                           <!-- <div class="col-md-4 col-sm-6">
+                            <div class="col-md-4 col-sm-6">
                                 <div class="form-group mb-0">
                                     <label class="form-label" for="exampleFormControlInput1">{{translate('messages.item_type')}}</label>
                                     <select name="veg" id="veg" class="form-control h--45px js-select2-custom" required>
