@@ -72,7 +72,7 @@
                                     <div class="media-body">
                                         <h5 class="text-hover-primary mb-0">{{Str::limit($review->food['name'],10)}}</h5>
                                         <!-- Static -->
-                                        <a href=""  class="fz--12 text-body important--link">Order ID #100070</a>
+                                        <a href=""  class="fz--12 text-body important--link">ID #100070</a>
                                         <!-- Static -->
                                     </div>
                                 </div>
@@ -105,7 +105,7 @@
                             </td>
                             <td>
                                 <span class="d-block">
-                                    {{date('d M Y',strtotime($review['created_at']))}}
+                                    {{date('d n Y',strtotime($review['created_at']))}}
                                 </span>
                                 <span class="d-block">{{date(config('timeformat'),strtotime($review['created_at']))}}</span>
                             </td>
